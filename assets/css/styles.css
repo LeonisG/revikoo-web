@@ -853,11 +853,13 @@ body.no-scroll .navbar__logo--dark {
 @media (max-width: 899px) {
   .hero__composition {
     position: relative;
+    /* Sin aire superior: la fotografía arranca justo bajo el navbar. */
+    padding-block-start: 0;
   }
 
   .hero__content {
     position: absolute;
-    top: 0;
+    top: clamp(3rem, 13vw, 4.5rem);
     left: 0;
     right: 0;
     z-index: 1;
@@ -884,6 +886,39 @@ body.no-scroll .navbar__logo--dark {
 
   .hero__cta-row {
     justify-content: center;
+  }
+
+  /* La fotografía escapa del padding del .container y ocupa el
+     ancho completo del viewport, tocando el borde del navbar. */
+  .hero__visual {
+    position: relative;
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  /* Difuminados de costura: funden el borde superior (navbar) y el
+     inferior (zona de la firma) de la fotografía con --hero-bg para
+     que fondo e imagen encajen sin cortes visibles. */
+  .hero__visual::before,
+  .hero__visual::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero__visual::before {
+    top: 0;
+    height: clamp(64px, 16vw, 110px);
+    background: linear-gradient(to bottom, var(--hero-bg) 0%, rgba(241, 235, 225, 0) 100%);
+  }
+
+  .hero__visual::after {
+    bottom: 0;
+    height: clamp(48px, 12vw, 90px);
+    background: linear-gradient(to top, var(--hero-bg) 0%, rgba(241, 235, 225, 0) 100%);
   }
 
   .hero__signature {
