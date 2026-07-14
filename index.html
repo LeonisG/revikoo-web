@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Marca <html> como "js" antes del primer pintado: .reveal solo
+       arranca oculto cuando JavaScript está activo (ver styles.css). -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <title>Revikoo — Más reseñas. Más clientes. Más tuyo.</title>
+  <meta name="description" content="Soporte de metacrilato con tecnología NFC para negocios locales: el cliente acerca el móvil y accede directamente a dejar una reseña, sin apps ni códigos QR.">
+  <link rel="canonical" href="https://revikoo.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://revikoo.com/">
+  <meta property="og:title" content="Revikoo — Más reseñas. Más clientes. Más tuyo.">
+  <meta property="og:description" content="Soporte de metacrilato con tecnología NFC para negocios locales: el cliente acerca el móvil y accede directamente a dejar una reseña, sin apps ni códigos QR.">
+  <meta property="og:image" content="https://revikoo.com/assets/img/social/revikoo-og-1200x630.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Revikoo, soporte NFC para facilitar reseñas en negocios locales">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Revikoo — Más reseñas. Más clientes. Más tuyo.">
+  <meta name="twitter:description" content="Soporte de metacrilato con tecnología NFC para negocios locales: el cliente acerca el móvil y accede directamente a dejar una reseña, sin apps ni códigos QR.">
+  <meta name="twitter:image" content="https://revikoo.com/assets/img/social/revikoo-og-1200x630.png">
+  <meta name="twitter:image:alt" content="Revikoo, soporte NFC para facilitar reseñas en negocios locales">
+
+  <meta name="theme-color" content="#050816">
+
+  <!-- Favicon: isotipo oficial (la R geométrica), sin redibujar -->
+  <link rel="icon" href="assets/img/logo/revikoo-symbol.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/logo/revikoo-symbol.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/logo/revikoo-symbol.png">
+
+  <!-- Fuentes: Sora (titulares) + Inter (texto funcional), solo los pesos usados -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="navbar" data-navbar>
+    <div class="container navbar__inner">
+      <a class="navbar__brand" href="#hero" aria-label="Revikoo — inicio">
+        <img
+          class="navbar__logo"
+          src="assets/img/logo/revikoo-horizontal-dark.svg"
+          alt="Revikoo"
+          width="141"
+          height="32"
+        >
+      </a>
+
+      <nav class="navbar__nav" aria-label="Navegación principal">
+        <ul class="navbar__links">
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#producto">Producto</a></li>
+          <li><a href="#para-quien">Para quién es</a></li>
+          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <a class="btn btn-primary btn--sm" href="mailto:hola@revikoo.com?subject=Quiero%20información%20sobre%20Revikoo">Quiero mi Revikoo</a>
+
+        <button
+          type="button"
+          class="navbar__toggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-menu-toggle
+        >
+          <span class="navbar__toggle-bar" aria-hidden="true"></span>
+          <span class="navbar__toggle-bar" aria-hidden="true"></span>
+          <span class="navbar__toggle-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+      <nav aria-label="Navegación móvil">
+        <ul class="mobile-menu__links">
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#producto">Producto</a></li>
+          <li><a href="#para-quien">Para quién es</a></li>
+          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn-primary" href="mailto:hola@revikoo.com?subject=Quiero%20información%20sobre%20Revikoo">Quiero mi Revikoo</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+      <div class="hero__backdrop" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__content reveal">
+          <p class="eyebrow">Reputación local, sin fricciones</p>
+
+          <h1 id="hero-heading">Más reseñas. Más clientes. Más tuyo.</h1>
+
+          <p class="lead">Revikoo convierte el momento en que un cliente está satisfecho en una oportunidad para compartir su experiencia. Solo tiene que acercar su móvil al soporte.</p>
+
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="mailto:hola@revikoo.com?subject=Quiero%20información%20sobre%20Revikoo">Quiero mi Revikoo</a>
+            <a class="btn btn-secondary" href="#como-funciona">Ver cómo funciona</a>
+          </div>
+
+          <p class="hero__clarity">Sin apps · Sin suscripciones · Configurado para tu negocio</p>
+        </div>
+
+        <div class="hero__visual reveal reveal--lg reveal--delay-1">
+          <!--
+            TODO (sustitución de producto real): cuando exista la fotografía
+            o el render final del soporte, sustituir todo el contenido de
+            ".product-stand" por:
+            <img class="product-stand" src="assets/img/producto/revikoo-stand-hero.png"
+                 alt="Soporte Revikoo de metacrilato sobre un mostrador" loading="eager"
+                 width="360" height="522">
+            manteniendo la clase "product-stand" para conservar proporciones y espacio.
+          -->
+          <div
+            class="product-stand ambient-float"
+            role="img"
+            aria-label="Representación conceptual del soporte Revikoo: un portacarteles vertical de metacrilato de doble cara sobre una base oscura, con una hoja interior que invita a acercar el móvil para dejar una reseña."
+          >
+            <div class="product-stand__frame" aria-hidden="true">
+              <div class="product-stand__plate product-stand__plate--back"></div>
+
+              <div class="product-stand__sheet">
+                <img class="product-stand__mark" src="assets/img/logo/revikoo-symbol.svg" alt="" width="32" height="32">
+                <p class="product-stand__copy">Acerca tu móvil<br>y deja tu reseña</p>
+                <span class="product-stand__tap">
+                  <span class="product-stand__tap-ring"></span>
+                  <span class="product-stand__tap-dot"></span>
+                </span>
+              </div>
+
+              <div class="product-stand__plate product-stand__plate--front"></div>
+            </div>
+
+            <div class="product-stand__base"></div>
+          </div>
+
+          <div class="hero__journey">
+            <svg class="hero__journey-line" viewBox="0 0 220 40" width="220" height="40" aria-hidden="true" focusable="false">
+              <path class="hero__journey-path" d="M6 8 L70 8 L96 32 L150 32 L176 8 L214 8"/>
+              <circle class="hero__journey-node--start" cx="6" cy="8" r="4"/>
+              <circle class="hero__journey-node--mid" cx="96" cy="32" r="4"/>
+              <circle class="hero__journey-node--end" cx="214" cy="8" r="4"/>
+            </svg>
+            <ol class="hero__journey-labels">
+              <li>Cliente satisfecho</li>
+              <li>Acerca el móvil</li>
+              <li>Deja su reseña</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="como-funciona" class="anchor-marker"></div>
+    <div id="producto" class="anchor-marker"></div>
+    <div id="para-quien" class="anchor-marker"></div>
+    <div id="preguntas-frecuentes" class="anchor-marker"></div>
+
+    <!-- TODO (Fase 3): franja de claridad, problema, cómo funciona (completo),
+         producto (completo), beneficios, para quién es (completo), propuesta
+         comercial, FAQ (completo) y CTA final. Cada marcador de ancla anterior
+         se sustituirá por su sección real correspondiente. -->
+  </main>
+
+  <!-- TODO (Fase 3): footer -->
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
