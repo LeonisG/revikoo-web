@@ -113,4 +113,50 @@
       revealTargets.forEach((el) => observer.observe(el));
     }
   }
+
+  /* ---------------------------------------------------------
+     Acordeón de preguntas frecuentes
+     --------------------------------------------------------- */
+
+  document.querySelectorAll(".faq-item__trigger").forEach((trigger) => {
+    const panel = document.getElementById(trigger.getAttribute("aria-controls"));
+    if (!panel) return;
+
+    trigger.addEventListener("click", () => {
+      const isOpen = trigger.getAttribute("aria-expanded") === "true";
+      trigger.setAttribute("aria-expanded", String(!isOpen));
+      panel.hidden = isOpen;
+    });
+  });
+
+  /* ---------------------------------------------------------
+     "El gesto": el móvil se aproxima y la línea se dibuja
+     una única vez al entrar en el viewport.
+     --------------------------------------------------------- */
+
+  const gestureDemo = document.querySelector("[data-gesture]");
+
+  if (gestureDemo) {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      gestureDemo.classList.add("is-visible");
+    } else {
+      const gestureObserver = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+
+      gestureObserver.observe(gestureDemo);
+    }
+  }
 })();
