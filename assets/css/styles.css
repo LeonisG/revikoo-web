@@ -27,7 +27,6 @@
   --color-paper-light: #f8f5ef;
   --color-paper-dark: #e9e3d9;
   --color-rule: #d5cec2;
-  --color-base-product: #11131a;
   --color-gray-50: #f7f8fb;
   --color-gray-100: #eceff4;
   --color-gray-300: #cbd1dc;
@@ -521,10 +520,11 @@ small,
 
 /* =========================================================
    COMPONENTE — ENLACE EDITORIAL
-   (acción secundaria: navbar "Pedir uno" y "Cómo funciona")
+   (acción secundaria: navbar "Contacto" y "Cómo funciona")
    ========================================================= */
 
 .editorial-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -534,15 +534,32 @@ small,
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  border-bottom: 1px solid var(--color-border-strong);
   padding-bottom: 2px;
-  transition: color var(--transition-fast), border-color var(--transition-fast);
+  transition: color var(--transition-fast);
+}
+
+/* Filete inferior como pseudo-elemento (no border-bottom): permite
+   animar su aparición con scaleX sin depender de un border estático. */
+.editorial-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-border-strong);
+  transform-origin: left;
+  transition: background-color var(--transition-fast);
 }
 
 .editorial-link:hover,
 .editorial-link:focus-visible {
   color: var(--color-primary);
-  border-color: var(--color-primary);
+}
+
+.editorial-link:hover::after,
+.editorial-link:focus-visible::after {
+  background: var(--color-primary);
 }
 
 /* Único corte diagonal permitido en toda la web: detalle
@@ -756,79 +773,34 @@ body.no-scroll .navbar__logo--dark {
 
 /* =========================================================
    HERO — PORTADA EDITORIAL
+   Fotografía real del soporte (picture con fuente de escritorio
+   y de móvil): nada del producto se construye con CSS. El texto
+   vive en la zona izquierda; en escritorio la imagen ocupa una
+   franja fija a la derecha, en móvil pasa a flujo normal.
    ========================================================= */
 
 .hero {
   position: relative;
   overflow: hidden;
-}
-
-/* Luz cálida muy discreta sugiriendo un espacio real, nunca un
-   glow de marca: tono papel, no violeta. */
-.hero__ambient {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse 60% 50% at 78% 8%, var(--color-paper-light), transparent 62%);
+  background: var(--color-paper);
 }
 
 .hero__composition {
-  position: relative;
-  min-height: calc(100svh - var(--navbar-height));
-  padding-block: var(--space-7) var(--space-8);
-}
-
-@media (max-width: 1023px) {
-  .hero__composition {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-  }
-}
-
-.hero__masthead {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  flex-direction: column;
+  padding-block: var(--space-6) var(--space-8);
 }
 
-.hero__dot {
-  width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--color-primary);
-}
-
-.hero__kicker {
-  margin: 0;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-ink-soft);
-  white-space: nowrap;
-}
-
-.hero__masthead-line {
-  flex: 1;
-  height: 1px;
-  background: var(--color-rule);
-  transform-origin: left;
-  min-width: var(--space-6);
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 36rem;
 }
 
 .hero__headline {
   margin: 0;
-  font-size: clamp(1.85rem, 1.35rem + 2.7vw, 3rem);
-}
-
-.hero__headline-rule {
-  display: block;
-  width: 72px;
-  height: 2px;
-  background: var(--color-ink);
-  transform-origin: left;
+  font-size: clamp(2rem, 1.1rem + 3vw, 4.25rem);
 }
 
 .hero__note {
@@ -845,6 +817,17 @@ body.no-scroll .navbar__logo--dark {
   gap: var(--space-5);
 }
 
+.hero__visual {
+  display: block;
+  margin-block: var(--space-7);
+}
+
+.hero__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .hero__signature {
   margin: 0;
   padding-top: var(--space-4);
@@ -854,102 +837,47 @@ body.no-scroll .navbar__logo--dark {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-ink-soft);
+  max-width: 32rem;
 }
 
-.hero__product-zone {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.hero__pedestal {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 135%;
-  height: 30%;
-  background: linear-gradient(180deg, var(--color-paper-light), var(--color-paper-dark));
-  border-top: 1px solid var(--color-rule);
-}
-
-.hero__pedestal::before {
-  content: "";
-  position: absolute;
-  top: -18%;
-  left: 8%;
-  width: 60%;
-  height: 45%;
-  background: radial-gradient(ellipse at center, rgba(17, 19, 26, 0.14), transparent 72%);
-  filter: blur(6px);
-}
-
-.hero__aside {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.hero__aside-line {
-  width: 18px;
-  height: 1px;
-  background: var(--color-primary);
-}
-
-.hero__aside-tag {
-  margin: 0;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-ink-soft);
-}
-
-.hero__aside-caption {
-  margin: 0;
-  font-size: 0.7rem;
-  line-height: var(--leading-snug);
-  color: var(--color-ink-soft);
-  max-width: 16ch;
-}
-
-@media (max-width: 1023px) {
-  .hero__aside {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .hero__aside-caption {
-    max-width: none;
-  }
-}
-
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .hero__composition {
-    grid-template-rows: auto auto auto auto auto 1fr auto;
-    row-gap: var(--space-4);
-    padding-block: var(--space-8) var(--space-6);
+    min-height: calc(100svh - var(--navbar-height));
+    padding-block: var(--space-6) var(--space-7);
   }
 
-  .hero__masthead { grid-column: 1 / 10; grid-row: 1; }
-  .hero__headline { grid-column: 1 / 8; grid-row: 2; align-self: start; }
-  .hero__headline-rule { grid-column: 1 / 4; grid-row: 3; align-self: start; }
-  .hero__note { grid-column: 2 / 6; grid-row: 4; align-self: start; }
-  .hero__cta-row { grid-column: 2 / 8; grid-row: 5; align-self: start; }
-  .hero__signature { grid-column: 1 / 8; grid-row: 7; }
-
-  .hero__product-zone {
-    grid-column: 8 / 12;
-    grid-row: 1 / 8;
-    align-self: end;
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: clamp(20rem, 38vw, 36rem);
+    margin-top: clamp(1.5rem, 24vh, 9rem);
   }
 
-  .hero__aside {
-    grid-column: 12 / 13;
-    grid-row: 1 / 8;
-    align-self: start;
-    padding-top: var(--space-2);
+  /* La imagen escapa del ancho máximo del .container: su bloque
+     contenedor de posicionamiento es .hero (position: relative),
+     no .hero__composition, así que llega hasta el borde real
+     del viewport en vez de detenerse en los 1200px del container. */
+  .hero__visual {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 58%;
+    margin: 0;
+    z-index: 0;
+  }
+
+  .hero__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 74% 55%;
+  }
+
+  .hero__signature {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
   }
 }
 
@@ -957,7 +885,7 @@ body.no-scroll .navbar__logo--dark {
    Animaciones específicas del hero (no el reveal genérico).
    Estado por defecto = totalmente visible; el estado inicial
    oculto solo se activa con la clase "js" (ver sistema global).
-   El producto queda estable al terminar: sin flotación.
+   La composición queda estable al terminar: sin flotación.
    --------------------------------------------------------- */
 
 @keyframes hero-rule-extend {
@@ -970,9 +898,9 @@ body.no-scroll .navbar__logo--dark {
   to { clip-path: inset(0 0 0 0); }
 }
 
-@keyframes hero-rise-in {
-  from { transform: translateY(48px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+@keyframes hero-visual-in {
+  from { transform: translate(24px, 16px); opacity: 0; }
+  to { transform: translate(0, 0); opacity: 1; }
 }
 
 @keyframes hero-fade-in {
@@ -980,142 +908,34 @@ body.no-scroll .navbar__logo--dark {
   to { opacity: 1; }
 }
 
-.js .hero__masthead-line {
-  animation: hero-rule-extend 650ms var(--ease-reveal) both;
-}
-
 .js .hero__headline {
-  animation: hero-mask-reveal 650ms var(--ease-reveal) 120ms both;
-}
-
-.js .hero__headline-rule {
-  animation: hero-rule-extend 400ms var(--ease-reveal) 520ms both;
-}
-
-.js .hero__product-zone {
-  animation: hero-rise-in 650ms var(--ease-reveal) 220ms both;
-}
-
-.js .hero__pedestal {
-  animation: hero-fade-in 500ms ease 420ms both;
+  animation: hero-mask-reveal 650ms var(--ease-reveal) both;
 }
 
 .js .hero__note {
-  animation: hero-fade-in 450ms ease 620ms both;
+  animation: hero-fade-in 450ms ease 380ms both;
+}
+
+.js .hero__cta-row {
+  animation: hero-fade-in 450ms ease 520ms both;
+}
+
+.js .hero__cta-row .editorial-link::after {
+  animation: hero-rule-extend 500ms var(--ease-reveal) 760ms both;
+}
+
+.js .hero__visual {
+  animation: hero-visual-in 700ms var(--ease-reveal) 220ms both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .hero__masthead-line,
   .js .hero__headline,
-  .js .hero__headline-rule,
-  .js .hero__product-zone,
-  .js .hero__pedestal,
-  .js .hero__note {
+  .js .hero__note,
+  .js .hero__cta-row,
+  .js .hero__cta-row .editorial-link::after,
+  .js .hero__visual {
     animation: none;
   }
-}
-
-/* =========================================================
-   REPRESENTACIÓN CONCEPTUAL DEL SOPORTE
-   Maqueta editorial: líneas de canto, transparencia controlada,
-   un reflejo lineal sutil y sombra de contacto. Sin glass, sin glow.
-   ========================================================= */
-
-.product-stand {
-  --stand-w: clamp(190px, 24vw, 300px);
-  --stand-h: calc(var(--stand-w) * 1.5);
-  position: relative;
-  width: var(--stand-w);
-  height: calc(var(--stand-h) + 26px);
-}
-
-.product-stand__frame {
-  position: absolute;
-  inset: 0 0 26px 0;
-  perspective: 1200px;
-}
-
-.product-stand__plate {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(5, 8, 22, 0.22);
-  background: rgba(255, 255, 255, 0.34);
-  transform: rotateY(-7deg);
-}
-
-.product-stand__plate--back {
-  transform: rotateY(-7deg) translate(8px, 6px);
-  opacity: 0.5;
-}
-
-.product-stand__plate--front {
-  background:
-    linear-gradient(115deg, transparent 44%, rgba(255, 255, 255, 0.7) 48%, transparent 52%),
-    rgba(255, 255, 255, 0.3);
-}
-
-.product-stand__sheet {
-  position: absolute;
-  inset: 11% 13%;
-  transform: rotateY(-7deg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  text-align: center;
-  background: var(--color-white);
-  border: 1px solid rgba(5, 8, 22, 0.08);
-  padding: var(--space-4) var(--space-3);
-}
-
-.product-stand__mark {
-  width: 20px;
-  height: 20px;
-}
-
-.product-stand__question {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(0.85rem, 0.7rem + 0.5vw, 1.05rem);
-  font-weight: 600;
-  line-height: var(--leading-snug);
-  color: var(--color-ink);
-}
-
-.product-stand__instruction {
-  margin: 0;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-ink);
-}
-
-.product-stand__indicator {
-  width: 16px;
-  height: 16px;
-  border: 1.5px solid var(--color-violet-500);
-  border-radius: 50%;
-}
-
-.product-stand__thanks {
-  margin: 0;
-  font-size: 0.65rem;
-  color: var(--color-gray-700);
-}
-
-.product-stand__base {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: calc(var(--stand-w) * 1.15);
-  height: 20px;
-  background: var(--color-base-product);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 14px 18px -10px rgba(17, 19, 26, 0.45);
 }
 
 /* =========================================================
