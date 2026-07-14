@@ -782,7 +782,11 @@ body.no-scroll .navbar__logo--dark {
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--color-paper);
+  /* Papel cálido específico del hero, calibrado por muestreo real sobre
+     el borde de la fotografía (ver object-position más abajo) para que
+     la zona de texto no lea como un panel blanco aparte. */
+  --hero-bg: #f1ebe1;
+  background: var(--hero-bg);
 }
 
 .hero__composition {
@@ -819,7 +823,7 @@ body.no-scroll .navbar__logo--dark {
 
 .hero__visual {
   display: block;
-  margin-block: var(--space-7);
+  margin: 0;
 }
 
 .hero__visual img {
@@ -838,6 +842,46 @@ body.no-scroll .navbar__logo--dark {
   text-transform: uppercase;
   color: var(--color-ink-soft);
   max-width: 32rem;
+}
+
+/* ---------------------------------------------------------
+   Móvil (<900px): la fotografía es la escena principal del hero
+   (flujo normal, sin recorte: ancho completo, alto natural) y el
+   texto se superpone encima en la zona despejada superior, con
+   un halo de lectura muy suave detrás — nunca una tarjeta.
+   --------------------------------------------------------- */
+@media (max-width: 899px) {
+  .hero__composition {
+    position: relative;
+  }
+
+  .hero__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    gap: var(--space-4);
+    max-width: 22rem;
+  }
+
+  .hero__content::before {
+    content: "";
+    position: absolute;
+    inset: -1.5rem -1.25rem;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse 90% 85% at 28% 30%,
+      rgba(241, 235, 225, 0.88) 0%,
+      rgba(241, 235, 225, 0.6) 45%,
+      rgba(241, 235, 225, 0) 78%
+    );
+    pointer-events: none;
+  }
+
+  .hero__signature {
+    margin-top: var(--space-6);
+  }
 }
 
 @media (min-width: 900px) {
@@ -872,6 +916,22 @@ body.no-scroll .navbar__logo--dark {
     height: 100%;
     object-fit: cover;
     object-position: 74% 55%;
+  }
+
+  /* Filete de transición: funde el borde izquierdo de la fotografía
+     con --hero-bg para evitar el corte seco entre zona de texto e
+     imagen, sin leerse como un degradado decorativo (banda estrecha,
+     pegada exactamente a la costura). */
+  .hero__visual::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: clamp(56px, 7vw, 120px);
+    z-index: 1;
+    background: linear-gradient(to right, var(--hero-bg) 0%, rgba(241, 235, 225, 0) 100%);
+    pointer-events: none;
   }
 
   .hero__signature {
