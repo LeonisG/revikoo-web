@@ -861,8 +861,11 @@ body.no-scroll .navbar__logo--dark {
     left: 0;
     right: 0;
     z-index: 1;
+    align-items: center;
     gap: var(--space-4);
     max-width: 22rem;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .hero__content::before {
@@ -871,12 +874,16 @@ body.no-scroll .navbar__logo--dark {
     inset: -1.5rem -1.25rem;
     z-index: -1;
     background: radial-gradient(
-      ellipse 90% 85% at 28% 30%,
+      ellipse 90% 85% at 50% 35%,
       rgba(241, 235, 225, 0.88) 0%,
       rgba(241, 235, 225, 0.6) 45%,
       rgba(241, 235, 225, 0) 78%
     );
     pointer-events: none;
+  }
+
+  .hero__cta-row {
+    justify-content: center;
   }
 
   .hero__signature {
