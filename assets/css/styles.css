@@ -1140,22 +1140,20 @@ body.no-scroll .navbar__logo--dark {
 }
 
 /* =========================================================
-   PRODUCTOS — carrusel editorial (Swiper 11)
-   Cada diapositiva es un panel blanco de catálogo. Swiper gestiona
-   el desplazamiento (loop, teclado, gesto, a11y); aquí se define
-   solo el aspecto: panel, paginación (puntos), flechas y contador.
-   Sin scrollbar (no se usa el módulo) y sin autoplay.
+   PRODUCTOS — carrusel editorial interactivo
+   Panel blanco compacto sobre papel cálido. Las flechas se sitúan
+   a izquierda y derecha del panel; contador y puntos, centrados abajo.
+   Swiper se usa cuando está disponible y existe fallback vanilla.
    ========================================================= */
 
 .producto {
-  /* Filete fino de transición desde "Por qué Revikoo", sin cambio
-     brusco de fondo: misma superficie de papel cálido. */
   border-top: 1px solid var(--color-rule);
+  overflow: hidden;
 }
 
 .producto__header {
   max-width: 44rem;
-  margin-bottom: var(--space-7);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 
 .producto__header h2 {
@@ -1175,15 +1173,43 @@ body.no-scroll .navbar__logo--dark {
 }
 
 .carousel {
+  width: min(100%, 70rem);
+  margin-inline: auto;
+}
+
+.carousel__stage {
   position: relative;
+  padding-inline: clamp(3.75rem, 6vw, 5rem);
 }
 
+/* Estilos esenciales propios para que el carrusel siga funcionando
+   aunque la hoja CSS de Swiper no llegue a cargar desde el CDN. */
 .carousel__swiper {
-  border-radius: var(--radius-md);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-white);
+  border: 1px solid rgba(5, 8, 22, 0.1);
+  border-radius: 1.75rem;
+  box-shadow:
+    0 1px 2px rgba(5, 8, 22, 0.03),
+    0 18px 48px rgba(5, 8, 22, 0.07);
+  isolation: isolate;
+  touch-action: pan-y;
 }
 
-/* Cada slide estira a la altura de la más alta (altura estable). */
+.carousel__swiper .swiper-wrapper {
+  display: flex;
+  width: 100%;
+  transition-property: transform;
+  transition-duration: 480ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .carousel__swiper .swiper-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
   height: auto;
   display: flex;
 }
@@ -1191,41 +1217,44 @@ body.no-scroll .navbar__logo--dark {
 .panel {
   flex: 1;
   width: 100%;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  /* Sombra extremadamente suave (contacto), nunca teñida ni intensa. */
-  box-shadow: 0 1px 2px rgba(5, 8, 22, 0.04), 0 18px 40px rgba(5, 8, 22, 0.05);
-  padding: var(--space-6);
+  min-height: 28rem;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
+  grid-template-columns: minmax(0, 53%) minmax(0, 47%);
+  background: var(--color-white);
+  border-radius: inherit;
+  overflow: hidden;
 }
 
 .panel__media {
+  min-width: 0;
+  min-height: 28rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: clamp(1.25rem, 2.5vw, 2.25rem);
+  background: var(--color-white);
 }
 
 .panel__img {
-  /* Retrato completo: se dimensiona por la altura, sin recortes. */
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 46vh;
+  width: 100%;
+  height: 26rem;
+  max-height: 26rem;
   object-fit: contain;
+  object-position: center;
 }
 
 .panel__body {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  align-self: center;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.62rem;
+  padding: clamp(1.8rem, 3.4vw, 2.75rem);
+  border-left: 1px solid rgba(5, 8, 22, 0.06);
 }
 
 .panel__num {
-  margin: 0;
   font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: var(--tracking-wide);
@@ -1234,86 +1263,115 @@ body.no-scroll .navbar__logo--dark {
 }
 
 .panel__name {
-  margin: 0;
-  font-size: var(--text-3xl);
+  margin-top: 0.15rem;
+  font-size: clamp(2.15rem, 3.35vw, 3.25rem);
+  line-height: 0.98;
 }
 
 .panel__label {
-  margin: 0;
+  margin-top: 0.35rem;
   font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
+  font-weight: 700;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
-  color: var(--color-ink-soft);
+  color: var(--color-primary);
+}
+
+.panel__rule {
+  width: 1.75rem;
+  height: 1px;
+  margin-block: 0.7rem 0.35rem;
+  background: var(--color-rule);
 }
 
 .panel__price {
-  margin: var(--space-2) 0 0;
-  font-size: var(--text-xl);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 3.2vw, 3rem);
+  line-height: 1;
   color: var(--color-text-primary);
 }
 
 .panel__desc {
-  margin: 0;
-  max-width: 46ch;
+  margin-top: 0.55rem;
+  max-width: 39ch;
+  font-size: clamp(0.96rem, 1.2vw, 1.08rem);
+  line-height: 1.65;
   color: var(--color-ink-soft);
 }
 
 .panel__note {
-  margin: 0;
-  max-width: 46ch;
+  max-width: 42ch;
   font-size: var(--text-sm);
+  line-height: 1.5;
   color: var(--color-text-muted);
 }
 
 .panel__cta {
-  margin-top: var(--space-2);
-  align-self: start;
-}
-
-/* --- Controles: [ ← ]  01 / 03  ● ○ ○  [ → ] --- */
-.carousel__controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-5);
-  margin-top: var(--space-6);
+  margin-top: 0.65rem;
 }
 
 .carousel__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  width: 3rem;
+  height: 3rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
-  font-size: var(--text-lg);
-  color: var(--color-text-primary);
-  background: transparent;
+  transform: translateY(-50%);
   border: 1px solid var(--color-rule);
-  border-radius: var(--radius-sm);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  line-height: 1;
   cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast),
+  box-shadow: 0 8px 24px rgba(5, 8, 22, 0.06);
+  transition:
+    transform var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
     background-color var(--transition-fast);
 }
 
-.carousel__arrow:hover {
+.carousel__arrow--prev {
+  left: 0;
+}
+
+.carousel__arrow--next {
+  right: 0;
+}
+
+.carousel__arrow:hover,
+.carousel__arrow:focus-visible {
+  color: var(--color-white);
   border-color: var(--color-primary);
-  color: var(--color-primary);
+  background: var(--color-primary);
 }
 
 .carousel__arrow:active {
-  background: var(--color-surface-hover);
+  transform: translateY(-50%) scale(0.96);
+}
+
+.carousel__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.4rem;
+  min-height: 2rem;
 }
 
 .carousel__count {
-  margin: 0;
-  min-width: 6ch;
-  text-align: center;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  min-width: 5.8rem;
   font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: var(--tracking-wide);
-  color: var(--color-ink-soft);
+  color: var(--color-text-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -1321,55 +1379,143 @@ body.no-scroll .navbar__logo--dark {
   color: var(--color-primary);
 }
 
-/* Paginación de Swiper reestilizada como puntos editoriales. El
-   contenedor se saca del posicionamiento absoluto de Swiper para
-   integrarse en la barra de controles. */
+.carousel__count-separator {
+  color: var(--color-rule);
+}
+
 .carousel__dots {
-  position: static;
+  position: static !important;
+  width: auto !important;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  width: auto;
+  justify-content: center;
+  gap: 0.55rem;
+  transform: none !important;
 }
 
 .carousel__dots .swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
-  margin: 0;
+  display: block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin: 0 !important;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
   background: var(--color-rule);
   opacity: 1;
-  border-radius: var(--radius-pill);
-  transition: width var(--transition-normal), background-color var(--transition-fast);
+  cursor: pointer;
+  transition:
+    width var(--transition-normal),
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.carousel__dots .swiper-pagination-bullet:hover {
+.carousel__dots .swiper-pagination-bullet:hover,
+.carousel__dots .swiper-pagination-bullet:focus-visible {
   background: var(--color-primary-light);
+  transform: scale(1.08);
 }
 
 .carousel__dots .swiper-pagination-bullet-active {
-  width: 24px;
+  width: 1.55rem;
   background: var(--color-primary);
 }
 
 .producto__common {
-  margin: var(--space-7) 0 0;
+  width: min(100%, 60rem);
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
   padding-top: var(--space-5);
   border-top: 1px solid var(--color-rule);
-  max-width: 52ch;
+  text-align: center;
   font-size: var(--text-base);
   color: var(--color-ink-soft);
 }
 
-@media (min-width: 860px) {
+/* Fallback vanilla: usa la misma estructura y aspecto. */
+.carousel--fallback .swiper-wrapper {
+  will-change: transform;
+}
+
+@media (max-width: 859px) {
+  .carousel {
+    width: min(100%, 42rem);
+  }
+
+  .carousel__stage {
+    padding-inline: 0;
+  }
+
   .panel {
-    grid-template-columns: 55% 1fr;
-    gap: var(--space-7);
-    align-items: center;
-    padding: var(--space-7);
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .panel__media {
+    min-height: 0;
+    height: clamp(18rem, 68vw, 27rem);
+    padding: 1rem 1rem 0;
   }
 
   .panel__img {
-    max-height: 58vh;
+    max-height: 100%;
+  }
+
+  .panel__body {
+    padding: clamp(1.5rem, 6vw, 2.4rem);
+    border-top: 1px solid rgba(5, 8, 22, 0.06);
+    border-left: 0;
+  }
+
+  .carousel__arrow {
+    width: 2.65rem;
+    height: 2.65rem;
+    background: rgba(255, 255, 255, 0.94);
+  }
+
+  .carousel__arrow--prev {
+    left: 0.65rem;
+  }
+
+  .carousel__arrow--next {
+    right: 0.65rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .producto {
+    padding-block: var(--space-8);
+  }
+
+  .producto__header {
+    margin-bottom: var(--space-6);
+  }
+
+  .carousel__swiper {
+    border-radius: 1.25rem;
+  }
+
+  .panel__media {
+    height: clamp(16rem, 78vw, 21rem);
+  }
+
+  .panel__name {
+    font-size: clamp(2rem, 11vw, 2.8rem);
+  }
+
+  .panel__desc {
+    font-size: 0.95rem;
+  }
+
+  .carousel__arrow {
+    top: 30%;
+  }
+
+  .carousel__meta {
+    gap: 0.85rem;
+  }
+
+  .producto__common {
+    text-align: left;
   }
 }
 
@@ -1377,9 +1523,13 @@ body.no-scroll .navbar__logo--dark {
   .producto__header h2 {
     font-size: var(--text-4xl);
   }
+}
 
-  .panel__img {
-    max-height: 60vh;
+@media (prefers-reduced-motion: reduce) {
+  .carousel__swiper .swiper-wrapper,
+  .carousel__dots .swiper-pagination-bullet,
+  .carousel__arrow {
+    transition-duration: 0.01ms !important;
   }
 }
 

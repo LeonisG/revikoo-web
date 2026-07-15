@@ -162,167 +162,209 @@
 
   /* ---------------------------------------------------------
      Carrusel de productos
-     Progressive enhancement: sin JS los tres paneles se apilan
-     y son accesibles. Con JS la pista pasa a una fila y un único
-     estado (activeIndex) mueve la pista con translate3d y
-     sincroniza indicador, puntos y foco. Navegación circular con
-     flechas, puntos, teclado y gesto táctil. Sin autoplay.
+     Swiper gestiona loop, teclado, gesto y paginación cuando está
+     disponible. Si el CDN falla, el mismo componente funciona con
+     un fallback vanilla, de modo que los controles nunca quedan
+     inactivos en localhost o en GitHub Pages.
      --------------------------------------------------------- */
 
   const carousel = document.querySelector("[data-carousel]");
 
   if (carousel) {
-    const viewport = carousel.querySelector("[data-carousel-viewport]");
-    const track = carousel.querySelector("[data-carousel-track]");
-    const panels = Array.from(carousel.querySelectorAll("[data-slide]"));
-    const controls = carousel.querySelector("[data-carousel-controls]");
-    const prevBtn = carousel.querySelector("[data-carousel-prev]");
-    const nextBtn = carousel.querySelector("[data-carousel-next]");
+    const swiperElement = carousel.querySelector("[data-carousel-swiper]");
+    const prevButton = carousel.querySelector("[data-carousel-prev]");
+    const nextButton = carousel.querySelector("[data-carousel-next]");
+    const pagination = carousel.querySelector("[data-carousel-pagination]");
     const current = carousel.querySelector("[data-carousel-current]");
-    const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
+    const totalElement = carousel.querySelector("[data-carousel-total]");
+    const status = carousel.querySelector("[data-carousel-status]");
+    const sourceSlides = Array.from(carousel.querySelectorAll(".swiper-slide"));
+    const productNames = sourceSlides.map(
+      (slide, index) => slide.dataset.productName || `Producto ${index + 1}`
+    );
+    const total = sourceSlides.length;
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (viewport && track && panels.length) {
-      const total = panels.length;
-      let activeIndex = 0;
+    const normalize = (index) => ((index % total) + total) % total;
+    const pad = (index) => String(index + 1).padStart(2, "0");
 
-      const prefersReducedMotion = () =>
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (totalElement) totalElement.textContent = String(total).padStart(2, "0");
 
-      const supportsInert = "inert" in HTMLElement.prototype;
+    const updateTextState = (index) => {
+      const activeIndex = normalize(index);
+      if (current) current.textContent = pad(activeIndex);
+      if (status) {
+        status.textContent = `Producto ${activeIndex + 1} de ${total}: ${productNames[activeIndex]}`;
+      }
 
-      // Solo con JS: pista en fila y controles visibles.
-      carousel.classList.add("is-enhanced");
-      if (controls) controls.hidden = false;
+      carousel.querySelectorAll(".swiper-pagination-bullet").forEach((bullet, bulletIndex) => {
+        const isActive = bulletIndex === activeIndex;
+        bullet.setAttribute("aria-current", isActive ? "true" : "false");
+        bullet.setAttribute("aria-label", `Mostrar ${productNames[bulletIndex]}`);
+      });
+    };
 
-      const pad = (n) => String(n + 1).padStart(2, "0");
+    const setSlideInteractivity = (slides, activeIndex) => {
+      slides.forEach((slide) => {
+        const dataIndex = Number(slide.getAttribute("data-swiper-slide-index"));
+        const originalIndex = Number.isNaN(dataIndex)
+          ? sourceSlides.indexOf(slide)
+          : dataIndex;
+        const isActive = originalIndex === activeIndex && slide.classList.contains("swiper-slide-active");
 
-      // El panel activo es el único interactivo/anunciado.
-      const syncActivePanel = () => {
-        panels.forEach((panel, i) => {
-          const inactive = i !== activeIndex;
-          panel.setAttribute("aria-hidden", inactive ? "true" : "false");
-          if (supportsInert) {
-            panel.inert = inactive;
-          } else {
-            panel
-              .querySelectorAll("a, button")
-              .forEach((el) => {
-                el.tabIndex = inactive ? -1 : 0;
-              });
-          }
+        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+        slide.querySelectorAll("a, button").forEach((element) => {
+          element.tabIndex = isActive ? 0 : -1;
         });
-      };
+      });
+    };
 
-      // Coloca la pista. En modo instantáneo (inicial, arrastre en
-      // curso, reducción de movimiento) se desactiva la transición y
-      // se reactiva tras forzar un reflow síncrono — sin depender de
-      // requestAnimationFrame.
-      const applyPosition = (animate) => {
-        const instant = !animate || prefersReducedMotion();
-        track.style.transition = instant ? "none" : "";
-        track.style.transform = `translate3d(${-activeIndex * 100}%, 0, 0)`;
-        if (instant) {
-          void track.offsetWidth;
-          track.style.transition = "";
-        }
-      };
+    const initializeSwiper = () => {
+      if (!swiperElement || typeof window.Swiper !== "function") return false;
+
+      try {
+        const swiper = new window.Swiper(swiperElement, {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: true,
+          speed: reducedMotionQuery.matches ? 0 : 480,
+          grabCursor: true,
+          watchOverflow: true,
+          keyboard: {
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+          },
+          navigation: {
+            prevEl: prevButton,
+            nextEl: nextButton,
+          },
+          pagination: {
+            el: pagination,
+            clickable: true,
+            renderBullet(index, className) {
+              return `<button type="button" class="${className}" aria-label="Mostrar ${productNames[index]}"></button>`;
+            },
+          },
+          a11y: {
+            enabled: true,
+            prevSlideMessage: "Mostrar modelo anterior",
+            nextSlideMessage: "Mostrar modelo siguiente",
+            paginationBulletMessage: "Mostrar producto {{index}}",
+          },
+          on: {
+            init(instance) {
+              updateTextState(instance.realIndex);
+              setSlideInteractivity(Array.from(instance.slides), instance.realIndex);
+            },
+            realIndexChange(instance) {
+              updateTextState(instance.realIndex);
+              setSlideInteractivity(Array.from(instance.slides), instance.realIndex);
+            },
+          },
+        });
+
+        reducedMotionQuery.addEventListener?.("change", (event) => {
+          swiper.params.speed = event.matches ? 0 : 480;
+        });
+
+        return true;
+      } catch (error) {
+        console.warn("Swiper no pudo inicializarse; se activa el fallback vanilla.", error);
+        return false;
+      }
+    };
+
+    const initializeFallback = () => {
+      if (!swiperElement || !total || !pagination) return;
+
+      carousel.classList.add("carousel--fallback");
+      const wrapper = swiperElement.querySelector(".swiper-wrapper");
+      if (!wrapper) return;
+
+      let activeIndex = 0;
+      let pointerStartX = null;
+      let pointerStartY = null;
+
+      pagination.innerHTML = productNames
+        .map(
+          (name, index) =>
+            `<button type="button" class="swiper-pagination-bullet" data-fallback-index="${index}" aria-label="Mostrar ${name}"></button>`
+        )
+        .join("");
+
+      const bullets = Array.from(pagination.querySelectorAll("[data-fallback-index]"));
 
       const render = ({ animate = true } = {}) => {
-        applyPosition(animate);
-        if (current) current.textContent = pad(activeIndex);
-        dots.forEach((dot, i) =>
-          dot.setAttribute("aria-current", i === activeIndex ? "true" : "false")
-        );
-        syncActivePanel();
+        wrapper.style.transitionDuration = !animate || reducedMotionQuery.matches ? "0ms" : "480ms";
+        wrapper.style.transform = `translate3d(${-activeIndex * 100}%, 0, 0)`;
+
+        sourceSlides.forEach((slide, index) => {
+          const isActive = index === activeIndex;
+          slide.classList.toggle("swiper-slide-active", isActive);
+          slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+          slide.querySelectorAll("a, button").forEach((element) => {
+            element.tabIndex = isActive ? 0 : -1;
+          });
+        });
+
+        bullets.forEach((bullet, index) => {
+          const isActive = index === activeIndex;
+          bullet.classList.toggle("swiper-pagination-bullet-active", isActive);
+          bullet.setAttribute("aria-current", isActive ? "true" : "false");
+        });
+
+        updateTextState(activeIndex);
       };
 
-      const goToSlide = (target, options) => {
-        activeIndex = ((target % total) + total) % total; // circular
-        render(options);
+      const goTo = (index) => {
+        activeIndex = normalize(index);
+        render();
       };
 
-      // Posición inicial sin animación.
-      render({ animate: false });
-
-      if (prevBtn)
-        prevBtn.addEventListener("click", () => goToSlide(activeIndex - 1));
-      if (nextBtn)
-        nextBtn.addEventListener("click", () => goToSlide(activeIndex + 1));
-
-      dots.forEach((dot) => {
-        dot.addEventListener("click", () =>
-          goToSlide(Number(dot.getAttribute("data-carousel-dot")))
-        );
+      prevButton?.addEventListener("click", () => goTo(activeIndex - 1));
+      nextButton?.addEventListener("click", () => goTo(activeIndex + 1));
+      bullets.forEach((bullet) => {
+        bullet.addEventListener("click", () => goTo(Number(bullet.dataset.fallbackIndex)));
       });
 
-      carousel.addEventListener("keydown", (event) => {
+      swiperElement.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") {
           event.preventDefault();
-          goToSlide(activeIndex - 1);
+          goTo(activeIndex - 1);
         } else if (event.key === "ArrowRight") {
           event.preventDefault();
-          goToSlide(activeIndex + 1);
+          goTo(activeIndex + 1);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          goTo(0);
+        } else if (event.key === "End") {
+          event.preventDefault();
+          goTo(total - 1);
         }
       });
 
-      /* Gesto táctil / puntero: se sigue el dedo en horizontal; el
-         desplazamiento vertical se cede a la página (touch-action:
-         pan-y en CSS + abandono si el gesto es vertical). */
-      let startX = 0;
-      let startY = 0;
-      let width = 0;
-      let dragging = false;
-      let moved = false;
+      swiperElement.addEventListener("pointerdown", (event) => {
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+      });
 
-      const onPointerDown = (event) => {
-        if (event.pointerType === "mouse" && event.button !== 0) return;
-        dragging = true;
-        moved = false;
-        startX = event.clientX;
-        startY = event.clientY;
-        width = viewport.clientWidth || 1;
-        track.style.transition = "none";
-      };
+      swiperElement.addEventListener("pointerup", (event) => {
+        if (pointerStartX === null || pointerStartY === null) return;
+        const deltaX = event.clientX - pointerStartX;
+        const deltaY = event.clientY - pointerStartY;
+        pointerStartX = null;
+        pointerStartY = null;
 
-      const onPointerMove = (event) => {
-        if (!dragging) return;
-        const dx = event.clientX - startX;
-        const dy = event.clientY - startY;
-        if (!moved && Math.abs(dy) > Math.abs(dx)) {
-          // Intención vertical: soltar y dejar que la página haga scroll.
-          dragging = false;
-          track.style.transition = "";
-          render({ animate: false });
-          return;
+        if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY)) {
+          goTo(activeIndex + (deltaX < 0 ? 1 : -1));
         }
-        if (Math.abs(dx) > 6) moved = true;
-        const offset = -activeIndex * 100 + (dx / width) * 100;
-        track.style.transform = `translate3d(${offset}%, 0, 0)`;
-      };
+      });
 
-      const onPointerUp = (event) => {
-        if (!dragging) return;
-        dragging = false;
-        track.style.transition = "";
-        const dx = event.clientX - startX;
-        const threshold = width * 0.2;
-        if (dx <= -threshold) goToSlide(activeIndex + 1);
-        else if (dx >= threshold) goToSlide(activeIndex - 1);
-        else render({ animate: true });
-      };
+      render({ animate: false });
+    };
 
-      viewport.addEventListener("pointerdown", onPointerDown);
-      viewport.addEventListener("pointermove", onPointerMove);
-      viewport.addEventListener("pointerup", onPointerUp);
-      viewport.addEventListener("pointercancel", onPointerUp);
-      // Evita que un arrastre dispare el enlace del panel al soltar.
-      viewport.addEventListener(
-        "click",
-        (event) => {
-          if (moved) event.preventDefault();
-        },
-        true
-      );
-    }
+    if (!initializeSwiper()) initializeFallback();
   }
+
 })();

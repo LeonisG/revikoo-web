@@ -182,78 +182,97 @@
         </header>
 
         <div class="carousel" data-carousel>
-          <div class="swiper carousel__swiper" data-carousel-swiper aria-roledescription="carrusel" aria-label="Modelos de Revikoo">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <article class="panel">
-                  <div class="panel__media">
-                    <img class="panel__img"
-                      src="assets/img/productos/MockUp_Basico_Branding_Revikoo.png"
-                      alt="Soporte de sobremesa con el diseño Revikoo, cinco estrellas e indicación para acercar el móvil."
-                      width="1122" height="1402" loading="lazy" decoding="async">
-                  </div>
-                  <div class="panel__body">
-                    <p class="panel__num" aria-hidden="true">01</p>
-                    <h3 class="panel__name">Diseño Revikoo</h3>
-                    <p class="panel__label">Directo y listo</p>
-                    <p class="panel__price">15&nbsp;€</p>
-                    <p class="panel__desc">Una composición clara y reconocible con la firma discreta de Revikoo. Se configura para tu negocio y llega preparada para colocar.</p>
-                    <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20Revikoo">Consultar este modelo <span aria-hidden="true">→</span></a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="panel">
-                  <div class="panel__media">
-                    <img class="panel__img"
-                      src="assets/img/productos/MockUp_Basico.png"
-                      alt="Soporte de sobremesa con diseño neutro, cinco estrellas e indicación para acercar el móvil."
-                      width="1122" height="1402" loading="lazy" decoding="async">
-                  </div>
-                  <div class="panel__body">
-                    <p class="panel__num" aria-hidden="true">02</p>
-                    <h3 class="panel__name">Diseño neutro</h3>
-                    <p class="panel__label">El equilibrio</p>
-                    <p class="panel__price">20&nbsp;€</p>
-                    <p class="panel__desc">Una propuesta limpia y sin marca visible de Revikoo, pensada para integrarse con facilidad en cualquier mostrador.</p>
-                    <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20neutro">Consultar este modelo <span aria-hidden="true">→</span></a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="panel">
-                  <div class="panel__media">
-                    <img class="panel__img"
-                      src="assets/img/productos/MockUp_Branding_Negocio.png"
-                      alt="Soporte de sobremesa personalizado con los colores, la marca y el mensaje de un negocio."
-                      width="1122" height="1402" loading="lazy" decoding="async">
-                  </div>
-                  <div class="panel__body">
-                    <p class="panel__num" aria-hidden="true">03</p>
-                    <h3 class="panel__name">Diseño a medida</h3>
-                    <p class="panel__label">Integrado con tu identidad</p>
-                    <p class="panel__price">desde 30&nbsp;€</p>
-                    <p class="panel__desc">Adaptamos los colores, la composición y el mensaje a la identidad de tu negocio para que el soporte se sienta parte del espacio.</p>
-                    <p class="panel__note">La personalización no incluye la creación de un logotipo o una identidad corporativa completa.</p>
-                    <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20a%20medida">Consultar este modelo <span aria-hidden="true">→</span></a>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel__controls">
-            <button type="button" class="carousel__arrow" data-carousel-prev aria-label="Modelo anterior">
+          <div class="carousel__stage">
+            <button type="button" class="carousel__arrow carousel__arrow--prev" data-carousel-prev aria-label="Mostrar modelo anterior">
               <span aria-hidden="true">←</span>
             </button>
-            <p class="carousel__count" aria-hidden="true"><span class="carousel__count-active" data-carousel-current>01</span>&nbsp;/&nbsp;03</p>
-            <div class="carousel__dots" data-carousel-pagination></div>
-            <button type="button" class="carousel__arrow" data-carousel-next aria-label="Modelo siguiente">
+
+            <div
+              class="swiper carousel__swiper"
+              data-carousel-swiper
+              aria-roledescription="carrusel"
+              aria-label="Modelos de Revikoo"
+              tabindex="0"
+            >
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" data-product-name="Diseño Revikoo">
+                  <article class="panel">
+                    <div class="panel__media">
+                      <img class="panel__img"
+                        src="assets/img/productos/MockUp_Basico_Branding_Revikoo.png"
+                        alt="Soporte de sobremesa con el diseño Revikoo, cinco estrellas e indicación para acercar el móvil."
+                        width="1122" height="1402" loading="lazy" decoding="async">
+                    </div>
+                    <div class="panel__body">
+                      <p class="panel__num" aria-hidden="true">01</p>
+                      <h3 class="panel__name">Diseño Revikoo</h3>
+                      <p class="panel__label">Directo y listo</p>
+                      <span class="panel__rule" aria-hidden="true"></span>
+                      <p class="panel__price">15&nbsp;€</p>
+                      <p class="panel__desc">Una composición clara y reconocible con la firma discreta de Revikoo. Se configura para tu negocio y llega preparada para colocar.</p>
+                      <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20Revikoo">Consultar este modelo <span aria-hidden="true">→</span></a>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide" data-product-name="Diseño neutro">
+                  <article class="panel">
+                    <div class="panel__media">
+                      <img class="panel__img"
+                        src="assets/img/productos/MockUp_Basico.png"
+                        alt="Soporte de sobremesa con diseño neutro, cinco estrellas e indicación para acercar el móvil."
+                        width="1122" height="1402" loading="lazy" decoding="async">
+                    </div>
+                    <div class="panel__body">
+                      <p class="panel__num" aria-hidden="true">02</p>
+                      <h3 class="panel__name">Diseño neutro</h3>
+                      <p class="panel__label">El equilibrio</p>
+                      <span class="panel__rule" aria-hidden="true"></span>
+                      <p class="panel__price">20&nbsp;€</p>
+                      <p class="panel__desc">Una propuesta limpia y sin marca visible de Revikoo, pensada para integrarse con facilidad en cualquier mostrador.</p>
+                      <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20neutro">Consultar este modelo <span aria-hidden="true">→</span></a>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide" data-product-name="Diseño a medida">
+                  <article class="panel">
+                    <div class="panel__media">
+                      <img class="panel__img"
+                        src="assets/img/productos/MockUp_Branding_Negocio.png"
+                        alt="Soporte de sobremesa personalizado con los colores, la marca y el mensaje de un negocio."
+                        width="1122" height="1402" loading="lazy" decoding="async">
+                    </div>
+                    <div class="panel__body">
+                      <p class="panel__num" aria-hidden="true">03</p>
+                      <h3 class="panel__name">Diseño a medida</h3>
+                      <p class="panel__label">Integrado con tu identidad</p>
+                      <span class="panel__rule" aria-hidden="true"></span>
+                      <p class="panel__price">desde 30&nbsp;€</p>
+                      <p class="panel__desc">Adaptamos los colores, la composición y el mensaje a la identidad de tu negocio para que el soporte se sienta parte del espacio.</p>
+                      <p class="panel__note">La personalización no incluye la creación de un logotipo o una identidad corporativa completa.</p>
+                      <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20a%20medida">Consultar este modelo <span aria-hidden="true">→</span></a>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="carousel__arrow carousel__arrow--next" data-carousel-next aria-label="Mostrar modelo siguiente">
               <span aria-hidden="true">→</span>
             </button>
           </div>
+
+          <div class="carousel__meta" aria-label="Posición del carrusel">
+            <p class="carousel__count" aria-hidden="true">
+              <span class="carousel__count-active" data-carousel-current>01</span>
+              <span class="carousel__count-separator">/</span>
+              <span data-carousel-total>03</span>
+            </p>
+            <div class="carousel__dots" data-carousel-pagination></div>
+          </div>
+
+          <p class="visually-hidden" data-carousel-status aria-live="polite">Producto 1 de 3: Diseño Revikoo</p>
         </div>
 
         <p class="producto__common">Soporte, hoja impresa, NFC configurado y enlace probado. Listo para colocar y sin suscripción.</p>
