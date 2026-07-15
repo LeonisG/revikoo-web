@@ -1096,7 +1096,7 @@ body.no-scroll .navbar__logo--dark {
   max-width: 28rem;
   font-family: var(--font-display);
   /* Un punto por debajo del párrafo introductorio (--text-lg, 18px). */
-  font-size: 1.0625rem;
+  font-size: 1.3rem;
   line-height: var(--leading-snug);
   color: var(--color-text-primary);
 }
