@@ -845,7 +845,11 @@ body.no-scroll .navbar__toggle {
 
 .hero__headline {
   margin: 0;
-  font-size: clamp(2rem, 1.1rem + 3vw, 4.25rem);
+  max-width: 11ch;
+  font-size: clamp(2.4rem, 1.25rem + 4vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .hero__note {
