@@ -1051,8 +1051,14 @@ body.no-scroll .navbar__logo--dark {
 
 .porque__points {
   list-style: none;
-  margin: var(--space-6) 0 0;
   padding: 0;
+}
+
+/* Especificidad 0,2,0 para superar el reset global `ol[class]`
+   (0,1,1) y dejar aire entre el cierre y el primer beneficio en
+   la vista apilada de móvil. */
+.porque__composition > .porque__points {
+  margin-top: var(--space-6);
 }
 
 .porque__point {
@@ -1086,14 +1092,26 @@ body.no-scroll .navbar__logo--dark {
 }
 
 .porque__cierre {
-  margin: var(--space-6) auto 0;
-  max-width: 36ch;
+  margin: var(--space-5) 0 0;
+  max-width: 28rem;
   font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-style: italic;
+  font-size: clamp(1.6rem, 1.4rem + 0.6vw, 1.75rem);
   line-height: var(--leading-tight);
-  text-align: center;
   color: var(--color-text-primary);
+}
+
+.porque__cierre em {
+  font-style: italic;
+}
+
+/* Acento editorial: línea violeta corta encima del cierre, alineada
+   con el borde izquierdo del texto (mismo gesto que 01/02/03). */
+.porque__cierre-rule {
+  display: block;
+  width: 40px;
+  height: 1.5px;
+  margin-bottom: var(--space-4);
+  background: var(--color-primary);
 }
 
 @media (min-width: 900px) {
@@ -1101,15 +1119,14 @@ body.no-scroll .navbar__logo--dark {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
     column-gap: var(--space-8);
-    grid-template-rows: auto 1fr auto;
+    align-items: start;
   }
 
   .porque__intro {
     grid-column: 1;
-    grid-row: 1;
   }
 
-  .porque__points {
+  .porque__composition > .porque__points {
     grid-column: 2;
     grid-row: 1 / span 2;
     margin-top: 0;
@@ -1118,15 +1135,6 @@ body.no-scroll .navbar__logo--dark {
   .porque__point:first-child {
     border-top: 0;
     padding-top: 0;
-  }
-
-  /* Cierre como banda centrada a pie de sección: sale de la columna
-     izquierda (demasiado estrecha) para caber en una sola línea. */
-  .porque__cierre {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    max-width: none;
-    margin-top: var(--space-6);
   }
 }
 
