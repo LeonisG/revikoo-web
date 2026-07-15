@@ -1658,11 +1658,12 @@ body.no-scroll .navbar__toggle {
 
 @media (max-width: 520px) {
   .hero__headline {
-    max-width: 12ch;
-    font-size: clamp(2.2rem, 10vw, 2.85rem);
-    line-height: 0.95;
+    max-width: 12.5ch;
+    font-size: clamp(1.95rem, 8.8vw, 2.55rem);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
   }
-  
+
   .funciona__demo-bar > span:last-child {
     display: none;
   }
