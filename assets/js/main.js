@@ -171,20 +171,6 @@
     }
   }
 
-  /* ---------------------------------------------------------
-     Acordeón de preguntas frecuentes
-     --------------------------------------------------------- */
-
-  document.querySelectorAll(".faq-item__trigger").forEach((trigger) => {
-    const panel = document.getElementById(trigger.getAttribute("aria-controls"));
-    if (!panel) return;
-
-    trigger.addEventListener("click", () => {
-      const isOpen = trigger.getAttribute("aria-expanded") === "true";
-      trigger.setAttribute("aria-expanded", String(!isOpen));
-      panel.hidden = isOpen;
-    });
-  });
 
 
 
