@@ -70,15 +70,29 @@
 
       <nav class="navbar__nav" aria-label="Navegación principal">
         <ul class="navbar__links">
-          <li><a href="#como-funciona">Cómo funciona</a></li>
-          <li><a href="#producto">Producto</a></li>
-          <li><a href="#para-quien">Para quién es</a></li>
-          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+          <li>
+            <a href="#como-funciona">
+              <span class="navbar__index" aria-hidden="true">01</span>
+              <span>Cómo funciona</span>
+            </a>
+          </li>
+          <li>
+            <a href="#por-que-revikoo">
+              <span class="navbar__index" aria-hidden="true">02</span>
+              <span>Por qué Revikoo</span>
+            </a>
+          </li>
+          <li>
+            <a href="#producto">
+              <span class="navbar__index" aria-hidden="true">03</span>
+              <span>Productos</span>
+            </a>
+          </li>
         </ul>
       </nav>
 
       <div class="navbar__actions">
-        <a class="editorial-link" href="mailto:hola@revikoo.com?subject=Contacto%20Revikoo">Contacto <span aria-hidden="true">→</span></a>
+        <a class="navbar__contact" href="mailto:hola@revikoo.com?subject=Contacto%20Revikoo">Contacto <span aria-hidden="true">→</span></a>
 
         <button
           type="button"
@@ -98,10 +112,24 @@
     <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
       <nav aria-label="Navegación móvil">
         <ul class="mobile-menu__links">
-          <li><a href="#como-funciona">Cómo funciona</a></li>
-          <li><a href="#producto">Producto</a></li>
-          <li><a href="#para-quien">Para quién es</a></li>
-          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+          <li>
+            <a href="#como-funciona">
+              <span class="navbar__index" aria-hidden="true">01</span>
+              <span>Cómo funciona</span>
+            </a>
+          </li>
+          <li>
+            <a href="#por-que-revikoo">
+              <span class="navbar__index" aria-hidden="true">02</span>
+              <span>Por qué Revikoo</span>
+            </a>
+          </li>
+          <li>
+            <a href="#producto">
+              <span class="navbar__index" aria-hidden="true">03</span>
+              <span>Productos</span>
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -134,6 +162,98 @@
             fetchpriority="high"
           >
         </picture>
+      </div>
+    </section>
+
+    <section class="section funciona" id="como-funciona" aria-labelledby="funciona-heading">
+      <div class="container funciona__layout">
+        <div class="funciona__copy">
+          <p class="section-tag reveal">Cómo funciona</p>
+          <h2 id="funciona-heading" class="reveal">Del mostrador a la reseña, <em>en unos segundos</em>.</h2>
+          <p class="funciona__lead reveal reveal--delay-1">Revikoo coloca la invitación justo donde termina la experiencia. El cliente no tiene que buscar el negocio más tarde ni instalar una aplicación.</p>
+
+          <ol class="funciona__steps" data-demo-steps>
+            <li class="funciona__step reveal is-active" data-demo-step="0">
+              <span class="funciona__step-number" aria-hidden="true">01</span>
+              <div>
+                <h3>Acerca el móvil</h3>
+                <p>Un gesto sencillo que el personal puede explicar en pocos segundos.</p>
+              </div>
+            </li>
+            <li class="funciona__step reveal reveal--delay-1" data-demo-step="1">
+              <span class="funciona__step-number" aria-hidden="true">02</span>
+              <div>
+                <h3>Abre el acceso</h3>
+                <p>El móvil muestra el enlace configurado para el negocio, sin instalar nada.</p>
+              </div>
+            </li>
+            <li class="funciona__step reveal reveal--delay-2" data-demo-step="2">
+              <span class="funciona__step-number" aria-hidden="true">03</span>
+              <div>
+                <h3>Comparte su experiencia</h3>
+                <p>El cliente llega al espacio de reseña mientras el momento todavía está reciente.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="funciona__demo reveal reveal--delay-1" data-review-demo>
+          <div class="funciona__demo-bar">
+            <span>Demo</span>
+            <span data-demo-state aria-hidden="true">01 · Acerca el móvil</span>
+          </div>
+
+          <div class="funciona__scene" aria-hidden="true">
+            <div class="demo-counter"></div>
+
+            <div class="demo-stand">
+              <div class="demo-stand__panel">
+                <span class="demo-stand__brand">REVIKOO</span>
+                <span class="demo-stand__question">¿Te ha gustado<br>tu experiencia?</span>
+                <span class="demo-stand__waves"><i></i><i></i><i></i></span>
+                <span class="demo-stand__hint">Acerca tu móvil</span>
+              </div>
+              <span class="demo-stand__base"></span>
+            </div>
+
+            <div class="demo-nfc-pulse"><i></i><i></i><i></i></div>
+
+            <div class="demo-phone">
+              <span class="demo-phone__speaker"></span>
+              <div class="demo-phone__screen">
+                <div class="demo-phone__idle">
+                  <span class="demo-phone__time">12:24</span>
+                  <span class="demo-phone__idle-mark"></span>
+                </div>
+
+                <div class="demo-phone__prompt">
+                  <span class="demo-phone__prompt-icon">R</span>
+                  <span><small>Revikoo</small><strong>Abrir reseñas</strong></span>
+                  <span class="demo-phone__chevron">›</span>
+                </div>
+
+                <div class="demo-phone__review">
+                  <small>Tu opinión</small>
+                  <strong>Comparte tu experiencia</strong>
+                  <span class="demo-phone__stars">★★★★★</span>
+                  <span class="demo-phone__field">Escribe una reseña</span>
+                </div>
+
+                <div class="demo-phone__done">
+                  <span>✓</span>
+                  <strong>Listo</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="funciona__demo-footer">
+            <span class="funciona__progress" aria-hidden="true"><i></i></span>
+            <button type="button" class="funciona__replay" data-demo-replay>
+              Repetir demo <span aria-hidden="true">↻</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -210,7 +330,6 @@
                       <span class="panel__rule" aria-hidden="true"></span>
                       <p class="panel__price">15&nbsp;€</p>
                       <p class="panel__desc">Una composición clara y reconocible con la firma discreta de Revikoo. Se configura para tu negocio y llega preparada para colocar.</p>
-                      <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20Revikoo">Consultar este modelo <span aria-hidden="true">→</span></a>
                     </div>
                   </article>
                 </div>
@@ -230,7 +349,6 @@
                       <span class="panel__rule" aria-hidden="true"></span>
                       <p class="panel__price">20&nbsp;€</p>
                       <p class="panel__desc">Una propuesta limpia y sin marca visible de Revikoo, pensada para integrarse con facilidad en cualquier mostrador.</p>
-                      <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20neutro">Consultar este modelo <span aria-hidden="true">→</span></a>
                     </div>
                   </article>
                 </div>
@@ -251,7 +369,6 @@
                       <p class="panel__price">desde 30&nbsp;€</p>
                       <p class="panel__desc">Adaptamos los colores, la composición y el mensaje a la identidad de tu negocio para que el soporte se sienta parte del espacio.</p>
                       <p class="panel__note">La personalización no incluye la creación de un logotipo o una identidad corporativa completa.</p>
-                      <a class="editorial-link panel__cta" href="mailto:hola@revikoo.com?subject=Consulta%20sobre%20Diseño%20a%20medida">Consultar este modelo <span aria-hidden="true">→</span></a>
                     </div>
                   </article>
                 </div>
@@ -303,23 +420,6 @@
       </div>
     </section>
 
-    <section class="section gesto surface-dark" id="como-funciona" aria-labelledby="gesto-heading" hidden>
-      <div class="container editorial-grid gesto__composition">
-        <div class="gesto__intro reveal">
-          <p class="section-tag">02 / El gesto</p>
-          <h2 id="gesto-heading">Acercar. Opinar. Seguir.</h2>
-          <p class="gesto__text">El cliente no tiene que buscar tu negocio ni recordar hacerlo más tarde. Acerca el móvil y accede directamente al espacio donde puede compartir su experiencia.</p>
-        </div>
-
-        <div class="gesto__demo reveal reveal--delay-1" data-gesture>
-          <svg class="gesto__path" viewBox="0 0 240 120" width="240" height="120" aria-hidden="true" focusable="false">
-            <path class="gesto__path-line" d="M14 100 C 90 100, 150 40, 222 26" />
-          </svg>
-          <span class="gesto__stand" aria-hidden="true"></span>
-          <span class="gesto__phone" aria-hidden="true"></span>
-        </div>
-      </div>
-    </section>
 
     <section class="section objeto" id="el-objeto" aria-labelledby="objeto-heading" hidden>
       <div class="container editorial-grid objeto__composition">
@@ -510,7 +610,45 @@
     </section>
   </main>
 
-  <!-- TODO (Fase 3): footer -->
+  <footer class="site-footer" id="contacto" aria-label="Pie de página de Revikoo">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="#hero" aria-label="Revikoo — volver al inicio">
+            <img
+              src="assets/img/logo/revikoo-horizontal-light.svg"
+              alt="Revikoo"
+              width="141"
+              height="32"
+              loading="lazy"
+            >
+          </a>
+          <p>Un soporte físico con NFC que reduce los pasos para dejar una reseña en el momento adecuado.</p>
+        </div>
+
+        <div class="site-footer__contact">
+          <p>Cuéntanos qué negocio tienes y qué nivel de personalización buscas.</p>
+          <a class="site-footer__cta" href="mailto:hola@revikoo.com?subject=Solicitud%20de%20presupuesto%20Revikoo">
+            Solicitar presupuesto <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <nav class="site-footer__nav" aria-label="Navegación del pie de página">
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#por-que-revikoo">Por qué Revikoo</a>
+          <a href="#producto">Productos</a>
+          <a href="#hero">Volver arriba <span aria-hidden="true">↑</span></a>
+        </nav>
+
+        <div class="site-footer__meta">
+          <a href="mailto:hola@revikoo.com">hola@revikoo.com</a>
+          <span>© 2026 Revikoo</span>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>

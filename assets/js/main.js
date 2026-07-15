@@ -31,6 +31,63 @@
   }
 
   /* ---------------------------------------------------------
+     Navegación: marca la sección visible en desktop y móvil
+     --------------------------------------------------------- */
+
+  const sectionNavLinks = Array.from(
+    document.querySelectorAll(
+      '.navbar__links a[href^="#"], .mobile-menu__links a[href^="#"]'
+    )
+  );
+
+  if (sectionNavLinks.length) {
+    const sectionIds = [...new Set(
+      sectionNavLinks
+        .map((link) => link.getAttribute("href"))
+        .filter((href) => href && href.length > 1)
+        .map((href) => href.slice(1))
+    )];
+
+    const trackedSections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section) => section && !section.hidden);
+
+    const setActiveSection = (id) => {
+      sectionNavLinks.forEach((link) => {
+        const isActive = link.getAttribute("href") === `#${id}`;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    };
+
+    sectionNavLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) setActiveSection(href.slice(1));
+      });
+    });
+
+    if (trackedSections.length && "IntersectionObserver" in window) {
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+          if (visible[0]) setActiveSection(visible[0].target.id);
+        },
+        {
+          threshold: [0.08, 0.25, 0.5],
+          rootMargin: "-24% 0px -58% 0px",
+        }
+      );
+
+      trackedSections.forEach((section) => navObserver.observe(section));
+    }
+  }
+
+  /* ---------------------------------------------------------
      Menú móvil
      --------------------------------------------------------- */
 
@@ -129,34 +186,88 @@
     });
   });
 
+
+
   /* ---------------------------------------------------------
-     "El gesto": el móvil se aproxima y la línea se dibuja
-     una única vez al entrar en el viewport.
+     Demo de “Cómo funciona”
+     Se reproduce una sola vez al entrar en pantalla. El botón
+     permite reiniciarla y los tres pasos se sincronizan con la
+     secuencia visual. No depende de un vídeo externo.
      --------------------------------------------------------- */
 
-  const gestureDemo = document.querySelector("[data-gesture]");
+  const reviewDemo = document.querySelector("[data-review-demo]");
 
-  if (gestureDemo) {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  if (reviewDemo) {
+    const replayButton = reviewDemo.querySelector("[data-demo-replay]");
+    const stateLabel = reviewDemo.querySelector("[data-demo-state]");
+    const demoSteps = Array.from(document.querySelectorAll("[data-demo-step]"));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const stepLabels = [
+      "01 · Acerca el móvil",
+      "02 · Abre el acceso",
+      "03 · Comparte su experiencia",
+    ];
+    const timers = [];
+    let hasPlayed = false;
 
-    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-      gestureDemo.classList.add("is-visible");
+    const clearDemoTimers = () => {
+      while (timers.length) window.clearTimeout(timers.pop());
+    };
+
+    const setActiveStep = (index) => {
+      demoSteps.forEach((step, stepIndex) => {
+        step.classList.toggle("is-active", stepIndex === index);
+      });
+      if (stateLabel) stateLabel.textContent = stepLabels[index];
+    };
+
+    const showReducedMotionState = () => {
+      clearDemoTimers();
+      reviewDemo.classList.remove("is-playing");
+      setActiveStep(2);
+    };
+
+    const playDemo = () => {
+      if (reducedMotion.matches) {
+        showReducedMotionState();
+        return;
+      }
+
+      clearDemoTimers();
+      reviewDemo.classList.remove("is-playing");
+      void reviewDemo.offsetWidth;
+      setActiveStep(0);
+      reviewDemo.classList.add("is-playing");
+
+      timers.push(window.setTimeout(() => setActiveStep(1), 2500));
+      timers.push(window.setTimeout(() => setActiveStep(2), 4550));
+    };
+
+    replayButton?.addEventListener("click", playDemo);
+
+    reducedMotion.addEventListener?.("change", (event) => {
+      if (event.matches) showReducedMotionState();
+      else playDemo();
+    });
+
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+      reducedMotion.matches ? showReducedMotionState() : playDemo();
+      hasPlayed = true;
     } else {
-      const gestureObserver = new IntersectionObserver(
-        (entries, obs) => {
+      const demoObserver = new IntersectionObserver(
+        (entries, observer) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              obs.unobserve(entry.target);
+            if (entry.isIntersecting && !hasPlayed) {
+              hasPlayed = true;
+              playDemo();
+              observer.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.4 }
+        { threshold: 0.35 }
       );
 
-      gestureObserver.observe(gestureDemo);
+      demoObserver.observe(reviewDemo);
     }
   }
 
