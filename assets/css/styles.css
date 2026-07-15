@@ -1140,12 +1140,11 @@ body.no-scroll .navbar__logo--dark {
 }
 
 /* =========================================================
-   PRODUCTOS — carrusel editorial (paneles blancos)
-   Base sin JS: los tres paneles se apilan verticalmente y son
-   plenamente accesibles. Con JS (.is-enhanced) la pista pasa a
-   una fila y un único panel al 100% se desplaza con translate3d;
-   un estado central (activeIndex) sincroniza imagen, textos,
-   indicador y puntos. Sin scrollbar, sin autoplay.
+   PRODUCTOS — carrusel editorial (Swiper 11)
+   Cada diapositiva es un panel blanco de catálogo. Swiper gestiona
+   el desplazamiento (loop, teclado, gesto, a11y); aquí se define
+   solo el aspecto: panel, paginación (puntos), flechas y contador.
+   Sin scrollbar (no se usa el módulo) y sin autoplay.
    ========================================================= */
 
 .producto {
@@ -1179,21 +1178,19 @@ body.no-scroll .navbar__logo--dark {
   position: relative;
 }
 
-.carousel__viewport {
+.carousel__swiper {
   border-radius: var(--radius-md);
 }
 
-/* --- Base (sin JS): paneles apilados --- */
-.carousel__track {
+/* Cada slide estira a la altura de la más alta (altura estable). */
+.carousel__swiper .swiper-slide {
+  height: auto;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .panel {
+  flex: 1;
+  width: 100%;
   background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -1275,7 +1272,7 @@ body.no-scroll .navbar__logo--dark {
   align-self: start;
 }
 
-/* --- Controles (solo con JS) --- */
+/* --- Controles: [ ← ]  01 / 03  ● ○ ○  [ → ] --- */
 .carousel__controls {
   display: flex;
   align-items: center;
@@ -1296,12 +1293,17 @@ body.no-scroll .navbar__logo--dark {
   border: 1px solid var(--color-rule);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  transition: border-color var(--transition-fast), color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .carousel__arrow:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
+}
+
+.carousel__arrow:active {
+  background: var(--color-surface-hover);
 }
 
 .carousel__count {
@@ -1319,32 +1321,32 @@ body.no-scroll .navbar__logo--dark {
   color: var(--color-primary);
 }
 
+/* Paginación de Swiper reestilizada como puntos editoriales. El
+   contenedor se saca del posicionamiento absoluto de Swiper para
+   integrarse en la barra de controles. */
 .carousel__dots {
+  position: static;
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  width: auto;
 }
 
-.carousel__dot {
-  display: block;
+.carousel__dots .swiper-pagination-bullet {
   width: 8px;
   height: 8px;
-  padding: 0;
+  margin: 0;
   background: var(--color-rule);
-  border: 0;
+  opacity: 1;
   border-radius: var(--radius-pill);
-  cursor: pointer;
   transition: width var(--transition-normal), background-color var(--transition-fast);
 }
 
-.carousel__dot:hover {
+.carousel__dots .swiper-pagination-bullet:hover {
   background: var(--color-primary-light);
 }
 
-.carousel__dot[aria-current="true"] {
+.carousel__dots .swiper-pagination-bullet-active {
   width: 24px;
   background: var(--color-primary);
 }
@@ -1356,37 +1358,6 @@ body.no-scroll .navbar__logo--dark {
   max-width: 52ch;
   font-size: var(--text-base);
   color: var(--color-ink-soft);
-}
-
-/* --- Enhanced (con JS): fila desplazable por transform --- */
-.carousel.is-enhanced .carousel__viewport {
-  overflow: hidden;
-  /* El gesto horizontal lo gestiona el carrusel; el vertical hace
-     scroll de la página con normalidad. */
-  touch-action: pan-y;
-}
-
-.carousel.is-enhanced .carousel__track {
-  flex-direction: row;
-  gap: 0;
-  will-change: transform;
-  transition: transform 420ms var(--ease-reveal);
-}
-
-.carousel.is-enhanced .panel {
-  flex: 0 0 100%;
-  min-width: 0;
-}
-
-.carousel.is-enhanced .panel__cta:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .carousel.is-enhanced .carousel__track {
-    transition: none;
-  }
 }
 
 @media (min-width: 860px) {
