@@ -1674,7 +1674,7 @@ body.no-scroll .navbar__toggle {
     width: 100%;
     max-width: none;
     margin-inline: auto;
-    font-size: clamp(1.78rem, 7.25vw, 2rem);
+    font-size: clamp(1.86rem, 7.65vw, 2.05rem);
     line-height: 0.91;
     letter-spacing: -0.018em;
     text-wrap: initial;
