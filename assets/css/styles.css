@@ -1086,12 +1086,13 @@ body.no-scroll .navbar__logo--dark {
 }
 
 .porque__cierre {
-  margin: var(--space-6) 0 0;
-  max-width: 30ch;
+  margin: var(--space-6) auto 0;
+  max-width: 36ch;
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-style: italic;
   line-height: var(--leading-tight);
+  text-align: center;
   color: var(--color-text-primary);
 }
 
@@ -1100,7 +1101,7 @@ body.no-scroll .navbar__logo--dark {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
     column-gap: var(--space-8);
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
   }
 
   .porque__intro {
@@ -1119,11 +1120,13 @@ body.no-scroll .navbar__logo--dark {
     padding-top: 0;
   }
 
+  /* Cierre como banda centrada a pie de sección: sale de la columna
+     izquierda (demasiado estrecha) para caber en una sola línea. */
   .porque__cierre {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: end;
-    margin-top: var(--space-7);
+    grid-column: 1 / -1;
+    grid-row: 3;
+    max-width: none;
+    margin-top: var(--space-6);
   }
 }
 
