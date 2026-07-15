@@ -832,18 +832,6 @@ body.no-scroll .navbar__logo--dark {
   height: auto;
 }
 
-.hero__signature {
-  margin: 0;
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-rule);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-ink-soft);
-  max-width: 32rem;
-}
-
 /* ---------------------------------------------------------
    Móvil (<900px): la fotografía es la escena principal del hero
    (flujo normal, sin recorte: ancho completo, alto natural) y el
@@ -897,8 +885,8 @@ body.no-scroll .navbar__logo--dark {
   }
 
   /* Difuminados de costura: funden el borde superior (navbar) y el
-     inferior (zona de la firma) de la fotografía con --hero-bg para
-     que fondo e imagen encajen sin cortes visibles. */
+     inferior (transición a la siguiente sección) de la fotografía
+     con --hero-bg para que fondo e imagen encajen sin cortes. */
   .hero__visual::before,
   .hero__visual::after {
     content: "";
@@ -921,9 +909,6 @@ body.no-scroll .navbar__logo--dark {
     background: linear-gradient(to top, var(--hero-bg) 0%, rgba(241, 235, 225, 0) 100%);
   }
 
-  .hero__signature {
-    margin-top: var(--space-6);
-  }
 }
 
 @media (min-width: 900px) {
@@ -976,11 +961,6 @@ body.no-scroll .navbar__logo--dark {
     pointer-events: none;
   }
 
-  .hero__signature {
-    position: relative;
-    z-index: 1;
-    margin-top: auto;
-  }
 }
 
 /* ---------------------------------------------------------
@@ -1037,6 +1017,113 @@ body.no-scroll .navbar__logo--dark {
   .js .hero__cta-row .editorial-link::after,
   .js .hero__visual {
     animation: none;
+  }
+}
+
+/* =========================================================
+   POR QUÉ REVIKOO — bloque editorial compacto tras el hero.
+   Intro serif a la izquierda, tres puntos como filas separadas
+   por líneas finas a la derecha; sin tarjetas ni iconos.
+   ========================================================= */
+
+.porque {
+  /* Bloque compacto: menos aire que una sección estándar para
+     leerse de un vistazo sin competir con el hero. */
+  padding-block: var(--space-6) var(--space-7);
+}
+
+.porque__intro h2 {
+  margin: 0 0 var(--space-5);
+  max-width: 20ch;
+  font-size: var(--text-2xl);
+}
+
+.porque__intro h2 em {
+  font-style: italic;
+}
+
+.porque__lead {
+  margin: 0;
+  max-width: 52ch;
+  font-size: var(--text-lg);
+  color: var(--color-ink-soft);
+}
+
+.porque__points {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+}
+
+.porque__point {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--space-5);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-rule);
+}
+
+.porque__num {
+  padding-top: 0.2em;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-primary);
+}
+
+.porque__point-body h3 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.porque__point-body p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--color-ink-soft);
+}
+
+.porque__cierre {
+  margin: var(--space-6) 0 0;
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-style: italic;
+  line-height: var(--leading-tight);
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 900px) {
+  .porque__composition {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: var(--space-8);
+    grid-template-rows: auto 1fr;
+  }
+
+  .porque__intro {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .porque__points {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin-top: 0;
+  }
+
+  .porque__point:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .porque__cierre {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+    margin-top: var(--space-7);
   }
 }
 
