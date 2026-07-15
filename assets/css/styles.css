@@ -1668,18 +1668,19 @@ body.no-scroll .navbar__toggle {
     padding-inline: 1.25rem;
   }
 
+  /* Ajuste exclusivo para móvil: tres líneas fijas, algo más grandes.
+     La versión de escritorio permanece intacta. */
   .hero__headline {
     width: 100%;
     max-width: none;
     margin-inline: auto;
-
-    font-size: clamp(1.6rem, 6.8vw, 1.75rem);
-    line-height: 0.92;
-    letter-spacing: -0.015em;
+    font-size: clamp(1.78rem, 7.25vw, 2rem);
+    line-height: 0.91;
+    letter-spacing: -0.018em;
     text-wrap: initial;
   }
 
-  .hero__headline-line {
+  .hero__headline .hero__headline-line {
     display: block;
     white-space: nowrap;
   }
