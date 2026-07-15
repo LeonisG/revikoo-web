@@ -1657,11 +1657,21 @@ body.no-scroll .navbar__toggle {
 }
 
 @media (max-width: 520px) {
+  .hero__content {
+    width: 100%;
+    max-width: 23rem;
+    padding-inline: 1rem;
+  }
+
   .hero__headline {
-    max-width: 12.5ch;
-    font-size: clamp(1.95rem, 8.8vw, 2.55rem);
-    line-height: 0.96;
-    letter-spacing: -0.02em;
+    width: 100%;
+    max-width: 20ch;
+    margin-inline: auto;
+
+    font-size: clamp(1.72rem, 7.4vw, 2rem);
+    line-height: 0.94;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
   }
 
   .funciona__demo-bar > span:last-child {
