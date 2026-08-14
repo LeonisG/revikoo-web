@@ -647,14 +647,18 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   max-width: var(--vr-max); margin-inline: auto;
 }
 
+/* La fila es el contenedor; el enlace lleva la retícula. Separados
+   porque el botón de expandir no puede vivir dentro de un <a>. */
 .vr-row {
   position: relative;
+  border-bottom: 1px solid var(--vr-hair-2);
+}
+.vr-row__link {
   display: grid;
   grid-template-columns: minmax(5.5rem, 8%) 1fr auto auto;
   align-items: center;
   gap: 1.2rem;
   padding: clamp(1.1rem, 2.6vw, 2rem) 0;
-  border-bottom: 1px solid var(--vr-hair-2);
   transition: color var(--vr-mid) var(--vr-ease);
 }
 /* Barra de vino que barre la fila al entrar el cursor */
@@ -688,7 +692,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   color: var(--vr-rose);
   padding-left: 1.4rem;
 }
-.vr-row__thumb { display: none; }
+/* Cartel expandible: solo en móvil. En escritorio el cartel ya se ve
+   en la vista previa que sigue al cursor, así que aquí sobra. */
+.vr-row__toggle { display: none; }
+.vr-row__poster { display: none; }
 
 /* Preview que sigue al cursor (solo puntero fino) */
 .vr-agenda__peek {
@@ -869,7 +876,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .vr-spaces__tabs button { border-bottom: 0; padding: .4rem 0; }
   .vr-spaces__tabs button:hover,
   .vr-spaces__tabs button[aria-selected="true"] { padding-left: 0; }
-  .vr-row { grid-template-columns: minmax(4.5rem, 14%) 1fr auto; }
+  .vr-row__link { grid-template-columns: minmax(4.5rem, 14%) 1fr auto; }
   .vr-row__r { display: none; }
 }
 
@@ -901,25 +908,58 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* ≤ 620px: la agenda cambia de estructura, no se comprime */
 @media (max-width: 620px) {
-  .vr-row {
+  .vr-row { padding-bottom: .4rem; }
+  .vr-row__link {
     grid-template-columns: auto 1fr;
-    grid-template-areas: "date name" "thumb thumb";
     gap: .6rem 1rem;
-    padding: 1.4rem 0;
+    padding: 1.4rem 0 .8rem;
   }
-  .vr-row__d { grid-area: date; }
-  .vr-row__n { grid-area: name; font-size: clamp(1.6rem, 8vw, 2.4rem); }
+  .vr-row__n { font-size: clamp(1.6rem, 8vw, 2.4rem); }
   .vr-row:hover .vr-row__n { transform: none; }
   .vr-row__s { display: none; }
-  /* En táctil el cartel se muestra siempre: no hay hover que revelar */
-  .vr-row__thumb {
-    display: block; grid-area: thumb;
-    width: 100%; height: 8.5rem;
+
+  /* En táctil no hay hover: el cartel se muestra recortado y se
+     despliega entero con el botón. */
+  .vr-row__poster {
+    display: block;
+    margin: 0 0 .9rem;
+    max-height: 8.5rem;
+    overflow: hidden;
     border-radius: var(--vr-radius);
-    object-fit: cover; object-position: 50% 32%;
-    margin-top: .5rem;
-    filter: grayscale(.25);
+    transition: max-height .7s var(--vr-ease);
   }
+  .vr-row__poster img {
+    width: 100%; height: auto;
+    filter: grayscale(.25);
+    transition: filter var(--vr-slow) var(--vr-ease);
+  }
+  /* Los carteles son 3:4, así que el alto nunca pasa de 1.34 × ancho.
+     Ese tope permite animar la apertura sin fijar un alto a mano. */
+  .vr-row.is-open .vr-row__poster { max-height: 140vw; }
+  .vr-row.is-open .vr-row__poster img { filter: none; }
+
+  .vr-row__toggle:not([hidden]) {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; min-height: 44px;
+    padding: .2rem 0 1rem;
+    font-size: .6rem; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--vr-ivory-3);
+    transition: color var(--vr-fast) var(--vr-ease);
+  }
+  .vr-row__toggle:hover { color: var(--vr-ivory); }
+  /* Signo +/− con dos filetes: el vertical gira al abrir */
+  .vr-row__toggle i {
+    position: relative; flex: none;
+    width: 12px; height: 12px;
+  }
+  .vr-row__toggle i::before,
+  .vr-row__toggle i::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%;
+    height: 1px; background: var(--vr-rose);
+    transition: transform var(--vr-mid) var(--vr-ease);
+  }
+  .vr-row__toggle i::after { transform: rotate(90deg); }
+  .vr-row__toggle[aria-expanded="true"] i::after { transform: rotate(0); }
 
   .vr-menu__foot { flex-direction: column; align-items: flex-start; }
   .vr-menu__note { text-align: left; }

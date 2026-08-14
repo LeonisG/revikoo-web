@@ -168,6 +168,25 @@
     });
   }
 
+  /* ── Carteles de la agenda: desplegar / plegar (móvil) ─────────────
+     El botón nace con [hidden] en el HTML: sin JS no aparece un control
+     que no haría nada, y el cartel sigue visible recortado. */
+  $$("[data-poster-toggle]").forEach((btn) => {
+    const row = btn.closest(".vr-row");
+    const panel = document.getElementById(btn.getAttribute("aria-controls"));
+    if (!row || !panel) return;
+
+    btn.hidden = false;
+
+    btn.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      row.classList.toggle("is-open", !open);
+      const label = btn.querySelector("[data-toggle-label]");
+      if (label) label.textContent = open ? "Ver cartel" : "Ocultar cartel";
+    });
+  });
+
   /* ── Año en curso ──────────────────────────────────────────────── */
   const year = $("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());
