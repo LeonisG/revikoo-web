@@ -409,10 +409,18 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   text-transform: uppercase;
 }
 .vr-word--a { justify-self: start; }
-/* ROSE en cursiva, desplazada hacia el centro. La cursiva de Bodoni
-   sobresale por la derecha, así que necesita aire para no cortarse. */
-.vr-word--b { justify-self: end; font-style: italic; margin-right: .1em; }
-.vr-word--b span { color: transparent; -webkit-text-stroke: 2px var(--vr-ivory); }
+.vr-word--b { justify-self: end; font-style: italic; }
+/* La E cursiva de Bodoni pinta ~.11em fuera de su caja de avance y la
+   máscara del revelado (overflow:hidden) la recortaba. El aire va en
+   em sobre ESTE elemento, que es el que lleva el tamaño grande: en el
+   envoltorio, 1em son ~30px y no ~243px. Escala sola en cada pantalla. */
+.vr-word--b span {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--vr-ivory);
+  /* .16em cubre el desborde del glifo; los 2px fijos, el contorno,
+     que no escala con el tamaño y en móvil pesa proporcionalmente más. */
+  padding-right: calc(.16em + 2px);
+}
 
 /* Revelado por máscara: el texto sube desde debajo de su propia línea */
 .vr-word { overflow: hidden; }
@@ -866,8 +874,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
   .vr-hero { padding-top: calc(var(--vr-pad) * 5); }
   .vr-hero__rail { display: none; }
-  /* En móvil, aún más adentro: la pantalla no perdona un corte */
-  .vr-word--b { margin-right: .14em; }
+  /* Sin override de margen: el padding en em ya escala con la palabra */
   .vr-hero__strip { grid-template-columns: 1fr 1fr; row-gap: 1.4rem; }
   .vr-strip__cell--act { grid-column: 1 / -1; gap: 1.8rem; }
 
