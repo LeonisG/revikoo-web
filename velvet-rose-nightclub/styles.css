@@ -61,14 +61,17 @@ body {
   background: var(--vr-void);
   color: var(--vr-ivory);
   font-family: var(--vr-mono);
-  font-weight: 300;
+  font-weight: 400;
+  /* Bodoni afina sus trazos finos al crecer el tamaño óptico y a gran
+     escala desaparecen. Fijando el eje se conservan legibles. */
+  font-optical-sizing: none;
   font-size: clamp(.82rem, .78rem + .18vw, .95rem);
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3 { margin: 0; font-weight: 400; line-height: .92; }
+h1, h2, h3 { margin: 0; font-weight: 600; line-height: .92; }
 p, dl, dd, figure, ol, ul { margin: 0; }
 ul, ol { list-style: none; padding: 0; }
 img, svg { display: block; max-width: 100%; }
@@ -394,7 +397,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: grid;
   width: 100%;
   font-family: var(--vr-display);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .vr-word span {
@@ -406,9 +409,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   text-transform: uppercase;
 }
 .vr-word--a { justify-self: start; }
-/* ROSE en cursiva y desbordando el margen derecho: la firma */
-.vr-word--b { justify-self: end; font-style: italic; margin-right: -.06em; }
-.vr-word--b span { color: transparent; -webkit-text-stroke: 1px var(--vr-ivory); }
+/* ROSE en cursiva, desplazada hacia el centro. La cursiva de Bodoni
+   sobresale por la derecha, así que necesita aire para no cortarse. */
+.vr-word--b { justify-self: end; font-style: italic; margin-right: .1em; }
+.vr-word--b span { color: transparent; -webkit-text-stroke: 2px var(--vr-ivory); }
 
 /* Revelado por máscara: el texto sube desde debajo de su propia línea */
 .vr-word { overflow: hidden; }
@@ -485,11 +489,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   white-space: nowrap; padding-right: .6em;
   color: var(--vr-ivory-3);
 }
-.vr-marquee--thin .vr-marquee__row span {
-  font-family: var(--vr-mono); font-style: normal;
-  font-size: clamp(.7rem, 1.4vw, .86rem);
-  letter-spacing: .3em; text-transform: uppercase;
-}
 @keyframes vr-slide { to { transform: translate3d(-50%, 0, 0); } }
 
 /* ── 10 · SECCIONES: base ─────────────────────────────────────────── */
@@ -515,9 +514,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: linear-gradient(180deg, var(--vr-void), var(--vr-ink) 60%, var(--vr-void));
   overflow: hidden;
 }
+/* Fecha · información · cartel, en una sola fila: el cartel acompaña
+   al evento, no cuelga por debajo. */
 .vr-tonight__grid {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: clamp(1.5rem, 4vw, 4rem);
   align-items: start;
   margin-top: clamp(2rem, 5vw, 4rem);
@@ -526,7 +527,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .vr-date { display: flex; flex-direction: column; line-height: .8; }
 .vr-date b {
-  font-family: var(--vr-display); font-weight: 500;
+  font-family: var(--vr-display); font-weight: 600;
   font-size: clamp(5rem, 17vw, 15rem);
   letter-spacing: -.04em;
   background: linear-gradient(170deg, var(--vr-ivory) 30%, var(--vr-rose) 130%);
@@ -593,9 +594,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .vr-cta--big { padding: 1.25rem 2.2rem; font-size: .72rem; }
 
 .vr-tonight__poster {
-  grid-column: 2; justify-self: end;
+  grid-column: 3; grid-row: 1;
+  justify-self: end;
   width: clamp(12rem, 22vw, 21rem);
-  margin-top: clamp(1.5rem, 4vw, 3rem);
 }
 .vr-tonight__poster img {
   width: 100%; height: auto;
@@ -653,7 +654,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .vr-row__d { display: flex; align-items: baseline; gap: .5rem; }
 .vr-row__d b {
-  font-family: var(--vr-display); font-weight: 500;
+  font-family: var(--vr-display); font-weight: 600;
   font-size: clamp(1.7rem, 3.6vw, 2.9rem); line-height: 1;
 }
 .vr-row__d i {
@@ -686,42 +687,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .vr-agenda__peek.is-on { opacity: 1; transform: translate3d(0,0,0) scale(1) rotate(-4deg); }
 .vr-agenda__peek img { width: 100%; height: auto; }
-
-/* ── 13 · EXPERIENCE ──────────────────────────────────────────────── */
-.vr-exp {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(10rem, 22%) 1fr;
-  gap: clamp(1.5rem, 4vw, 4rem);
-  padding: clamp(5rem, 13vw, 12rem) var(--vr-pad);
-  background:
-    radial-gradient(90% 60% at 100% 0%, rgba(69,16,31,.42), transparent 62%),
-    var(--vr-void);
-  max-width: var(--vr-max); margin-inline: auto;
-}
-.vr-exp__rail { position: sticky; top: 22vh; align-self: start; }
-.vr-exp__note {
-  margin-top: 1.6rem;
-  font-size: .78rem; line-height: 2; color: var(--vr-ivory-2);
-}
-.vr-exp__words { display: flex; flex-direction: column; }
-.vr-exp__words span {
-  display: block;
-  font-family: var(--vr-display);
-  font-size: clamp(2.6rem, 11vw, 9rem);
-  line-height: .96; letter-spacing: -.025em; text-transform: uppercase;
-  /* Revelado por máscara vertical, no un simple fade */
-  clip-path: inset(0 0 100% 0);
-  opacity: .001;
-  transform: translate3d(0, .3em, 0);
-  transition: clip-path 1.15s var(--vr-ease), transform 1.15s var(--vr-ease), opacity .5s var(--vr-ease);
-}
-/* El disparo lo da el contenedor, nunca la palabra: un elemento
-   recortado a área cero no puede observarse de forma fiable. */
-.vr-exp__words.is-in span { clip-path: inset(0 0 -10% 0); opacity: 1; transform: none; }
-.vr-exp__words span:nth-child(even) { align-self: flex-end; text-align: right; }
-.vr-exp__words em { font-style: italic; text-transform: none; color: var(--vr-rose); }
-.vr-exp__words i { font-style: normal; color: var(--vr-rose); }
 
 /* ── 14 · SPACES ──────────────────────────────────────────────────── */
 .vr-spaces {
@@ -817,50 +782,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .vr-vip__p { margin-top: 1.6rem; color: var(--vr-ivory-2); font-size: .9rem; }
 .vr-vip__fine { margin-top: 1.4rem; font-size: .64rem; letter-spacing: .12em; color: var(--vr-ivory-3); }
 
-/* ── 16 · MUSIC ───────────────────────────────────────────────────── */
-.vr-music { padding: clamp(4.5rem, 11vw, 10rem) 0; background: var(--vr-void); }
-.vr-music__head { padding-inline: var(--vr-pad); max-width: var(--vr-max); margin-inline: auto; }
-.vr-music__head h2 {
-  margin-top: 1.2rem;
-  font-family: var(--vr-display);
-  font-size: clamp(2.2rem, 6.5vw, 5.5rem);
-  text-transform: uppercase; letter-spacing: -.02em;
-}
-.vr-music__p { margin-top: 1.2rem; max-width: 42ch; color: var(--vr-ivory-2); font-size: .84rem; }
-
-.vr-tracks {
-  margin: clamp(2.4rem, 5vw, 4rem) auto 0;
-  padding-inline: var(--vr-pad);
-  max-width: var(--vr-max);
-  border-top: 1px solid var(--vr-hair);
-}
-.vr-track {
-  display: grid;
-  grid-template-columns: 2.6rem minmax(8rem, 1fr) minmax(4rem, 1.3fr) auto;
-  align-items: center; gap: 1.2rem;
-  padding: 1.15rem 0;
-  border-bottom: 1px solid var(--vr-hair-2);
-}
-.vr-track__i { font-size: .6rem; letter-spacing: .16em; color: var(--vr-mercury); }
-.vr-track__n { font-family: var(--vr-display); font-size: clamp(1.05rem, 2.4vw, 1.6rem); }
-.vr-track__t { font-size: .68rem; letter-spacing: .12em; color: var(--vr-ivory-3); font-variant-numeric: tabular-nums; }
-
-/* Waveform: barras generadas por JS, decorativas */
-.vr-track__w { display: flex; align-items: center; gap: 2px; height: 26px; }
-.vr-track__w b {
-  flex: 1; min-width: 1px;
-  height: var(--h, 30%);
-  background: var(--vr-hair);
-  transform-origin: center;
-  transition: background var(--vr-mid) var(--vr-ease), transform var(--vr-mid) var(--vr-ease);
-}
-.vr-track:hover .vr-track__w b {
-  background: var(--vr-rose);
-  transform: scaleY(1.35);
-  transition-delay: calc(var(--n) * 7ms);
-}
-.vr-track:hover .vr-track__n { color: var(--vr-rose); }
-
 /* ── 17 · CONTACT ─────────────────────────────────────────────────── */
 .vr-contact {
   padding: clamp(4.5rem, 11vw, 10rem) var(--vr-pad) clamp(3rem, 7vw, 6rem);
@@ -903,7 +824,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .vr-foot__word {
   display: flex; flex-direction: column;
   padding: 0 var(--vr-pad);
-  font-family: var(--vr-display); font-weight: 500;
+  font-family: var(--vr-display); font-weight: 600;
   line-height: .78; text-transform: uppercase;
   letter-spacing: -.03em;
 }
@@ -928,9 +849,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* ≤ 1024px: la agenda pierde una columna, salas se apilan */
 @media (max-width: 1024px) {
-  .vr-exp { grid-template-columns: 1fr; }
-  .vr-exp__rail { position: static; }
-  .vr-exp__words span:nth-child(even) { align-self: flex-start; text-align: left; }
   .vr-spaces__ui { grid-template-columns: 1fr; }
   .vr-spaces__tabs { flex-direction: row; flex-wrap: wrap; gap: .4rem 1.6rem; border-top: 0; }
   .vr-spaces__tabs button { border-bottom: 0; padding: .4rem 0; }
@@ -948,21 +866,23 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
   .vr-hero { padding-top: calc(var(--vr-pad) * 5); }
   .vr-hero__rail { display: none; }
-  /* En móvil el desbordamiento se contiene: legibilidad primero */
-  .vr-word--b { margin-right: 0; }
+  /* En móvil, aún más adentro: la pantalla no perdona un corte */
+  .vr-word--b { margin-right: .14em; }
   .vr-hero__strip { grid-template-columns: 1fr 1fr; row-gap: 1.4rem; }
   .vr-strip__cell--act { grid-column: 1 / -1; gap: 1.8rem; }
 
   .vr-rose { right: -28vw; top: 38%; width: 30rem; opacity: .8; }
 
   .vr-tonight__grid { grid-template-columns: 1fr; }
-  .vr-tonight__poster { grid-column: 1; justify-self: start; width: min(62vw, 18rem); }
+  .vr-tonight__poster {
+    grid-column: 1; grid-row: auto;
+    justify-self: start; width: min(62vw, 18rem);
+    margin-top: clamp(1.5rem, 4vw, 3rem);
+  }
 
   .vr-space__txt { grid-template-columns: 1fr; }
   .vr-space__txt dl { grid-column: 1; grid-row: auto; }
 
-  .vr-track { grid-template-columns: 2rem 1fr auto; gap: .9rem; }
-  .vr-track__w { display: none; }
 }
 
 /* ≤ 620px: la agenda cambia de estructura, no se comprime */
@@ -1011,7 +931,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
   /* Todo el contenido visible sin depender del scroll */
   [data-reveal],
-  .vr-exp__words span,
   .vr-menu.is-open .vr-menu__nav a {
     opacity: 1 !important;
     transform: none !important;

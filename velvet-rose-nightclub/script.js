@@ -103,12 +103,7 @@
 
   /* ── Revelado al entrar en pantalla ────────────────────────────────
      Una sola regla repetida: subir + aparecer. Se observa una vez. */
-  // Se observa el contenedor de las palabras, no cada palabra: están
-  // recortadas a área cero y un observador nunca las vería entrar.
-  const revealTargets = [
-    ...$$("[data-reveal]"),
-    ...$$(".vr-exp__words"),
-  ];
+  const revealTargets = $$("[data-reveal]");
 
   if (revealTargets.length) {
     if (reduced.matches || !("IntersectionObserver" in window)) {
@@ -138,11 +133,6 @@
       };
       window.addEventListener("load", revealVisible, { once: true });
       window.addEventListener("pageshow", revealVisible, { once: true });
-
-      // Escalonado dentro de cada grupo: el ritmo importa más que la velocidad
-      $$(".vr-exp__words span").forEach((el, i) => {
-        el.style.transitionDelay = `${i * 90}ms`;
-      });
     }
   }
 
@@ -177,25 +167,6 @@
       });
     });
   }
-
-  /* ── Waveforms decorativas ─────────────────────────────────────────
-     Generadas aquí para no ensuciar el HTML con 200 elementos vacíos.
-     Patrón determinista: mismo set, mismo dibujo en cada carga. */
-  $$("[data-wave]").forEach((wave, w) => {
-    const BARS = 42;
-    const frag = document.createDocumentFragment();
-    for (let i = 0; i < BARS; i++) {
-      const bar = document.createElement("b");
-      const seed = Math.sin((i + 1) * (w + 1.7) * 12.9898) * 43758.5453;
-      const n = seed - Math.floor(seed);
-      const shape = Math.sin((i / BARS) * Math.PI);
-      const h = 14 + n * 62 * (0.45 + shape * 0.75);
-      bar.style.setProperty("--h", `${Math.min(100, h).toFixed(1)}%`);
-      bar.style.setProperty("--n", String(i));
-      frag.appendChild(bar);
-    }
-    wave.appendChild(frag);
-  });
 
   /* ── Año en curso ──────────────────────────────────────────────── */
   const year = $("[data-year]");
