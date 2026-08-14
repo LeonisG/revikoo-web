@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img">
+  <!-- PLACEHOLDER sala Velvet Rose — sustituible por fotografía real -->
+  <defs>
+    <linearGradient id="s3sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0C1017"/>
+      <stop offset="52%" stop-color="#12070D"/>
+      <stop offset="100%" stop-color="#07060A"/>
+    </linearGradient>
+    <radialGradient id="s3moon" cx="76%" cy="20%" r="34%">
+      <stop offset="0%" stop-color="#8FA0AC" stop-opacity=".42"/>
+      <stop offset="100%" stop-color="#8FA0AC" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="s3warm" cx="30%" cy="78%" r="50%">
+      <stop offset="0%" stop-color="#FF1F4B" stop-opacity=".34"/>
+      <stop offset="100%" stop-color="#07060A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="s3grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".92" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#s3sky)"/>
+  <rect width="1200" height="900" fill="url(#s3moon)"/>
+  <rect width="1200" height="900" fill="url(#s3warm)"/>
+
+  <!-- Vegetación abstracta: masas, no ilustración -->
+  <g fill="#07060A" fill-opacity=".78">
+    <ellipse cx="90" cy="700" rx="150" ry="230" transform="rotate(-12 90 700)"/>
+    <ellipse cx="1130" cy="660" rx="170" ry="260" transform="rotate(14 1130 660)"/>
+    <ellipse cx="300" cy="840" rx="200" ry="120"/>
+    <ellipse cx="900" cy="856" rx="230" ry="110"/>
+  </g>
+
+  <!-- Guirnalda: puntos de luz cálidos -->
+  <path d="M60 250 Q 300 360 600 268 T 1140 300" fill="none" stroke="#EDE4D8" stroke-opacity=".14"/>
+  <g fill="#FF6B86">
+    <circle cx="180" cy="302" r="4"/><circle cx="330" cy="330" r="4"/>
+    <circle cx="480" cy="316" r="4"/><circle cx="640" cy="272" r="4"/>
+    <circle cx="800" cy="278" r="4"/><circle cx="960" cy="292" r="4"/>
+  </g>
+
+  <line x1="0" y1="640" x2="1200" y2="640" stroke="#EDE4D8" stroke-opacity=".1"/>
+
+  <rect width="1200" height="900" filter="url(#s3grain)" opacity=".17" style="mix-blend-mode:overlay"/>
+</svg>

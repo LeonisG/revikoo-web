@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img">
+  <!-- PLACEHOLDER sala Velvet Rose — sustituible por fotografía real -->
+  <defs>
+    <linearGradient id="s1cone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF1F4B" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#FF1F4B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="s1cone2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8FA0AC" stop-opacity=".26"/>
+      <stop offset="100%" stop-color="#8FA0AC" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="s1floor" cx="50%" cy="100%" r="70%">
+      <stop offset="0%" stop-color="#B00B33" stop-opacity=".42"/>
+      <stop offset="100%" stop-color="#07060A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="s1soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+    <filter id="s1grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="900" fill="#08070B"/>
+
+  <!-- Conos de luz desde el techo -->
+  <g filter="url(#s1soft)">
+    <polygon points="300,0 360,0 520,900 140,900" fill="url(#s1cone)"/>
+    <polygon points="880,0 930,0 1080,900 700,900" fill="url(#s1cone2)"/>
+    <polygon points="600,0 640,0 760,900 470,900" fill="url(#s1cone)" opacity=".5"/>
+  </g>
+
+  <rect y="560" width="1200" height="340" fill="url(#s1floor)"/>
+
+  <!-- Horizonte / tarima -->
+  <line x1="0" y1="612" x2="1200" y2="612" stroke="#EDE4D8" stroke-opacity=".14"/>
+  <line x1="0" y1="628" x2="1200" y2="628" stroke="#EDE4D8" stroke-opacity=".06"/>
+
+  <!-- Siluetas: masa, nunca personas reconocibles -->
+  <g fill="#07060A" fill-opacity=".82">
+    <ellipse cx="160" cy="660" rx="52" ry="72"/><ellipse cx="268" cy="672" rx="46" ry="64"/>
+    <ellipse cx="392" cy="656" rx="58" ry="80"/><ellipse cx="520" cy="676" rx="44" ry="60"/>
+    <ellipse cx="648" cy="660" rx="54" ry="74"/><ellipse cx="784" cy="678" rx="46" ry="62"/>
+    <ellipse cx="908" cy="658" rx="56" ry="78"/><ellipse cx="1040" cy="674" rx="48" ry="66"/>
+  </g>
+
+  <rect width="1200" height="900" filter="url(#s1grain)" opacity=".15" style="mix-blend-mode:overlay"/>
+</svg>

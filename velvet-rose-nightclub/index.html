@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es" class="vr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Prototipo en desarrollo: no debe indexarse -->
+<meta name="robots" content="noindex,nofollow,noarchive">
+
+<title>VELVET ROSE — Bloom After Dark</title>
+<meta name="description" content="Velvet Rose. Una flor que solo se abre de noche.">
+<meta name="theme-color" content="#07060A">
+
+<link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./styles.css">
+
+<!-- Arma la apertura solo si procede. Sin JS nunca se arma: la página es
+     directamente accesible y la cortina jamás llega a cubrir el contenido. -->
+<script>
+(function(){try{
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = window.sessionStorage.getItem('vr:intro');
+  if(!rm && !seen){ document.documentElement.classList.add('vr-armed'); }
+}catch(e){}})();
+</script>
+</head>
+<body>
+
+<!-- ============================================================
+     ⟨DEMO⟩ — CONTENIDO SUSTITUIBLE
+     Todo lo marcado con "data-demo" o comentado con ⟨DEMO⟩ es
+     contenido de relleno. Puntos a sustituir cuando llegue la
+     información real del club:
+       · nombre de sesión, fecha y horario  → #tonight
+       · agenda de próximos eventos         → #agenda
+       · salas y descripciones              → #spaces
+       · sets y duraciones                  → #music
+       · dirección, teléfono, email         → #contacto
+       · URLs: entradas, reservas (WhatsApp), Instagram, mapa
+     Busca `data-demo` para localizarlos todos de una vez.
+     ============================================================ -->
+
+<a class="vr-skip" href="#entrance">Saltar al contenido</a>
+
+<!-- ── Apertura: cortina de terciopelo + diafragma ─────────────── -->
+<div class="vr-intro" data-intro aria-hidden="true">
+  <span class="vr-intro__panel vr-intro__panel--l"></span>
+  <span class="vr-intro__panel vr-intro__panel--r"></span>
+  <span class="vr-intro__iris"></span>
+  <span class="vr-intro__mark">V&thinsp;R</span>
+</div>
+
+<!-- ── Grano de película (una sola capa, sobre todo) ───────────── -->
+<div class="vr-grain" aria-hidden="true"></div>
+<div class="vr-glow" data-glow aria-hidden="true"></div>
+
+<!-- ── Navegación ─────────────────────────────────────────────── -->
+<header class="vr-nav" data-nav>
+  <a class="vr-nav__mark" href="#entrance" aria-label="Velvet Rose — inicio">
+    <span class="vr-nav__mono">VR</span>
+    <span class="vr-nav__full">VELVET&nbsp;ROSE</span>
+  </a>
+
+  <nav class="vr-nav__links" aria-label="Navegación principal">
+    <a href="#agenda"><span>Agenda</span></a>
+    <a href="#experience"><span>Club</span></a>
+    <a href="#reservados"><span>Reservados</span></a>
+    <a href="#contacto"><span>Contacto</span></a>
+  </nav>
+
+  <div class="vr-nav__end">
+    <!-- ⟨DEMO⟩ sustituir href por la URL real de venta de entradas -->
+    <a class="vr-ticket" href="#tonight" data-demo="url-entradas" data-cursor>
+      <span class="vr-ticket__t">Entradas</span>
+      <span class="vr-ticket__i" aria-hidden="true"></span>
+    </a>
+
+    <button type="button" class="vr-burger" data-menu-open aria-label="Abrir menú" aria-expanded="false" aria-controls="vr-menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Menú fullscreen (móvil / tablet) ───────────────────────── -->
+<div class="vr-menu" id="vr-menu" data-menu hidden>
+  <div class="vr-menu__head">
+    <span class="vr-menu__label">Índice</span>
+    <button type="button" class="vr-menu__close" data-menu-close aria-label="Cerrar menú">Cerrar</button>
+  </div>
+
+  <nav class="vr-menu__nav" aria-label="Navegación">
+    <a href="#agenda"><i aria-hidden="true">01</i>Agenda</a>
+    <a href="#experience"><i aria-hidden="true">02</i>Club</a>
+    <a href="#spaces"><i aria-hidden="true">03</i>Salas</a>
+    <a href="#reservados"><i aria-hidden="true">04</i>Reservados</a>
+    <a href="#music"><i aria-hidden="true">05</i>Música</a>
+    <a href="#contacto"><i aria-hidden="true">06</i>Contacto</a>
+  </nav>
+
+  <div class="vr-menu__foot">
+    <a class="vr-menu__cta" href="#tonight" data-demo="url-entradas">Entradas</a>
+    <p class="vr-menu__note">23:59 — 06:00<br><span data-demo="direccion">Calle Demo 00 · Ciudad</span></p>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ══ ENTRANCE ══════════════════════════════════════════════ -->
+  <section class="vr-hero" id="entrance">
+
+    <!-- Símbolo: rosa abstracta por capas -->
+    <div class="vr-rose" data-rose aria-hidden="true">
+      <span class="vr-rose__halo"></span>
+      <span class="vr-rose__petal" style="--i:6"></span>
+      <span class="vr-rose__petal" style="--i:5"></span>
+      <span class="vr-rose__petal" style="--i:4"></span>
+      <span class="vr-rose__petal" style="--i:3"></span>
+      <span class="vr-rose__petal" style="--i:2"></span>
+      <span class="vr-rose__petal" style="--i:1"></span>
+      <span class="vr-rose__core"></span>
+    </div>
+
+    <p class="vr-hero__rail" aria-hidden="true">Una flor que solo se abre de noche</p>
+
+    <h1 class="vr-hero__type">
+      <span class="vr-word vr-word--a"><span>Velvet</span></span>
+      <span class="vr-hero__mid">
+        <span class="vr-rule" aria-hidden="true"></span>
+        <span class="vr-hero__tag">Bloom after dark</span>
+      </span>
+      <span class="vr-word vr-word--b"><span>Rose</span></span>
+    </h1>
+
+    <div class="vr-hero__strip">
+      <div class="vr-strip__cell">
+        <span class="vr-k">Esta noche</span>
+        <!-- ⟨DEMO⟩ nombre de la sesión -->
+        <b data-demo="sesion-hoy">Bloom 001</b>
+      </div>
+      <div class="vr-strip__cell">
+        <span class="vr-k">Horario</span>
+        <b data-demo="horario">23:59 — 06:00</b>
+      </div>
+      <div class="vr-strip__cell vr-strip__cell--act">
+        <a href="#tonight" data-demo="url-entradas" data-cursor>Entradas</a>
+        <a href="#reservados" data-cursor>Reservados</a>
+      </div>
+    </div>
+
+    <div class="vr-marquee" aria-hidden="true">
+      <div class="vr-marquee__row" data-marquee>
+        <span>Bloom after dark — Velvet Rose — 23:59 — Bloom after dark — Velvet Rose — 23:59 — </span>
+        <span>Bloom after dark — Velvet Rose — 23:59 — Bloom after dark — Velvet Rose — 23:59 — </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TONIGHT ═══════════════════════════════════════════════ -->
+  <section class="vr-tonight" id="tonight" aria-labelledby="tonight-h">
+    <p class="vr-sec-k"><span>01</span> Esta noche</p>
+
+    <div class="vr-tonight__grid">
+      <!-- ⟨DEMO⟩ fecha -->
+      <p class="vr-date" data-reveal>
+        <b data-demo="dia">14</b>
+        <i data-demo="mes-dia">Sáb · Feb</i>
+      </p>
+
+      <div class="vr-tonight__body">
+        <h2 class="vr-tonight__title" id="tonight-h" data-reveal>
+          <span data-demo="sesion-hoy">Bloom</span>
+          <em data-demo="sesion-num">001</em>
+        </h2>
+
+        <dl class="vr-meta" data-reveal>
+          <div><dt>Apertura</dt><dd data-demo="horario">23:59 — 06:00</dd></div>
+          <div><dt>Sala</dt><dd data-demo="sala">Main Room</dd></div>
+          <div><dt>Código</dt><dd>Sin explicaciones</dd></div>
+        </dl>
+
+        <!-- ⟨DEMO⟩ line-up -->
+        <ul class="vr-lineup" data-reveal data-demo="lineup">
+          <li><span>00:30</span> Nocturne <i>live</i></li>
+          <li><span>02:00</span> Amara Voss</li>
+          <li><span>04:00</span> K-Side <i>b2b</i> Lumen</li>
+        </ul>
+
+        <a class="vr-cta" href="#" data-demo="url-entradas" data-cursor data-reveal>
+          <span>Comprar entradas</span>
+          <i aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <figure class="vr-tonight__poster" data-reveal data-parallax="0.06">
+        <img src="./assets/images/poster-01.svg" alt="Cartel de la sesión de esta noche" width="600" height="800" loading="lazy" decoding="async">
+        <figcaption>Cartel — <span data-demo="sesion-hoy">Bloom 001</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══ UPCOMING ══════════════════════════════════════════════ -->
+  <section class="vr-agenda" id="agenda" aria-labelledby="agenda-h">
+    <div class="vr-agenda__head">
+      <p class="vr-sec-k"><span>02</span> Agenda</p>
+      <h2 id="agenda-h">Lo que <em>viene</em></h2>
+    </div>
+
+    <!-- ⟨DEMO⟩ toda la agenda. Duplicar <a class="vr-row"> para añadir fechas. -->
+    <div class="vr-agenda__list" data-agenda data-demo="agenda">
+
+      <a class="vr-row" href="#" data-demo="url-entradas" data-poster="./assets/images/poster-02.svg" data-cursor>
+        <span class="vr-row__d"><b>21</b><i>Feb</i></span>
+        <span class="vr-row__n">Velour</span>
+        <span class="vr-row__r">Main Room</span>
+        <span class="vr-row__s">Entradas</span>
+        <img class="vr-row__thumb" src="./assets/images/poster-02.svg" alt="" width="600" height="800" loading="lazy" decoding="async" aria-hidden="true">
+      </a>
+
+      <a class="vr-row" href="#" data-demo="url-entradas" data-poster="./assets/images/poster-03.svg" data-cursor>
+        <span class="vr-row__d"><b>28</b><i>Feb</i></span>
+        <span class="vr-row__n">Thorn</span>
+        <span class="vr-row__r">Velvet Room</span>
+        <span class="vr-row__s">Entradas</span>
+        <img class="vr-row__thumb" src="./assets/images/poster-03.svg" alt="" width="600" height="800" loading="lazy" decoding="async" aria-hidden="true">
+      </a>
+
+      <a class="vr-row" href="#" data-demo="url-entradas" data-poster="./assets/images/poster-01.svg" data-cursor>
+        <span class="vr-row__d"><b>07</b><i>Mar</i></span>
+        <span class="vr-row__n">Petal &amp; Ash</span>
+        <span class="vr-row__r">Main Room</span>
+        <span class="vr-row__s">Últimas</span>
+        <img class="vr-row__thumb" src="./assets/images/poster-01.svg" alt="" width="600" height="800" loading="lazy" decoding="async" aria-hidden="true">
+      </a>
+
+      <a class="vr-row" href="#" data-demo="url-entradas" data-poster="./assets/images/poster-02.svg" data-cursor>
+        <span class="vr-row__d"><b>14</b><i>Mar</i></span>
+        <span class="vr-row__n">Midnight Bloom</span>
+        <span class="vr-row__r">Todas las salas</span>
+        <span class="vr-row__s">Pronto</span>
+        <img class="vr-row__thumb" src="./assets/images/poster-02.svg" alt="" width="600" height="800" loading="lazy" decoding="async" aria-hidden="true">
+      </a>
+
+    </div>
+
+    <figure class="vr-agenda__peek" data-agenda-peek aria-hidden="true">
+      <img src="./assets/images/poster-02.svg" alt="" width="600" height="800" decoding="async">
+    </figure>
+  </section>
+
+  <!-- ══ THE EXPERIENCE ════════════════════════════════════════ -->
+  <section class="vr-exp" id="experience" aria-labelledby="exp-h">
+    <div class="vr-exp__rail">
+      <p class="vr-sec-k"><span>03</span> El club</p>
+      <p class="vr-exp__note">
+        No hay dress code escrito.<br>
+        Hay una hora a la que todo<br>
+        empieza a tener sentido.
+      </p>
+    </div>
+
+    <h2 class="vr-exp__words" id="exp-h">
+      <span data-reveal>Música<i>.</i></span>
+      <span data-reveal>Luz<i>.</i></span>
+      <span data-reveal>Terciopelo<i>.</i></span>
+      <span data-reveal>2&thinsp;AM<i>.</i></span>
+      <span data-reveal><em>Sin explicaciones</em><i>.</i></span>
+    </h2>
+  </section>
+
+  <!-- ══ SPACES ════════════════════════════════════════════════ -->
+  <section class="vr-spaces" id="spaces" aria-labelledby="spaces-h">
+    <div class="vr-spaces__head">
+      <p class="vr-sec-k"><span>04</span> Salas</p>
+      <h2 id="spaces-h">Cuatro maneras<br>de <em>perderse</em></h2>
+    </div>
+
+    <!-- ⟨DEMO⟩ salas. Añadir sala = un <button> + un <article> con el mismo id. -->
+    <div class="vr-spaces__ui" data-demo="salas">
+      <div class="vr-spaces__tabs" role="tablist" aria-label="Salas del club" data-tabs>
+        <button type="button" role="tab" id="tab-main" aria-controls="p-main" aria-selected="true" tabindex="0"><i aria-hidden="true">01</i>Main Room</button>
+        <button type="button" role="tab" id="tab-velvet" aria-controls="p-velvet" aria-selected="false" tabindex="-1"><i aria-hidden="true">02</i>Velvet Room</button>
+        <button type="button" role="tab" id="tab-garden" aria-controls="p-garden" aria-selected="false" tabindex="-1"><i aria-hidden="true">03</i>The Garden</button>
+        <button type="button" role="tab" id="tab-atelier" aria-controls="p-atelier" aria-selected="false" tabindex="-1"><i aria-hidden="true">04</i>Atelier</button>
+      </div>
+
+      <div class="vr-spaces__panels">
+        <article role="tabpanel" id="p-main" aria-labelledby="tab-main" tabindex="0">
+          <img src="./assets/images/space-01.svg" alt="Sala principal de Velvet Rose" width="1200" height="900" loading="lazy" decoding="async">
+          <div class="vr-space__txt">
+            <h3>Main Room</h3>
+            <p>El corazón. Sonido de sala grande, techo alto y una pista que no pide permiso.</p>
+            <dl><div><dt>Aforo</dt><dd data-demo="aforo">— · DEMO</dd></div><div><dt>Sonido</dt><dd data-demo="sonido">— · DEMO</dd></div></dl>
+          </div>
+        </article>
+
+        <article role="tabpanel" id="p-velvet" aria-labelledby="tab-velvet" tabindex="0" hidden>
+          <img src="./assets/images/space-02.svg" alt="Velvet Room, sala íntima" width="1200" height="900" loading="lazy" decoding="async">
+          <div class="vr-space__txt">
+            <h3>Velvet Room</h3>
+            <p>Más baja, más densa, más cerca. Aquí la música se escucha con el cuerpo.</p>
+            <dl><div><dt>Aforo</dt><dd data-demo="aforo">— · DEMO</dd></div><div><dt>Sonido</dt><dd data-demo="sonido">— · DEMO</dd></div></dl>
+          </div>
+        </article>
+
+        <article role="tabpanel" id="p-garden" aria-labelledby="tab-garden" tabindex="0" hidden>
+          <img src="./assets/images/space-03.svg" alt="The Garden, terraza exterior" width="1200" height="900" loading="lazy" decoding="async">
+          <div class="vr-space__txt">
+            <h3>The Garden</h3>
+            <p>Aire, humo y conversación. El sitio al que se sale a las cuatro para volver a entrar.</p>
+            <dl><div><dt>Aforo</dt><dd data-demo="aforo">— · DEMO</dd></div><div><dt>Sonido</dt><dd data-demo="sonido">— · DEMO</dd></div></dl>
+          </div>
+        </article>
+
+        <article role="tabpanel" id="p-atelier" aria-labelledby="tab-atelier" tabindex="0" hidden>
+          <img src="./assets/images/space-01.svg" alt="Atelier, espacio reservado" width="1200" height="900" loading="lazy" decoding="async">
+          <div class="vr-space__txt">
+            <h3>Atelier</h3>
+            <p>Reservado, silencioso, con vistas a la pista. Se entra por invitación o por mesa.</p>
+            <dl><div><dt>Aforo</dt><dd data-demo="aforo">— · DEMO</dd></div><div><dt>Sonido</dt><dd data-demo="sonido">— · DEMO</dd></div></dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RESERVED / VIP ════════════════════════════════════════ -->
+  <section class="vr-vip" id="reservados" aria-labelledby="vip-h">
+    <div class="vr-vip__inner">
+      <p class="vr-sec-k"><span>05</span> Reservados</p>
+      <h2 id="vip-h" data-reveal>Una mesa<br>con <em>vistas</em><br>a la pista</h2>
+      <p class="vr-vip__p" data-reveal>Botella, sitio propio y acceso directo. Sin colas y sin explicaciones.</p>
+
+      <!-- ⟨DEMO⟩ sustituir por enlace real de WhatsApp: https://wa.me/34XXXXXXXXX -->
+      <a class="vr-cta vr-cta--big" href="#" data-demo="url-reservas-whatsapp" data-cursor data-reveal>
+        <span>Reservar mesa</span>
+        <i aria-hidden="true"></i>
+      </a>
+
+      <p class="vr-vip__fine">Respondemos por WhatsApp de <span data-demo="horario-reservas">16:00 a 22:00</span>.</p>
+    </div>
+  </section>
+
+  <!-- ══ MUSIC ═════════════════════════════════════════════════ -->
+  <section class="vr-music" id="music" aria-labelledby="music-h">
+    <div class="vr-music__head">
+      <p class="vr-sec-k"><span>06</span> Música</p>
+      <h2 id="music-h">El sonido<br>de la casa</h2>
+      <p class="vr-music__p">House con cuerpo, disco tarde y techno cuando ya nadie mira el reloj.</p>
+    </div>
+
+    <!-- ⟨DEMO⟩ sets. Nada suena automáticamente: es una ficha, no un reproductor. -->
+    <ol class="vr-tracks" data-demo="sets">
+      <li class="vr-track" data-track>
+        <span class="vr-track__i" aria-hidden="true">01</span>
+        <span class="vr-track__n">Bloom 001 — Opening</span>
+        <span class="vr-track__w" data-wave aria-hidden="true"></span>
+        <span class="vr-track__t">58:12</span>
+      </li>
+      <li class="vr-track" data-track>
+        <span class="vr-track__i" aria-hidden="true">02</span>
+        <span class="vr-track__n">Velour — Peak</span>
+        <span class="vr-track__w" data-wave aria-hidden="true"></span>
+        <span class="vr-track__t">1:12:40</span>
+      </li>
+      <li class="vr-track" data-track>
+        <span class="vr-track__i" aria-hidden="true">03</span>
+        <span class="vr-track__n">Thorn — 04:00</span>
+        <span class="vr-track__w" data-wave aria-hidden="true"></span>
+        <span class="vr-track__t">1:04:05</span>
+      </li>
+      <li class="vr-track" data-track>
+        <span class="vr-track__i" aria-hidden="true">04</span>
+        <span class="vr-track__n">Closing — Last Petal</span>
+        <span class="vr-track__w" data-wave aria-hidden="true"></span>
+        <span class="vr-track__t">42:31</span>
+      </li>
+    </ol>
+
+    <div class="vr-marquee vr-marquee--thin" aria-hidden="true">
+      <div class="vr-marquee__row vr-marquee__row--rev" data-marquee>
+        <span>House · Disco · Techno · Sin peticiones · House · Disco · Techno · Sin peticiones · </span>
+        <span>House · Disco · Techno · Sin peticiones · House · Disco · Techno · Sin peticiones · </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ═══════════════════════════════════════════════ -->
+  <section class="vr-contact" id="contacto" aria-labelledby="contact-h">
+    <h2 class="vr-sr">Contacto y localización</h2>
+    <p class="vr-sec-k" id="contact-h"><span>07</span> Encontrarnos</p>
+
+    <div class="vr-contact__grid">
+      <div class="vr-contact__col">
+        <span class="vr-k">Dónde</span>
+        <!-- ⟨DEMO⟩ dirección + enlace a mapa -->
+        <p data-demo="direccion">Calle Demo 00<br>00000 · Ciudad</p>
+        <a class="vr-link" href="#" data-demo="url-mapa" data-cursor>Cómo llegar</a>
+      </div>
+
+      <div class="vr-contact__col">
+        <span class="vr-k">Cuándo</span>
+        <p data-demo="dias">Viernes y sábado<br>23:59 — 06:00</p>
+      </div>
+
+      <div class="vr-contact__col">
+        <span class="vr-k">Hablar</span>
+        <!-- ⟨DEMO⟩ teléfono y email reales -->
+        <p><a class="vr-link" href="#" data-demo="telefono">+34 000 000 000</a><br>
+           <a class="vr-link" href="#" data-demo="email">hola@velvetrose.demo</a></p>
+      </div>
+
+      <div class="vr-contact__col vr-contact__col--ig">
+        <span class="vr-k">Seguir</span>
+        <!-- ⟨DEMO⟩ Instagram real -->
+        <a class="vr-ig" href="#" data-demo="url-instagram" data-cursor>
+          <span>@velvetrose</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <p class="vr-contact__fine">Lo de anoche está ahí.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="vr-foot">
+  <p class="vr-foot__word" aria-hidden="true"><span>Velvet</span><span>Rose</span></p>
+  <div class="vr-foot__bar">
+    <span>© <span data-year>2026</span> Velvet Rose</span>
+    <span class="vr-foot__mono">VR</span>
+    <span>Prototipo · <span data-demo="aviso">contenido de muestra</span></span>
+  </div>
+</footer>
+
+<script src="./script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img">
+  <!-- PLACEHOLDER editorial Velvet Rose — sustituible por cartel real -->
+  <defs>
+    <radialGradient id="p1bloom" cx="58%" cy="34%" r="62%">
+      <stop offset="0%" stop-color="#FF3D63" stop-opacity=".85"/>
+      <stop offset="34%" stop-color="#B00B33" stop-opacity=".45"/>
+      <stop offset="72%" stop-color="#45101F" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#07060A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p1pet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF1F4B" stop-opacity=".34"/>
+      <stop offset="60%" stop-color="#45101F" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#07060A" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="p1soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="p1grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#0A0709"/>
+  <rect width="600" height="800" fill="url(#p1bloom)"/>
+
+  <g filter="url(#p1soft)" opacity=".9">
+    <ellipse cx="340" cy="300" rx="190" ry="150" fill="url(#p1pet)" transform="rotate(-18 340 300)"/>
+    <ellipse cx="300" cy="340" rx="140" ry="180" fill="url(#p1pet)" transform="rotate(26 300 340)"/>
+  </g>
+
+  <g fill="none" stroke="#FF1F4B" stroke-opacity=".30">
+    <ellipse cx="330" cy="316" rx="205" ry="162" transform="rotate(-14 330 316)"/>
+    <ellipse cx="318" cy="326" rx="152" ry="196" transform="rotate(30 318 326)"/>
+    <ellipse cx="322" cy="322" rx="104" ry="120" transform="rotate(-42 322 322)"/>
+  </g>
+  <circle cx="326" cy="320" r="19" fill="#FF3D63" opacity=".92"/>
+
+  <g stroke="#EDE4D8" stroke-opacity=".16">
+    <line x1="60" y1="596" x2="540" y2="596"/>
+    <line x1="60" y1="640" x2="380" y2="640"/>
+  </g>
+  <rect x="60" y="672" width="76" height="2" fill="#FF1F4B"/>
+
+  <rect x="24" y="24" width="552" height="752" fill="none" stroke="#EDE4D8" stroke-opacity=".12"/>
+  <rect width="600" height="800" filter="url(#p1grain)" opacity=".16" style="mix-blend-mode:overlay"/>
+</svg>

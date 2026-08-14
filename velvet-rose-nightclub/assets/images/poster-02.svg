@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img">
+  <!-- PLACEHOLDER editorial Velvet Rose — sustituible por cartel real -->
+  <defs>
+    <radialGradient id="p2bloom" cx="34%" cy="66%" r="66%">
+      <stop offset="0%" stop-color="#FF6B86" stop-opacity=".62"/>
+      <stop offset="30%" stop-color="#B00B33" stop-opacity=".38"/>
+      <stop offset="70%" stop-color="#24070F" stop-opacity=".28"/>
+      <stop offset="100%" stop-color="#07060A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p2v" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#45101F" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#07060A" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="p2soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+    <filter id="p2grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#08070B"/>
+  <rect width="600" height="800" fill="url(#p2bloom)"/>
+  <rect y="440" width="600" height="360" fill="url(#p2v)"/>
+
+  <!-- Pliegue de terciopelo -->
+  <g stroke="#EDE4D8" stroke-opacity=".05">
+    <line x1="90" y1="0" x2="90" y2="800"/><line x1="180" y1="0" x2="180" y2="800"/>
+    <line x1="270" y1="0" x2="270" y2="800"/><line x1="360" y1="0" x2="360" y2="800"/>
+    <line x1="450" y1="0" x2="450" y2="800"/><line x1="540" y1="0" x2="540" y2="800"/>
+  </g>
+
+  <g filter="url(#p2soft)" opacity=".85">
+    <ellipse cx="230" cy="520" rx="170" ry="205" fill="#B00B33" fill-opacity=".34" transform="rotate(22 230 520)"/>
+    <ellipse cx="280" cy="480" rx="130" ry="150" fill="#FF1F4B" fill-opacity=".22" transform="rotate(-30 280 480)"/>
+  </g>
+
+  <g fill="none" stroke="#FF6B86" stroke-opacity=".26">
+    <ellipse cx="248" cy="502" rx="196" ry="228" transform="rotate(18 248 502)"/>
+    <ellipse cx="252" cy="498" rx="128" ry="164" transform="rotate(-24 252 498)"/>
+  </g>
+  <circle cx="250" cy="500" r="14" fill="#FF6B86"/>
+
+  <g stroke="#EDE4D8" stroke-opacity=".14">
+    <line x1="60" y1="150" x2="540" y2="150"/>
+    <line x1="300" y1="90" x2="540" y2="90"/>
+  </g>
+  <rect x="464" y="118" width="76" height="2" fill="#FF1F4B"/>
+
+  <rect x="24" y="24" width="552" height="752" fill="none" stroke="#EDE4D8" stroke-opacity=".1"/>
+  <rect width="600" height="800" filter="url(#p2grain)" opacity=".17" style="mix-blend-mode:overlay"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img">
+  <!-- PLACEHOLDER editorial Velvet Rose — sustituible por cartel real -->
+  <defs>
+    <radialGradient id="p3bloom" cx="50%" cy="18%" r="72%">
+      <stop offset="0%" stop-color="#FF1F4B" stop-opacity=".70"/>
+      <stop offset="26%" stop-color="#8FA0AC" stop-opacity=".12"/>
+      <stop offset="62%" stop-color="#24070F" stop-opacity=".34"/>
+      <stop offset="100%" stop-color="#07060A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="p3soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="17"/>
+    </filter>
+    <filter id="p3grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#09080C"/>
+  <rect width="600" height="800" fill="url(#p3bloom)"/>
+
+  <!-- Espina / tallo abstracto: la rosa vista con dureza -->
+  <path d="M300 760 L300 300" stroke="#EDE4D8" stroke-opacity=".18"/>
+  <path d="M300 620 L232 566" stroke="#FF1F4B" stroke-opacity=".5"/>
+  <path d="M300 540 L368 486" stroke="#FF1F4B" stroke-opacity=".35"/>
+  <path d="M300 460 L246 414" stroke="#FF1F4B" stroke-opacity=".22"/>
+
+  <g filter="url(#p3soft)" opacity=".9">
+    <ellipse cx="300" cy="262" rx="176" ry="132" fill="#B00B33" fill-opacity=".42"/>
+    <ellipse cx="300" cy="248" rx="112" ry="96" fill="#FF1F4B" fill-opacity=".3"/>
+  </g>
+
+  <g fill="none" stroke="#EDE4D8" stroke-opacity=".2">
+    <ellipse cx="300" cy="258" rx="196" ry="146" transform="rotate(-8 300 258)"/>
+  </g>
+  <g fill="none" stroke="#FF1F4B" stroke-opacity=".38">
+    <ellipse cx="300" cy="254" rx="134" ry="112" transform="rotate(14 300 254)"/>
+    <ellipse cx="300" cy="252" rx="72" ry="82" transform="rotate(-34 300 252)"/>
+  </g>
+  <circle cx="300" cy="252" r="16" fill="#FF3D63"/>
+
+  <g stroke="#8FA0AC" stroke-opacity=".22">
+    <line x1="60" y1="700" x2="240" y2="700"/>
+    <line x1="360" y1="700" x2="540" y2="700"/>
+  </g>
+
+  <rect x="24" y="24" width="552" height="752" fill="none" stroke="#EDE4D8" stroke-opacity=".11"/>
+  <rect width="600" height="800" filter="url(#p3grain)" opacity=".18" style="mix-blend-mode:overlay"/>
+</svg>
