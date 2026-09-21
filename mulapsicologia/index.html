@@ -3,170 +3,164 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MŪLA Psicología. Un lugar para entender lo que te pasa, a tu ritmo y sin tener todas las respuestas.">
-  <meta name="theme-color" content="#f8f4ed">
-  <title>MŪLA Psicología | Podemos empezar hablando</title>
+  <meta name="description" content="MŪLA Psicología. Un espacio cercano para entender lo que te pasa, a tu ritmo.">
+  <meta name="theme-color" content="#2F5A43">
+  <title>MŪLA Psicología | Hay cosas que necesitan espacio</title>
   <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Kalam:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/styles.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
   <header class="site-header" data-header>
     <a class="brand" href="#inicio" aria-label="MŪLA Psicología, inicio">
-      <span class="brand-name">MŪLA</span><span class="brand-field">psicología</span>
+      <span class="brand-name">MŪLA</span>
+      <span class="brand-field">psicología</span>
     </a>
+
     <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal" data-menu-toggle>
-      <span class="menu-toggle__label">Menú</span>
-      <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+      <span>Menú</span>
+      <span class="menu-toggle__lines" aria-hidden="true"><i></i><i></i></span>
     </button>
+
     <nav class="main-nav" id="menu-principal" aria-label="Navegación principal" data-nav>
-      <a href="#puede-traerte">Lo que te trae</a><a href="#como-trabajamos">Cómo trabajamos</a>
-      <a href="#claudia">Claudia</a><a href="#cuaderno">Cuaderno</a><a class="nav-contact" href="#contacto">Hablemos</a>
+      <a href="#claudia">Claudia</a>
+      <a href="#como-trabajamos">Cómo trabajo</a>
+      <a href="#cuaderno">Cuaderno</a>
+      <a class="nav-contact" href="#contacto">Hablemos</a>
     </nav>
   </header>
 
   <main id="contenido">
     <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <div class="hero__scribble" aria-hidden="true">
-        <svg viewBox="0 0 520 600">
-          <path class="draw-line draw-line--slow" pathLength="1" d="M351 16C486 56 446 206 321 154C194 102 217 2 331 59C445 116 361 299 201 247C51 199 27 323 133 371C239 420 405 306 458 405C511 503 379 545 281 514C188 485 159 566 223 591"/>
-          <path class="draw-line draw-line--accent" pathLength="1" d="M31 308C66 285 92 287 117 303"/>
-        </svg>
-      </div>
+      <img class="hero__image" src="./assets/images/hero-campo.webp" width="1672" height="941" alt="Una persona camina por un paisaje abierto bajo un cielo amplio">
       <div class="hero__content">
-        <p class="eyebrow reveal">Psicología para la vida que pasa de verdad</p>
-        <h1 id="hero-title" class="hero__title">
-          <span class="reveal">Hay cosas que</span>
-          <span class="reveal reveal--delay">no se resuelven</span>
-          <span class="hero__last-line reveal reveal--delay-2">pensando <em>más.</em></span>
-        </h1>
-        <div class="hero__intro reveal reveal--delay-3">
-          <p>A veces ayuda parar. Decirlo en voz alta. Mirarlo desde otro sitio.</p>
-          <a class="text-link text-link--large" href="#contacto">Podemos empezar hablando <span aria-hidden="true">→</span></a>
-        </div>
+        <p class="hero__eyebrow reveal">MŪLA Psicología</p>
+        <h1 id="hero-title" class="reveal">Hay cosas que<br>necesitan espacio.</h1>
+        <a class="hero__link reveal" href="#manifiesto">Empezar por aquí <span aria-hidden="true">↓</span></a>
       </div>
-      <p class="hero__note handwritten reveal" aria-hidden="true">no hace falta venir<br>con las palabras preparadas</p>
-      <a class="scroll-cue" href="#presentacion"><span>seguir leyendo</span><svg viewBox="0 0 22 32" aria-hidden="true"><path d="M11 1v27M3 20l8 9 8-9"/></svg></a>
     </section>
 
-    <section class="opening section" id="presentacion" aria-labelledby="opening-title">
-      <div class="opening__marker reveal" aria-hidden="true">01</div>
-      <div class="opening__copy">
-        <p class="section-kicker reveal">Un poco de espacio</p>
-        <h2 id="opening-title" class="display-copy reveal">Puedes venir con preguntas.<br><em>O sin saber muy bien cuáles son.</em></h2>
-        <div class="opening__body reveal">
-          <p>Hay épocas en las que todo parece ocupar demasiado espacio en la cabeza. Una conversación puede ser una forma de empezar a ordenar, sin prisa y sin la obligación de tenerlo claro desde el principio.</p>
-          <p>MŪLA nace para que ir a terapia no se sienta como entrar en un lugar extraño. Aquí caben las dudas, los silencios y también eso que todavía no sabes explicar.</p>
-        </div>
-      </div>
-      <svg class="opening__underline draw-on-view" viewBox="0 0 410 62" aria-hidden="true"><path pathLength="1" d="M8 29C105 13 260 49 401 18"/><path pathLength="1" d="M279 46C330 49 370 44 396 36"/></svg>
-    </section>
-
-    <section class="reasons section" id="puede-traerte" aria-labelledby="reasons-title">
-      <header class="reasons__header">
-        <p class="section-kicker reveal">Quizá has llegado hasta aquí porque...</p>
-        <h2 id="reasons-title" class="section-title reveal">Últimamente, algo<br>no termina de <span class="circled-word">encajar.<svg class="draw-on-view" viewBox="0 0 250 100" aria-hidden="true"><path pathLength="1" d="M20 57C35 9 213 4 230 46C247 88 65 99 16 68C-3 56 8 39 34 28"/></svg></span></h2>
-      </header>
-      <ol class="reason-list">
-        <li class="reveal"><span class="reason-list__number">01</span><p>Tu cabeza vive siempre un poco en el futuro y descansar se parece demasiado a seguir pensando.</p><span class="reason-list__aside handwritten">ansiedad · estrés</span></li>
-        <li class="reveal"><span class="reason-list__number">02</span><p>Te cuesta poner límites sin sentir que estás fallando a alguien.</p><span class="reason-list__aside handwritten">relaciones · autoestima</span></li>
-        <li class="reveal"><span class="reason-list__number">03</span><p>Estás atravesando un cambio, una pérdida o una etapa que no se parece a lo que imaginabas.</p><span class="reason-list__aside handwritten">duelo · cambios</span></li>
-        <li class="reveal"><span class="reason-list__number">04</span><p>No sabes exactamente qué te pasa. Solo sabes que no estás del todo bien.</p><span class="reason-list__aside handwritten">también puedes venir así</span></li>
-      </ol>
-    </section>
-
-    <section class="approach" id="como-trabajamos" aria-labelledby="approach-title">
-      <div class="approach__inner section">
-        <div class="approach__intro">
-          <p class="section-kicker reveal">Cómo trabajamos</p>
-          <h2 id="approach-title" class="approach__title reveal">No venimos a decirte<br>cómo vivir tu vida.</h2>
-          <svg class="approach__arrow draw-on-view" viewBox="0 0 160 100" aria-hidden="true"><path pathLength="1" d="M9 13C46 19 99 35 134 74M107 66l28 9-8-27"/></svg>
-        </div>
-        <div class="approach__manifesto">
-          <p class="reveal">La terapia puede ser una conversación en la que mirar con más calma lo que está pasando, entender de dónde viene y encontrar una manera propia de relacionarte con ello.</p>
-          <p class="reveal">Trabajaremos desde la curiosidad, sin juicios ni recetas universales. Tú marcas el ritmo. Mi trabajo es hacer buenas preguntas, sostener el proceso y ayudarte a que las respuestas sean cada vez más tuyas.</p>
-        </div>
-        <ul class="principles" aria-label="Principios de trabajo">
-          <li class="reveal"><strong>Sin juicio</strong><span>No tienes que demostrar nada aquí.</span></li>
-          <li class="reveal"><strong>Con sentido</strong><span>Entender antes que corregir.</span></li>
-          <li class="reveal"><strong>A tu ritmo</strong><span>El proceso no sigue una plantilla.</span></li>
-        </ul>
-      </div>
+    <section class="manifesto section" id="manifiesto" aria-labelledby="manifesto-title">
+      <p class="section-label reveal">Un lugar donde parar</p>
+      <h2 id="manifesto-title" class="reveal">No hace falta tener las palabras preparadas para empezar a entender lo que te pasa.</h2>
     </section>
 
     <section class="about section" id="claudia" aria-labelledby="about-title">
-      <div class="about__image-wrap reveal">
-        <div class="about__image-frame"><img src="./assets/images/claudia-mula.webp" width="1024" height="1365" loading="lazy" alt="Retrato editorial de Claudia sentada junto a una ventana"></div>
-        <p class="about__image-note handwritten">Claudia, con café<br>y una libreta cerca.</p>
-        <svg class="about__image-mark draw-on-view" viewBox="0 0 170 90" aria-hidden="true"><path pathLength="1" d="M162 8C129 9 80 22 34 57M48 39 31 58l26 3"/></svg>
-      </div>
+      <figure class="about__portrait reveal">
+        <img src="./assets/images/claudia-mula.webp" width="1024" height="1365" loading="lazy" alt="Retrato de Claudia sentada junto a una ventana">
+        <figcaption>Claudia · Psicóloga general sanitaria</figcaption>
+      </figure>
+
       <div class="about__copy">
-        <p class="section-kicker reveal">Hola, soy Claudia</p>
-        <h2 id="about-title" class="section-title reveal">Antes que psicóloga,<br>soy una persona que<br><em>también se hace preguntas.</em></h2>
-        <div class="about__body reveal">
-          <p>MŪLA empezó con una idea bastante sencilla: que pedir ayuda no debería obligarte a adoptar un lenguaje que no es el tuyo.</p>
-          <p>Soy psicóloga general sanitaria. Me formé en intervención psicológica y sigo ampliando mi mirada en apego, relaciones y procesos de cambio. Pero mi manera de trabajar también viene de escuchar mucho, leer despacio y no dar por hecho que dos historias parecidas se viven igual.</p>
-          <p>En sesión soy cercana, bastante curiosa y partidaria de llamar a las cosas por su nombre, cuando aparece.</p>
+        <p class="section-label reveal">Hola, soy Claudia</p>
+        <h2 id="about-title" class="reveal">Escuchar antes de dar nada por hecho.</h2>
+        <div class="about__text reveal">
+          <p>Creé MŪLA para que ir a terapia se sienta más humano y menos ajeno.</p>
+          <p>Trabajo desde una mirada cercana e integradora, respetando tu ritmo y la forma única en la que has aprendido a estar en el mundo.</p>
         </div>
-        <dl class="about__details reveal">
-          <div><dt>Formación</dt><dd>Psicología General Sanitaria</dd></div>
-          <div><dt>Mirada</dt><dd>Integradora y centrada en la persona</dd></div>
-          <div><dt>Una constante</dt><dd>Seguir aprendiendo</dd></div>
-        </dl>
+        <a class="text-link reveal" href="#como-trabajamos">Conóceme <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
-    <section class="process section" id="proceso" aria-labelledby="process-title">
-      <header class="process__header">
-        <p class="section-kicker reveal">¿Y cómo empieza esto?</p>
-        <h2 id="process-title" class="section-title reveal">Sin saltos de fe.<br>Una conversación cada vez.</h2>
-      </header>
-      <div class="process__map">
-        <svg class="process__path draw-on-view" viewBox="0 0 1100 430" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M28 212C143 36 260 64 305 185C352 313 462 397 569 266C676 135 772 54 864 171C938 265 980 273 1072 211"/></svg>
-        <ol class="process__steps">
-          <li class="process-step process-step--1 reveal"><span>1</span><h3>Nos conocemos</h3><p>Vemos qué te trae y si esta forma de trabajar encaja contigo.</p></li>
-          <li class="process-step process-step--2 reveal"><span>2</span><h3>Ponemos contexto</h3><p>Vamos entendiendo qué está pasando y qué lugar ocupa en tu historia.</p></li>
-          <li class="process-step process-step--3 reveal"><span>3</span><h3>Probamos otras formas</h3><p>Construimos recursos y nuevas maneras de mirar, sentir y actuar.</p></li>
-          <li class="process-step process-step--4 reveal"><span>4</span><h3>El camino se hace tuyo</h3><p>Revisamos lo aprendido para que puedas sostenerlo con autonomía.</p></li>
-        </ol>
+    <figure class="visual-pause reveal">
+      <img src="./assets/images/sendero-niebla.webp" width="1600" height="686" loading="lazy" alt="Un sendero atraviesa un campo cubierto por una ligera niebla">
+    </figure>
+
+    <section class="reasons" id="puede-traerte" aria-labelledby="reasons-title">
+      <div class="section reasons__inner">
+        <p class="section-label reveal">Quizá has llegado hasta aquí porque...</p>
+        <h2 id="reasons-title" class="sr-only">Motivos para empezar terapia</h2>
+        <ul class="reasons__list">
+          <li class="reveal">Tu cabeza no encuentra el botón de pausa.</li>
+          <li class="reveal">Poner límites se parece demasiado a fallar.</li>
+          <li class="reveal">Algo ha cambiado y todavía no sabes dónde colocarlo.</li>
+        </ul>
+        <p class="reasons__note reveal">También puedes venir sin saber exactamente qué te pasa.</p>
       </div>
+    </section>
+
+    <section class="process section" id="como-trabajamos" aria-labelledby="process-title">
+      <header class="process__header">
+        <p class="section-label reveal">Cómo trabajamos</p>
+        <h2 id="process-title" class="reveal">Una conversación cada vez.</h2>
+      </header>
+
+      <ol class="process__steps" aria-label="Etapas del proceso terapéutico">
+        <li class="reveal"><span>01</span><strong>Hablar</strong></li>
+        <li class="reveal"><span>02</span><strong>Entender</strong></li>
+        <li class="reveal"><span>03</span><strong>Trabajar</strong></li>
+        <li class="reveal"><span>04</span><strong>Seguir</strong></li>
+      </ol>
+      <p class="process__note reveal">Sin recetas universales. Tú marcas el ritmo; yo te acompaño a mirar con más claridad.</p>
     </section>
 
     <section class="journal section" id="cuaderno" aria-labelledby="journal-title">
       <header class="journal__header">
-        <div><p class="section-kicker reveal">El cuaderno de MŪLA</p><h2 id="journal-title" class="section-title reveal">Ideas para leer<br><em>sin prisa.</em></h2></div>
-        <p class="journal__intro reveal">Textos sobre lo que nos pasa por dentro y no siempre sabemos cómo contar.</p>
+        <div>
+          <p class="section-label reveal">El cuaderno de MŪLA</p>
+          <h2 id="journal-title" class="reveal">Para leer<br>sin prisa.</h2>
+        </div>
+        <p class="journal__intro reveal">Ideas sobre lo que nos pasa por dentro y no siempre sabemos cómo contar.</p>
       </header>
-      <div class="article-list">
-        <article class="article-row reveal"><div class="article-row__meta"><time datetime="2026-09-08">8 sep. 2026</time><span>6 min</span></div><h3><a href="#contacto">¿Por qué me cuesta tanto poner límites?</a></h3><p>Cuando decir que no activa una culpa que parece mucho más grande que la situación.</p><span class="article-row__arrow" aria-hidden="true">↗</span></article>
-        <article class="article-row reveal"><div class="article-row__meta"><time datetime="2026-08-21">21 ago. 2026</time><span>5 min</span></div><h3><a href="#contacto">Cuando tu cabeza vive siempre un poco en el futuro</a></h3><p>Anticiparse puede dar sensación de control. También puede dejarte sin presente.</p><span class="article-row__arrow" aria-hidden="true">↗</span></article>
-        <article class="article-row reveal"><div class="article-row__meta"><time datetime="2026-07-30">30 jul. 2026</time><span>4 min</span></div><h3><a href="#contacto">No sé qué me pasa, pero sé que no estoy bien</a></h3><p>No encontrar una explicación exacta no vuelve menos real lo que estás sintiendo.</p><span class="article-row__arrow" aria-hidden="true">↗</span></article>
-        <article class="article-row reveal"><div class="article-row__meta"><time datetime="2026-07-12">12 jul. 2026</time><span>7 min</span></div><h3><a href="#contacto">Estar contigo cuando todo hace ruido</a></h3><p>Sobre la diferencia entre quedarte a solas y aprender a hacerte compañía.</p><span class="article-row__arrow" aria-hidden="true">↗</span></article>
+
+      <article class="featured-article reveal">
+        <a class="article-image" href="#contacto" aria-label="Leer: Por qué me cuesta tanto poner límites">
+          <img src="./assets/images/cuaderno-limites.webp" width="1200" height="900" loading="lazy" alt="Dos estancias separadas por una puerta abierta">
+        </a>
+        <div class="featured-article__copy">
+          <p class="article-meta">Relaciones · 6 min</p>
+          <h3><a href="#contacto">¿Por qué me cuesta tanto poner límites?</a></h3>
+          <p>Cuando decir que no activa una culpa mucho más grande que la situación.</p>
+          <a class="text-link" href="#contacto">Leer el artículo <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <div class="article-grid">
+        <article class="article-card reveal">
+          <a class="article-image" href="#contacto" aria-label="Leer: Cuando tu cabeza vive en el futuro">
+            <img src="./assets/images/cuaderno-futuro.webp" width="1200" height="800" loading="lazy" alt="Paisaje visto a través de la ventana de un tren bajo la lluvia">
+          </a>
+          <p class="article-meta">Ansiedad · 5 min</p>
+          <h3><a href="#contacto">Cuando tu cabeza vive siempre un poco en el futuro</a></h3>
+        </article>
+
+        <article class="article-card reveal">
+          <a class="article-image" href="#contacto" aria-label="Leer: Estar contigo cuando todo hace ruido">
+            <img src="./assets/images/cuaderno-presente.webp" width="1200" height="800" loading="lazy" alt="Agua del mar moviéndose alrededor de varias rocas oscuras">
+          </a>
+          <p class="article-meta">Bienestar · 4 min</p>
+          <h3><a href="#contacto">Estar contigo cuando todo hace ruido</a></h3>
+        </article>
       </div>
     </section>
 
     <section class="contact" id="contacto" aria-labelledby="contact-title">
-      <div class="contact__line" aria-hidden="true"><svg class="draw-on-view" viewBox="0 0 1440 240" preserveAspectRatio="none"><path pathLength="1" d="M-30 166C246 42 407 259 680 131C884 35 1059 19 1478 161"/></svg></div>
       <div class="contact__inner reveal">
-        <p class="section-kicker">Cuando te apetezca</p>
-        <h2 id="contact-title">Podemos empezar<br><em>hablando.</em></h2>
-        <p>No necesitas escribir un mensaje perfecto. Cuéntame, como te salga, qué te trae hasta aquí.</p>
-        <a class="contact__mail" href="mailto:hola@mulapsicologia.es">hola@mulapsicologia.es <span aria-hidden="true">→</span></a>
+        <p class="section-label">Cuando te apetezca</p>
+        <h2 id="contact-title">Podemos empezar<br>hablando.</h2>
+        <a href="mailto:hola@mulapsicologia.es">hola@mulapsicologia.es <span aria-hidden="true">→</span></a>
       </div>
-      <p class="contact__aside handwritten" aria-hidden="true">un mensaje sencillo<br>es suficiente</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <a class="brand brand--footer" href="#inicio" aria-label="Volver al inicio"><span class="brand-name">MŪLA</span><span class="brand-field">psicología</span></a>
-    <p>Psicología cercana para entenderte un poco mejor.</p>
-    <nav aria-label="Enlaces del pie"><a href="#claudia">Sobre Claudia</a><a href="#cuaderno">Cuaderno</a><a href="mailto:hola@mulapsicologia.es">Contacto</a></nav>
-    <p class="site-footer__copyright">© <span data-year>2026</span> MŪLA Psicología</p>
+    <a class="brand brand--footer" href="#inicio" aria-label="MŪLA Psicología, volver al inicio">
+      <span class="brand-name">MŪLA</span>
+      <span class="brand-field">psicología</span>
+    </a>
+    <nav aria-label="Enlaces del pie">
+      <a href="#claudia">Claudia</a>
+      <a href="#cuaderno">Cuaderno</a>
+      <a href="mailto:hola@mulapsicologia.es">Contacto</a>
+    </nav>
+    <p>© <span data-year>2026</span> MŪLA Psicología</p>
   </footer>
+
   <script src="./js/main.js" defer></script>
 </body>
 </html>
