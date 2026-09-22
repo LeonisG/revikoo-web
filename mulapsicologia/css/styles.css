@@ -472,7 +472,7 @@ h3 {
   align-items: end;
   justify-content: space-between;
   gap: 40px;
-  margin-bottom: 100px;
+  margin-bottom: 78px;
 }
 
 .process__header .section-label {
@@ -487,6 +487,44 @@ h3 {
   text-align: right;
 }
 
+.process__story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(310px, 0.7fr);
+  gap: 8%;
+  align-items: center;
+  margin-bottom: 105px;
+}
+
+.process__image {
+  overflow: hidden;
+  background: var(--blue-smoke);
+}
+
+.process__image img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.process__copy {
+  max-width: 480px;
+}
+
+.process__copy p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.process__copy p:last-child {
+  margin-bottom: 0;
+}
+
+.process__copy .process__lead {
+  margin-bottom: 30px;
+  font-family: var(--serif);
+  font-size: 31px;
+  line-height: 1.22;
+}
+
 .process__steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -499,8 +537,8 @@ h3 {
 
 .process__steps li {
   position: relative;
-  min-height: 180px;
-  padding: 28px 24px 28px 0;
+  min-height: 220px;
+  padding: 28px 26px 30px 0;
 }
 
 .process__steps li:not(:last-child) {
@@ -513,22 +551,24 @@ h3 {
 
 .process__steps span {
   display: block;
-  margin-bottom: 53px;
+  margin-bottom: 38px;
   color: var(--emerald);
   font-size: 11px;
   font-weight: 600;
 }
 
-.process__steps strong {
+.process__steps h3 {
+  margin-bottom: 13px;
   font-family: var(--serif);
   font-size: 35px;
   font-weight: 400;
 }
 
-.process__note {
-  max-width: 580px;
-  margin: 52px 0 0 auto;
-  font-size: 18px;
+.process__steps p {
+  max-width: 190px;
+  margin-bottom: 0;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .journal {
@@ -765,7 +805,20 @@ h3 {
     font-size: 50px;
   }
 
-  .process__steps strong {
+  .process__story {
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 5%;
+  }
+
+  .process__copy p {
+    font-size: 15px;
+  }
+
+  .process__copy .process__lead {
+    font-size: 25px;
+  }
+
+  .process__steps h3 {
     font-size: 28px;
   }
 
@@ -1000,13 +1053,37 @@ h3 {
     text-align: left;
   }
 
+  .process__story {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    margin-bottom: 72px;
+  }
+
+  .process__image {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+  }
+
+  .process__copy {
+    max-width: 560px;
+  }
+
+  .process__copy p {
+    font-size: 16px;
+  }
+
+  .process__copy .process__lead {
+    margin-bottom: 25px;
+    font-size: 28px;
+  }
+
   .process__steps {
     grid-template-columns: 1fr 1fr;
   }
 
   .process__steps li {
-    min-height: 140px;
-    padding: 20px 18px 22px 0;
+    min-height: 182px;
+    padding: 20px 18px 24px 0;
   }
 
   .process__steps li:nth-child(2) {
@@ -1026,17 +1103,17 @@ h3 {
   }
 
   .process__steps span {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
 
-  .process__steps strong {
+  .process__steps h3 {
+    margin-bottom: 9px;
     font-size: 28px;
   }
 
-  .process__note {
-    max-width: 390px;
-    margin-top: 42px;
-    font-size: 16px;
+  .process__steps p {
+    max-width: 145px;
+    font-size: 12px;
   }
 
   .journal {
@@ -1143,6 +1220,11 @@ h3 {
   .emerald-pause h2,
   .process__header h2 {
     font-size: 37px;
+  }
+
+  .process__image {
+    width: calc(100% + 32px);
+    margin-left: -16px;
   }
 
   .about__portrait {
