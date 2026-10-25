@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="es" class="nodo-page">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="NODO es un concepto de suscripción para acceder a una red urbana de parkings desde una sola app.">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#f3f2ea">
+  <title>NODO | El parking, como servicio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="scroll-progress" aria-hidden="true"><span data-progress></span></div>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#inicio" aria-label="NODO, volver al inicio">
+      <span>NOD</span><i aria-hidden="true"></i>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú" data-menu-toggle>
+      <span>Menú</span><i aria-hidden="true"></i>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Navegación principal" data-nav>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#red">Red</a>
+      <a href="#planes">Planes</a>
+      <a href="#empresas">Empresas</a>
+      <a class="nav-cta" href="#idea">Probar concepto <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow reveal"><span></span> Movilidad urbana, reimaginada</p>
+          <h1 id="hero-title" class="reveal">Una suscripción.<br>Toda una ciudad<br><em>donde aparcar.</em></h1>
+          <p class="hero__intro reveal">Imagina acceder a una red de parkings desde una sola app. Elige tu plan, registra tu matrícula y utiliza tus créditos donde los necesites.</p>
+          <div class="hero__actions reveal">
+            <a class="button button--dark" href="#como-funciona">Ver cómo funciona <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#planes">Explorar planes <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="concept-note reveal">Proyecto conceptual · Madrid como ciudad piloto</p>
+        </div>
+
+        <div class="hero__product" aria-label="Vista conceptual de la aplicación NODO">
+          <span class="orbit-label orbit-label--one" aria-hidden="true">ACCESO · 24/7</span>
+          <span class="orbit-label orbit-label--two" aria-hidden="true">48 CRÉDITOS</span>
+          <div class="phone phone--hero" data-hero-phone>
+            <div class="phone__hardware"><span></span></div>
+            <div class="phone__screen">
+              <div class="app-topbar">
+                <span class="app-mark">N<i></i></span>
+                <button type="button" aria-label="Abrir perfil"><span class="avatar">MG</span></button>
+              </div>
+              <div class="app-greeting">
+                <p>Buenas tardes, Marta</p>
+                <strong><span>48</span> créditos disponibles</strong>
+              </div>
+              <div class="app-map" aria-label="Mapa conceptual con parkings cercanos">
+                <svg viewBox="0 0 360 390" role="img" aria-label="Mapa abstracto de Madrid">
+                  <path class="map-block" d="M-20 86L86 18l69 42 79-52 149 81v101l-73 51 46 92-95 70-110-44-99 38-72-71z"/>
+                  <path class="map-road map-road--wide" d="M-12 303C58 260 80 181 143 165s101 38 226-81"/>
+                  <path class="map-road" d="M36 4c58 90 62 190 22 390M198-8c-29 91-8 184 82 284s-4 124-4 124M-18 122c105 12 210 94 391 69M8 350c108-56 212-55 372-42"/>
+                  <path class="map-route" d="M82 281C118 257 113 213 158 190s69 4 108-42"/>
+                </svg>
+                <button class="map-pin map-pin--one" type="button" aria-label="Parking Serrano, 3 créditos por hora"><span>3</span></button>
+                <button class="map-pin map-pin--two" type="button" aria-label="Parking Colón, 4 créditos por hora"><span>4</span></button>
+                <button class="map-pin map-pin--three" type="button" aria-label="Parking Castellana, 2 créditos por hora"><span>2</span></button>
+                <div class="map-location" aria-hidden="true"><i></i></div>
+              </div>
+              <div class="parking-sheet">
+                <div class="parking-sheet__handle" aria-hidden="true"></div>
+                <div class="parking-sheet__head">
+                  <p>Parkings cerca de ti</p>
+                  <span>12 disponibles</span>
+                </div>
+                <article class="parking-row">
+                  <span class="parking-row__distance">4<small>min</small></span>
+                  <div><strong>Parking Serrano</strong><small>12 plazas · 3 créditos/h</small></div>
+                  <i aria-hidden="true">→</i>
+                </article>
+                <article class="parking-row">
+                  <span class="parking-row__distance">7<small>min</small></span>
+                  <div><strong>Parking Colón</strong><small>Disponible · 4 créditos/h</small></div>
+                  <i aria-hidden="true">→</i>
+                </article>
+                <article class="parking-row">
+                  <span class="parking-row__distance">9<small>min</small></span>
+                  <div><strong>Parking Castellana</strong><small>Alta disponibilidad · 2 créditos/h</small></div>
+                  <i aria-hidden="true">→</i>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero__rail" aria-label="Principios del concepto">
+        <span>01 · Una app</span><span>02 · Una red</span><span>03 · Una suscripción</span><span>Concepto 2026</span>
+      </div>
+    </section>
+
+    <section class="problem section" id="problema" aria-labelledby="problem-title">
+      <header class="section-heading">
+        <p class="eyebrow reveal"><span></span> El problema</p>
+        <h2 id="problem-title" class="reveal">Aparcar sigue funcionando<br>como hace 20 años.</h2>
+      </header>
+
+      <div class="problem-list">
+        <article class="problem-row reveal">
+          <span class="problem-row__number">01</span>
+          <div class="problem-row__copy"><h3>Buscar.</h3><p>Das vueltas sin saber dónde hay sitio.</p></div>
+          <div class="problem-visual problem-visual--route" aria-hidden="true">
+            <svg viewBox="0 0 420 150"><path d="M18 94c40-72 119-71 144-16s76 60 98 10-46-87-84-39-4 94 55 83 58-93 120-86 49 72 49 72"/><circle cx="18" cy="94" r="6"/></svg>
+            <span class="route-car"></span>
+          </div>
+        </article>
+        <article class="problem-row reveal">
+          <span class="problem-row__number">02</span>
+          <div class="problem-row__copy"><h3>Pagar.</h3><p>Cada parking tiene su propia tarifa, sistema o aplicación.</p></div>
+          <div class="problem-visual problem-visual--apps" aria-hidden="true">
+            <span>P</span><span>€</span><span>24h</span><span>+</span>
+          </div>
+        </article>
+        <article class="problem-row reveal">
+          <span class="problem-row__number">03</span>
+          <div class="problem-row__copy"><h3>Repetir.</h3><p>Vuelves a hacerlo cada vez que cambias de zona.</p></div>
+          <div class="problem-visual problem-visual--tickets" aria-hidden="true">
+            <span>COLÓN · 10:42</span><span>SERRANO · 17:08</span><span>AZCA · 08:31</span>
+          </div>
+        </article>
+      </div>
+      <p class="problem__question reveal">¿Y si simplemente <em>tuvieras acceso?</em></p>
+    </section>
+
+    <section class="idea dark-section" id="idea" aria-labelledby="idea-title">
+      <div class="section section--dark">
+        <p class="eyebrow eyebrow--light reveal"><span></span> La idea</p>
+        <h2 id="idea-title" class="idea__title reveal">Una red.<br>Una app.<br><em>Una suscripción.</em></h2>
+        <p class="idea__sub reveal">Tu matrícula se convierte en tu llave.</p>
+
+        <div class="access-flow reveal" aria-label="Flujo conceptual de acceso a un parking">
+          <div class="access-flow__line" aria-hidden="true"><i></i></div>
+          <div class="flow-node">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 39h44l-4-13a7 7 0 0 0-7-5H22a7 7 0 0 0-7 5zM7 39v10h6m44-10v10h-6M18 47h3m22 0h3"/></svg>
+            <span>Vehículo</span>
+          </div>
+          <div class="flow-node">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="9" y="18" width="46" height="30" rx="3"/><path d="M15 12v9m34-9v9M18 33h28"/></svg>
+            <span>Matrícula</span>
+          </div>
+          <div class="flow-node">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22"/><path d="m22 32 7 7 14-16"/></svg>
+            <span>Validación</span>
+          </div>
+          <div class="flow-node">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 53V18h8v35m0-25 34-12v7L20 35"/><circle cx="16" cy="14" r="4"/></svg>
+            <span>Acceso</span>
+          </div>
+          <div class="flow-node">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="9" width="40" height="46" rx="3"/><path d="M25 45V19h9a8 8 0 0 1 0 16h-9"/></svg>
+            <span>Parking</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how section" id="como-funciona" aria-labelledby="how-title">
+      <header class="how__header">
+        <p class="eyebrow reveal"><span></span> Cómo funciona</p>
+        <h2 id="how-title" class="reveal">Cuatro pasos.<br>Cero fricción.</h2>
+        <p class="reveal">Una secuencia de producto pensada para que la tecnología desaparezca justo cuando llegas.</p>
+      </header>
+
+      <div class="how__layout">
+        <ol class="how__steps" data-how-steps>
+          <li class="how-step is-active reveal" data-step="0">
+            <button type="button" aria-pressed="true">
+              <span>01</span><strong>Elige tu plan.</strong>
+              <p>Un saldo mensual de créditos ajustado a cómo te mueves.</p>
+            </button>
+          </li>
+          <li class="how-step reveal" data-step="1">
+            <button type="button" aria-pressed="false">
+              <span>02</span><strong>Añade tu matrícula.</strong>
+              <p>Tu vehículo queda listo para ser reconocido al llegar.</p>
+            </button>
+          </li>
+          <li class="how-step reveal" data-step="2">
+            <button type="button" aria-pressed="false">
+              <span>03</span><strong>Encuentra un parking.</strong>
+              <p>Compara disponibilidad, distancia y consumo de créditos.</p>
+            </button>
+          </li>
+          <li class="how-step reveal" data-step="3">
+            <button type="button" aria-pressed="false">
+              <span>04</span><strong>Entra y aparca.</strong>
+              <p>La matrícula valida el acceso. Sin ticket, sin pasar por caja.</p>
+            </button>
+          </li>
+        </ol>
+
+        <div class="how__stage reveal" aria-live="polite">
+          <div class="product-frame">
+            <div class="product-frame__bar"><span>NODO / DEMO</span><span>•••</span></div>
+            <div class="product-frame__screen">
+              <section class="flow-screen is-active" data-screen="0" aria-label="Selector conceptual de plan">
+                <p class="ui-kicker">TU SUSCRIPCIÓN</p>
+                <h3>¿Cómo aparcas?</h3>
+                <div class="plan-picker">
+                  <button type="button"><span>MINI</span><b>25</b><small>créditos</small></button>
+                  <button class="is-selected" type="button"><span>CITY</span><b>60</b><small>créditos</small><i>Recomendado</i></button>
+                  <button type="button"><span>PLUS</span><b>140</b><small>créditos</small></button>
+                </div>
+                <div class="ui-confirm"><span>PLAN CITY</span><strong>49,90 € <small>/ mes</small></strong></div>
+              </section>
+              <section class="flow-screen" data-screen="1" aria-label="Registro conceptual de matrícula" aria-hidden="true">
+                <p class="ui-kicker">TU VEHÍCULO</p>
+                <h3>Añade una matrícula</h3>
+                <div class="plate"><span>E</span><b data-plate>1234 LKM</b></div>
+                <div class="vehicle-data"><span>Vehículo principal</span><strong>Turismo · Madrid</strong></div>
+                <div class="toast toast--light"><i>✓</i><span>Matrícula verificada</span></div>
+              </section>
+              <section class="flow-screen" data-screen="2" aria-label="Mapa conceptual de parkings" aria-hidden="true">
+                <div class="mini-map">
+                  <svg viewBox="0 0 600 500" aria-hidden="true"><path d="M-20 80c150 30 180 150 330 120s190-110 330-80M80-30c20 150-50 260-5 560M300-30c-80 150 0 240 100 310s80 160 60 240M-10 390c180-100 350-60 650-100"/><path d="M85 420c90-70 110-165 225-170s126-69 206-151"/></svg>
+                  <span class="mini-pin mini-pin--a">2</span><span class="mini-pin mini-pin--b">4</span><span class="mini-pin mini-pin--c">3</span>
+                  <div class="mini-card"><small>4 MIN ANDANDO</small><strong>Parking Serrano</strong><span>12 plazas · 3 créditos/h</span></div>
+                </div>
+              </section>
+              <section class="flow-screen" data-screen="3" aria-label="Confirmación conceptual de acceso" aria-hidden="true">
+                <div class="gate-mini" aria-hidden="true"><span class="gate-mini__post"></span><span class="gate-mini__arm"></span><span class="gate-mini__car"></span></div>
+                <div class="access-ok"><i>✓</i><p>ACCESO CONFIRMADO</p><strong>1234 LKM</strong><span>3 créditos utilizados</span></div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="credits" id="creditos" aria-labelledby="credits-title">
+      <div class="section credits__inner">
+        <div class="credits__intro">
+          <p class="eyebrow reveal"><span></span> Créditos</p>
+          <h2 id="credits-title" class="reveal">No todos los parkings cuestan lo mismo.<br><em>Y eso está bien.</em></h2>
+          <p class="reveal">Tu suscripción incluye créditos. Tú decides dónde utilizarlos según la zona, la hora, la ocupación y el tiempo.</p>
+        </div>
+        <div class="credit-demo reveal" data-credit-demo>
+          <div class="credit-balance"><small>SALDO DISPONIBLE</small><strong data-credit-count>60</strong><span>CR</span></div>
+          <div class="credit-trip">
+            <span>Entrada <b>18:42</b></span><i></i><span>Salida <b>20:41</b></span>
+          </div>
+          <div class="credit-receipt"><span>Parking Colón · 2 h</span><strong>−8 CR</strong></div>
+          <div class="toast"><i>✓</i><span>Sesión finalizada · saldo actualizado</span></div>
+        </div>
+        <div class="credit-scale" aria-label="Ejemplos conceptuales de consumo">
+          <article class="reveal"><span>01</span><div><strong>Parking de barrio</strong><small>Disponibilidad habitual</small></div><b>2 créditos/h</b></article>
+          <article class="reveal"><span>02</span><div><strong>Centro ciudad</strong><small>Zona de alta demanda</small></div><b>4 créditos/h</b></article>
+          <article class="reveal"><span>03</span><div><strong>Parking premium</strong><small>Reserva y acceso prioritario</small></div><b>6 créditos/h</b></article>
+          <article class="reveal"><span>04</span><div><strong>Aeropuerto</strong><small>Estancia de larga duración</small></div><b>10 créditos/h</b></article>
+        </div>
+        <p class="fine-print">Tarifas mostradas únicamente para explicar el modelo conceptual.</p>
+      </div>
+    </section>
+
+    <section class="network dark-section" id="red" aria-labelledby="network-title">
+      <div class="section section--dark">
+        <div class="network__header">
+          <div><p class="eyebrow eyebrow--light reveal"><span></span> La red</p><h2 id="network-title" class="reveal">Una ciudad llena<br>de puntos de acceso.</h2></div>
+          <p class="reveal">Imagina una capa común que conectara parkings independientes, hoteles, oficinas y centros comerciales.</p>
+        </div>
+        <div class="city-map reveal" data-network-map>
+          <svg viewBox="0 0 1200 680" aria-hidden="true">
+            <path class="city-boundary" d="M62 245 180 73l213 42 164-84 210 58 141 123 207 37 44 178-123 157-199 58-192-34-184 62-195-76-168-7-49-147z"/>
+            <path class="city-road city-road--main" d="M-30 533c250-151 357-273 541-268s221 95 373 24 209-190 359-198"/>
+            <path class="city-road" d="M142-20c100 135 82 262 17 398s-4 249 41 336M426-20c-48 166 20 258 138 324s145 197 122 395M820-10c-28 145 40 258 176 337s158 169 157 357M-30 151c203 15 287 82 433 93s260-75 428-47 220 114 399 91M-20 440c157-67 316-43 455 20s291 81 454 21 226-13 358 56"/>
+            <path class="city-ring" d="M282 190c119-118 337-122 497-42s236 235 150 363-322 154-494 89-267-282-153-410Z"/>
+          </svg>
+          <span class="district district--centro">Centro</span><span class="district district--salamanca">Salamanca</span><span class="district district--chamartin">Chamartín</span><span class="district district--chamberi">Chamberí</span><span class="district district--azca">AZCA</span><span class="district district--retiro">Retiro</span>
+          <button class="network-pin pin-01" type="button" aria-label="Parking Serrano"><i></i><span><b>Parking Serrano</b>8 plazas disponibles · 3 CR/h</span></button>
+          <button class="network-pin pin-02" type="button" aria-label="Parking Colón"><i></i><span><b>Parking Colón</b>14 plazas disponibles · 4 CR/h</span></button>
+          <button class="network-pin pin-03" type="button" aria-label="Parking AZCA"><i></i><span><b>Parking AZCA</b>Alta disponibilidad · 2 CR/h</span></button>
+          <button class="network-pin pin-04" type="button" aria-label="Parking Retiro"><i></i><span><b>Parking Retiro</b>6 plazas disponibles · 3 CR/h</span></button>
+          <i class="network-dot dot-05"></i><i class="network-dot dot-06"></i><i class="network-dot dot-07"></i><i class="network-dot dot-08"></i><i class="network-dot dot-09"></i><i class="network-dot dot-10"></i><i class="network-dot dot-11"></i><i class="network-dot dot-12"></i><i class="network-dot dot-13"></i><i class="network-dot dot-14"></i><i class="network-dot dot-15"></i><i class="network-dot dot-16"></i><i class="network-dot dot-17"></i><i class="network-dot dot-18"></i><i class="network-dot dot-19"></i><i class="network-dot dot-20"></i><i class="network-dot dot-21"></i><i class="network-dot dot-22"></i><i class="network-dot dot-23"></i><i class="network-dot dot-24"></i>
+          <div class="map-legend"><span><i></i>Punto de acceso</span><span>Visualización conceptual</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing section" id="planes" aria-labelledby="pricing-title">
+      <header class="pricing__header">
+        <div><p class="eyebrow reveal"><span></span> Planes</p><h2 id="pricing-title" class="reveal">Tu ciudad.<br>Tu ritmo.</h2></div>
+        <p class="reveal">Cada plan combina un saldo mensual con distintos niveles de acceso. No es parking ilimitado: tú decides cómo distribuir tus créditos.</p>
+      </header>
+      <div class="plans">
+        <article class="plan reveal">
+          <div class="plan__top"><span>01 / MINI</span><small>OCASIONAL</small></div>
+          <p class="plan__price"><strong>24,90</strong><span>€ / mes</span></p><p class="plan__credits">25 <span>créditos</span></p><p class="plan__desc">Para aparcar de vez en cuando.</p>
+          <ul><li>Acceso a la red</li><li>1 vehículo</li><li>Reserva estándar</li></ul>
+          <a href="#idea">Ver concepto <span>↗</span></a>
+        </article>
+        <article class="plan plan--featured reveal">
+          <div class="plan__flag">Más equilibrado</div>
+          <div class="plan__top"><span>02 / CITY</span><small>URBANO</small></div>
+          <p class="plan__price"><strong>49,90</strong><span>€ / mes</span></p><p class="plan__credits">60 <span>créditos</span></p><p class="plan__desc">Para moverte por la ciudad.</p>
+          <ul><li>Acceso a la red</li><li>Reserva anticipada</li><li>2 vehículos</li></ul>
+          <a href="#idea">Ver concepto <span>↗</span></a>
+        </article>
+        <article class="plan reveal">
+          <div class="plan__top"><span>03 / PLUS</span><small>FRECUENTE</small></div>
+          <p class="plan__price"><strong>99</strong><span>€ / mes</span></p><p class="plan__credits">140 <span>créditos</span></p><p class="plan__desc">Para quienes aparcan casi todos los días.</p>
+          <ul><li>Parkings premium</li><li>Reserva anticipada</li><li>3 vehículos</li></ul>
+          <a href="#idea">Ver concepto <span>↗</span></a>
+        </article>
+        <article class="plan reveal">
+          <div class="plan__top"><span>04 / PRO</span><small>INTENSIVO</small></div>
+          <p class="plan__price"><strong>199</strong><span>€ / mes</span></p><p class="plan__credits">320 <span>créditos</span></p><p class="plan__desc">Movilidad intensiva.</p>
+          <ul><li>Aeropuertos y estaciones</li><li>Parkings premium</li><li>Vehículos adicionales</li></ul>
+          <a href="#idea">Ver concepto <span>↗</span></a>
+        </article>
+      </div>
+      <p class="fine-print">Planes y precios ilustrativos para explicar el modelo. NODO es un proyecto conceptual.</p>
+    </section>
+
+    <section class="entry dark-section" id="acceso" aria-labelledby="entry-title">
+      <div class="entry__copy reveal">
+        <p class="eyebrow eyebrow--light"><span></span> Experiencia de entrada</p>
+        <h2 id="entry-title">Llegas.<br><em>Y entras.</em></h2>
+        <p>Sin tickets.<br>Sin cajeros.<br>Sin descargar otra app.</p>
+      </div>
+      <div class="entry-scene reveal" data-entry-scene>
+        <div class="entry-scene__grid" aria-hidden="true"></div>
+        <div class="recognition">
+          <div class="recognition__status"><i></i>MATRÍCULA RECONOCIDA</div>
+          <div class="recognition__plate"><span>E</span><strong>1234 LKM</strong></div>
+          <dl><div><dt>PLAN</dt><dd>CITY</dd></div><div><dt>ESTADO</dt><dd>ACCESO AUTORIZADO</dd></div></dl>
+        </div>
+        <div class="entry-car" aria-hidden="true"><span class="entry-car__body"></span><i></i><i></i></div>
+        <div class="barrier" aria-hidden="true"><span></span><i></i></div>
+        <div class="entry-light" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="business section" id="empresas" aria-labelledby="business-title">
+      <div class="business__intro">
+        <p class="eyebrow reveal"><span></span> NODO para empresas</p>
+        <h2 id="business-title" class="reveal">También podría ser un beneficio para empleados.</h2>
+        <p class="reveal">Movilidad flexible sin alquilar cientos de plazas fijas. La empresa asigna saldo y cada persona utiliza la red cuando lo necesita.</p>
+      </div>
+      <div class="business-flow reveal" aria-label="Modelo conceptual para empresas"><span>EMPRESA</span><i>subsidia</i><span>PLAN EMPLEADO</span><i>utiliza</i><span>RED DE PARKINGS</span></div>
+      <div class="dashboard dashboard--business reveal">
+        <div class="dashboard__nav"><strong>NODO <span>WORK</span></strong><nav aria-label="Secciones del dashboard conceptual"><span class="is-active">Resumen</span><span>Equipo</span><span>Movilidad</span></nav><i>ACME / MADRID</i></div>
+        <div class="dashboard__head"><div><small>SEPTIEMBRE 2026 · DEMO</small><h3>Movilidad del equipo</h3></div><button type="button">Exportar <span>↓</span></button></div>
+        <div class="metric-row">
+          <article><span>Empleados</span><strong data-counter="342">342</strong><small>+24 este trimestre</small></article>
+          <article><span>Usuarios activos</span><strong data-counter="178">178</strong><small>52% del equipo</small></article>
+          <article><span>Aparcamientos</span><strong data-counter="1824">1.824</strong><small>este mes</small></article>
+          <article><span>Gasto movilidad</span><strong>8.420 €</strong><small>presupuesto demo</small></article>
+        </div>
+        <div class="dashboard__body">
+          <div class="usage-chart"><div class="chart-head"><span>UTILIZACIÓN · 6 MESES</span><strong>+18,4%</strong></div><svg viewBox="0 0 650 230" aria-label="Gráfico conceptual de utilización"><path class="chart-area" d="M0 200C75 188 86 144 151 155s83-47 147-39 85 55 145 13 79-97 133-72 74-27 74-27V230H0Z"/><path class="chart-line" d="M0 200C75 188 86 144 151 155s83-47 147-39 85 55 145 13 79-97 133-72 74-27 74-27"/></svg><div class="chart-labels"><span>ABR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AGO</span><span>SEP</span></div></div>
+          <div class="usage-list"><span>USO POR ZONA</span><ul><li><b>Centro</b><i style="--w:82%"></i><small>32%</small></li><li><b>AZCA</b><i style="--w:68%"></i><small>27%</small></li><li><b>Salamanca</b><i style="--w:49%"></i><small>19%</small></li><li><b>Otros</b><i style="--w:36%"></i><small>22%</small></li></ul></div>
+        </div>
+      </div>
+      <p class="business__closing reveal">Una alternativa flexible al parking corporativo tradicional.</p>
+    </section>
+
+    <section class="partners" id="partners" aria-labelledby="partners-title">
+      <div class="section partners__grid">
+        <div class="partners__copy">
+          <p class="eyebrow reveal"><span></span> Para parkings asociados</p>
+          <h2 id="partners-title" class="reveal">Las plazas vacías también son inventario.</h2>
+          <p class="reveal">Cada parking podría decidir cuándo, cuánto y a qué precio abrir capacidad a la red.</p>
+          <ul class="partner-points reveal"><li><span>01</span>Control de franjas horarias</li><li><span>02</span>Tarifa dinámica por ocupación</li><li><span>03</span>Ingresos y accesos en tiempo real</li></ul>
+        </div>
+        <div class="partner-console reveal">
+          <div class="partner-console__head"><div><small>PARKING ASOCIADO · DEMO</small><strong>Parking Centro</strong></div><span><i></i> Operativo</span></div>
+          <div class="partner-stats"><article><span>CAPACIDAD</span><strong>120</strong><small>plazas totales</small></article><article><span>OCUPACIÓN</span><strong>62%</strong><small>ahora</small></article><article class="accent"><span>DISPONIBLE PARA RED</span><strong>28</strong><small>plazas</small></article><article><span>INGRESOS ADICIONALES</span><strong>3.420 €</strong><small>este mes</small></article></div>
+          <div class="occupancy"><div class="occupancy__head"><span>OCUPACIÓN HOY</span><div><i></i>Red NODO <i></i>Otras plazas</div></div><div class="occupancy__bars" aria-label="Gráfico conceptual de ocupación por hora"><i style="--a:28%;--b:34%"></i><i style="--a:34%;--b:31%"></i><i style="--a:47%;--b:29%"></i><i style="--a:62%;--b:21%"></i><i style="--a:74%;--b:16%"></i><i style="--a:58%;--b:25%"></i><i style="--a:43%;--b:32%"></i><i style="--a:36%;--b:28%"></i><i style="--a:31%;--b:22%"></i></div><div class="occupancy__labels"><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span></div></div>
+          <div class="schedule"><span>CAPACIDAD ABIERTA A LA RED</span><strong>Laborables · 07:00—22:00</strong><button type="button" aria-label="Capacidad activa"><i></i></button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vision section" id="vision" aria-labelledby="vision-title">
+      <p class="eyebrow reveal"><span></span> Una nueva capa urbana</p>
+      <h2 id="vision-title" class="reveal">El parking no debería ser un destino.<br><em>Debería ser infraestructura.</em></h2>
+      <p class="vision__copy reveal">Una capa de acceso entre personas, ciudades y espacios disponibles.</p>
+      <div class="city-list" aria-label="Ejemplo conceptual de expansión"><span class="reveal">Madrid</span><span class="reveal">Barcelona</span><span class="reveal">Valencia</span><span class="reveal">Sevilla</span><span class="reveal">Málaga</span><span class="reveal">Bilbao</span></div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="cta-title">
+      <div>
+        <p class="eyebrow reveal"><span></span> Proyecto conceptual</p>
+        <h2 id="cta-title" class="reveal">¿Y si aparcar fuera<br>así de sencillo?</h2>
+      </div>
+      <div class="final-cta__actions reveal"><a class="button button--dark" href="#inicio">Volver al inicio <span aria-hidden="true">↑</span></a><a class="text-link" href="#idea">Explorar el concepto <span aria-hidden="true">↗</span></a></div>
+      <p>NODO · Concepto de producto · 2026</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand brand--footer" href="#inicio" aria-label="NODO, volver al inicio"><span>NOD</span><i aria-hidden="true"></i></a>
+    <p>El parking, como servicio.</p>
+    <span>Una propuesta conceptual. No representa una red actualmente operativa.</span>
+  </footer>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
