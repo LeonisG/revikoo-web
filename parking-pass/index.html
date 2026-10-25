@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./access-demo.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -328,23 +329,49 @@
       <p class="fine-print">Planes y precios ilustrativos para explicar el modelo. NODO es un proyecto conceptual.</p>
     </section>
 
-    <section class="entry dark-section" id="acceso" aria-labelledby="entry-title">
-      <div class="entry__copy reveal">
-        <p class="eyebrow eyebrow--light"><span></span> Experiencia de entrada</p>
-        <h2 id="entry-title">Llegas.<br><em>Y entras.</em></h2>
-        <p>Sin tickets.<br>Sin cajeros.<br>Sin descargar otra app.</p>
-      </div>
-      <div class="entry-scene reveal" data-entry-scene>
-        <div class="entry-scene__grid" aria-hidden="true"></div>
-        <div class="recognition">
-          <div class="recognition__status"><i></i>MATRÍCULA RECONOCIDA</div>
-          <div class="recognition__plate"><span>E</span><strong>1234 LKM</strong></div>
-          <dl><div><dt>PLAN</dt><dd>CITY</dd></div><div><dt>ESTADO</dt><dd>ACCESO AUTORIZADO</dd></div></dl>
+    <section class="access-demo" id="acceso" aria-labelledby="entry-title" data-access-demo>
+      <header class="access-demo__heading">
+        <div><p class="eyebrow eyebrow--light"><span></span> De la matrícula a tu saldo</p><h2 id="entry-title">Llegas. Aparcas.<br><em>Todo lo demás sucede solo.</em></h2></div>
+        <p>Tu matrícula abre el paso.<br>Tu suscripción se encarga del resto.<small>Demostración conceptual · Parking Serrano</small></p>
+      </header>
+      <div class="access-demo__stage">
+        <div class="access-demo__world">
+          <div class="access-demo__location"><span><i></i> MADRID / SERRANO</span><time data-demo-clock>11:42</time></div>
+          <div class="access-demo__canvas" data-demo-canvas role="img" aria-label="Demostración tridimensional: un coche se identifica por matrícula al entrar y salir de un parking."></div>
+          <div class="access-demo__fallback" data-demo-fallback hidden><span class="access-demo__fallback-plate">1234 LKM</span><strong>Tu matrícula es tu llave.</strong><p>Identificación, acceso y cobro automático en una misma sesión.</p></div>
+          <div class="access-demo__readout" data-demo-readout>
+            <div class="access-demo__readout-top"><span data-demo-scan-label>LECTURA DE MATRÍCULA</span><span data-demo-confidence>ANPR</span></div>
+            <strong>1234 LKM</strong>
+            <div class="access-demo__validation"><span data-demo-validation>Esperando vehículo</span><b data-demo-validation-value>—</b></div>
+          </div>
+          <div class="access-demo__time-jump" data-demo-time-jump><span>TIEMPO ESTACIONADO</span><strong>1 h 25 min</strong><small>11:42 <span aria-hidden="true">→</span> 13:07</small></div>
+          <div class="access-demo__caption"><span data-demo-phase-number>01 / 05</span><p data-demo-caption>La ciudad sigue. Tú aparcas.</p></div>
         </div>
-        <div class="entry-car" aria-hidden="true"><span class="entry-car__body"></span><i></i><i></i></div>
-        <div class="barrier" aria-hidden="true"><span></span><i></i></div>
-        <div class="entry-light" aria-hidden="true"></div>
+        <div class="access-demo__app-area">
+          <div class="access-demo__phone" aria-label="Aplicación NODO: estado de la sesión y saldo">
+            <div class="access-demo__island" aria-hidden="true"></div>
+            <div class="access-demo__phone-status"><time data-demo-phone-time>11:42</time><span aria-hidden="true">▮▮▮ ▰</span></div>
+            <div class="access-demo__app-nav"><b>NODO<span>®</span></b><span>MG</span></div>
+            <div class="access-demo__balance"><span>PLAN CITY</span><div><strong data-demo-balance>60</strong><i data-demo-debit>−4</i></div><p>créditos disponibles</p></div>
+            <div class="access-demo__session" data-demo-session>
+              <div class="access-demo__session-label"><i></i><span data-demo-session-label>LISTO PARA APARCAR</span></div>
+              <h3 data-demo-parking>Tu próximo destino.</h3><p data-demo-session-description>Ningún parking activo</p>
+              <dl><div><dt>Entrada</dt><dd data-demo-in>—</dd></div><div><dt data-demo-time-label>Tiempo</dt><dd data-demo-duration>—</dd></div></dl>
+              <div class="access-demo__receipt"><span>Parking Serrano · 1 h 25 min</span><b>4 CR</b></div>
+            </div>
+            <div class="access-demo__vehicle"><span>TU VEHÍCULO</span><b>1234 LKM</b><i>Verificado</i></div>
+            <div class="access-demo__app-toast" role="status" data-demo-toast><b>✓ Estancia finalizada</b><span>4 créditos utilizados · Nuevo saldo 56 CR</span></div>
+            <div class="access-demo__home" aria-hidden="true"></div>
+          </div>
+          <p class="access-demo__app-note">Una sesión. Todo conectado.</p>
+        </div>
       </div>
+      <footer class="access-demo__controls">
+        <ol aria-label="Etapas de la demostración"><li data-demo-chapter="0" aria-current="step">01 <span>Llegada</span></li><li data-demo-chapter="1">02 <span>Acceso</span></li><li data-demo-chapter="2">03 <span>Estancia</span></li><li data-demo-chapter="3">04 <span>Salida</span></li><li data-demo-chapter="4">05 <span>Saldo</span></li></ol>
+        <div class="access-demo__buttons"><button type="button" data-demo-pause aria-label="Pausar demostración" title="Pausar demostración"><span aria-hidden="true">Ⅱ</span></button><button type="button" data-demo-replay hidden><span aria-hidden="true">↻</span> Repetir demostración</button></div>
+        <div class="access-demo__progress" aria-hidden="true"><span data-demo-progress></span></div>
+        <p class="access-demo__sr" role="status" aria-live="polite" data-demo-announcement>Demostración preparada. Saldo inicial: 60 créditos.</p>
+      </footer>
     </section>
 
     <section class="business section" id="empresas" aria-labelledby="business-title">
@@ -412,5 +439,6 @@
   </footer>
 
   <script src="./script.js" defer></script>
+  <script src="./access-demo.js" type="module"></script>
 </body>
 </html>
