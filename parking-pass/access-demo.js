@@ -35,7 +35,16 @@ if (section) {
   let disposed = false;
 
   const text = (name, value) => { if (ui[name].textContent !== value) ui[name].textContent = value; };
-  const flag = (name, value) => section.classList.toggle(name, value);
+  const stateElements = {
+    'is-reading': find('readout'),
+    'is-parked': find('time-jump'),
+    'is-debiting': find('debit'),
+    'show-toast': find('toast')
+  };
+  const flag = (name, value) => {
+    section.classList.toggle(name, value);
+    stateElements[name]?.setAttribute('aria-hidden', String(!value));
+  };
   const duration = () => reducedMotion.matches ? 8 : 23;
 
   function renderUI(actual) {

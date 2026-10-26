@@ -150,6 +150,40 @@
   .access-demo__world { height: 430px; }
   .access-demo__location { font-size: 8px; }
 }
+/* A compact live companion keeps the vehicle and its session together on phones. */
+@media (max-width: 650px) {
+  .access-demo__stage { gap: 0; min-height: 0; }
+  .access-demo__world { height: 340px; }
+  .access-demo__readout { top: 36px; width: 190px; padding: 9px 12px; }
+  .access-demo__readout > strong { font-size: 19px; }
+  .access-demo__validation { font-size: 9px; padding-top: 8px; }
+  .access-demo__caption { bottom: 6px; gap: 10px; }
+  .access-demo__caption p { font-size: 10px; }
+  .access-demo__app-area { padding: 24px 0 20px; }
+  .access-demo__phone { max-width: 440px; height: 224px; border: 1px solid #737e75; border-radius: 15px; padding: 16px; display: grid; grid-template-columns: 90px minmax(0,1fr); column-gap: 16px; align-content: start; }
+  .access-demo__island,.access-demo__phone-status,.access-demo__home,.access-demo__vehicle { display: none; }
+  .access-demo__app-nav { grid-column: 1/-1; padding-bottom: 12px; }
+  .access-demo__app-nav > b { font-size: 15px; }
+  .access-demo__app-nav > span { width: 22px; height: 22px; }
+  .access-demo__balance { padding: 14px 0 0; border-top: 1px solid #c6cebf; }
+  .access-demo__balance strong { font-size: 52px; }
+  .access-demo__balance > span { font-size: 8px; }
+  .access-demo__balance p { font-size: 8px; line-height: 1.4; }
+  .access-demo__balance i { position: absolute; right: -1px; top: 30px; font-size: 13px; padding: 3px 5px; }
+  .access-demo__session { min-height: 0; border-bottom: 0; padding-top: 16px; }
+  .access-demo__session-label { font-size: 7px; }
+  .access-demo__session h3 { font-size: 16px; margin-top: 10px; }
+  .access-demo__session > p { font-size: 9px; }
+  .access-demo__session dl { margin-top: 12px; }
+  .access-demo__session dd { font-size: 12px; }
+  .access-demo__receipt { font-size: 8px; gap: 6px; line-height: 1.5; }
+  .access-demo__app-toast { bottom: 9px; padding: 8px 10px; border-radius: 6px; }
+  .access-demo__app-toast b { font-size: 9px; }
+  .access-demo__app-toast span { font-size: 7px; margin-top: 2px; }
+  .access-demo__app-note { font-size: 8px; margin-top: 12px; }
+  .access-demo.focus-app .access-demo__app-area { transform: none; }
+  .access-demo__controls { gap: 14px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .access-demo *, .access-demo *::before, .access-demo *::after { animation: none !important; transition: none !important; }
   .access-demo.focus-app .access-demo__app-area, .access-demo.focus-app .access-demo__world { transform: none; }

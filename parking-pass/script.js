@@ -1,4 +1,4 @@
-import { createCityMap, parkings } from './city-map.js';
+import { createCityMap, parkings } from './city-map.js?v=20261026.2';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -6,6 +6,7 @@ const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const header = $('[data-header]');
 const nav = $('[data-nav]');
 const menu = $('[data-menu-toggle]');
+const navLinks = $$('.main-nav a:not(.nav-demo)');
 const maps = $$('[data-city]').map(createCityMap);
 const format = value => new Intl.NumberFormat('es-ES').format(value);
 const clamp = value => Math.min(1, Math.max(0, value));
@@ -147,8 +148,14 @@ $('[data-network-book]').addEventListener('click', () => {
   $('.app-parking-info > p').textContent = selectedParking.zone + ' · ' + selectedParking.walk + ' min andando';
   $('.app-parking-info > .mono').textContent = selectedParking.places + ' PLAZAS DISPONIBLES';
   $('.app-price > span').textContent = selectedParking.id === 'serrano' ? '1 h 25 min · estancia de ejemplo' : 'Tarifa de ejemplo · 1 hora';
-  $('.app-price > strong').textContent = selectedParking.rate.split(' / ')[0];
+  const price = $('.app-price > strong');
+  const unit = document.createElement('small'); unit.textContent = 'CR';
+  price.replaceChildren(document.createTextNode(selectedParking.rate.split(' ')[0] + ' '), unit);
   $('.app-map-pin > small').textContent = selectedParking.zone.toUpperCase();
+  $('[data-city="app"]').setAttribute('aria-label', 'Mapa conceptual del entorno de ' + selectedParking.name);
+  $('.fragment-one').lastChild.textContent = selectedParking.walk + ' min';
+  $('.fragment-two small').textContent = selectedParking.zone.toUpperCase();
+  $('.fragment-two').lastChild.textContent = selectedParking.places + ' plazas';
   $('#screen-booking h3').textContent = selectedParking.name + '.';
   maps.find(map => map.mode === 'app')?.setSelected(selectedParking);
   reserved = false;
@@ -243,13 +250,21 @@ const hero = $('.hero');
 function updateScroll() {
   scrollFrame = 0;
   header.classList.toggle('is-scrolled', scrollY > 20);
-  const heroProgress = clamp(-hero.getBoundingClientRect().top / hero.offsetHeight);
-  maps.find(map => map.mode === 'hero')?.draw(motion.matches ? 0 : heroProgress, heroIntro);
+  header.style.setProperty('--reading-progress', clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight)).toFixed(4));
+  $('.product-tabs').setAttribute('aria-orientation', innerWidth <= 650 ? 'horizontal' : 'vertical');
+  const heroRect = hero.getBoundingClientRect();
+  const heroProgress = clamp(-heroRect.top / hero.offsetHeight);
+  if (heroRect.bottom > 0) maps.find(map => map.mode === 'hero')?.draw(motion.matches ? 0 : heroProgress, heroIntro);
   scenes.forEach(scene => {
     const rect = scene.getBoundingClientRect();
     const progress = motion.matches ? 1 : clamp((innerHeight * .85 - rect.top) / Math.min(rect.height, innerHeight * .8));
     scene.style.setProperty('--scene', progress.toFixed(3));
     if (scene.id === 'vision') maps.find(map => map.mode === 'vision')?.draw(progress);
+  });
+  navLinks.forEach(link => {
+    const rect = $(link.hash).getBoundingClientRect();
+    if (rect.top <= innerHeight * .35 && rect.bottom > innerHeight * .35) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
   });
 }
 addEventListener('scroll', () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll); }, { passive: true });
@@ -267,17 +282,7 @@ if (!motion.matches) {
   introFrame = requestAnimationFrame(intro);
 }
 document.fonts.ready.then(() => { maps.forEach(map => map.draw()); });
-const navLinks = $$('.main-nav a:not(.nav-demo)');
-const sectionObserver = new IntersectionObserver(entries => {
-  const current = entries.find(entry => entry.isIntersecting);
-  if (!current) return;
-  navLinks.forEach(link => {
-    if (link.hash === '#' + current.target.id) link.setAttribute('aria-current', 'location');
-    else link.removeAttribute('aria-current');
-  });
-}, { rootMargin: '-15% 0px -60% 0px' });
-navLinks.forEach(link => { const target = $(link.hash); if (target) sectionObserver.observe(target); });
 addEventListener('pagehide', event => {
   cancelAnimationFrame(introFrame); cancelAnimationFrame(scrollFrame);
-  if (!event.persisted) { maps.forEach(map => map.dispose()); sectionObserver.disconnect(); }
+  if (!event.persisted) maps.forEach(map => map.dispose());
 });

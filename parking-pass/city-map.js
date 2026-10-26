@@ -9,6 +9,81 @@ export const parkings = [
 
 const clamp = (n, min = 0, max = 1) => Math.max(min, Math.min(max, n));
 
+export const cityRoads = [
+  [[-80, 690], [210, 495], [432, 410], [543, 270], [602, -80]],
+  [[-100, 260], [230, 330], [485, 330], [710, 285], [1130, 218]],
+  [[650, -70], [650, 300], [678, 445], [670, 790]],
+  [[-40, 580], [300, 580], [560, 520], [720, 520], [1100, 690]],
+  [[-30, 87], [290, 140], [640, 140], [1060, 40]],
+  [[120, -40], [235, 330], [280, 700]],
+  [[970, -80], [930, 270], [955, 740]]
+];
+const routeCache = new Map();
+const distance = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+const cross = (a, b) => a[0] * b[1] - a[1] * b[0];
+const subtract = (a, b) => [a[0] - b[0], a[1] - b[1]];
+
+// Route within this illustrative street network; this is not real-world navigation.
+// Split roads at intersections, then connect each parking by its shortest street path.
+export function getParkingRoute(parking) {
+  if (routeCache.has(parking.id)) return routeCache.get(parking.id);
+  const start = [320, 695], end = [parking.x * 10, parking.y * 7];
+  const segments = cityRoads.flatMap(road => road.slice(1).map((b, i) => ({ a: road[i], b, cuts: [0, 1] })));
+  for (let i = 0; i < segments.length; i++) {
+    for (let j = i + 1; j < segments.length; j++) {
+      const one = segments[i], two = segments[j];
+      const r = subtract(one.b, one.a), s = subtract(two.b, two.a), delta = subtract(two.a, one.a);
+      const denominator = cross(r, s);
+      if (Math.abs(denominator) < .00001) continue;
+      const t = cross(delta, s) / denominator, u = cross(delta, r) / denominator;
+      if (t >= 0 && t <= 1 && u >= 0 && u <= 1) { one.cuts.push(t); two.cuts.push(u); }
+    }
+  }
+  const pointAt = (segment, t) => segment.a.map((n, i) => n + (segment.b[i] - n) * t);
+  function attach(point) {
+    let closest;
+    for (const segment of segments) {
+      const vector = subtract(segment.b, segment.a), delta = subtract(point, segment.a);
+      const t = clamp((delta[0] * vector[0] + delta[1] * vector[1]) / (vector[0] ** 2 + vector[1] ** 2));
+      const projected = pointAt(segment, t), length = distance(point, projected);
+      if (!closest || length < closest.length) closest = { segment, t, projected, length };
+    }
+    closest.segment.cuts.push(closest.t);
+    return closest.projected;
+  }
+  const from = attach(start), to = attach(end), nodes = new Map();
+  function node(point) {
+    const key = point.map(n => n.toFixed(3)).join(',');
+    if (!nodes.has(key)) nodes.set(key, { point, links: new Map(), cost: Infinity, previous: null });
+    return nodes.get(key);
+  }
+  for (const segment of segments) {
+    const cuts = [...new Set(segment.cuts)].sort((a, b) => a - b);
+    for (let i = 1; i < cuts.length; i++) {
+      const a = node(pointAt(segment, cuts[i - 1])), b = node(pointAt(segment, cuts[i]));
+      const cost = distance(a.point, b.point);
+      a.links.set(b, cost); b.links.set(a, cost);
+    }
+  }
+  const source = node(from), destination = node(to), remaining = new Set(nodes.values());
+  source.cost = 0;
+  while (remaining.size) {
+    let current;
+    for (const item of remaining) if (!current || item.cost < current.cost) current = item;
+    if (!Number.isFinite(current.cost)) break;
+    remaining.delete(current);
+    if (current === destination) break;
+    for (const [next, length] of current.links) {
+      if (current.cost + length < next.cost) { next.cost = current.cost + length; next.previous = current; }
+    }
+  }
+  const path = [];
+  for (let current = destination; current; current = current.previous) path.unshift(current.point);
+  const route = [start, ...path, end];
+  routeCache.set(parking.id, route);
+  return route;
+}
+
 // One cartographic vocabulary, rendered as pixels at each surface's actual size.
 // The map is intentionally illustrative, not a geographic or routing service.
 export function createCityMap(canvas) {
@@ -64,7 +139,9 @@ export function createCityMap(canvas) {
       ctx.scale(width / 900, height / 580);
       ctx.rotate(-.12);
     } else if (compact) {
-      ctx.scale(width / 520, height / 320); ctx.translate(-295, -170);
+      const target = mode === 'app' ? selected : parkings[0];
+      ctx.scale(width / 520, height / 320);
+      ctx.translate(520 * (mode === 'app' ? .63 : .60) - target.x * 10, 320 * (mode === 'app' ? .32 : .34) - target.y * 7);
     } else ctx.scale(width / 1000, height / 700);
 
     // Urban blocks, courtyards and an identifiable park, not a generic grid texture.
@@ -86,16 +163,7 @@ export function createCityMap(canvas) {
     for (let x = 747; x < 910; x += 22) for (let y = 410; y < 600; y += 22) node(x, y, 3, dark ? '#2b3f20' : '#b0c29d');
     path([[745, 410], [895, 595]], dark ? '#34492a' : '#a9bc94', 2);
     path([[895, 410], [745, 595]], dark ? '#34492a' : '#a9bc94', 2);
-    const roads = [
-      [[-80, 690], [210, 495], [432, 410], [543, 270], [602, -80]],
-      [[-100, 260], [230, 330], [485, 330], [710, 285], [1130, 218]],
-      [[650, -70], [650, 300], [678, 445], [670, 790]],
-      [[-40, 580], [300, 580], [560, 520], [720, 520], [1100, 690]],
-      [[-30, 87], [290, 140], [640, 140], [1060, 40]],
-      [[120, -40], [235, 330], [280, 700]],
-      [[970, -80], [930, 270], [955, 740]]
-    ];
-    roads.forEach((road, i) => {
+    cityRoads.forEach((road, i) => {
       path(road, palette.line, i ? 8 : 14);
       path(road, palette.road, i ? 6 : 11);
       if (dark) path(road, '#3e5032', .5, [5, 8]);
@@ -108,11 +176,11 @@ export function createCityMap(canvas) {
       label('CENTRO', 390, 640, 10);
       label('AZCA', 385, 128, 9);
     }
-    const endpoint = mode === 'network' || mode === 'app' ? [selected.x * 10, selected.y * 7] : [650, 301];
-    const route = [[320, 695], [320, 580], [475, 544], [475, 402], [540, 330], [650, 307], endpoint];
+    const route = getParkingRoute(mode === 'network' || mode === 'app' ? selected : parkings[0]);
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     ctx.save();
-    ctx.setLineDash([1400]); ctx.lineDashOffset = 1400 * (1 - intro);
+    const routeLength = route.slice(1).reduce((length, point, i) => length + distance(route[i], point), 0);
+    ctx.setLineDash([routeLength + 1]); ctx.lineDashOffset = (routeLength + 1) * (1 - intro);
     ctx.beginPath(); route.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
     ctx.strokeStyle = palette.route; ctx.lineWidth = dark ? 3 : 2.4; ctx.stroke();
     ctx.restore();
