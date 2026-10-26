@@ -274,6 +274,9 @@ export function createAccessScene(host) {
     let t=time;
     if(reduced) t=time<2?2.3:time<4?5.5:time<6?18.4:21.3;
     const exiting=t>=10.2;
+    const afternoon=smooth(8.8,10.2,t);
+    key.color.setRGB(mix(1,.93,afternoon),mix(.94,.96,afternoon),mix(.82,1,afternoon));
+    insideLight.intensity=35+afternoon*9;
     let z;
     if(t<2.3) z=mix(11.6,4.65,smooth(0,2.3,t));
     else if(t<5.7) z=4.65;

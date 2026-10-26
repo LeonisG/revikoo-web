@@ -9,7 +9,7 @@ if (section) {
   const states = [
     [0, 'Llegada', 'Esperando vehículo', '—'],
     [2.6, 'Lectura de matrícula', 'Enfoque de matrícula', 'ANPR'],
-    [3.35, 'Matrícula reconocida', 'Usuario identificado', 'Verificado'],
+    [3.35, 'Matrícula reconocida', 'Usuario identificado', 'Marta'],
     [3.8, 'Validando suscripción', 'Plan del usuario', 'CITY'],
     [4.15, 'Validando saldo', 'Saldo disponible', '60 CR'],
     [4.6, 'Acceso autorizado', 'Acceso autorizado', '✓ CITY'],
@@ -43,6 +43,7 @@ if (section) {
     const t = reduced ? actual < 2 ? 2.3 : actual < 4 ? 5.5 : actual < 6 ? 18.4 : 21.3 : actual;
     const phase = t < 3.35 ? 0 : t < 8.35 ? 1 : t < 10.2 ? 2 : t < 18.3 ? 3 : 4;
     const state = states.findLast(item => t >= item[0]);
+    section.style.setProperty('--access-transition', reduced ? 1 : Math.min(t / 1.35, 1));
     section.dataset.demoState = state[1];
     text('caption', captions[phase]);
     text('phase-number', `0${phase + 1} / 05`);
@@ -136,13 +137,17 @@ if (section) {
     ui.pause.querySelector('span').textContent = userPaused ? '▷' : 'Ⅱ';
     userPaused ? stopLoop() : resume();
   });
-  ui.replay.addEventListener('click', () => {
+  async function replay() {
+    await prepare();
+    started = true;
     elapsed = 0; finished = false; userPaused = false; lastTick = 0; lastPhase = -1; lastReducedState = -1;
     ui.pause.hidden = false; ui.replay.hidden = true;
     ui.pause.setAttribute('aria-label', 'Pausar demostración'); ui.pause.title = 'Pausar demostración';
     ui.pause.querySelector('span').textContent = 'Ⅱ';
     ui.pause.focus({ preventScroll: true }); render(); resume();
-  });
+  }
+  ui.replay.addEventListener('click', replay);
+  section.addEventListener('nodo:replay', replay);
   document.addEventListener('visibilitychange', () => document.hidden ? stopLoop() : resume());
   reducedMotion.addEventListener('change', () => {
     elapsed = Math.min(elapsed, duration()); lastReducedState = -1; render(); resume();

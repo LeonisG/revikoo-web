@@ -17,7 +17,7 @@ async function demo(reduced = false) {
       const attrs = {};
       const classes = new Set();
       elements.set(name, {
-        textContent: '', hidden: name === 'replay', dataset: {}, style: {}, attrs,
+        textContent: '', hidden: name === 'replay', dataset: {}, style: { setProperty() {} }, attrs,
         classList: { toggle: (key, enabled) => enabled ? classes.add(key) : classes.delete(key), contains: key => classes.has(key) },
         setAttribute: (key, value) => { attrs[key] = value; },
         removeAttribute: key => { delete attrs[key]; },
@@ -57,7 +57,7 @@ async function demo(reduced = false) {
       await new Promise(resolve => setImmediate(resolve));
       flush();
     },
-    click(name) { listeners[`${name}:click`](); flush(); }
+    click(name) { const result = listeners[`${name}:click`](); flush(); return result; }
   };
 }
 
@@ -90,7 +90,7 @@ test('entry, stay, exit and every credit decrement complete in order', async () 
   assert.equal(d.element('replay').hidden, false);
   assert.equal(d.element('pause').hidden, true);
   assert.equal(d.element('section').classList.contains('show-toast'), false);
-  d.click('replay');
+  await d.click('replay');
   assert.equal(d.element('balance').textContent, '60');
   assert.equal(d.element('replay').hidden, true);
 });
