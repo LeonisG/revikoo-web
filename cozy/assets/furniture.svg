@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none">
+<defs>
+ <linearGradient id="wood" x2="0" y2="1"><stop stop-color="#a47951"/><stop offset="1" stop-color="#78583d"/></linearGradient>
+ <linearGradient id="top"><stop stop-color="#c19a68"/><stop offset="1" stop-color="#ae8255"/></linearGradient>
+ <linearGradient id="screen" x2="1" y2="1"><stop stop-color="#5d7267"/><stop offset="1" stop-color="#344b45"/></linearGradient>
+</defs>
+<!-- Bookshelf: warm dark recesses and imperfect book spines -->
+<ellipse cx="1044" cy="651" rx="146" ry="24" fill="#302b21" opacity=".22"/>
+<path d="M923 206L1138 214L1155 641L928 634Z" fill="#5c503b"/>
+<path d="M1138 214L1165 225L1180 639L1155 656Z" fill="#70583c"/>
+<path d="M921 207L1141 215L1164 226L945 218Z" fill="#b59464"/>
+<path d="M924 215L945 217L952 641L930 638Z" fill="#a48358"/>
+<path d="M1123 222L1141 222L1155 650L1135 649Z" fill="#99774e"/>
+<g fill="#b28e5d" stroke="#775a3e" stroke-width="2"><path d="M944 319L1128 325L1150 339L947 333Z"/><path d="M947 436L1133 442L1153 455L949 450Z"/><path d="M949 553L1139 559L1156 571L951 566Z"/><path d="M951 626L1141 631L1155 647L951 641Z"/></g>
+<g stroke="#352e24" stroke-width="2"><path d="M962 244L985 245L989 320L966 319Z" fill="#a56c50"/><path d="M987 256L1004 257L1008 321L990 320Z" fill="#bcb493"/><path d="M1004 238L1024 239L1028 322L1008 322Z" fill="#79836b"/><path d="M1029 250L1045 249L1059 323L1040 324Z" fill="#c69d61"/>
+<path d="M968 367L984 367L987 438L970 438Z" fill="#9b9a7b"/><path d="M986 355L1009 355L1012 439L989 439Z" fill="#8a5b47"/><path d="M1014 373L1028 371L1044 439L1029 440Z" fill="#b6a477"/></g>
+<g stroke="#e0cca0" opacity=".7" stroke-width="2"><path d="M969 257l10 1m-9 46 10 1M1010 253l9 1m-7 53 9 1M993 372l11 1m-10 49 10 1"/></g>
+<!-- A small pot on the upper shelf -->
+<path d="M1081 287Q1089 271 1088 252M1089 271q-29-27-20-30q24 4 20 30M1090 268q23-31 27-17q-3 18-27 17" fill="#7b8c59" stroke="#66764e" stroke-width="2"/>
+<path d="M1073 284L1108 285L1103 321L1080 320Z" fill="#b88462"/><ellipse cx="1090" cy="285" rx="18" ry="5" fill="#c89b75"/>
+<path d="M980 479L1066 482V546L980 543Z" fill="#b6a185"/><path d="M980 479L1021 465L1103 469L1066 482Z" fill="#d3bd97"/><path d="M1066 482L1103 469V532L1066 546Z" fill="#978467"/><path d="M1004 497l34 1v13l-34-1Z" fill="#d6c5a3"/>
+<path d="M980 589L1098 593V610L981 607Z" fill="#887c60"/><path d="M992 574L1107 579V594L992 589Z" fill="#ae7f5c"/>
+<!-- Desk, slightly skewed handmade edges -->
+<ellipse cx="658" cy="675" rx="237" ry="31" fill="#3d3527" opacity=".22"/>
+<path d="M453 491L474 493L460 689L445 688Z" fill="#725338"/>
+<path d="M782 508L801 507L825 701L807 702Z" fill="#6d5138"/>
+<path d="M493 503L510 501L511 645L495 644Z" fill="#604c35"/>
+<path d="M809 480L826 479L845 652L830 652Z" fill="#6e5138"/>
+<path d="M441 468L771 446L847 484L493 516Z" fill="url(#top)"/>
+<path d="M441 468L493 501L847 473V489L493 522L441 485Z" fill="url(#wood)"/>
+<path d="M441 468L493 501L847 473" stroke="#d2ac76" stroke-width="3"/>
+<path d="M703 505L789 498L795 561L709 569Z" fill="#906b46" stroke="#725438" stroke-width="3"/>
+<path d="M718 535L775 530" stroke="#684d35" stroke-width="3"/><path d="M742 532l15-1" stroke="#d0ae77" stroke-width="4"/>
+<g stroke="#825d3b" opacity=".35"><path d="M467 471L777 453M489 480L797 461M522 489L820 469"/></g>
+<!-- Laptop -->
+<path d="M575 402L679 395L694 464L588 472Z" fill="#4e5148" stroke="#383e36" stroke-width="3"/>
+<path d="M582 408L673 402L685 457L594 465Z" fill="url(#screen)"/>
+<path d="M588 472L694 464L726 477L615 488Z" fill="#b0ad94" stroke="#777a6c" stroke-width="2"/>
+<path d="M604 474L691 468L704 474L618 481Z" fill="#686e60"/>
+<path d="M630 480l26-2 8 3-27 3Z" fill="#8d9582"/>
+<path d="M615 431q20-18 44-3m-36 15 33-3" stroke="#d5d5af" stroke-width="2" opacity=".65"/>
+<!-- Journal and pencil -->
+<path d="M522 470L565 465L598 480L551 486Z" fill="#475d4d" stroke="#394d3e" stroke-width="2"/>
+<path d="M525 466L564 462L596 476L552 482Z" fill="#e1d2ae"/>
+<path d="M525 463L564 459L595 473L552 479Z" fill="#74836a"/>
+<path d="M532 464L559 460L589 474" stroke="#b8bf97"/>
+<path d="M569 459L590 470" stroke="#bc9254" stroke-width="3" stroke-linecap="round"/>
+<!-- Task lamp -->
+<ellipse cx="762" cy="459" rx="25" ry="8" fill="#4a5140"/>
+<path d="M760 455L758 410L735 383" stroke="#5d6450" stroke-width="6"/>
+<circle cx="758" cy="409" r="6" fill="#b4a275"/>
+<path d="M718 375Q738 350 752 375L768 397L717 404Z" fill="#6e7959" stroke="#505c44" stroke-width="2"/>
+<ellipse cx="743" cy="401" rx="26" ry="6" transform="rotate(-8 743 401)" fill="#e9c98d"/>
+<!-- Tea, saucer and clock -->
+<ellipse cx="719" cy="479" rx="16" ry="5" fill="#c0b48e"/>
+<path d="M706 456Q718 451 730 455L727 475Q719 482 709 475Z" fill="#d4c7a2"/>
+<path d="M729 458q16-2 8 10l-8 1" stroke="#d4c7a2" stroke-width="4"/>
+<ellipse cx="718" cy="456" rx="12" ry="4" fill="#7f6647"/>
+<path d="M785 443V424Q785 409 800 409Q816 409 816 425V443Z" fill="#b18b58" stroke="#785e3e" stroke-width="2"/>
+<circle cx="800" cy="426" r="12" fill="#e2d5af"/>
+<path d="M800 417v10l6 3" stroke="#655e48" stroke-width="2" stroke-linecap="round"/>
+<!-- Wicker stool and sleeping cat -->
+<path d="M1087 686l-5 71m87-63 10 66" stroke="#796244" stroke-width="7"/>
+<ellipse cx="1126" cy="687" rx="62" ry="23" fill="#a98f62"/>
+<ellipse cx="1126" cy="678" rx="60" ry="21" fill="#c0a779"/>
+<path d="M1084 673Q1078 641 1117 635Q1158 630 1164 663Q1172 685 1122 685Z" fill="#b38459"/>
+<path d="M1090 651l-1-17 15 10 15-9 1 20" fill="#b38459"/>
+<path d="M1095 656q4 5 9 0m7 0q4 5 9 0" stroke="#705238" stroke-width="2"/>
+<path d="M1155 650q-26-11-26 13q0 14 24 8" stroke="#d1a271" stroke-width="9" stroke-linecap="round"/>
+<path d="M1123 641l4 9m9-10 3 8" stroke="#936944" stroke-width="4" stroke-linecap="round"/>
+</svg>
