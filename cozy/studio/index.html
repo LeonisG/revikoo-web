@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#233a31"><title>Oak Studio · Cozy Room</title>
+<link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="./studio.css">
+<script type="importmap">{"imports":{"three":"../tools/vendor/three/build/three.module.js","three/addons/":"../tools/vendor/three/examples/jsm/"}}</script>
+</head><body>
+<header><a class="brand" href="../">cozy<span>room.</span></a><span class="edition">OAK STUDIO <b>·</b> Vista previa 3D</span><a class="back" href="../">Volver a mi habitación ↗</a></header>
+<main>
+  <section class="world" aria-label="Estudio tridimensional">
+    <div class="scene-title"><span class="eyebrow">UN ESPACIO PARA HACERLO TUYO</span><h1>Tu próximo rincón.</h1><p>Madera cálida. Luz tranquila. Espacio para imaginar.</p></div>
+    <div id="viewport" tabindex="0" aria-label="Habitación 3D. Arrastra un mueble para moverlo; arrastra el fondo para girar la cámara. R gira el mueble, flechas lo mueven y Escape cancela."></div>
+    <p id="status" role="status" aria-live="polite">Preparando el estudio…</p>
+    <nav class="camera-bar" aria-label="Cámara"><button id="orbit-left" aria-label="Girar cámara a la izquierda">↶</button><button id="home">Vista inicial</button><button id="orbit-right" aria-label="Girar cámara a la derecha">↷</button><label>Zoom <input id="zoom" type="range" min="0.65" max="1.8" step="0.05" value="1"></label></nav>
+    <div id="fallback" hidden><h2>La vista 3D no está disponible</h2><p id="fallback-message"></p><a href="../">Volver a Cozy Room</a></div>
+  </section>
+  <aside>
+    <div class="intro"><span class="eyebrow">01 / CONSTRUYE</span><h2>La habitación</h2><p>Un boceto que se guarda aquí, separado de tu partida.</p></div>
+    <div class="two"><label>Ancho<select id="width"><option value="352">4 módulos</option><option value="440" selected>5 módulos</option><option value="528">6 módulos</option></select></label><label>Fondo<select id="depth"><option value="352">4 módulos</option><option value="440" selected>5 módulos</option><option value="528">6 módulos</option></select></label></div>
+    <label class="row">Color de pared<input id="wall-color" type="color" value="#63715a"></label>
+    <label>Posición de la ventana<input id="window-position" type="range" min="0.32" max="0.75" step="0.01" value="0.62"></label>
+    <label>La luz<select id="light"><option value="day">Una mañana tranquila</option><option value="sunset">Última luz</option><option value="night">Noche de lectura</option></select></label>
+    <div class="section"><span class="eyebrow">02 / HABITA</span><h2>Colección Oak</h2><p>Añade una pieza. Arrástrala hasta encontrar su lugar.</p><div id="catalog" class="catalog"></div></div>
+    <div class="selection"><label>Pieza seleccionada<select id="selection"><option value="">Ninguna</option></select></label><div class="two"><button id="rotate">Girar 15°</button><button id="quarter">Girar 90°</button></div><div class="two"><button id="remove">Retirar</button><button id="undo">Deshacer</button></div><label class="row">Ajustar posición a la cuadrícula<input id="snap" type="checkbox"></label><p id="coordinates" class="coordinates">Selecciona una pieza para colocarla.</p></div>
+    <p class="hint">Arrastra el fondo para mirar alrededor. R gira; las flechas mueven la selección. Escape cancela un arrastre.</p>
+    <p class="footnote">Primera sala modular. Se irán incorporando las piezas Oak revisadas. Tu progreso de Cozy permanece en tu habitación.</p>
+  </aside>
+</main>
+<script type="module" src="./studio.mjs"></script>
+</body></html>

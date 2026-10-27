@@ -1,0 +1,5 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),fs=require('node:fs'),path=require('node:path');
+const base=process.env.COZY_URL||'http://127.0.0.1:8767/cozy/',dir=path.resolve(__dirname,'../assets/room/oak');
+(async()=>{fs.mkdirSync(dir,{recursive:true});const b=await chromium.launch({channel:'msedge'});try{const p=await b.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(base+'tools/room-export.html');await p.waitForFunction(()=>window.oakRoomExport);
+for(const size of ['small','medium','large'])for(const light of ['day','sunset','night'])for(const weather of ['clear','rain']){const url=await p.evaluate(args=>oakRoomExport.draw(...args),[size,light,weather]);fs.writeFileSync(path.join(dir,`${size}-${light}-${weather}.png`),Buffer.from(url.split(',')[1],'base64'));}
+if(errors.length)throw new Error(errors.join('\n'));console.log('18 coherent room frames rendered');}finally{await b.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

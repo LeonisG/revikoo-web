@@ -1,0 +1,18 @@
+{
+  "bytes": 1067092,
+  "sha256": "22191caaa92400c065276d72760431bbcf83ef164c6757a3b9149176dd5cde24",
+  "nodes": 1,
+  "meshes": 1,
+  "materials": 1,
+  "triangles": 10576,
+  "normals": true,
+  "uv": true,
+  "externalBuffers": 0,
+  "externalImages": 0,
+  "requiredExtensions": [],
+  "animations": 0,
+  "errors": 0,
+  "warnings": 0,
+  "hints": 4,
+  "structuralReview": "See individual visual review; counts do not certify anatomy or manifold geometry."
+}

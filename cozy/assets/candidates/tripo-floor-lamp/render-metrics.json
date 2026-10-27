@@ -1,0 +1,74 @@
+{
+  "three": "186",
+  "meshes": 1,
+  "triangles": 11718,
+  "materials": [
+    {
+      "name": "tripo_material_4add61e6-add0-496c-b8f8-7e71f58e3121",
+      "metalness": 0,
+      "roughness": 0.9
+    }
+  ],
+  "textures": [
+    {
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "rawSize": [
+    0.40093180537223816,
+    0.39829593896865867,
+    1
+  ],
+  "scale": 180,
+  "id": "floor-lamp",
+  "normalizedSize": [
+    72.16772496700287,
+    71.69326901435856,
+    180.00000000000003
+  ],
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "footprint": [
+    1,
+    1
+  ],
+  "projectedTop": 227.65771294924323,
+  "existingSurfaceHeight": 132,
+  "camera": {
+    "t": 0.44742,
+    "elevationDegrees": 26.578273929356957,
+    "position": [
+      1138.2885647462158,
+      -1138.2885647462158,
+      805.356
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "frustum": [
+      -148.49242404917496,
+      148.49242404917496,
+      245.01249968113868,
+      -51.97234841721123
+    ]
+  },
+  "shadow": {
+    "type": "PCFSoftShadowMap",
+    "mapSize": 1024,
+    "key": [
+      -70,
+      -350,
+      600
+    ],
+    "opacity": 0.25,
+    "separatePass": true
+  },
+  "warning": "Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.",
+  "browserErrors": []
+}

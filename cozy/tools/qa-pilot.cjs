@@ -52,12 +52,12 @@ const out=path.resolve(__dirname,'../docs/qa/tripo-pilot');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),360);
     await page.screenshot({path:path.join(out,'mobile-360.png')});
     assert.equal(await page.evaluate(()=>localStorage.getItem('cozy-room:v2')),normal);
-    // A pilot query alone cannot opt a real save into candidate delivery.
+    // Ordinary games now receive the reviewed release, never candidate paths.
     await page.goto(base+'?pilot=tripo-desk');
-    assert.deepEqual(await page.evaluate(async()=> (await import('./assets/manifest.mjs')).availableOrientations('desk')),[0]);
-    assert.equal(await page.evaluate(async()=>{
+    assert.deepEqual(await page.evaluate(async()=> (await import('./assets/manifest.mjs')).availableOrientations('desk')),[0,90,180,270]);
+    assert.ok(Math.abs(await page.evaluate(async()=>{
       const {CATALOG}=await import('./logic/catalog.mjs');return (await import('./logic/geometry-profile.mjs')).geometryProfile(CATALOG.desk).top;
-    }),132);
+    })-113.73869858923008)<.0001);
     assert.deepEqual(errors,[]);assert.deepEqual(bad,[]);
     fs.writeFileSync(path.join(out,'results.json'),JSON.stringify({passed:true,views,geometry,errors,bad,normalSaveUnchanged:true,productionLoadsNoThreeOrGLB:true,snapshots},null,2)+'\n');
     console.log('PASS: real four-view candidate, rotation and parented accessory, clean production route, normal save unchanged, no console/network errors. '+out);

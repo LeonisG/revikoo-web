@@ -1,0 +1,36 @@
+{
+  "id": "bookshelf",
+  "date": "2026-10-28",
+  "status": "completed-downloaded",
+  "visualStatus": "REVIEWED",
+  "source": "assets/masters/oak-cozy/bookshelf.png",
+  "mediaId": "2fa6376f-e0f6-405f-a1b1-42f5039cc09b",
+  "jobId": "35dcf3e4-9a18-4f51-9695-fd673bf4e77c",
+  "model": "tripo_h3_1_image_to_3d",
+  "params": {
+    "model": "tripo_h3_1_image_to_3d",
+    "count": 1,
+    "face_limit": 12000,
+    "texture": true,
+    "pbr": false,
+    "geometry_quality": "standard",
+    "texture_quality": "standard",
+    "quad": false,
+    "auto_size": false,
+    "texture_alignment": "original_image",
+    "orientation": "default",
+    "medias": [
+      {
+        "role": "image",
+        "value": "2fa6376f-e0f6-405f-a1b1-42f5039cc09b"
+      }
+    ]
+  },
+  "budget": {
+    "batchLimit": 36,
+    "quotedCredits": 9,
+    "generationCount": 1,
+    "billingNote": "Quote plus completed job; no itemized debit returned."
+  },
+  "resultUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3KviCEABNdmp8bzxvvCzQQmlL56/hf_20261027_232518_35dcf3e4-9a18-4f51-9695-fd673bf4e77c.glb"
+}

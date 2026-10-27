@@ -1,6 +1,7 @@
 // Rendering metadata only. No price, ownership, rewards or productivity here.
 // A GLB candidate may be recorded separately; it is never an implicit WebP fallback.
 import { SPRITES } from './sprites.mjs';
+import { RELEASED } from './released.mjs';
 
 export const GOLDEN_IDS = Object.freeze(['desk', 'chair', 'bookshelf', 'wardrobe-oak', 'floor-lamp']);
 
@@ -55,5 +56,8 @@ export const ART_ASSETS = Object.freeze(Object.fromEntries(Object.entries(SPRITE
 export function artDefinition(id) {
   const entry = ART_ASSETS[id];
   if (!entry) throw new Error(`Missing art definition: ${id}`);
+  if (RELEASED[id]) return { ...entry, ...RELEASED[id].frames[0], source: RELEASED[id].frames[0].src,
+    orientations: Object.keys(RELEASED[id].frames).map(Number), projection: 'glb-orthographic', visualStatus: 'RELEASED',
+    reviewReason: 'Real geometry and four views reviewed; original texture limitations recorded' };
   return entry;
 }

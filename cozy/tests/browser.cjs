@@ -111,11 +111,11 @@ const server = http.createServer((request, response) => {
     await page.keyboard.press('Enter');
     await page.locator('[data-edit=move]').click();
     await page.locator('#held-bar').waitFor({ state: 'visible' });
-    assert.equal(await page.locator('[data-held=rotate]').isVisible(), false, 'only published sprite views can be selected');
+    assert.equal(await page.locator('[data-held=rotate]').isVisible(), true, 'reviewed Oak views can be selected');
     await page.keyboard.press('r');
     await clickCell(3, 3);
     const chair = Object.values((await stored()).room.placed).find(p => p.item === 'chair');
-    assert.deepEqual([chair.gx, chair.gy, chair.rotation], [3, 3, 0]);
+    assert.deepEqual([chair.gx, chair.gy, chair.rotation], [3, 3, 90]);
     assert.equal((await stored()).stats.moves, 1);
 
     // Putting a surface away brings down whatever was standing on it.

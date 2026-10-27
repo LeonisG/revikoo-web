@@ -1,0 +1,99 @@
+// Reviewed release; generated from the preserved GLB.
+export const asset = {
+  "id": "wardrobe-oak",
+  "frames": {
+    "0": {
+      "src": "models/oak/wardrobe-oak/view-0.webp",
+      "master": "assets/candidates/tripo-wardrobe-oak/view-0.png",
+      "width": 420,
+      "aspect": 1,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.825
+      },
+      "pixels": [
+        768,
+        768
+      ],
+      "bytes": 15046,
+      "hitMask": "0000000000000000001f0000007fc00000fff00000fffe0000ffff0000ffff8000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff00004fff000003ff000000fb0000003000000030000000000000000000",
+      "candidate": "tripo-wardrobe-oak",
+      "visualStatus": "RELEASED",
+      "shadowSrc": "models/oak/wardrobe-oak/shadow-0.webp"
+    },
+    "90": {
+      "src": "models/oak/wardrobe-oak/view-90.webp",
+      "master": "assets/candidates/tripo-wardrobe-oak/view-90.png",
+      "width": 420,
+      "aspect": 1,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.825
+      },
+      "pixels": [
+        768,
+        768
+      ],
+      "bytes": 11882,
+      "hitMask": "0000000000000000000078000001fe00000fff00003fff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000fffb0000ffc00000ff0000000e0000000e00000000000000000000",
+      "candidate": "tripo-wardrobe-oak",
+      "visualStatus": "RELEASED",
+      "shadowSrc": "models/oak/wardrobe-oak/shadow-90.webp"
+    },
+    "180": {
+      "src": "models/oak/wardrobe-oak/view-180.webp",
+      "master": "assets/candidates/tripo-wardrobe-oak/view-180.png",
+      "width": 420,
+      "aspect": 1,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.825
+      },
+      "pixels": [
+        768,
+        768
+      ],
+      "bytes": 11148,
+      "hitMask": "0000000000000000001e0000007f800000fff00000fffc0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000dfff000003ff000000ff0000007000000070000000000000000000",
+      "candidate": "tripo-wardrobe-oak",
+      "visualStatus": "RELEASED",
+      "shadowSrc": "models/oak/wardrobe-oak/shadow-180.webp"
+    },
+    "270": {
+      "src": "models/oak/wardrobe-oak/view-270.webp",
+      "master": "assets/candidates/tripo-wardrobe-oak/view-270.png",
+      "width": 420,
+      "aspect": 1,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.825
+      },
+      "pixels": [
+        768,
+        768
+      ],
+      "bytes": 14974,
+      "hitMask": "00000000000000000000f8000003fe00000fff00007fff0000ffff0001ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000ffff0000fff00000ffc00000df0000000c0000000c00000000000000000000",
+      "candidate": "tripo-wardrobe-oak",
+      "visualStatus": "RELEASED",
+      "shadowSrc": "models/oak/wardrobe-oak/shadow-270.webp"
+    }
+  },
+  "geometry": {
+    "id": "wardrobe-oak",
+    "top": 276.9835507549126,
+    "footprint": [
+      2,
+      1
+    ],
+    "modelBounds": [
+      146.88107085227966,
+      75.11596763134007,
+      219.00000000000003
+    ],
+    "projectionTilt": 0.44742,
+    "source": "wardrobe-oak.glb",
+    "visualStatus": "RELEASED"
+  },
+  "model": "models/oak/wardrobe-oak/wardrobe-oak.glb"
+};

@@ -1,4 +1,4 @@
-import { roomAssets, objectAsset } from '../assets/manifest.mjs';
+import { roomAssets, roomFrame, objectAsset } from '../assets/manifest.mjs';
 import { CATALOG, GAME_CONFIG, ROOM_SIZES, roomLevel, ASSET_TEST } from '../logic/config.mjs';
 import { GLOW_TINTS } from '../logic/collections.mjs';
 import { paintOrder, cellPolygon, cellAt, useRoomCamera, footprint, SCENE, CAMERA } from '../logic/grid.mjs';
@@ -29,10 +29,11 @@ export function createRoom() {
       'window-night': 'windowNight', 'window-rain': 'windowRain', 'room-daylight': 'daylight',
     })) document.querySelector(`#${id}`).src = assets[key];
     app.classList.toggle('illustrated-room', assets.illustrated);
+    app.classList.toggle('modular-room', !!assets.modular);
     const shell = document.querySelector('#room-shell');
     shell.style.cssText = assets.illustrated ? `left:${assets.fit.x}%;top:${assets.fit.y}%;width:${assets.fit.w}%;height:${assets.fit.h}%;` : '';
     app.style.setProperty('--room-mask-size', assets.illustrated ? `${assets.fit.w}% ${assets.fit.h}%` : '100% 100%');
-    app.style.setProperty('--room-mask-position', assets.illustrated ? `${assets.fit.x / (100-assets.fit.w)*100}% ${assets.fit.y/(100-assets.fit.h)*100}%` : '0 0');
+    app.style.setProperty('--room-mask-position', assets.illustrated ? `${assets.fit.w===100?50:assets.fit.x / (100-assets.fit.w)*100}% ${assets.fit.h===100?50:assets.fit.y/(100-assets.fit.h)*100}%` : '0 0');
     // The lighting passes are masked by the shell itself. A polygon is not good
     // enough: a multiply layer over a transparent backdrop paints its own colour,
     // so any part of the mask that is not actually room shows up as a pale block.
@@ -45,6 +46,10 @@ export function createRoom() {
     const now = new Date(), hour = now.getHours();
     const phase = preferences.lighting === 'auto' ? (hour >= 6 && hour < 10 ? 'morning' : hour >= 10 && hour < 17 ? 'day' : hour >= 17 && hour < 21 ? 'sunset' : 'night') : preferences.lighting || 'day';
     app.dataset.light = phase;
+    if(lastSize && app.classList.contains('modular-room')) {
+      const src=roomFrame(lastSize,phase,preferences.weather);
+      const shell=document.querySelector('#room-shell');if(shell.src!==src)shell.src=src;
+    }
     document.querySelector('#day-label').textContent = { morning: 'La mañana se despierta', day: 'Una pausa en el día', sunset: 'La luz de última hora', night: 'El mundo baja el volumen' }[phase];
     document.querySelector('#local-time').textContent = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
   }

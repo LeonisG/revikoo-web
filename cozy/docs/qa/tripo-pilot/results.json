@@ -41,18 +41,18 @@
         "room": {
           "size": "medium",
           "placed": {
-            "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43": {
+            "1a2c6345-ea2d-44a2-befb-acd2f2a411c9": {
               "item": "desk",
               "gx": 1,
               "gy": 1,
               "rotation": 0
             },
-            "791dbf57-442c-4b9b-ba04-f748e7d9e189": {
+            "01ee9110-00ae-444b-a61e-96c13f95fe93": {
               "item": "mug",
               "gx": 1,
               "gy": 1,
               "rotation": 0,
-              "parentSurfaceId": "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43",
+              "parentSurfaceId": "1a2c6345-ea2d-44a2-befb-acd2f2a411c9",
               "surfaceSlot": 0,
               "on": true
             }
@@ -82,7 +82,7 @@
       },
       "mugPosition": [
         "49.057%",
-        "49.56%"
+        "47.608%"
       ]
     },
     {
@@ -111,18 +111,18 @@
         "room": {
           "size": "medium",
           "placed": {
-            "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43": {
+            "1a2c6345-ea2d-44a2-befb-acd2f2a411c9": {
               "item": "desk",
               "gx": 1,
               "gy": 1,
               "rotation": 90
             },
-            "791dbf57-442c-4b9b-ba04-f748e7d9e189": {
+            "01ee9110-00ae-444b-a61e-96c13f95fe93": {
               "item": "mug",
               "gx": 1,
               "gy": 1,
               "rotation": 0,
-              "parentSurfaceId": "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43",
+              "parentSurfaceId": "1a2c6345-ea2d-44a2-befb-acd2f2a411c9",
               "surfaceSlot": 0,
               "on": true
             }
@@ -152,7 +152,7 @@
       },
       "mugPosition": [
         "50.943%",
-        "49.56%"
+        "47.608%"
       ]
     },
     {
@@ -181,18 +181,18 @@
         "room": {
           "size": "medium",
           "placed": {
-            "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43": {
+            "1a2c6345-ea2d-44a2-befb-acd2f2a411c9": {
               "item": "desk",
               "gx": 1,
               "gy": 1,
               "rotation": 180
             },
-            "791dbf57-442c-4b9b-ba04-f748e7d9e189": {
+            "01ee9110-00ae-444b-a61e-96c13f95fe93": {
               "item": "mug",
               "gx": 2,
               "gy": 1,
               "rotation": 0,
-              "parentSurfaceId": "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43",
+              "parentSurfaceId": "1a2c6345-ea2d-44a2-befb-acd2f2a411c9",
               "surfaceSlot": 0,
               "on": true
             }
@@ -222,7 +222,7 @@
       },
       "mugPosition": [
         "57.229%",
-        "55.248%"
+        "53.295%"
       ]
     },
     {
@@ -251,18 +251,18 @@
         "room": {
           "size": "medium",
           "placed": {
-            "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43": {
+            "1a2c6345-ea2d-44a2-befb-acd2f2a411c9": {
               "item": "desk",
               "gx": 1,
               "gy": 1,
               "rotation": 270
             },
-            "791dbf57-442c-4b9b-ba04-f748e7d9e189": {
+            "01ee9110-00ae-444b-a61e-96c13f95fe93": {
               "item": "mug",
               "gx": 1,
               "gy": 2,
               "rotation": 0,
-              "parentSurfaceId": "fb259ab5-3021-4ee9-a1c6-86a2f3cb1d43",
+              "parentSurfaceId": "1a2c6345-ea2d-44a2-befb-acd2f2a411c9",
               "surfaceSlot": 0,
               "on": true
             }
@@ -292,7 +292,7 @@
       },
       "mugPosition": [
         "42.771%",
-        "55.248%"
+        "53.295%"
       ]
     }
   ]

@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Oak room export</title>
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js"}}</script></head><body style="margin:0">
+<script type="module">
+import * as THREE from 'three';
+import { createRoomKit, disposeKit } from '../studio/room-kit.mjs';
+import { ROOM_CAMERAS } from '../logic/room-camera.mjs';
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});renderer.setSize(1400,900);renderer.setPixelRatio(1);renderer.setClearColor(0,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;document.body.append(renderer.domElement);
+const scene=new THREE.Scene(),camera=new THREE.OrthographicCamera();camera.up.set(0,0,1);camera.near=.1;camera.far=4000;
+const ambient=new THREE.HemisphereLight(0xfff5dc,0x485842,2);ambient.position.z=700;scene.add(ambient);
+const key=new THREE.DirectionalLight(0xffe4b3,2.2);key.position.set(-70,-350,600);key.castShadow=true;key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-800,right:800,top:800,bottom:-800,near:1,far:2000});key.shadow.radius=4;key.shadow.normalBias=.3;scene.add(key);
+let kit;
+function draw(size,light='day',weather='clear'){
+  if(kit){scene.remove(kit);disposeKit(kit);}const room=ROOM_CAMERAS[size];kit=createRoomKit({width:room.cells*88,depth:room.cells*88,color:'#63715a',window:.62,light,weather});scene.add(kit);
+  const k=Math.SQRT2,e=Math.asin(room.tilt);camera.left=-room.origin.x/k;camera.right=(1400-room.origin.x)/k;camera.top=room.origin.y/k;camera.bottom=-(900-room.origin.y)/k;camera.updateProjectionMatrix();camera.position.set(Math.cos(e)*1800/k,-Math.cos(e)*1800/k,Math.sin(e)*1800);camera.lookAt(0,0,0);
+  key.intensity=light==='night'?.45:light==='sunset'?1.8:2.2;key.color.set(light==='night'?0xa9c5ec:light==='sunset'?0xffb477:0xffe4b3);ambient.intensity=light==='night'?.85:1.7;
+  renderer.render(scene,camera);return renderer.domElement.toDataURL('image/png');
+}
+window.oakRoomExport={draw};draw('medium');
+</script></body></html>

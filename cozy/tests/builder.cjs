@@ -52,7 +52,7 @@ const server = http.createServer((request, response) => {
     await page.reload();await page.locator('#edit-toggle').click();
     await dragStart('desk');await moveTo(0,0);
     assert.equal(await page.locator('.placement-preview.good').count(),1);
-    assert.match(await page.locator('.placement-preview img').getAttribute('src'),/desk\.webp$/);
+    assert.match(await page.locator('.placement-preview .item-sprite').getAttribute('src'),/desk\/view-0\.webp$/);
     await page.screenshot({path:path.join(shots,'drag-valid.png')});await page.mouse.up();
     const desk=await keyOf('desk');assert.ok(desk);assert.equal((await stored()).inventory.desk,undefined);
     const beforeInvalid=await stored();
@@ -64,9 +64,9 @@ const server = http.createServer((request, response) => {
     assert.deepEqual(await stored(),beforeInvalid,'Escape cancels active pointer capture');
     assert.equal(await page.locator('.placement-preview').count(),0);
     await dragStart('chair');await moveTo(2,2);await page.keyboard.press('r');
-    assert.match(await page.locator('.placement-preview img').getAttribute('src'),/chair\.webp$/);
-    assert.equal(await page.locator('[data-held=rotate]').isVisible(),false);
-    await page.mouse.up();const chair=await keyOf('chair');assert.equal((await stored()).room.placed[chair].rotation,0);
+    assert.match(await page.locator('.placement-preview .item-sprite').getAttribute('src'),/chair\/view-90\.webp$/);
+    assert.equal(await page.locator('[data-held=rotate]').isVisible(),true);
+    await page.mouse.up();const chair=await keyOf('chair');assert.equal((await stored()).room.placed[chair].rotation,90);
     await drag('journal',0,0,142);const journal=await keyOf('journal');
     assert.equal((await stored()).room.placed[journal].parentSurfaceId,desk);
     await drag('vintage-lamp',1,0,142);const lamp=await keyOf('vintage-lamp');
@@ -74,7 +74,7 @@ const server = http.createServer((request, response) => {
     await select(desk);await page.locator('[data-edit=move]').click();await moveTo(3,0);await page.keyboard.press('r');
     assert.equal(await page.locator('.placement-preview').count(),3,'host previews its children');
     await page.keyboard.press('Enter');
-    assert.equal((await stored()).room.placed[journal].gx,3);assert.equal((await stored()).room.placed[lamp].gy,0);
+    assert.equal((await stored()).room.placed[journal].gx,3);assert.equal((await stored()).room.placed[lamp].gy,1,'surface child follows the newly available 90 degree turn');
     const beforeMove=await stored();await select(desk);await page.locator('[data-edit=move]').click();await moveTo(0,3);await page.locator('[data-held=cancel]').click();
     assert.deepEqual(await stored(),beforeMove,'cancel restores host and children');
     const chairPoint=await point(2,2,84);

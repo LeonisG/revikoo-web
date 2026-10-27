@@ -1,0 +1,36 @@
+{
+  "id": "wardrobe-oak",
+  "date": "2026-10-28",
+  "status": "completed-downloaded",
+  "visualStatus": "REVIEWED",
+  "source": "assets/masters/oak-cozy/wardrobe-oak.png",
+  "mediaId": "8c029eab-9f8b-4a1c-9846-9def7c6bb239",
+  "jobId": "8cdfe437-df7b-48c9-a57c-8d3e13632541",
+  "model": "tripo_h3_1_image_to_3d",
+  "params": {
+    "model": "tripo_h3_1_image_to_3d",
+    "count": 1,
+    "face_limit": 12000,
+    "texture": true,
+    "pbr": false,
+    "geometry_quality": "standard",
+    "texture_quality": "standard",
+    "quad": false,
+    "auto_size": false,
+    "texture_alignment": "original_image",
+    "orientation": "default",
+    "medias": [
+      {
+        "role": "image",
+        "value": "8c029eab-9f8b-4a1c-9846-9def7c6bb239"
+      }
+    ]
+  },
+  "budget": {
+    "batchLimit": 36,
+    "quotedCredits": 9,
+    "generationCount": 1,
+    "billingNote": "Quote plus completed job; no itemized debit returned."
+  },
+  "resultUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3KviCEABNdmp8bzxvvCzQQmlL56/hf_20261027_232520_8cdfe437-df7b-48c9-a57c-8d3e13632541.glb"
+}

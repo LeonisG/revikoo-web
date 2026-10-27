@@ -1,31 +1,34 @@
 import { SPRITES } from './sprites.mjs';
 import { ROOM_CAMERAS } from '../logic/room-camera.mjs';
 import { artDefinition } from './art-registry.mjs';
+import { RELEASED } from './released.mjs';
 const root = new URL('./', import.meta.url);
-// Candidate opt-in is deliberately unavailable in ordinary saves. Only WebP
-// frames are loaded here; the authoring GLB/Three renderer stays in tools/.
+// The main game loads reviewed WebP frames. The optional studio loads GLB/Three.
 const query = typeof location === 'undefined' ? null : new URLSearchParams(location.search);
 export const ART_PILOT = query?.get('art-debug') === 'true' && query?.get('pilot') === 'tripo-desk';
 const pilotFrames = ART_PILOT ? (await import('./candidates/tripo-desk/frames.mjs')).PILOT_FRAMES : null;
 
 // The room's own layers come in one set per size, so choosing a bigger room
 // swaps the shell, the window and the daylight together.
+export const roomFrame = (size, light = 'day', weather = 'clear') => new URL(`room/oak/${size}-${light === 'morning' ? 'day' : light}-${weather === 'rain' ? 'rain' : 'clear'}.webp`, root).href;
 export const roomAssets = size => ({
-  shell: new URL(`room/illustrated-${size}.webp`, root).href,
+  shell: roomFrame(size),
   illustrated: true,
-  // Measured, not eyeballed: see tools/measure-room.py.
+  modular: true,
+  // Projected directly from the room kit at the same camera as the furniture.
   fit: ROOM_CAMERAS[size].fit,
-  window: new URL(`room/window-${size}.svg`, root).href,
-  windowSunset: new URL(`room/window-${size}-sunset.svg`, root).href,
-  windowNight: new URL(`room/window-${size}-night.svg`, root).href,
-  windowRain: new URL(`room/window-${size}-rain.svg`, root).href,
-  daylight: new URL(`room/light-${size}.svg`, root).href,
-  mask: new URL(`room/illustrated-${size}.webp`, root).href,
+  window: new URL('room/empty.svg', root).href,
+  windowSunset: new URL('room/empty.svg', root).href,
+  windowNight: new URL('room/empty.svg', root).href,
+  windowRain: new URL('room/empty.svg', root).href,
+  daylight: new URL('room/empty.svg', root).href,
+  mask: roomFrame(size),
 });
 
 export const objectAsset = (id, rotation = 0, state = 'idle') => {
-  if (pilotFrames && id === 'desk') {
-    const angle = pilotFrames[rotation] ? rotation : 0, frame = pilotFrames[angle];
+  const frames = pilotFrames && id === 'desk' ? pilotFrames : RELEASED[id]?.frames;
+  if (frames) {
+    const angle = frames[rotation] ? rotation : 0, frame = frames[angle];
     return { ...frame, type: 'image', src: new URL(frame.src, root).href,
       shadowSrc: frame.shadowSrc ? new URL(frame.shadowSrc, root).href : null, rotation: angle };
   }
@@ -39,4 +42,5 @@ export const objectAsset = (id, rotation = 0, state = 'idle') => {
 };
 
 export const availableOrientations = id => pilotFrames && id === 'desk' ? [0,90,180,270]
+  : RELEASED[id] ? Object.keys(RELEASED[id].frames).map(Number)
   : SPRITES[id]?.src ? [0, ...Object.keys(SPRITES[id].orientations || {}).map(Number)] : [];

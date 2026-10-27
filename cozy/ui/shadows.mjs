@@ -1,5 +1,5 @@
 import { artDefinition, SHADOW_PROFILES } from '../assets/art-registry.mjs';
-import { CAMERA, CELL, SYMBOL } from '../logic/grid.mjs';
+import { CAMERA, CELL, SYMBOL, footprint } from '../logic/grid.mjs';
 import { objectAsset } from '../assets/manifest.mjs';
 
 /** Small contact supports. No claim of physical cast shadows or recovered AO. */
@@ -8,8 +8,12 @@ export function contactShadow(item, placement) {
   const asset = objectAsset(item.id,placement.rotation,placement.pose || 'idle');
   if (asset.shadowSrc) {
     const width=asset.width,height=width/asset.aspect;
+    const f=footprint(item,placement.rotation),cx=(placement.gx+f.w/2)*CELL,cy=(placement.gy+f.h/2)*CELL,side=CAMERA.cells*CELL;
+    // Clip only the shadow to the receiver plane; furniture can rise above it.
+    const clip=[[0,0],[side,0],[side,side],[0,side]].map(([x,y])=>
+      `${((x-y-cx+cy)/width+asset.pivot.x)*100}% ${(((x+y-cx-cy)*CAMERA.tilt)/height+asset.pivot.y)*100}%`).join(',');
     return `<img class="art-cast" data-shadow-profile="geometry-cast" src="${asset.shadowSrc}" alt="" aria-hidden="true" draggable="false"
-      style="width:${width/SYMBOL.w*100}%;height:${height/SYMBOL.h*100}%;left:${(SYMBOL.anchorX-width*asset.pivot.x)/SYMBOL.w*100}%;top:${(SYMBOL.anchorY-height*asset.pivot.y)/SYMBOL.h*100}%">`;
+      style="clip-path:polygon(${clip});width:${width/SYMBOL.w*100}%;height:${height/SYMBOL.h*100}%;left:${(SYMBOL.anchorX-width*asset.pivot.x)/SYMBOL.w*100}%;top:${(SYMBOL.anchorY-height*asset.pivot.y)/SYMBOL.h*100}%">`;
   }
   const { shadowProfile } = artDefinition(item.id);
   const supports = SHADOW_PROFILES[shadowProfile].contacts;

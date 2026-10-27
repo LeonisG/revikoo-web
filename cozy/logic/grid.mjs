@@ -21,13 +21,14 @@ export const SCENE = { w: 1400, h: 900 };
 // and the projection below reads the active room's calibration, so a footprint
 // the grid draws lands on the floorboards rather than near them.
 // Regenerate with `python tools/measure-room.py`.
-export const CAMERA = { tilt: ROOM_CAMERAS.medium.tilt, origin: { ...ROOM_CAMERAS.medium.origin } };
+export const CAMERA = { tilt: ROOM_CAMERAS.medium.tilt, origin: { ...ROOM_CAMERAS.medium.origin }, cells: ROOM_CAMERAS.medium.cells };
 
 /** Point the camera at a room size. Returns that room's calibration. */
 export function useRoomCamera(size) {
   const room = ROOM_CAMERAS[size] || ROOM_CAMERAS.medium;
   CAMERA.tilt = room.tilt;
   CAMERA.origin = { ...room.origin };
+  CAMERA.cells = room.cells;
   return room;
 }
 

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, statSync } from 'node:fs';
 import { ITEMS } from '../logic/catalog.mjs';
 import { SPRITES } from '../assets/sprites.mjs';
+import { RELEASED } from '../assets/released.mjs';
 import { objectAsset, availableOrientations, roomAssets } from '../assets/manifest.mjs';
 
 test('every purchasable and legacy item has a real, independently delivered WebP and retained PNG master', () => {
@@ -22,9 +23,14 @@ test('every purchasable and legacy item has a real, independently delivered WebP
       assert.ok(/[1-9a-f]/.test(frame.hitMask) && frame.hitMask.includes('0'));
       assert.ok(frame.width > 0 && frame.pivot.y >= 0 && frame.pivot.y <= 1);
     }
-    assert.deepEqual(availableOrientations(item.id), [0], 'only authored views are offered');
+    assert.deepEqual(availableOrientations(item.id), RELEASED[item.id] ? [0,90,180,270] : [0], 'only authored views are offered');
     assert.equal(objectAsset(item.id).type, 'image');
-    assert.equal(objectAsset(item.id, 90).rotation, 0, 'never fake a missing view');
+    assert.equal(objectAsset(item.id, 90).rotation, RELEASED[item.id] ? 90 : 0, 'never fake a missing view');
+    if(RELEASED[item.id])for(const r of [0,90,180,270]){
+      const frame=objectAsset(item.id,r),bytes=readFileSync(new URL(frame.src));
+      assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.equal(bytes.length,frame.bytes);
+      assert.ok(readFileSync(new URL(frame.shadowSrc)).length>0);assert.equal(frame.axisFix,undefined);
+    }
   }
 });
 

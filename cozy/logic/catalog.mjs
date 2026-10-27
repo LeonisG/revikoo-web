@@ -15,6 +15,7 @@
 
 import { COLLECTION_ITEMS } from './collections.mjs';
 import { SPRITES } from '../assets/sprites.mjs';
+import { RELEASED } from '../assets/released.mjs';
 const collectionById = Object.fromEntries(COLLECTION_ITEMS.map(i => [i.id, i]));
 const item = (id, name, category, price, extra = {}) => {
   extra = { ...extra, ...collectionById[id] };
@@ -32,6 +33,7 @@ const item = (id, name, category, price, extra = {}) => {
   definition.surfaces = extra.surfaces || (definition.surface ? Array.from({ length: definition.w }, (_, i) => ({ x: i + .5, y: .5 })) : []);
   definition.animationStates = definition.companion ? Object.fromEntries(['idle','sleep','sit'].map(pose=>[pose,SPRITES[id]?.states?.[pose]?.src || (pose === 'idle' ? SPRITES[id]?.src : null)])) : {};
   definition.unlock = extra.unlock || null;
+  if (RELEASED[id]) definition.rotatable = true;
   definition.collection = extra.collection || 'oak-cozy';
   definition.group = extra.group || (definition.companion ? 'companions' : definition.placement === 'wall' ? 'wall' : definition.placement === 'surface' ? 'accessories' : 'furniture');
   definition.rarity = definition.companion ? 'special' : definition.unlock ? 'uncommon' : 'common';

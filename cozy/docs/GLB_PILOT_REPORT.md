@@ -1,5 +1,7 @@
 # Piloto real: Oak Desk → Tripo GLB → cuatro vistas → Cozy
 
+> Informe histórico del piloto. La solicitud posterior de producción del 28-10-2026 promueve el escritorio y cuatro piezas Oak, añade rooms modulares y Oak Studio. El estado vigente está en [OAK_PRODUCTION.md](OAK_PRODUCTION.md). Las capturas de QA se actualizan al ejecutar las pruebas; el texto inferior documenta la decisión anterior.
+
 ## Resultado
 
 **Pipeline técnico demostrado; arte DRAFT, no promovido a producción.** El escritorio se ha generado una sola vez, descargado, validado, renderizado desde cuatro orientaciones y colocado en la aplicación. Puede girar con una taza vinculada a su superficie. Se conservan el escritorio original, sus precios, inventario y guardados.

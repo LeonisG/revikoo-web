@@ -598,6 +598,7 @@
   .placed[style*="--wall"] .sprite-frame, .placement-preview[style*="--wall"] .sprite-frame { transform: skewY(var(--wall)); transform-origin: 50% 82.5%; }
   .shop-illustration .sprite-frame { width: auto; }
   .scene-shade { opacity: .6; }
+  .modular-room .scene-shade, .modular-room .scene-light, .modular-room .window-spill, .modular-room .daylight-layer { display: none; }
   .illustrated-room #room-window, .illustrated-room #window-sunset, .illustrated-room #window-night { visibility: hidden; }
   #world-panel[data-panel=shop] { position: fixed; inset: 88px 22px auto auto; margin: 0; width: 414px; max-height: calc(100svh - 112px); padding: 24px; background-image: none; border: 1px solid #bca77b; border-radius: 16px; box-shadow: 0 20px 70px #0006; }
   #world-panel[data-panel=shop]::backdrop { background: #06130f30; }

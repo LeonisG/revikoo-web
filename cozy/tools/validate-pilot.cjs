@@ -1,9 +1,11 @@
 // Requires Khronos glTF-Validator as an authoring dependency, never in the app.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const validator=require(process.env.GLTF_VALIDATOR_MODULE || 'gltf-validator');
-const dir=path.resolve(__dirname,'../assets/candidates/tripo-desk'),bytes=fs.readFileSync(path.join(dir,'desk.glb'));
+const id=process.argv[2]||'desk';
+if(!/^[a-z-]+$/.test(id))throw new Error('Invalid asset id');
+const dir=path.resolve(__dirname,`../assets/candidates/tripo-${id}`),bytes=fs.readFileSync(path.join(dir,id+'.glb'));
 (async()=>{
-  const report=await validator.validateBytes(new Uint8Array(bytes),{uri:'desk.glb',maxIssues:100});
+  const report=await validator.validateBytes(new Uint8Array(bytes),{uri:id+'.glb',maxIssues:100});
   fs.writeFileSync(path.join(dir,'validation.json'),JSON.stringify(report,null,2)+'\n');
   const length=bytes.readUInt32LE(12),gltf=JSON.parse(bytes.subarray(20,20+length).toString());
   const primitives=(gltf.meshes||[]).flatMap(m=>m.primitives);
@@ -14,7 +16,7 @@ const dir=path.resolve(__dirname,'../assets/candidates/tripo-desk'),bytes=fs.rea
     externalBuffers:(gltf.buffers||[]).filter(b=>b.uri).length,externalImages:(gltf.images||[]).filter(i=>i.uri).length,
     requiredExtensions:gltf.extensionsRequired||[],animations:gltf.animations?.length||0,
     errors:report.issues.numErrors,warnings:report.issues.numWarnings,hints:report.issues.numHints,
-    structuralReview:'Single mesh/node. Drawer fronts and handles are geometry, not independently articulated parts.'};
+    structuralReview:'See individual visual review; counts do not certify anatomy or manifold geometry.'};
   fs.writeFileSync(path.join(dir,'technical-summary.json'),JSON.stringify(stats,null,2)+'\n');
   console.log(JSON.stringify(stats));if(stats.errors)process.exitCode=1;
 })().catch(e=>{console.error(e);process.exitCode=1;});

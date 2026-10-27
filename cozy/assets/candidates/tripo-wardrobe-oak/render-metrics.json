@@ -1,0 +1,74 @@
+{
+  "three": "186",
+  "meshes": 1,
+  "triangles": 9890,
+  "materials": [
+    {
+      "name": "tripo_material_9955f7c0-1471-4021-9540-766ae4629ef2",
+      "metalness": 0,
+      "roughness": 0.9
+    }
+  ],
+  "textures": [
+    {
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "rawSize": [
+    0.6706898212432861,
+    0.3429952859878542,
+    1
+  ],
+  "scale": 219,
+  "id": "wardrobe-oak",
+  "normalizedSize": [
+    146.88107085227966,
+    75.11596763134007,
+    219.00000000000003
+  ],
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "footprint": [
+    2,
+    1
+  ],
+  "projectedTop": 276.9835507549126,
+  "existingSurfaceHeight": 132,
+  "camera": {
+    "t": 0.44742,
+    "elevationDegrees": 26.578273929356957,
+    "position": [
+      1138.2885647462158,
+      -1138.2885647462158,
+      805.356
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "frustum": [
+      -148.49242404917496,
+      148.49242404917496,
+      245.01249968113868,
+      -51.97234841721123
+    ]
+  },
+  "shadow": {
+    "type": "PCFSoftShadowMap",
+    "mapSize": 1024,
+    "key": [
+      -70,
+      -350,
+      600
+    ],
+    "opacity": 0.25,
+    "separatePass": true
+  },
+  "warning": "Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.",
+  "browserErrors": []
+}

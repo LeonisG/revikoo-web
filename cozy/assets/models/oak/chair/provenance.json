@@ -1,0 +1,36 @@
+{
+  "id": "chair",
+  "date": "2026-10-28",
+  "status": "completed-downloaded",
+  "visualStatus": "DRAFT",
+  "source": "assets/masters/oak-cozy/chair.png",
+  "mediaId": "3c356cee-dfa6-4549-85b4-7a1a7f0f5194",
+  "jobId": "fe3a7cd2-e5ad-4646-bbb7-eaa6f397db06",
+  "resultUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3KviCEABNdmp8bzxvvCzQQmlL56/hf_20261027_231535_fe3a7cd2-e5ad-4646-bbb7-eaa6f397db06.glb",
+  "model": "tripo_h3_1_image_to_3d",
+  "params": {
+    "model": "tripo_h3_1_image_to_3d",
+    "count": 1,
+    "face_limit": 12000,
+    "texture": true,
+    "pbr": false,
+    "geometry_quality": "standard",
+    "texture_quality": "standard",
+    "quad": false,
+    "auto_size": false,
+    "texture_alignment": "original_image",
+    "orientation": "default",
+    "medias": [
+      {
+        "role": "image",
+        "value": "3c356cee-dfa6-4549-85b4-7a1a7f0f5194"
+      }
+    ]
+  },
+  "budget": {
+    "batchLimit": 36,
+    "quotedCredits": 9,
+    "generationCount": 1,
+    "billingNote": "Quote plus completed job; no itemized debit returned."
+  }
+}

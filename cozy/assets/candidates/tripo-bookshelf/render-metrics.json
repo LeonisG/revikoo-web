@@ -1,0 +1,112 @@
+{
+  "three": "186",
+  "meshes": 1,
+  "triangles": 10024,
+  "materials": [
+    {
+      "name": "tripo_material_fe989b0b-2d34-4d03-9744-c0664708fa47",
+      "metalness": 0,
+      "roughness": 0.9
+    }
+  ],
+  "textures": [
+    {
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "rawSize": [
+    0.6933132410049438,
+    0.27726981043815635,
+    1
+  ],
+  "scale": 192,
+  "surfaceLevels": [
+    187.9,
+    132.7,
+    80.8,
+    24.3
+  ],
+  "surfaceSlots": [
+    {
+      "x": 0.5,
+      "y": 0.65,
+      "z": 234.74039735210852
+    },
+    {
+      "x": 1.5,
+      "y": 0.65,
+      "z": 240.9377462046157
+    },
+    {
+      "x": 0.5,
+      "y": 0.65,
+      "z": 167.83432504646981
+    },
+    {
+      "x": 1.5,
+      "y": 0.65,
+      "z": 167.83432504646981
+    },
+    {
+      "x": 0.5,
+      "y": 0.65,
+      "z": 102.19301781277139
+    },
+    {
+      "x": 1.5,
+      "y": 0.65,
+      "z": 102.31949431996541
+    }
+  ],
+  "id": "bookshelf",
+  "normalizedSize": [
+    133.11614227294922,
+    53.23580360412602,
+    192
+  ],
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "footprint": [
+    2,
+    1
+  ],
+  "projectedTop": 242.8348938125261,
+  "existingSurfaceHeight": 132,
+  "camera": {
+    "t": 0.44742,
+    "elevationDegrees": 26.578273929356957,
+    "position": [
+      1138.2885647462158,
+      -1138.2885647462158,
+      805.356
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "frustum": [
+      -148.49242404917496,
+      148.49242404917496,
+      245.01249968113868,
+      -51.97234841721123
+    ]
+  },
+  "shadow": {
+    "type": "PCFSoftShadowMap",
+    "mapSize": 1024,
+    "key": [
+      -70,
+      -350,
+      600
+    ],
+    "opacity": 0.25,
+    "separatePass": true
+  },
+  "warning": "Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.",
+  "browserErrors": []
+}

@@ -1,0 +1,106 @@
+{
+  "status": "completed-downloaded",
+  "visualStatus": "DRAFT",
+  "userBudgetCredits": 9,
+  "approvedGenerations": 1,
+  "quotedCredits": 9,
+  "reference": "assets/masters/oak-cozy/desk.png",
+  "mediaId": "ce1e0c9b-b489-4600-8646-d18a7938c7b1",
+  "job": {
+    "results": [
+      {
+        "id": "df3e1594-4357-4ef4-a64f-accd526fef70",
+        "type": "3d",
+        "status": "pending",
+        "model": "tripo_h3_1_image_to_3d",
+        "params": {
+          "prompt": "",
+          "reference_images": [
+            "ce1e0c9b-b489-4600-8646-d18a7938c7b1"
+          ],
+          "face_limit": 12000,
+          "texture": true,
+          "pbr": false,
+          "geometry_quality": "standard",
+          "texture_quality": "standard",
+          "quad": false,
+          "auto_size": false,
+          "texture_alignment": "original_image",
+          "orientation": "default"
+        }
+      }
+    ],
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "Tripo H3.1 Image to 3D backend expects schema-key media roles"
+      }
+    }
+  },
+  "params": {
+    "model": "tripo_h3_1_image_to_3d",
+    "count": 1,
+    "face_limit": 12000,
+    "texture": true,
+    "pbr": false,
+    "geometry_quality": "standard",
+    "texture_quality": "standard",
+    "quad": false,
+    "auto_size": false,
+    "texture_alignment": "original_image",
+    "orientation": "default",
+    "medias": [
+      {
+        "role": "image",
+        "value": "ce1e0c9b-b489-4600-8646-d18a7938c7b1"
+      }
+    ]
+  },
+  "verification": {
+    "date": "2026-10-27",
+    "method": "Higgsfield MCP: balance, list_workspaces, workspace_select, show_generations",
+    "workspace": "c7737909-d103-4684-82ac-e5b2a63459e3 (private); estaba SIN seleccionar, se seleccionó para poder leer historial",
+    "balanceCreditsAfter": 201,
+    "subscriptionPlan": "starter",
+    "historyReads": {
+      "image": "ok, 0 items",
+      "video": "ok, 0 items",
+      "3d": "ERROR del conector en 4 intentos (request ids 29e46973, 9a29658d, daace771, e513b03d, 4e464dae)"
+    },
+    "outcome": "NO VERIFICADO. El job sigue registrado como pending y el historial 3D no se puede leer. No se confirma ni GLB entregado ni crédito consumido.",
+    "generationToolsInSession": false,
+    "doNotResubmit": "Reenviar el mismo job arriesga un cargo duplicado. Resolver el estado antes de volver a generar."
+  },
+  "finalJobVerification": {
+    "method": "Higgsfield jobs_wait timeout_seconds=0",
+    "jobId": "df3e1594-4357-4ef4-a64f-accd526fef70",
+    "status": "completed",
+    "resultUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3KviCEABNdmp8bzxvvCzQQmlL56/hf_20261027_215553_df3e1594-4357-4ef4-a64f-accd526fef70.glb"
+  },
+  "download": {
+    "file": "desk.glb",
+    "bytes": 848004,
+    "sha256": "eaac88e0a9c66b5276dce0ef8bfb2e3a3d19451a4f718914b2d19ee965a356d5"
+  },
+  "referenceSha256": "081d972d3a8197eec2a29ce496fc4a12523402f4e90941edbbe8303bd6179caa",
+  "generationCount": 1,
+  "additionalGenerations": 0,
+  "costNote": "9-credit quote reconfirmed immediately before one authorized submission; tool does not return an itemized final debit.",
+  "qa": {
+    "technicalStatus": "PASS",
+    "visualStatus": "DRAFT",
+    "renderedViews": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "separateShadowPasses": true,
+    "calibratedSurfaceHeight": 113.73869858923008,
+    "productionPromoted": false,
+    "reason": "Illustrated grain, outline and contrast need further art work; mesh has no articulated drawers.",
+    "report": "cozy/docs/GLB_PILOT_REPORT.md",
+    "tests": "cozy/docs/qa/tripo-pilot/results.json"
+  }
+}

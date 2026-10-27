@@ -1,6 +1,10 @@
 // Authoring/QA only. Three is never imported by the production app.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OAK_SPECS } from './oak-spec.mjs';
+const id = new URLSearchParams(location.search).get('asset') || 'desk';
+const spec = OAK_SPECS[id];
+if (!spec) throw new Error('Unknown Oak asset');
 
 const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true, preserveDrawingBuffer:true });
 renderer.setPixelRatio(1); renderer.setSize(768,768); renderer.setClearColor(0x000000,0);
@@ -25,15 +29,24 @@ const fill = new THREE.DirectionalLight(0xdbe6ec,.3); fill.position.set(350,200,
 const root = new THREE.Group(); scene.add(root);
 const shadowFloor = new THREE.Mesh(new THREE.PlaneGeometry(700,700),new THREE.ShadowMaterial({opacity:.25}));
 shadowFloor.receiveShadow=true;shadowFloor.position.z=-.02;shadowFloor.visible=false;scene.add(shadowFloor);
-const gltf = await new GLTFLoader().loadAsync('../assets/candidates/tripo-desk/desk.glb');
+const gltf = await new GLTFLoader().loadAsync(`../assets/candidates/tripo-${id}/${id}.glb`);
 const model = gltf.scene;
 // glTF Y-up -> Cozy Z-up. Uniform scale preserves the generated proportions.
 model.rotation.x = Math.PI/2; model.updateMatrixWorld(true);
 const rawBox = new THREE.Box3().setFromObject(model), rawSize = rawBox.getSize(new THREE.Vector3());
-const scale = 176 / rawSize.x; model.scale.setScalar(scale); model.updateMatrixWorld(true);
+const scale = spec.size / rawSize[spec.axis]; model.scale.setScalar(scale); model.updateMatrixWorld(true);
 const bounds = new THREE.Box3().setFromObject(model), centre = bounds.getCenter(new THREE.Vector3());
 model.position.set(-centre.x,-centre.y,-bounds.min.z); root.add(model); model.updateMatrixWorld(true);
 const size = new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3());
+// All upward-facing levels through the central cavity, not only its outer top.
+const probe = new THREE.Raycaster(new THREE.Vector3(0,0,size.z+10),new THREE.Vector3(0,0,-1));
+const surfaceLevels = [...new Set(probe.intersectObject(model,true).map(hit=>Math.round(hit.point.z*10)/10))].sort((a,b)=>b-a);
+const surfaceSlots = id === 'bookshelf' ? [0,1,2].flatMap(level=>[.5,1.5].map(x=>{
+  const y=.65;
+  probe.set(new THREE.Vector3((x-1)*88,-(y-.5)*88,size.z+10),new THREE.Vector3(0,0,-1));
+  const levels=[...new Set(probe.intersectObject(model,true).map(hit=>Math.round(hit.point.z*10)/10))].sort((a,b)=>b-a);
+  return {x,y,z:levels[level]*Math.SQRT2*Math.cos(elevation)};
+})) : null;
 let triangles=0, meshes=0; const materials = [], textures = [];
 model.traverse(node => {
   if(!node.isMesh)return; meshes++; triangles+=(node.geometry.index?.count || node.geometry.attributes.position.count)/3;
@@ -46,8 +59,8 @@ model.traverse(node => {
   materials.push({name:original.name,metalness:original.metalness,roughness:original.roughness});
   if(original.map)textures.push({width:original.map.image.width,height:original.map.image.height});
 });
-const metrics = {three:THREE.REVISION,meshes,triangles,materials,textures,rawSize:rawSize.toArray(),scale,
-  normalizedSize:size.toArray(),pivot:[0,0,0],footprint:[2,1],projectedTop:size.z*Math.SQRT2*Math.cos(elevation),
+const metrics = {three:THREE.REVISION,meshes,triangles,materials,textures,rawSize:rawSize.toArray(),scale,surfaceLevels,surfaceSlots,
+  id, normalizedSize:size.toArray(),pivot:[0,0,0],footprint:spec.footprint,projectedTop:size.z*Math.SQRT2*Math.cos(elevation),
   existingSurfaceHeight:132,camera:{t,elevationDegrees:elevation*180/Math.PI,position:camera.position.toArray(),target:target.toArray(),frustum:[camera.left,camera.right,camera.top,camera.bottom]},
   shadow:{type:'PCFSoftShadowMap',mapSize:1024,key:key.position.toArray(),opacity:.25,separatePass:true},
   warning:'Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.'};
