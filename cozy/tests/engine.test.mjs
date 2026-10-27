@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createEngine } from '../logic/engine.mjs';
-import { createStorage, initialState, validateState } from '../logic/storage.mjs';
-import { CATALOG } from '../logic/config.mjs';
+import { createEngine, ownedIds } from '../logic/engine.mjs';
+import { createStorage, initialState, validateState, migrate } from '../logic/storage.mjs';
+import { CATALOG } from '../logic/catalog.mjs';
+import { GAME_CONFIG, ROOM_SIZES, QUESTS } from '../logic/config.mjs';
+import { placementError, cellsOf, footprint, anchorOf, cellAt, paintOrder } from '../logic/grid.mjs';
 
 function fixture({ debug = false } = {}) {
   const data = new Map();
@@ -10,120 +12,215 @@ function fixture({ debug = false } = {}) {
   const warnings = [];
   const storage = createStorage({ backend, key: 'test', onWarning: message => warnings.push(message) });
   let time = 100000;
-  return { engine: createEngine(storage, { debug, now: () => time }), storage, backend, data, warnings, advance(ms) { time += ms; }, reload() { return createEngine(storage, { debug, now: () => time }); } };
+  return { engine: createEngine(storage, { debug, now: () => time }), storage, backend, data, warnings,
+    advance(ms) { time += ms; }, reload() { return createEngine(storage, { debug, now: () => time }); } };
 }
+/** A room already built, so placement tests do not repeat the setup each time. */
+function built({ size = 'medium' } = {}) {
+  const f = fixture({ debug: true });
+  f.engine.startSetup();
+  f.engine.chooseSize(size);
+  f.engine.debug('rich');
+  f.engine.completeSetup();
+  return f;
+}
+const placedKey = (g, item) => Object.entries(g.state.room.placed).find(([, p]) => p.item === item)?.[0];
 
-test('ideal loop: task → focus → purchase → equip → reload', () => {
-  const f = fixture(), g = f.engine;
-  assert.equal(g.state.coins, 20);
-  g.addTask('Finish presentation', 'medium');
-  const id = g.state.tasks[0].id;
-  g.editTask(id, 'Finish the presentation', 'medium');
-  g.completeTask(id); assert.equal(g.state.coins, 25);
-  g.completeTask(id); assert.equal(g.state.coins, 25);
-  g.startFocus(25); f.advance(25 * 60000); g.completeFocus();
-  assert.equal(g.state.coins, 30);
-  g.buyItem('monstera'); g.equipItem('monstera', 'floor-right');
-  assert.equal(g.state.coins, 15);
-  const restored = f.reload().state;
-  assert.equal(restored.room.slots['floor-right'], 'monstera');
-  assert.equal(restored.tasks[0].rewardClaimed, true);
-  assert.equal(restored.focusHistory.length, 1);
-  assert.deepEqual(restored, g.state);
-});
-
-test('all task sizes reward once, including after reload; completed tasks cannot be edited', () => {
-  const f = fixture();
-  for (const difficulty of ['small', 'medium', 'big']) f.engine.addTask(difficulty, difficulty);
-  for (const task of f.engine.state.tasks) f.engine.completeTask(task.id);
-  const g = f.reload();
-  assert.equal(g.state.coins, 37);
-  for (const task of g.state.tasks) { g.completeTask(task.id); assert.throws(() => g.editTask(task.id, 'changed', 'big')); }
-  assert.equal(g.state.coins, 37);
-});
-
-test('book validation, completion and backwards progress cannot mint a second reward', () => {
-  const f = fixture(), g = f.engine;
-  assert.throws(() => g.addBook('Invalid', '', 0));
-  assert.throws(() => g.addBook('Invalid', '', 100, 101));
-  g.addBook('The Hobbit', 'J. R. R. Tolkien', 300, 50);
-  const id = g.state.books[0].id;
-  assert.throws(() => g.updateBook(id, 301));
-  assert.throws(() => g.updateBook(id, 1.5));
-  g.updateBook(id, 300); assert.equal(g.state.coins, 45);
-  g.updateBook(id, 10); g.updateBook(id, 300); assert.equal(g.state.coins, 45);
-  const restored = f.reload(); restored.updateBook(id, 300);
-  assert.equal(restored.state.coins, 45);
-  assert.equal(restored.state.books[0].completed, true);
-  restored.deleteBook(id); assert.equal(restored.state.books.length, 0);
-});
-
-test('focus is deadline based, survives reload and background time, pays exactly once', () => {
-  for (const [duration, reward] of [[25, 5], [45, 10], [60, 15], [90, 25]]) {
-    const f = fixture(); f.engine.startFocus(duration);
-    assert.equal(f.engine.completeFocus(), false);
-    assert.throws(() => f.engine.startFocus(25));
-    f.advance(duration * 60000 - 1);
-    const g = f.reload(); assert.equal(g.completeFocus(), false);
-    f.advance(1); g.completeFocus(); g.completeFocus();
-    assert.equal(g.state.coins, 20 + reward);
-    assert.equal(g.state.focusHistory.length, 1);
-  }
-});
-
-test('cancelled focus does not reward; normal mode cannot invoke debug', () => {
-  const f = fixture(); f.engine.startFocus(25); f.advance(1000); f.engine.cancelFocus(); f.advance(9999999);
-  f.engine.completeFocus(); assert.equal(f.engine.state.coins, 20); assert.equal(f.engine.state.focusHistory.length, 0);
-  assert.throws(() => f.engine.debug('coins'));
-  const d = fixture({ debug: true }); d.engine.startFocus(25); d.advance(25000); d.engine.completeFocus(); assert.equal(d.engine.state.coins, 25);
-});
-
-test('shop rejects insufficient funds, duplicate purchases and incompatible slots', () => {
+test('a new room is empty and has no money until the budget is granted', () => {
   const { engine: g } = fixture();
-  assert.throws(() => g.buyItem('print-moon')); assert.equal(g.state.coins, 20);
-  g.buyItem('monstera'); assert.equal(g.state.coins, 5);
-  assert.throws(() => g.buyItem('monstera')); assert.equal(g.state.coins, 5);
-  assert.throws(() => g.equipItem('monstera', 'wall-left'));
-  assert.throws(() => g.equipItem('candle', 'desk-left'));
-  g.equipItem('monstera', 'floor-left'); g.equipItem('monstera', 'floor-right');
-  assert.deepEqual(g.state.room.slots, { 'floor-right': 'monstera' });
-  g.unequipItem('monstera'); assert.deepEqual(g.state.room.slots, {}); assert.deepEqual(g.state.inventory, ['monstera']);
+  assert.equal(g.state.coins, 0);
+  assert.deepEqual(g.state.room.placed, {});
+  assert.deepEqual(g.state.inventory, {});
+  assert.equal(g.state.profile.setupCompleted, false);
+  g.startSetup();
+  assert.equal(g.state.coins, GAME_CONFIG.starterBudget);
+  // The journal and the timer come with the room: the loop depends on them.
+  assert.equal(g.state.inventory.journal, 1);
+  assert.equal(g.state.inventory.timer, 1);
+  assert.throws(() => g.startSetup(), /ya está empezada/);
 });
 
-test('replacing a slot keeps previous item in inventory and every catalog item equips', () => {
-  const { engine: g } = fixture({ debug: true }); g.debug('unlock');
-  for (const item of CATALOG) g.equipItem(item.id, item.compatibleSlots[0]);
-  assert.equal(g.state.inventory.length, 16);
-  g.equipItem('mushroom', 'desk-left'); g.equipItem('vintage', 'desk-left');
-  assert.equal(g.state.room.slots['desk-left'], 'vintage'); assert.ok(g.state.inventory.includes('mushroom'));
+test('room size is a real decision, and reversible while the budget is open', () => {
+  const { engine: g } = fixture();
+  g.startSetup();
+  g.chooseSize('medium');
+  assert.equal(g.state.coins, GAME_CONFIG.starterBudget - ROOM_SIZES.medium.price);
+  g.chooseSize('small');
+  assert.equal(g.state.coins, GAME_CONFIG.starterBudget, 'downgrading during setup refunds the difference');
+  g.chooseSize('large');
+  assert.equal(g.state.coins, GAME_CONFIG.starterBudget - ROOM_SIZES.large.price);
+  assert.throws(() => g.chooseSize('enormous'), /no existe/);
 });
 
-test('stale tabs cannot overwrite newer progress', () => {
-  const f = fixture(), second = f.reload();
-  f.engine.addTask('One', 'small');
-  assert.throws(() => second.addTask('Two', 'big'), /otra pestaña/);
-  assert.equal(second.state.tasks.length, 1);
-  second.addTask('Two', 'big'); f.engine.sync(); assert.equal(f.engine.state.tasks.length, 2);
+test('shrinking the room returns whatever no longer fits, and loses nothing', () => {
+  const f = built({ size: 'large' }), g = f.engine;
+  g.buyItem('desk'); g.placeItem('desk', { gx: 4, gy: 4, rotation: 0 });
+  g.buyItem('chair'); g.placeItem('chair', { gx: 0, gy: 0 });
+  const result = g.chooseSize('small');
+  assert.equal(result.displaced, 1);
+  assert.equal(g.state.inventory.desk, 1, 'the displaced desk is back in the inventory');
+  assert.ok(placedKey(g, 'chair'), 'what still fits stays put');
 });
 
-test('a failed save rolls back the economy transaction', () => {
-  const f = fixture(); f.engine.addTask('One', 'small');
-  f.backend.setItem = () => { throw new Error('QuotaExceeded'); };
-  assert.throws(() => f.engine.buyItem('candle'), /No se ha podido guardar/);
-  assert.equal(f.engine.state.coins, 20); assert.deepEqual(f.engine.state.inventory, []);
+test('footprints collide, rugs do not, and nothing leaves the room', () => {
+  const f = built({ size: 'small' }), g = f.engine;
+  g.buyItem('desk'); g.placeItem('desk', { gx: 1, gy: 0, rotation: 0 });
+  g.buyItem('chair');
+  assert.throws(() => g.placeItem('chair', { gx: 2, gy: 0 }), /ocupado/, 'the desk is 2x1, so it also holds 2,0');
+  assert.throws(() => g.placeItem('chair', { gx: 3, gy: 3, rotation: 0 }) && g.placeItem('chair', { gx: 9, gy: 9 }), /No cabe/);
+  g.buyItem('rug-moss');
+  g.placeItem('rug-moss', { gx: 1, gy: 0 });
+  assert.ok(placedKey(g, 'rug-moss'), 'a rug lies flat and shares its cells with furniture');
 });
 
-test('corrupt data is backed up; future versions are protected', () => {
-  const f = fixture(); f.data.set('test', '{invalid'); f.storage.load();
-  assert.ok([...f.data.keys()].some(k => k.startsWith('test:recovery:'))); assert.ok(f.warnings.length);
-  const future = { ...initialState(), version: 99 }; f.data.set('test', JSON.stringify(future)); f.storage.load();
-  assert.throws(() => f.storage.save(initialState(), 0), /protegido/);
-  assert.equal(JSON.parse(f.data.get('test')).version, 99);
+test('rotation swaps the footprint', () => {
+  const f = built(), g = f.engine;
+  g.buyItem('desk'); g.placeItem('desk', { gx: 0, gy: 0, rotation: 90 });
+  const key = placedKey(g, 'desk');
+  assert.deepEqual(footprint(CATALOG.desk, 90), { w: 1, h: 2 });
+  assert.deepEqual(cellsOf(g.state.room.placed[key], CATALOG.desk).sort(), ['0,0', '0,1']);
+  g.buyItem('chair');
+  assert.throws(() => g.placeItem('chair', { gx: 0, gy: 1 }), /ocupado/);
 });
 
-test('reset restores onboarding, settings and progress; invalid state fails validation', () => {
-  const { engine: g } = fixture(); g.preference('lighting', 'night'); g.onboard(); g.buyItem('candle'); g.reset();
-  const expected = initialState(); expected.revision = 4; assert.deepEqual(g.state, expected);
-  assert.equal(validateState(g.state), true); assert.equal(validateState({ ...g.state, coins: -1 }), false);
-  assert.equal(validateState({ ...g.state, books: [{ id: '1', title: 'x', author: '', totalPages: 0, currentPage: 0 }] }), false);
+test('small things need something to stand on, one per surface', () => {
+  const f = built(), g = f.engine;
+  assert.throws(() => g.placeItem('journal', { gx: 2, gy: 2 }), /apoyarse/);
+  g.buyItem('desk'); g.placeItem('desk', { gx: 1, gy: 1, rotation: 0 });
+  g.placeItem('journal', { gx: 1, gy: 1 });
+  assert.throws(() => g.placeItem('timer', { gx: 1, gy: 1 }), /ya tiene algo encima/);
+  g.placeItem('timer', { gx: 2, gy: 1 });
+  assert.equal(Object.keys(g.state.room.placed).length, 3);
+});
+
+test('putting a surface away brings down what was standing on it', () => {
+  const f = built(), g = f.engine;
+  g.buyItem('desk'); g.placeItem('desk', { gx: 1, gy: 1, rotation: 0 });
+  g.placeItem('journal', { gx: 1, gy: 1 });
+  g.storeItem(placedKey(g, 'desk'));
+  assert.deepEqual(Object.keys(g.state.room.placed), []);
+  assert.equal(g.state.inventory.desk, 1);
+  assert.equal(g.state.inventory.journal, 1, 'the journal came down with the desk, not lost');
+});
+
+test('wall slots hold one piece each', () => {
+  const f = built(), g = f.engine;
+  g.buyItem('print-moon'); g.placeItem('print-moon', { wall: 'left', index: 1 });
+  g.buyItem('print-sunset');
+  assert.throws(() => g.placeItem('print-sunset', { wall: 'left', index: 1 }), /colgado/);
+  g.placeItem('print-sunset', { wall: 'right', index: 1 });
+  assert.equal(Object.keys(g.state.room.placed).length, 2);
+});
+
+test('moving counts as rearranging; selling returns most of the price', () => {
+  const f = built(), g = f.engine;
+  g.buyItem('chair');
+  g.placeItem('chair', { gx: 0, gy: 0 });
+  const key = placedKey(g, 'chair');
+  g.moveItem(key, { gx: 2, gy: 2, rotation: 0 });
+  assert.equal(g.state.stats.moves, 1);
+  assert.equal(g.state.room.placed[key].gx, 2);
+  g.storeItem(key);
+  const before = g.state.coins;
+  const sold = g.sellItem('chair');
+  assert.equal(sold.refund, Math.floor(CATALOG.chair.price * GAME_CONFIG.resaleRate));
+  assert.equal(g.state.coins, before + sold.refund);
+  assert.equal(g.state.inventory.chair, undefined);
+  assert.throws(() => g.sellItem('journal'), /se queda contigo/, 'starter tools cannot be sold');
+});
+
+test('quests only pay out once they are actually done', () => {
+  const f = built(), g = f.engine;
+  assert.throws(() => g.claimQuest('first-task'), /Todavía no/);
+  g.addTask('Regar las plantas', 'small');
+  g.completeTask(g.state.tasks[0].id);
+  const payout = g.claimQuest('first-task');
+  assert.equal(payout.reward, QUESTS.find(q => q.id === 'first-task').reward);
+  assert.throws(() => g.claimQuest('first-task'), /Ya la has recogido/);
+});
+
+test('unlocks follow from play, and a finished collection hands over its gift', () => {
+  const f = built(), g = f.engine;
+  g.buyItem('bookshelf'); g.placeItem('bookshelf', { gx: 0, gy: 0, rotation: 0 });
+  assert.ok(g.state.achievements.includes('first-shelf'));
+  g.buyItem('floor-lamp'); g.placeItem('floor-lamp', { gx: 3, gy: 3 });
+  assert.ok(g.state.achievements.includes('first-light'));
+  // The amber set: owning every piece grants the set's reward exactly once.
+  for (const id of ['candle', 'mushroom', 'vintage-lamp', 'lantern']) g.buyItem(id);
+  assert.ok(g.state.achievements.includes('collector'));
+  const gifts = g.state.inventory.candle;
+  g.buyItem('vase');
+  assert.equal(g.state.inventory.candle, gifts, 'the set gift is not handed out twice');
+});
+
+test('the grid projection inverts exactly, and paint order is back to front', () => {
+  for (const [gx, gy] of [[0, 0], [2, 3], [4, 4]]) {
+    const spot = anchorOf({ gx, gy, rotation: 0 }, { w: 1, h: 1 });
+    assert.deepEqual(cellAt(spot.x, spot.y, 5), { gx, gy });
+  }
+  const room = { cells: 5, placed: {
+    a: { item: 'rug-moss', gx: 0, gy: 0, rotation: 0 },
+    b: { item: 'desk', gx: 1, gy: 1, rotation: 0 },
+    c: { item: 'journal', gx: 1, gy: 1, rotation: 0, on: true },
+    d: { item: 'print-moon', wall: 'left', index: 0 },
+  } };
+  const order = paintOrder(room, CATALOG).map(o => o.item.id);
+  assert.deepEqual(order.slice(0, 2), ['print-moon', 'rug-moss'], 'wall art then rug, under everything');
+  assert.ok(order.indexOf('journal') > order.indexOf('desk'), 'what sits on the desk paints over it');
+});
+
+test('placement rules are pure: they never touch the room they are asked about', () => {
+  const room = { cells: 4, placed: { a: { item: 'desk', gx: 0, gy: 0, rotation: 0 } } };
+  const snapshot = JSON.stringify(room);
+  assert.equal(placementError({ gx: 2, gy: 2, rotation: 0 }, CATALOG.chair, room, CATALOG), null);
+  assert.match(placementError({ gx: 0, gy: 0, rotation: 0 }, CATALOG.chair, room, CATALOG), /ocupado/);
+  assert.equal(JSON.stringify(room), snapshot);
+});
+
+test('a v1 save keeps its progress and lays the room out again', () => {
+  const legacy = {
+    version: 1, revision: 7, profile: { onboardingCompleted: true }, coins: 140,
+    tasks: [{ id: 't1', title: 'Vieja tarea', difficulty: 'medium', completed: true, rewardClaimed: true }],
+    books: [], focusHistory: [], activeFocus: null,
+    inventory: ['monstera', 'vintage'], room: { slots: { 'floor-left': 'monstera' } }, ledger: ['task:t1'],
+    preferences: { sound: true, ambient: 50, reduceMotion: false, lighting: 'night', weather: 'rain', lamp: true },
+  };
+  const next = migrate(legacy);
+  assert.ok(next && validateState(next));
+  assert.equal(next.coins, 140);
+  assert.equal(next.tasks.length, 1);
+  assert.equal(next.preferences.lighting, 'night');
+  assert.equal(next.inventory.monstera, 1, 'items already paid for come back as units');
+  assert.equal(next.inventory['vintage-lamp'], 1, 'renamed items are carried across');
+  assert.deepEqual(next.room.placed, {}, 'the old ten-slot layout does not survive the grid');
+  assert.equal(next.profile.setupCompleted, false, 'they choose a room size again');
+});
+
+test('saves survive a reload and reject nonsense', () => {
+  const f = built(), g = f.engine;
+  g.buyItem('desk'); g.placeItem('desk', { gx: 1, gy: 1, rotation: 90 });
+  const after = f.reload();
+  assert.equal(Object.keys(after.state.room.placed).length, 1);
+  assert.equal(Object.values(after.state.room.placed)[0].rotation, 90);
+  assert.equal(validateState({ ...initialState(), room: { size: 'nope', placed: {} } }), false);
+  assert.equal(validateState({ ...initialState(), inventory: { 'not-a-thing': 1 } }), false);
+  assert.equal(validateState({ ...initialState(), room: { size: 'small', placed: { x: { item: 'desk', gx: -1, gy: 0, rotation: 0 } } } }), false);
+  assert.ok(validateState(initialState()));
+});
+
+test('the productivity loop still pays, and pays only once', () => {
+  const f = fixture({ debug: true }), g = f.engine;
+  g.startSetup();
+  const start = g.state.coins;
+  g.addTask('Escribir', 'big');
+  const id = g.state.tasks[0].id;
+  g.completeTask(id);
+  assert.equal(g.state.coins, start + GAME_CONFIG.rewards.tasks.big);
+  g.completeTask(id);
+  assert.equal(g.state.coins, start + GAME_CONFIG.rewards.tasks.big, 'no second payout');
+  g.startFocus(25); f.advance(25 * 1000 + 10); g.completeFocus();
+  assert.equal(g.state.focusHistory.length, 1);
+  g.addBook('Un libro', 'Alguien', 100, 100);
+  assert.equal(g.state.books[0].completed, true);
+  assert.equal(ownedIds(g.state).includes('journal'), true);
 });

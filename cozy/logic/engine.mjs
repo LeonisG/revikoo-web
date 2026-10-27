@@ -1,17 +1,34 @@
-import { GAME_CONFIG, CATALOG, SLOTS } from './config.mjs';
+import { GAME_CONFIG, ROOM_SIZES, QUESTS, SETS, setProgress } from './config.mjs';
+import { CATALOG, STARTER_ITEMS } from './catalog.mjs';
 import { initialState } from './storage.mjs';
 import { createEvents } from './events.mjs';
+import { placementError, inBounds, footprint } from './grid.mjs';
+
+/** The grid works in cell counts, so hand it the room with its size resolved. */
+const gridRoom = s => ({ placed: s.room.placed, cells: ROOM_SIZES[s.room.size].cells });
 
 const uid = () => globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 const clean = (value, max = 180) => String(value ?? '').trim().slice(0, max);
 const positiveInt = value => Number.isSafeInteger(Number(value)) && Number(value) > 0;
 
+const held = (s, id) => s.inventory[id] || 0;
+const give = (s, id, n = 1) => { s.inventory[id] = held(s, id) + n; };
+const take = (s, id, n = 1) => {
+  if (held(s, id) < n) throw new Error('No tienes ese objeto guardado.');
+  s.inventory[id] -= n;
+  if (s.inventory[id] === 0) delete s.inventory[id];
+};
+/** Every item the player owns, whether it is standing in the room or put away. */
+export const ownedIds = s => [...new Set([...Object.keys(s.inventory), ...Object.values(s.room.placed).map(p => p.item)])];
+
 export function createEngine(storage, { debug = false, now = () => Date.now() } = {}) {
   let state = storage.load();
   const events = createEvents();
+
   function transact(event, mutate) {
     const next = structuredClone(state);
     const payload = mutate(next) || {};
+    settle(next, payload);
     next.revision = state.revision + 1;
     try { storage.save(next, state.revision); }
     catch (error) { state = storage.load(); events.emit('STATE_SYNCED', {}); throw error; }
@@ -19,19 +36,169 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
     events.emit(event, payload);
     return payload;
   }
+
   function award(s, reason, amount) {
     if (s.ledger.includes(reason)) return 0;
     s.ledger.push(reason); s.coins += amount; return amount;
   }
-  function finishBook(s, b) {
-    b.completed = b.currentPage === b.totalPages;
-    if (!b.completed || b.rewardClaimed) return 0;
-    b.rewardClaimed = true;
-    return award(s, `book:${b.id}`, GAME_CONFIG.rewards.book);
+
+  // Run after every change: unlocks are a consequence of play, never something
+  // the player has to go and collect.
+  function settle(s, payload) {
+    const placed = Object.values(s.room.placed);
+    const owned = ownedIds(s);
+    const unlock = id => { if (!s.achievements.includes(id)) { s.achievements.push(id); (payload.unlocked ??= []).push(id); } };
+    if (placed.some(p => ['candle', 'mushroom', 'vintage-lamp', 'lantern', 'floor-lamp'].includes(p.item))) unlock('first-light');
+    if (placed.some(p => ['bookshelf', 'shelf-small'].includes(p.item))) unlock('first-shelf');
+    if (s.tasks.filter(t => t.completed).length >= 10) unlock('quiet-progress');
+    if (s.focusHistory.length >= 5) unlock('deep-focus');
+    if (s.books.filter(b => b.completed).length >= 3) unlock('book-nook');
+    if (placed.some(p => CATALOG[p.item]?.companion)) unlock('companion');
+    if (placed.length >= 15) unlock('architect');
+    // Completing a collection hands over its small gift, exactly once.
+    for (const [id, set] of Object.entries(SETS)) {
+      const progress = setProgress(id, owned);
+      if (!progress.total || progress.have < progress.total) continue;
+      unlock('collector');
+      if (s.ledger.includes(`set:${id}`)) continue;
+      s.ledger.push(`set:${id}`);
+      if (CATALOG[set.reward]) give(s, set.reward);
+      (payload.sets ??= []).push(id);
+    }
   }
+
   const api = {
-    get state() { return structuredClone(state); }, subscribe: events.subscribe,
+    get state() { return structuredClone(state); },
+    subscribe: events.subscribe,
     sync() { const next = storage.load(); if (JSON.stringify(next) !== JSON.stringify(state)) { state = next; events.emit('STATE_SYNCED', {}); } },
+
+    // ── Building the first room ───────────────────────────────────────────────
+    startSetup() {
+      return transact('SETUP_STARTED', s => {
+        if (s.profile.setupCompleted || s.ledger.includes('starter-budget')) throw new Error('Tu habitación ya está empezada.');
+        s.ledger.push('starter-budget');
+        s.coins += GAME_CONFIG.starterBudget;
+        for (const id of STARTER_ITEMS) give(s, id);
+        return { budget: GAME_CONFIG.starterBudget };
+      });
+    },
+    /**
+     * Pick the room's size. During setup the previous choice is refunded so the
+     * decision stays reversible; afterwards it is an expansion and costs in full.
+     * Shrinking puts anything that no longer fits back in the inventory.
+     */
+    chooseSize(sizeId) {
+      return transact('ROOM_RESIZED', s => {
+        const size = ROOM_SIZES[sizeId];
+        if (!size) throw new Error('Ese tamaño no existe.');
+        if (size.id === s.room.size) return { size: sizeId, cost: 0 };
+        const refund = s.profile.setupCompleted ? 0 : ROOM_SIZES[s.room.size].price;
+        const cost = size.price - refund;
+        if (cost > s.coins) throw new Error('Todavía no te llega para esta habitación.');
+        // During setup `cost` can be negative: downgrading hands the difference
+        // back, so the size choice stays genuinely reversible.
+        s.coins -= cost;
+        if (cost > 0) s.stats.spent += cost;
+        s.room.size = size.id;
+        let displaced = 0;
+        for (const [key, placement] of Object.entries(s.room.placed)) {
+          const item = CATALOG[placement.item];
+          if (!item || item.placement === 'wall') continue;
+          if (inBounds(placement, item, size.cells)) continue;
+          delete s.room.placed[key]; give(s, placement.item); displaced++;
+        }
+        return { size: sizeId, cost, displaced };
+      });
+    },
+    completeSetup() {
+      return transact('SETUP_COMPLETED', s => { s.profile.setupCompleted = true; s.profile.onboardingCompleted = true; });
+    },
+
+    // ── Economy ───────────────────────────────────────────────────────────────
+    buyItem(id) {
+      return transact('ITEM_PURCHASED', s => {
+        const item = CATALOG[id];
+        if (!item) throw new Error('No se encuentra este objeto.');
+        if (item.starter) throw new Error('Esto ya viene con tu habitación.');
+        if (s.coins < item.price) throw new Error('Aún te faltan algunas monedas. Tu habitación puede esperar.');
+        s.coins -= item.price; s.stats.spent += item.price; give(s, id);
+        return { item: id };
+      });
+    },
+    /** Sell a spare unit from the inventory. Placed objects must be put away first. */
+    sellItem(id) {
+      return transact('ITEM_SOLD', s => {
+        const item = CATALOG[id];
+        if (!item) throw new Error('No se encuentra este objeto.');
+        if (item.starter) throw new Error('Esto se queda contigo.');
+        take(s, id);
+        const refund = Math.floor(item.price * GAME_CONFIG.resaleRate);
+        s.coins += refund; s.stats.sold += 1;
+        return { item: id, refund };
+      });
+    },
+
+    // ── Placement ─────────────────────────────────────────────────────────────
+    placeItem(id, placement) {
+      return transact('ITEM_PLACED', s => {
+        const item = CATALOG[id];
+        if (!item) throw new Error('No se encuentra este objeto.');
+        const spot = normalise(item, placement);
+        const problem = placementError(spot, item, gridRoom(s), CATALOG);
+        if (problem) throw new Error(problem);
+        take(s, id);
+        const key = uid();
+        s.room.placed[key] = { item: id, ...spot };
+        return { item: id, key };
+      });
+    },
+    moveItem(key, placement) {
+      return transact('ITEM_MOVED', s => {
+        const current = s.room.placed[key];
+        if (!current) throw new Error('Ese objeto ya no está en la habitación.');
+        const item = CATALOG[current.item];
+        const spot = normalise(item, placement);
+        const problem = placementError(spot, item, gridRoom(s), CATALOG, key);
+        if (problem) throw new Error(problem);
+        s.room.placed[key] = { item: current.item, ...spot };
+        s.stats.moves += 1;
+        return { item: current.item, key };
+      });
+    },
+    storeItem(key) {
+      return transact('ITEM_STORED', s => {
+        const current = s.room.placed[key];
+        if (!current) throw new Error('Ese objeto ya no está en la habitación.');
+        // Anything resting on this one comes down with it.
+        const item = CATALOG[current.item];
+        if (item?.surface) {
+          for (const [other, p] of Object.entries(s.room.placed)) {
+            if (other === key || !p.on) continue;
+            if (p.gx >= current.gx && p.gy >= current.gy
+              && p.gx < current.gx + footprint(item, current.rotation).w
+              && p.gy < current.gy + footprint(item, current.rotation).h) {
+              delete s.room.placed[other]; give(s, p.item);
+            }
+          }
+        }
+        delete s.room.placed[key]; give(s, current.item);
+        return { item: current.item };
+      });
+    },
+
+    // ── Quests ────────────────────────────────────────────────────────────────
+    claimQuest(id) {
+      return transact('QUEST_CLAIMED', s => {
+        const quest = QUESTS.find(q => q.id === id);
+        if (!quest) throw new Error('Esa propuesta no existe.');
+        if (s.quests.includes(id)) throw new Error('Ya la has recogido.');
+        if (!quest.check(s)) throw new Error('Todavía no, pero no hay prisa.');
+        s.quests.push(id);
+        return { reward: award(s, `quest:${id}`, quest.reward), quest: id };
+      });
+    },
+
+    // ── Productivity ──────────────────────────────────────────────────────────
     addTask(title, difficulty) {
       if (!clean(title)) throw new Error('Escribe algo que quieras hacer.');
       if (!Object.hasOwn(GAME_CONFIG.rewards.tasks, difficulty)) throw new Error('Elige un tamaño de tarea.');
@@ -80,25 +247,6 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         return { reward: award(s, `focus:${f.id}`, GAME_CONFIG.rewards.focus[f.duration]), duration: f.duration };
       });
     },
-    buyItem(id) {
-      return transact('ITEM_PURCHASED', s => {
-        const item = CATALOG.find(i => i.id === id);
-        if (!item) throw new Error('No se encuentra este objeto.');
-        if (s.inventory.includes(id)) throw new Error('Ya forma parte de tu colección.');
-        if (s.coins < item.price) throw new Error('Aún te faltan algunas monedas. Tu habitación puede esperar.');
-        s.coins -= item.price; s.inventory.push(id); return { item: id };
-      });
-    },
-    equipItem(id, slot) {
-      return transact('ITEM_EQUIPPED', s => {
-        const item = CATALOG.find(i => i.id === id);
-        if (!s.inventory.includes(id) || !SLOTS[slot] || !item?.compatibleSlots.includes(slot)) throw new Error('Este objeto no encaja en ese rincón.');
-        for (const [key, value] of Object.entries(s.room.slots)) if (value === id) delete s.room.slots[key];
-        s.room.slots[slot] = id;
-        return { item: id, slot };
-      });
-    },
-    unequipItem(id) { return transact('ITEM_UNEQUIPPED', s => { for (const [slot, value] of Object.entries(s.room.slots)) if (value === id) delete s.room.slots[slot]; }); },
     preference(key, value) {
       const valid = { sound: v => typeof v === 'boolean', ambient: v => Number.isFinite(v) && v >= 0 && v <= 100, reduceMotion: v => typeof v === 'boolean', lamp: v => typeof v === 'boolean', lighting: v => ['auto', 'morning', 'day', 'sunset', 'night'].includes(v), weather: v => ['clear', 'rain'].includes(v) };
       if (!valid[key]?.(value)) throw new Error('Preferencia no válida.');
@@ -106,15 +254,38 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
     },
     onboard() { return transact('ONBOARDED', s => { s.profile.onboardingCompleted = true; }); },
     reset() { return transact('RESET', s => { Object.assign(s, initialState()); }); },
-    debug(action) {
+    debug(action, value) {
       if (!debug) throw new Error('Solo disponible en el espacio de pruebas.');
       return transact('DEBUG_CHANGED', s => {
-        if (action === 'coins') s.coins += 100;
+        if (action === 'coins') s.coins += 250;
+        if (action === 'rich') s.coins += 2000;
         if (action === 'zero') s.coins = 0;
-        if (action === 'unlock') s.inventory = CATALOG.map(i => i.id);
+        if (action === 'unlock') for (const id of Object.keys(CATALOG)) give(s, id);
+        if (action === 'clear') { for (const [key, p] of Object.entries(s.room.placed)) { give(s, p.item); delete s.room.placed[key]; } }
+        if (action === 'resetSetup') { s.profile.setupCompleted = false; s.ledger = s.ledger.filter(e => e !== 'starter-budget'); }
+        if (action === 'size' && ROOM_SIZES[value]) s.room.size = value;
         if (action === 'finish' && s.activeFocus) s.activeFocus.endsAt = now();
       });
     },
   };
+
+  function finishBook(s, b) {
+    b.completed = b.currentPage === b.totalPages;
+    if (!b.completed || b.rewardClaimed) return 0;
+    b.rewardClaimed = true;
+    return award(s, `book:${b.id}`, GAME_CONFIG.rewards.book);
+  }
+
   return api;
+}
+
+/** Keep only the fields that belong to this kind of placement, and sane values. */
+function normalise(item, placement = {}) {
+  if (item.placement === 'wall') return { wall: placement.wall, index: Number(placement.index) };
+  const spot = {
+    gx: Number(placement.gx), gy: Number(placement.gy),
+    rotation: item.rotatable ? (Number(placement.rotation) || 0) % 360 : 0,
+  };
+  if (item.placement === 'surface') spot.on = true;
+  return spot;
 }

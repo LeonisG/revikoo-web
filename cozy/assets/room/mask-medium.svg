@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none"><defs>
+ <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+ <filter id="contact" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#09251e" flood-opacity=".45"/></filter>
+ <radialGradient id="warm"><stop stop-color="#ffd086" stop-opacity=".4"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="glow"><stop stop-color="#ffcd85" stop-opacity=".55"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="screen"><stop stop-color="#a4dbc3"/><stop offset="1" stop-color="#599e91"/></radialGradient>
+ <linearGradient id="pot"><stop stop-color="#e99570"/><stop offset=".5" stop-color="#cf6d55"/><stop offset="1" stop-color="#9b4f42"/></linearGradient>
+ <linearGradient id="leaf"><stop stop-color="#93c86d"/><stop offset="1" stop-color="#408857"/></linearGradient>
+ <linearGradient id="cloth"><stop stop-color="#d1795a"/><stop offset="1" stop-color="#914c3a"/></linearGradient>
+</defs>
+<path d="M246 640.4L700 813.8L1154 640.4L1154 686.4L700 859.8L246 686.4Z" fill="#fff"/><path d="M246 640.4L700 477L1154 640.4L700 813.8Z" fill="#fff"/><path d="M260 638.4V298.4Q260 272.4 284 281L700 114L700 480Z" fill="#fff"/><path d="M1140 638.4V298.4Q1140 272.4 1116 281L700 114L700 480Z" fill="#fff"/><polygon points="700,480 1140,638.4 700,796.8 260,638.4" fill="#fff" /><path d="M260 638.4V298.4Q260 272.4 284 281L700 114L1116 281Q1140 272.4 1140 298.4V638.4" stroke="#fff" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

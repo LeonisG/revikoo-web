@@ -1,21 +1,20 @@
 const root = new URL('./', import.meta.url);
-export const ROOM_ASSETS = {
-  background: new URL('room/shell.svg', root).href,
-  window: new URL('room/window.svg', root).href,
-  windowNight: new URL('room/window-night.svg', root).href,
-  windowSunset: new URL('room/window-sunset.svg', root).href,
-  windowRain: new URL('room/window-rain.svg', root).href,
-  wallDecor: new URL('room/wall-decor.svg', root).href,
-  bookshelf: new URL('furniture/bookshelf.svg', root).href,
-  furniture: new URL('furniture/desk.svg', root).href,
-  foreground: new URL('furniture/chair.svg', root).href,
-  plant: new URL('plants/large-plant.svg', root).href,
-  cat: new URL('furniture/cat.svg', root).href,
-  rug: new URL('room/rug.svg', root).href,
-  daylight: new URL('room/light-floor.svg', root).href,
-  objects: new URL('objects.svg', root).href,
-};
-// Optional per-object overrides, e.g.:
+
+// The room's own layers come in one set per size, so choosing a bigger room
+// swaps the shell, the window and the daylight together.
+export const roomAssets = size => ({
+  shell: new URL(`room/shell-${size}.svg`, root).href,
+  window: new URL(`room/window-${size}.svg`, root).href,
+  windowSunset: new URL(`room/window-${size}-sunset.svg`, root).href,
+  windowNight: new URL(`room/window-${size}-night.svg`, root).href,
+  windowRain: new URL(`room/window-${size}-rain.svg`, root).href,
+  daylight: new URL(`room/light-${size}.svg`, root).href,
+  mask: new URL(`room/mask-${size}.svg`, root).href,
+});
+
+export const OBJECTS = new URL('objects.svg', root).href;
+
+// Optional per-object overrides, for swapping a drawn symbol for a bitmap later:
 // mushroom: { type: 'image', src: new URL('mushroom-lamp.webp', root).href }
 export const ITEM_ASSETS = {};
-export const objectAsset = id => ITEM_ASSETS[id] || { type: 'symbol', src: `${ROOM_ASSETS.objects}#${id}` };
+export const objectAsset = id => ITEM_ASSETS[id] || { type: 'symbol', src: `${OBJECTS}#${id}` };

@@ -1,6 +1,12 @@
-# Cozy Room · V0.1
+# Cozy Room · V0.2 — constructor de habitación
 
-Una habitación ilustrada que crece con las cosas que haces. Aplicación funcional, estática y completamente aislada dentro de `/cozy/`.
+Empiezas con una habitación vacía y un presupuesto. Lo que haces en tu día —tareas,
+sesiones de concentración, lectura— te da monedas, y con ellas amueblas y reorganizas
+tu espacio sobre una rejilla. La habitación es el producto; la productividad es lo que
+la hace crecer.
+
+Aplicación estática, sin dependencias, sin compilación y completamente aislada dentro
+de `/cozy/`.
 
 ## Ejecutar
 
@@ -10,164 +16,142 @@ Desde la raíz del repositorio:
 python -m http.server 4173 --bind 127.0.0.1
 ```
 
-Abrir `http://127.0.0.1:4173/cozy/`. Los módulos ES necesitan HTTP; no abrir `index.html` mediante `file://`.
+Abrir `http://127.0.0.1:4173/cozy/`. Los módulos ES necesitan HTTP; no abrir
+`index.html` mediante `file://`. Añadir `?debug=true` para la mesa de pruebas, que usa
+su propio almacenamiento y no toca el progreso normal.
 
-No hay instalación de dependencias, compilación, backend, fuentes remotas ni CDN. JavaScript, CSS, ilustraciones y audio funcionan localmente después de cargar la página. No se incluye un service worker ni se promete disponibilidad sin conexión.
+No hay instalación de dependencias, compilación, backend, fuentes remotas ni CDN.
 
-## Auditoría y publicación
+## El bucle
 
-El repositorio existente contiene páginas HTML, CSS y JavaScript estáticos, `CNAME` con `revikoo.com` y `.nojekyll`. No hay `package.json`, configuración de build ni workflows de GitHub Actions en el checkout. Existen otros micrositios aislados y pruebas de Node para `parking-pass/`.
+1. Eliges el tamaño de la habitación y gastas el presupuesto inicial en lo básico.
+2. Colocas lo que has comprado sobre la rejilla, en modo **Editar**.
+3. Haces cosas reales: tareas, foco, lectura. Eso da monedas.
+4. Compras, colocas, recolocas, vendes lo que no encaja.
+5. La habitación sube de nivel, se completan colecciones y aparecen compañeros.
 
-Esta implementación añade exclusivamente `cozy/`: no modifica la homepage, estilos, scripts, logos, navegación, README global, `CNAME`, `.nojekyll` ni otras aplicaciones. No reutiliza el branding comercial de Revikoo para esta experiencia independiente.
-
-Para publicar, incluir la carpeta `cozy/` en la misma rama y raíz que ya utiliza GitHub Pages. La URL resultante será `https://revikoo.com/cozy/`. No se necesitan redirects, fallback de SPA, cambio de dominio ni configuración adicional. Todas las referencias son relativas al documento o a `import.meta.url`: también funciona bajo `/revikoo-web/cozy/` en un dominio de proyecto.
-
-**Estado y alcance de la verificación (27 de octubre de 2026):** la V0.1 está guardada en el commit `037dec6` y publicada en `https://revikoo.com/cozy/`. Se han comprobado respuestas HTTP 200 para la aplicación, su módulo principal, estilos e ilustración, y se ha abierto el escritorio y el cuaderno en producción sin errores de ejecución ni recursos fallidos. La homepage de Revikoo también responde correctamente. El recorrido completo se ha probado localmente tanto en `/cozy/` como bajo `/revikoo-web/cozy/`, con 16 pruebas de lógica aprobadas entre Cozy Room y el micrositio existente. El endpoint público de configuración de Pages devolvió 404 durante la auditoría inicial; la rama fuente no se ha confirmado mediante esa API. Esta revisión no cambia la configuración de publicación ni realiza un nuevo despliegue.
+Las monedas solo se ganan haciendo. No hay rachas, ni castigos, ni nada que caduque:
+una propuesta que hoy no te apetece sigue ahí mañana.
 
 ## Estructura
 
 ```text
 cozy/
-  index.html                 Escena semántica, hotspots y diálogos accesibles
-  app.mjs                    Coordinación, navegación y reloj
-  styles/cozy.css            Estilos de esta aplicación, por capas CSS
+  index.html                 Escena, modo edición, flujo inicial y diálogos
+  app.mjs                    Coordinación, reloj y pistas contextuales
+  styles/cozy.css            Estilos por capas: reset, world, objects, paper,
+                             instruments, builder, responsive
   assets/
-    manifest.mjs             Referencias de ilustraciones y sustituciones
-    room/shell.svg           Paredes, zócalo, suelo y sombras de contacto
-    room/window*.svg         Cristal: día, atardecer, noche y lluvia
-    room/light-floor.svg     Luz de la ventana proyectada en el suelo
-    room/wall-decor.svg      Repisa y marco fijos de la pared derecha
-    room/rug.svg             Alfombra inicial, separada del mobiliario
-    furniture/*.svg          Escritorio, biblioteca, silla y gato
-    plants/large-plant.svg   Planta grande del suelo derecho
-    objects.svg              16 símbolos de catálogo en la misma proyección
-    favicon.svg
+    manifest.mjs             Rutas de las capas por tamaño de habitación
+    room/shell-*.svg         Habitación vacía: paredes, suelo, zócalo
+    room/window-*.svg        Ventana por tamaño y por estado del cielo
+    room/light-*.svg         Luz de la ventana proyectada en el suelo
+    room/mask-*.svg          Silueta plana: recorta las pasadas de iluminación
+    objects.svg              Un símbolo por objeto del catálogo
   logic/
-    config.mjs               Recompensas, precios, slots y configuración
+    grid.mjs                 Proyección, huellas, colisiones y orden de pintado
+    catalog.mjs              Definición de cada objeto que se puede poseer
+    config.mjs               Economía, tamaños, niveles, propuestas y logros
     engine.mjs               Transacciones y reglas del juego
-    storage.mjs              Único acceso a localStorage, versión y validación
-    events.mjs               Eventos internos y trackEvent sin red
+    storage.mjs              Único acceso a localStorage, versión y migración
+    events.mjs               Eventos internos, sin red
     audio.mjs                Ambiente e interacciones Web Audio
   ui/
-    room.mjs                 Capas, iluminación, decoración y parallax
-    panels.mjs               Cuaderno, biblioteca, catálogo, ajustes y debug
-    helpers.mjs              Escape de texto, assets y aspecto de los libros
-  tests/
-    engine.test.mjs          Pruebas de economía, estado y persistencia
-    browser.cjs              Recorrido de navegador y capturas de QA
+    room.mjs                 Pintado de la habitación, iluminación y parallax
+    edit.mjs                 Modo edición: rejilla, previsualización, girar, guardar
+    setup.mjs                Construye tu primera habitación
+    panels.mjs               Cuaderno, foco, biblioteca, tienda, progreso, ajustes
+    helpers.mjs              Iconos, escape de HTML y arte de objetos
+  tools/
+    lib.mjs                  Primitivas de dibujo compartidas
+    draw-room.mjs            Genera la habitación vacía, por tamaño
+    draw-objects.mjs         Genera objects.svg
+    preview.html             Hoja de contacto de todos los objetos
 ```
 
-## Cómo se usa
+## La rejilla
 
-- Acercarse al escritorio y abrir el cuaderno, el reloj o el portátil. Los accesos inferiores permiten llegar a las mismas herramientas con teclado o desde móvil.
-- Las tareas se pueden añadir, editar, completar y eliminar. Una tarea cerrada no se edita ni genera otra recompensa.
-- Focus ofrece 25, 45, 60 y 90 minutos. Durante la sesión se ocultan las distracciones. Cancelar pide confirmación y no da recompensa.
-- La biblioteca genera lomos consistentes a partir del título. Se puede guardar la página, marcar un libro terminado y retirarlo. Volver a una página anterior no permite cobrar otra vez.
-- El catálogo tiene 16 objetos y una sección «Mi colección». Comprar no coloca el objeto automáticamente: hay que elegir un rincón. Mover un objeto lo retira de su posición anterior. Reemplazar otro lo devuelve a la colección.
-- La ventana y los ajustes permiten escoger mañana, día, atardecer o noche, y lluvia o cielo despejado. «Según la hora» usa la hora local del navegador y se actualiza cada minuto.
-- La lámpara se enciende o apaga al pulsarla. El gato solo reacciona con un pequeño gesto.
-- El reinicio borra todos los datos de la habitación actual después de una confirmación explícita.
+Todo lo espacial vive en `logic/grid.mjs`, que no toca el DOM ni el almacenamiento.
+Hay tres sistemas de coordenadas y conviene no mezclarlos:
 
-## Estado y persistencia
+| | |
+|---|---|
+| celda `(gx, gy)` | índices enteros de la rejilla |
+| mundo `(x, y, z)` | unidades del diorama; `x` e `y` recorren el suelo, `z` es altura |
+| escena `(%, %)` | posición dentro del lienzo 1400 × 900 |
 
-La clave normal es `cozy-room:v1`. El estado contiene `version`, `revision`, `profile`, `coins`, `tasks`, `books`, `focusHistory`, `activeFocus`, `inventory`, `room`, `preferences` y `ledger`.
+La proyección es ortográfica: `pantalla = [700 + x - y, 480 + (x + y) · 0,36 - z]`.
+`gx` crece hacia abajo-derecha y `gy` hacia abajo-izquierda, así que la profundidad de
+una celda es simplemente `gx + gy`: cuanto mayor, más cerca del espectador. Esa suma es
+la que ordena el pintado.
 
-Cada operación valida las reglas, clona el estado, intenta guardarlo y solo entonces lo publica a la UI. Si el guardado falla, la transacción se revierte y se informa del problema. Si el navegador bloquea la lectura de localStorage, se permite una sesión en memoria con un aviso visible de que no persistirá.
+`tools/draw-room.mjs` y `tools/draw-objects.mjs` usan exactamente la misma proyección
+(`tools/lib.mjs`). Si cambia la geometría, cambia en `lib.mjs` y en `grid.mjs`: son los
+dos únicos sitios.
 
-Un JSON corrupto o un esquema no válido intenta conservarse en `cozy-room:v1:recovery:<timestamp>` antes de iniciar un estado limpio. Una versión futura queda protegida contra sobrescritura. Para una futura migración, ampliar la validación y migrar explícitamente en `storage.mjs`, conservando una copia del estado anterior.
+### Reglas de colocación
 
-`rewardClaimed` y el registro `ledger` impiden volver a cobrar la misma tarea, sesión o libro. Las compras se rechazan si falta saldo o ya existe el objeto. Los eventos `storage` sincronizan pestañas y la revisión detecta cambios de una pestaña que aún no ha actualizado su copia. Esto es una protección básica, no un bloqueo transaccional entre procesos ni un sistema antifraude: localStorage y el reloj del cliente se pueden modificar deliberadamente.
+- **suelo**: ocupa sus celdas; nadie más puede ocuparlas.
+- **superficie**: necesita apoyarse en un mueble con `surface: true`, y solo cabe una
+  cosa por mueble. La habitación lo eleva hasta la cara superior de su anfitrión
+  (`top`), así que un flexo sobre un escritorio se dibuja sobre el escritorio.
+- **pared**: cuelga en uno de los cuatro huecos de cada pared. No choca con el suelo.
+- **alfombras** (`flat: true`) se tumban bajo todo lo demás y comparten sus celdas.
 
-Focus almacena una fecha límite absoluta, no cuenta ticks. Al volver de otra pestaña, recargar o abrir de nuevo el navegador, se calcula el tiempo restante. Si ya acabó, se concede la recompensa una vez. No hay notificaciones ni procesos ejecutándose con el navegador cerrado.
+Girar un objeto solo intercambia su huella: un escritorio de 2×1 girado es de 1×2.
 
-Toda la productividad permanece en este navegador y origen. No existe sincronización entre dispositivos. Borrar los datos del sitio elimina el progreso. `localhost`, un dominio de GitHub Pages y `revikoo.com` tienen almacenamientos distintos.
+## Añadir un objeto
 
-Para añadir persistencia remota, sustituir el adaptador `load/save` de `storage.mjs` y adaptar el coordinador de transacciones para operaciones asíncronas. Las reglas de tareas, focus, inventario y recompensas quedan separadas de la UI y del proveedor de almacenamiento.
+1. Dibujarlo en `tools/draw-objects.mjs` con `draw(id, w, h, ...)`, usando la
+   proyección de su propia huella. El arte se dibuja a tamaño real dentro de una caja
+   común, que es lo que hace que una silla sea del tamaño de una silla al lado de un
+   escritorio.
+2. `node tools/draw-objects.mjs` para regenerar `assets/objects.svg`.
+3. Añadir su definición a `logic/catalog.mjs`: huella, precio, categoría, tipo de
+   colocación, si gira, si es superficie, su `glow` si da luz, y su colección.
+4. Abrir `tools/preview.html` para verlo a escala sobre su huella.
 
-## Economía y nuevos objetos
+No hace falta tocar colocación, pintado, tienda ni economía: todo sale de la definición.
 
-Editar `GAME_CONFIG` en `logic/config.mjs` para cambiar recompensas, monedas iniciales, duraciones y preferencias de animación. Los precios viven en `CATALOG`, en el mismo archivo.
+## Iluminación
 
-Valores iniciales:
+Son tres pasadas superpuestas y el orden importa:
 
-| Acción | ✦ |
-| --- | ---: |
-| Tarea pequeña / mediana / grande | 2 / 5 / 10 |
-| Focus 25 / 45 / 60 / 90 min | 5 / 10 / 15 / 25 |
-| Terminar un libro | 25 |
-| Bienvenida | 20 |
+1. un grado de color sobre `.room-camera` — el color de la hora;
+2. `.scene-shade` y `.scene-light` en `multiply` — la sombra;
+3. `.glow-layer` en `screen` por encima — las luces.
 
-Para añadir un objeto:
+Una luz colocada por debajo de la pasada de sombra se apaga justo cuando debería
+sostener la habitación. Las tres se recortan con `mask-*.svg`, la silueta plana de la
+habitación: un polígono no basta, porque una capa `multiply` sobre un fondo transparente
+pinta su propio color y aparece como un bloque pálido.
 
-1. Dibujar el símbolo en `tools/draw-diorama.mjs`, dentro del bloque de catálogo, usando la proyección `o(x, y, z)` y `obox(...)`. La línea de suelo del objeto va en `y = 150`; al generar el símbolo se desplaza 18 px para que apoye en el punto del slot. Alfombras: `viewBox` `0 0 300 120`.
-2. Ejecutar `node tools/draw-diorama.mjs` para regenerar `assets/objects.svg`.
-3. Añadir un registro a `CATALOG` con `id`, `name`, `category`, `price`, `asset` y `compatibleSlots`.
-4. Usar slots existentes de `SLOTS` o añadir uno con `slot(nombre, at(x, y, z), tamaño, plano)`. `at()` proyecta coordenadas del mundo del diorama a porcentajes de la escena 1400 × 900, igual que la herramienta de ilustración: si cambia la geometría de la habitación, los slots se corrigen ahí y en ningún otro sitio. Cada slot admite un objeto.
-5. Probar compra, colocación en la habitación, sustitución, devolución a inventario y recarga.
+La luz la dan los objetos que hayas colocado. Una habitación sin lámparas de noche está
+oscura de verdad, y por eso merece la pena comprar una.
 
-La colocación ocurre dentro del mundo: comprar cierra el catálogo, ilumina solo los rincones compatibles (`#slot-targets`) y coloca el objeto donde se elija. `Escape` o «Cancelar» abandonan sin mover nada.
+## Persistencia
 
-`owned` y `equipped` se derivan del inventario y los slots, evitando mantener varias copias contradictorias. Todos los objetos de V0.1 son únicos; `repeatable` queda como metadato a futuro y no habilita compras múltiples todavía.
+`logic/storage.mjs` es el único módulo que toca `localStorage`. El estado se valida al
+cargar; si no es válido se guarda una copia de recuperación y se empieza de cero.
 
-## Sustituir ilustraciones
+Una partida de la V0.1 se migra automáticamente: se conservan monedas, tareas, libros,
+historial de foco y preferencias, y los objetos que ya estaban comprados vuelven como
+unidades guardadas. La distribución en los diez huecos fijos de la V0.1 no sobrevive a
+la rejilla, así que la habitación se vuelve a montar desde cero.
 
-Las referencias de capas están centralizadas en `assets/manifest.mjs`. Cada entrada corresponde a una imagen de la escena: si se añade una capa al manifiesto hay que enlazarla también en el bucle de `ui/room.mjs` que asigna los `src`, o la capa no llega a cargarse. Para cambiar una capa completa, sustituir su URL conservando el lienzo 1400 × 900 y los puntos de apoyo de los objetos.
-
-Las ilustraciones las genera `tools/draw-diorama.mjs` (`node tools/draw-diorama.mjs`). No es un paso de compilación: el navegador sirve los SVG ya generados. La proyección ortográfica `p(x, y, z)` de esa herramienta es el origen de toda la geometría del diorama, incluidos los slots.
-
-La iluminación son tres pasadas superpuestas, y el orden importa: un grado de color sobre `.room-camera`, la sombra `.scene-shade` / `.scene-light` en `multiply`, y las fuentes de luz `.glow-layer` en `screen` por encima. Una luz colocada por debajo de la pasada de sombra se apaga justo cuando debería sostener la habitación.
-
-Para cambiar un objeto SVG por una ilustración WebP/AVIF, añadir una entrada a `ITEM_ASSETS` en ese manifiesto:
-
-```js
-export const ITEM_ASSETS = {
-  mushroom: {
-    type: 'image',
-    src: new URL('mushroom-lamp.webp', root).href,
-  },
-};
-```
-
-No cambia la lógica de compras ni de colocación. Mantener un fondo transparente, encuadre y proporción similares. Las ilustraciones secundarias raster usan `loading="lazy"`. El atlas SVG actual es pequeño, local y compartido entre todos los objetos. La ventana nocturna usa geometría SVG recortada a los cuatro cristales; no se oscurecen los marcos.
-
-## Audio, movimiento y accesibilidad
-
-Web Audio sintetiza ruido filtrado para el ambiente y la lluvia, un tono suave durante focus y pequeños sonidos de interacción. No hay archivos de música ni descargas externas. La preferencia de sonido se guarda, pero el contexto de audio solo se crea o reanuda después de una interacción válida. Al ocultar la página se silencia el ambiente. Se puede desactivar el sonido y ajustar su volumen.
-
-El movimiento usa transformaciones CSS, opacidad y una actualización de parallax por frame solicitado. Respeta `prefers-reduced-motion` y el ajuste manual. No utiliza GSAP, WebGL ni motores 3D. Los diálogos nativos contienen el foco y se cierran con Escape; el reinicio mantiene el botón de cancelar como foco inicial. Los datos del usuario se escapan antes de representarlos en HTML.
-
-La vista principal se adapta desde 360 px. En móvil se priorizan la habitación, los accesos inferiores y formularios legibles; no requiere apuntar a objetos diminutos para completar el recorrido.
-
-## Debug
-
-Abrir `http://127.0.0.1:4173/cozy/?debug=true`.
-
-El modo está explícitamente identificado y usa **otra clave**, `cozy-room:debug:v1`. La habitación normal no muestra sus controles ni recibe sus recompensas.
-
-- Una sesión de 25 minutos dura 25 segundos; las demás mantienen la misma equivalencia.
-- La etiqueta inferior «Debug» abre la mesa de pruebas, incluso con focus activo.
-- Permite añadir 100 monedas, ponerlas a cero, desbloquear toda la colección, finalizar el focus activo, cambiar luz/clima y reiniciar el guardado de pruebas con confirmación.
-- `trackEvent` escribe eventos locales en consola únicamente en debug. No se envían a ningún servicio.
-
-Recorrido recomendado: tarea mediana → completar (+5) → focus 25 segundos (+5) → comprar Monstera (−15) → colocar en suelo derecho → cerrar panel → recargar. Saldo final: 15 ✦, planta colocada y tarea/sesión conservadas.
-
-## Verificación
-
-Pruebas de lógica, sin dependencias:
+## Pruebas
 
 ```sh
-node --test cozy/tests/engine.test.mjs
-node --test parking-pass/tests/*.test.cjs
+node --test tests/engine.test.mjs     # reglas, rejilla, economía, migración
+node tests/browser.cjs                # QA de navegador, necesita Playwright
 ```
 
-QA de navegador opcional, con Playwright disponible en el entorno:
+Las pruebas de navegador son opcionales y no son dependencia de producción. Usar
+`PLAYWRIGHT_MODULE` si Playwright no está en el entorno.
 
-```sh
-node cozy/tests/browser.cjs
-```
+## Aislamiento
 
-Si se usa una instalación externa, establecer `PLAYWRIGHT_MODULE` con la ruta absoluta de su módulo. `PLAYWRIGHT_CHANNEL=msedge` o `chrome` permite probar el navegador ya instalado. La prueba inicia y detiene su propio servidor local; guarda capturas en el directorio temporal del sistema, dentro de `cozy-qa/`.
-
-Se verifica el recorrido productivo, edición, recompensas únicas, persistencia, focus tras recarga, cancelación, inventario, iluminación, lluvia, ajustes, confirmaciones de reinicio, Escape, foco de teclado, texto no ejecutable, ausencia de solicitudes externas y rutas bajo subdirectorio. Se revisan tamaños 1440×900, 1920×1080, 1366×768, 768×1024, 390×844 y 360×740. La homepage Revikoo se sirve desde el mismo servidor y sus pruebas existentes siguen pasando.
-
-No hay build ni linter configurado en este repositorio. La compatibilidad con hosting estático se comprueba sirviendo los archivos finales directamente. Esta V0.1 no incluye autenticación, pagos, sincronización, notificaciones en segundo plano, colocación libre, exportación de datos ni música.
+Todo vive bajo `/cozy/`. No se modifican la homepage, los estilos, los logos, la
+navegación, el `CNAME`, el `.nojekyll` ni las demás aplicaciones del repositorio. Todas
+las rutas son relativas al documento o a `import.meta.url`, así que funciona igual en
+`localhost`, en `revikoo.com/cozy/` y bajo `/revikoo-web/cozy/`.

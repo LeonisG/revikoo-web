@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none"><defs>
+ <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+ <filter id="contact" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#09251e" flood-opacity=".45"/></filter>
+ <radialGradient id="warm"><stop stop-color="#ffd086" stop-opacity=".4"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="glow"><stop stop-color="#ffcd85" stop-opacity=".55"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="screen"><stop stop-color="#a4dbc3"/><stop offset="1" stop-color="#599e91"/></radialGradient>
+ <linearGradient id="pot"><stop stop-color="#e99570"/><stop offset=".5" stop-color="#cf6d55"/><stop offset="1" stop-color="#9b4f42"/></linearGradient>
+ <linearGradient id="leaf"><stop stop-color="#93c86d"/><stop offset="1" stop-color="#408857"/></linearGradient>
+ <linearGradient id="cloth"><stop stop-color="#d1795a"/><stop offset="1" stop-color="#914c3a"/></linearGradient>
+</defs>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#ba9e9e"/><stop offset="1" stop-color="#f4b778"/></linearGradient><clipPath id="pane"><polygon points="862.8,402.17 1065.2,475.03 1065.2,290.23 862.8,217.37" fill="#fff" /></clipPath></defs><g clip-path="url(#pane)"><polygon points="862.8,402.17 1065.2,475.03 1065.2,290.23 862.8,217.37" fill="url(#sky)" /><ellipse cx="1004.48" cy="327.50879999999995" rx="26" ry="26" fill="#ffd69b" /><polygon points="862.8,324.55 943.76,316.74 1000.43,381.49 1065.2,367.85 1065.2,475.03 862.8,402.17" fill="#5c8583" /></g><path d="M964,438.59999999999997L964,253.79999999999995" stroke="#cfc3a4" stroke-width="9" stroke-linecap="round" fill="none" /><path d="M862.8,309.7679999999999L1065.2,382.63199999999995" stroke="#cfc3a4" stroke-width="9" stroke-linecap="round" fill="none" />
+</svg>

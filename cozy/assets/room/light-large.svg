@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none"><defs>
+ <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+ <filter id="contact" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#09251e" flood-opacity=".45"/></filter>
+ <radialGradient id="warm"><stop stop-color="#ffd086" stop-opacity=".4"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="glow"><stop stop-color="#ffcd85" stop-opacity=".55"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="screen"><stop stop-color="#a4dbc3"/><stop offset="1" stop-color="#599e91"/></radialGradient>
+ <linearGradient id="pot"><stop stop-color="#e99570"/><stop offset=".5" stop-color="#cf6d55"/><stop offset="1" stop-color="#9b4f42"/></linearGradient>
+ <linearGradient id="leaf"><stop stop-color="#93c86d"/><stop offset="1" stop-color="#408857"/></linearGradient>
+ <linearGradient id="cloth"><stop stop-color="#d1795a"/><stop offset="1" stop-color="#914c3a"/></linearGradient>
+</defs>
+<defs><linearGradient id="day" gradientUnits="userSpaceOnUse" x1="1084" y1="655" x2="784" y2="795"><stop stop-color="#fffaec"/><stop offset=".55" stop-color="#f6efd9" stop-opacity=".78"/><stop offset="1" stop-color="#e2ecf4" stop-opacity=".26"/></linearGradient><filter id="pool" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter></defs><g filter="url(#pool)"><polygon points="704.71,609.05 791.91,640.44 732.13,665.04 644.93,633.65" fill="url(#day)" /><polygon points="805.91,645.48 893.11,676.87 833.33,701.47 746.13,670.08" fill="url(#day)" /><polygon points="774.29,580.42 861.49,611.81 801.71,636.41 714.51,605.02" fill="url(#day)" /><polygon points="875.49,616.85 962.69,648.25 902.91,672.84 815.71,641.45" fill="url(#day)" /></g>
+</svg>

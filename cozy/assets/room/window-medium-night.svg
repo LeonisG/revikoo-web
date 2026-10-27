@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none"><defs>
+ <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+ <filter id="contact" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#09251e" flood-opacity=".45"/></filter>
+ <radialGradient id="warm"><stop stop-color="#ffd086" stop-opacity=".4"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="glow"><stop stop-color="#ffcd85" stop-opacity=".55"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="screen"><stop stop-color="#a4dbc3"/><stop offset="1" stop-color="#599e91"/></radialGradient>
+ <linearGradient id="pot"><stop stop-color="#e99570"/><stop offset=".5" stop-color="#cf6d55"/><stop offset="1" stop-color="#9b4f42"/></linearGradient>
+ <linearGradient id="leaf"><stop stop-color="#93c86d"/><stop offset="1" stop-color="#408857"/></linearGradient>
+ <linearGradient id="cloth"><stop stop-color="#d1795a"/><stop offset="1" stop-color="#914c3a"/></linearGradient>
+</defs>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#183c57"/><stop offset="1" stop-color="#315c68"/></linearGradient><clipPath id="pane"><polygon points="818.8,391.01 1021.2,463.87 1021.2,279.07 818.8,206.21" fill="#fff" /></clipPath></defs><g clip-path="url(#pane)"><polygon points="818.8,391.01 1021.2,463.87 1021.2,279.07 818.8,206.21" fill="url(#sky)" /><path d="M964.53,299.33m0 0a20 20 0 1 0 10 34a21 21 0 0 1-10-34Z" fill="#d9d5b6"/><ellipse cx="859.28" cy="246.65279999999996" rx="1.6" ry="1.6" fill="#d7dabd" /><ellipse cx="930.12" cy="316.5072" rx="1.6" ry="1.6" fill="#d7dabd" /><ellipse cx="895.712" cy="285.64032" rx="1.6" ry="1.6" fill="#d7dabd" /><polygon points="818.8,313.39 899.76,305.58 956.43,370.33 1021.2,356.69 1021.2,463.87 818.8,391.01" fill="#254b54" /></g><path d="M920,427.44000000000005L920,242.64000000000004" stroke="#cfc3a4" stroke-width="9" stroke-linecap="round" fill="none" /><path d="M818.8,298.60800000000006L1021.2,371.472" stroke="#cfc3a4" stroke-width="9" stroke-linecap="round" fill="none" />
+</svg>

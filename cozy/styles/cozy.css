@@ -1,4 +1,4 @@
-@layer reset, world, objects, paper, instruments, responsive;
+@layer reset, world, objects, paper, instruments, builder, responsive;
 @import url('./panels.css');
 @font-face { font-family: 'Space Grotesk'; src: url('../assets/fonts/space-grotesk.ttf') format('truetype'); font-weight: 300 700; font-display: swap; }
 @layer reset {
@@ -49,7 +49,8 @@
   .masthead { position: relative; height: 96px; padding: 32px 4.5%; display: flex; align-items: flex-start; justify-content: space-between; z-index: 15; }
   .wordmark { font-weight: 600; font-size: 21px; line-height: .88; letter-spacing: -1.2px; color: #e6e7d8; }
   .wordmark span { display: block; margin: 6px 0 0 12px; }
-  .room-status { display: none; }
+  .room-status { display: flex; align-items: center; gap: 10px; font: 10px var(--font-micro); color: #7f9488; letter-spacing: .4px; }
+  .room-status .status-divider { opacity: .4; }
   .header-actions { display: flex; align-items: center; gap: 20px; }
   .coin-counter { display: inline-flex; align-items: center; gap: 7px; font: 500 15px var(--font-micro); font-variant-numeric: tabular-nums; min-width: 52px; }
   .coin-counter .icon-coin { color: #e3bc77; width: 13px; height: 13px; }
@@ -73,7 +74,10 @@
      3. .glow-layer, screened on top   — the lamp, the screen, the window
      Light sources must sit ABOVE the shadow pass or they go dark exactly when
      they should be carrying the room. */
-  .scene-shade, .scene-light, .glow-layer { clip-path: polygon(14.6% 30.8%, 50% 8.6%, 85.4% 30.8%, 85.4% 79%, 51.6% 98.7%, 48.4% 98.7%, 14.6% 79%); }
+  .scene-shade, .scene-light, .glow-layer {
+    -webkit-mask-image: var(--room-mask, none); mask-image: var(--room-mask, none);
+    -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
   /* Ambient shade: the room is lit from the window, so everything away from it
      falls off. This is present at every hour and is what gives the diorama its
      zones of light, half-shade and dark. */
@@ -114,9 +118,10 @@
   #explore-toggle span { margin-left: 7px; color: #debc7d; }
   .room-nav { display: none; position: absolute; bottom: 62px; left: 50%; transform: translateX(-50%); padding: 8px 12px; gap: 6px; background: #253b31; border: 1px solid #607a5d66; border-radius: 6px; box-shadow: 0 8px 25px #0003; }
   .room-nav.is-open { display: flex; }
-  .room-nav button { padding: 10px 14px; font-size: 11px; white-space: nowrap; color: #e2e4cf; }
+  .room-nav button { display: inline-flex; align-items: center; gap: 7px; padding: 10px 14px; font-size: 11px; white-space: nowrap; color: #e2e4cf; border-radius: 5px; }
+  .room-nav button .icon { width: 13px; height: 13px; color: #a9c0ab; }
   .room-nav button:hover { background: #4a65413d; border-radius: 3px; }
-  .welcome-note, .desk-note { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10; width: max-content; max-width: 90%; }
+  /* The welcome note and the desk note are gone: the setup flow replaced them. */
   .welcome-note p { color: #c6d1bd; font: italic 14px/1.6 var(--font-note); }
   .welcome-note button { font-size: 11px; color: #e2c38c; margin-top: 10px; padding: 7px; }
   .welcome-note button span { margin-left: 12px; }
@@ -127,101 +132,96 @@
   .reward { position: fixed; top: 110px; left: 50%; transform: translate(-50%,8px); opacity: 0; z-index: 40; pointer-events: none; color: #f0cf8e; background: #263d31ed; padding: 12px 19px; border-radius: 4px; font-size: 13px; transition: opacity .3s, transform .4s; max-width: 90vw; text-align: center; }
   .reward.show { opacity: 1; transform: translate(-50%,0); }
   #save-warning { position: relative; z-index: 20; padding: 12px 20px; background: #dfbd85; color: #463d2a; text-align: center; font-size: 12px; }
-  .focusing .masthead, .focusing .room-footer, .focusing .welcome-note, .focusing .desk-note, .focusing .back-room, .focusing .mobile-camera { opacity: 0; pointer-events: none; }
+  .focusing .masthead, .focusing .room-footer, .focusing .back-room, .focusing .edit-bar { opacity: 0; pointer-events: none; }
   .focusing .room-camera { transform: scale(1.35) translate(-7%,1%); }
-  .focusing .shelf-layer, .focusing .front-layer { filter: brightness(.7); }
+  .focusing .room-objects { filter: brightness(.82); }
   .focusing .scene-light { opacity: .32; }
-  .focus-active { position: absolute; z-index: 9; left: 58.8%; top: 43.5%; width: 6.8%; height: 4.8%; background: #274e46; transform: skewY(19.8deg); display: grid; place-items: center; border-radius: 2px; box-shadow: 0 0 12px #81bca834; }
-  .focus-active time { font: 500 clamp(10px,1.25vw,21px) var(--font-micro); color: #e6d5a5; font-variant-numeric: tabular-nums; letter-spacing: .5px; }
+  .focus-active { position: absolute; z-index: 12; left: 50%; top: 42%; transform: translate(-50%,-50%); display: grid; place-items: center; padding: 18px 30px; border-radius: 14px; background: #16251fd9; border: 1px solid #3c5c4c; box-shadow: 0 20px 60px #0007; }
+  .focus-active time { font: 500 clamp(26px,3.4vw,46px) var(--font-micro); color: #f0dcab; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
   .focus-exit { position: absolute; bottom: 17px; left: 50%; transform: translateX(-50%); padding: 12px; z-index: 12; font-size: 11px; color: #b5c7b3; border-bottom: 1px solid #66826b; }
   #debug-badge { position: fixed; bottom: 0; left: 0; padding: 4px 9px; font: 9px var(--font-micro); color: #d5ca9d; background: #254133; z-index: 20; }
   #debug-badge button { font: inherit; text-decoration: underline; }
   .mobile-camera { display: none; }
 }
 @layer objects {
-  .hotspots, .slot-targets { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
-  .hotspot { position: absolute; pointer-events: auto; border-radius: 10px; }
-  .hotspot:after { content: ''; position: absolute; inset: 10%; border-radius: 50%; background: radial-gradient(ellipse,#efc78624,transparent 70%); opacity: 0; transition: opacity .3s; }
+  /* Everything standing in the room is one box of the same size, anchored where
+     it meets its surface. Only position and paint order differ. */
+  .room-objects { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+  .placed { position: absolute; width: 30%; aspect-ratio: 420/400;
+    transform: translate(-50%, -82.5%) scaleX(var(--flip, 1));
+    /* One pair of custom properties on the stage moves every object by its own
+       depth, so the parallax costs nothing per object. */
+    translate: calc(var(--px, 0px) * var(--d, 0)) calc(var(--py, 0px) * var(--d, 0));
+    transition: translate 620ms var(--ease), opacity var(--medium) var(--ease);
+    animation: object-in 520ms var(--ease);
+  }
+  .placed svg, .placed img { width: 100%; height: 100%; overflow: visible; }
+  .placed.is-flat { z-index: 0; }
+  .editing .placed { pointer-events: auto; cursor: pointer; }
+  .editing .placed:hover { filter: brightness(1.12) drop-shadow(0 0 10px #ffd79a66); }
+  .holding .placed { pointer-events: none; }
+
+  /* Light comes from whatever the player has actually put down. */
+  .object-glow { position: absolute; width: calc(26% * var(--glow)); aspect-ratio: 1.5;
+    transform: translate(-50%, -78%);
+    background: radial-gradient(ellipse at 50% 50%, #ffd98f9e, #ffb75c3a 38%, transparent 72%);
+    opacity: calc(.34 * var(--glow)); transition: opacity 1.4s; }
+  .app[data-light=sunset] .object-glow { opacity: calc(.7 * var(--glow)); }
+  .app[data-light=night] .object-glow { opacity: calc(.95 * var(--glow)); }
+  .app[data-weather=rain] .object-glow { opacity: calc(.62 * var(--glow)); }
+  .app[data-lamp=off] .object-glow { opacity: 0; }
+
+  /* An unlit room at night really is dark; that is what makes a lamp worth buying. */
+  .app[data-light=night][data-lit=none] .room-camera { filter: brightness(.4) saturate(.6) hue-rotate(-6deg); }
+  .app[data-light=night][data-lit=dim] .room-camera { filter: brightness(.52) saturate(.7) hue-rotate(-6deg); }
+
+  .hotspots { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+  .hotspot { position: absolute; width: 74px; height: 74px; transform: translate(-50%, -86%);
+    pointer-events: auto; border-radius: 50%; }
+  .editing .hotspots { display: none; }
+  .hotspot:after { content: ''; position: absolute; inset: 18%; border-radius: 50%;
+    background: radial-gradient(ellipse, #efc78630, transparent 70%); opacity: 0; transition: opacity var(--medium); }
   .hotspot:hover:after, .hotspot:focus-visible:after { opacity: 1; }
-  .hotspot span { position: absolute; left: 50%; bottom: 100%; transform: translate(-50%,5px); padding: 8px 12px; background: #213d32ed; border: 1px solid #b8b78c36; box-shadow: var(--shadow-object); border-radius: 4px; color: #ecdfbb; font-size: 10px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
-  .hotspot span b { margin-left: 10px; font-weight: 400; color: #d9ad70; }
-  .hotspot:hover span, .hotspot:focus-visible span { opacity: 1; transform: translate(-50%,0); }
-  .hotspot-desk { left: 43%; top: 45%; width: 28%; height: 17%; }
-  .hotspot-books { left: 23%; top: 28%; width: 21%; height: 43%; }
-  .hotspot-window { left: 56.5%; top: 20%; width: 15%; height: 27%; }
-  .hotspot-lamp { left: 64.3%; top: 43%; width: 5.5%; height: 11%; }
-  .hotspot-cat { left: 54.5%; top: 78%; width: 9%; height: 8%; }
-  .catalog-object { left: 54%; top: 55%; width: 6%; height: 5%; }
-  .desk-object { display: none; }
-  .room-stage[data-view=desk] .desk-object { display: block; }
-  .room-stage[data-view=desk] .hotspot-desk { display: none; }
-  .journal-object { left: 48%; top: 48%; width: 5.5%; height: 5%; }
-  .clock-object { left: 61.5%; top: 52%; width: 4%; height: 5%; }
-  .laptop-object { left: 56.5%; top: 40.5%; width: 9%; height: 12%; }
-  .room-stage[data-view=desk] .desk-object:focus-visible { outline: 1px solid #e7c17f; }
-  .room-stage[data-view=desk] .desk-object:hover { background: #e9cb8d0a; }
-  .decoration-layer { position: absolute; inset: 0; pointer-events: none; }
-  .decoration { position: absolute; transform: translate(-50%,-100%); filter: drop-shadow(0 5px 4px #172b2455); animation: object-in .6s cubic-bezier(.2,.7,.3,1.12); }
-  .decoration svg, .decoration img { width: 100%; height: 100%; object-fit: contain; }
-  .decoration.wall-object { transform: translate(-50%,-100%) skewY(var(--surface-angle,19.8deg)); }
-  .decoration.just-placed { animation: object-in .7s cubic-bezier(.2,.7,.3,1.12); }
-  .room-books { position: absolute; left: 28.7%; top: 47%; width: 8.5%; height: 7%; display: flex; align-items: flex-end; gap: 2px; transform: skewY(-19.8deg); transform-origin: bottom left; overflow: hidden; }
-  .mini-book { width: 12%; height: 84%; background: var(--book-color); border-radius: 2px 2px 0 0; border-right: 3px solid #0003; border-top: 3px solid #ebd69c55; box-shadow: -2px 1px 2px #15291e44; transform: rotate(var(--tilt,0deg)); }
+  .hotspot span { position: absolute; left: 50%; bottom: 92%; transform: translate(-50%, 5px);
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #213d32ed;
+    border: 1px solid #b8b78c36; box-shadow: var(--shadow-object); border-radius: 5px; color: #ecdfbb;
+    font-size: 10px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+  .hotspot span .icon { color: #d9ad70; width: 11px; height: 11px; }
+  .hotspot:hover span, .hotspot:focus-visible span { opacity: 1; transform: translate(-50%, 0); }
+
+  /* The grid exists only while editing. */
+  .grid-overlay { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0; transition: opacity var(--medium) var(--ease); }
+  .editing .grid-overlay { opacity: 1; }
+  .ghost-overlay { z-index: 9; }
+  .cell { fill: #8fd8b41a; stroke: #93e4bcd9; stroke-width: 2.8; }
+  .cell.taken { fill: #06181366; stroke: #6d9b8966; }
+  .ghost { stroke-width: 2.6; }
+  .ghost.good { fill: #76e0a63d; stroke: #86efb4; }
+  .ghost.bad { fill: #e0766a3d; stroke: #ef9686; }
+  .hook { fill: #8fd8b41f; stroke: #93e4bcc4; stroke-width: 2.6; stroke-dasharray: 7 6; }
+  .hook.taken { fill: #0618134d; stroke: #6d9b8955; stroke-dasharray: none; }
+  .ghost-wall { stroke-width: 3; }
+  .ghost-wall.good { fill: #76e0a62e; stroke: #86efb4; }
+  .ghost-wall.bad { fill: #e0766a2e; stroke: #ef9686; }
+
   .sky-state { opacity: 0; transition: opacity 1.8s; }
   .app[data-light=sunset] .sunset-sky, .app[data-light=night] .night-sky, .app[data-weather=rain] .rain-sky { opacity: 1; }
   .app[data-weather=rain][data-light=night] .rain-sky { opacity: .25; }
-  .window-atmosphere { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .rain { opacity: 0; animation: rainfall 1.4s linear infinite; animation-play-state: paused; }
-  .app[data-weather=rain] .rain { opacity: .65; animation-play-state: running; }
-  /* The lamp reads as two things: the bulb's halo, and the warm pool it throws
-     down the desk onto the floor. The pool is what makes nearby objects look lit. */
-  .lamp-glow { left: 58.5%; top: 40%; width: 18%; height: 23%; background: radial-gradient(ellipse at 52% 48%, #ffd98f9e, #ffb75c4a 38%, transparent 70%); opacity: .4; }
-  .lamp-pool { left: 44%; top: 44%; width: 40%; height: 44%; background: radial-gradient(ellipse at 56% 40%, #ffc87a4a, #f7a8521f 36%, #e0904010 58%, transparent 80%); opacity: .3; }
-  .app[data-light=sunset] .lamp-glow { opacity: .85; scale: 1.12; } .app[data-light=sunset] .lamp-pool { opacity: .6; }
-  .app[data-light=night] .lamp-glow { opacity: 1; scale: 1.25; } .app[data-light=night] .lamp-pool { opacity: .95; scale: 1.08; }
-  .app[data-weather=rain] .lamp-glow { opacity: .8; } .app[data-weather=rain] .lamp-pool { opacity: .55; }
-  .app[data-lamp=off] .lamp-glow, .app[data-lamp=off] .lamp-pool { opacity: 0; }
-  .app[data-lamp=on]:has(.hotspot-lamp:hover) .lamp-glow { scale: 1.3; opacity: 1; }
-  .app[data-lamp=on]:has(.hotspot-lamp:hover) .lamp-pool { opacity: .75; }
-  .lamp-glow.celebrate { animation: lamp-breathe 2s ease; }
-  .monitor-glow { left: 55.5%; top: 39%; width: 12%; height: 13%; border-radius: 50%; background: radial-gradient(ellipse,#8fd3ba3d,transparent 70%); }
-  /* Cold light washing the wall around the window — the other half of the
-     warm-interior / cold-exterior contrast. */
-  .window-spill { left: 53%; top: 15%; width: 26%; height: 32%; background: radial-gradient(ellipse at 50% 55%, #cfe8ff40, transparent 68%); opacity: .55; }
+
+  .window-spill { position: absolute; left: 52%; top: 20%; width: 28%; height: 34%;
+    background: radial-gradient(ellipse at 50% 55%, #cfe8ff40, transparent 68%); opacity: .55; transition: opacity 1.4s; }
   .app[data-light=sunset] .window-spill { opacity: .5; background: radial-gradient(ellipse at 50% 55%, #ffc08c52, transparent 68%); }
   .app[data-light=night] .window-spill { opacity: .28; background: radial-gradient(ellipse at 50% 55%, #7fa6d84a, transparent 68%); }
   .app[data-weather=rain] .window-spill { opacity: .36; }
-  .tea-steam { position: absolute; left: 57.5%; top: 50%; width: 2%; height: 3.5%; }
-  .tea-steam i { position: absolute; bottom: 0; width: 6px; height: 18px; border-left: 1.5px solid #e7d9b7; border-radius: 50%; animation: steam 6s ease-in-out infinite; opacity: 0; }
-  .tea-steam i:nth-child(2) { left: 6px; animation-delay: 2.5s; }
-  .plant-illustration { transform-origin: 74% 76%; animation: plant-breathe 13s ease-in-out infinite; }
-  .dust { position: absolute; inset: 28% 28% 35% 49%; z-index: 7; pointer-events: none; }
-  .dust i { position: absolute; left: 20%; top: 10%; width: 2px; height: 2px; background: #ead0a3; border-radius: 50%; opacity: .3; animation: drift 18s ease-in-out infinite; }
-  .dust i:nth-child(2) { left: 70%; top: 60%; animation-delay: -9s; }
-  .cat-heart { position: absolute; left: 59%; top: 78%; z-index: 10; color: #e5bb83; font-size: 12px; pointer-events: none; animation: cat-love 2s ease both; }
-  .slot-target { position: absolute; width: 5%; aspect-ratio: 2.5; transform: translate(-50%,-50%); border: 1px solid #f3ce83; border-radius: 50%; background: #dfbf6e30; box-shadow: 0 0 18px #e9c1703b; pointer-events: auto; animation: slot-breathe 2.2s ease-in-out infinite; }
-  .slot-target span { position: absolute; left: 50%; top: 110%; transform: translateX(-50%); padding: 6px 10px; border-radius: 4px; background: #18392fea; color: #eddcb2; white-space: nowrap; font-size: 10px; opacity: 0; }
-  .slot-target:hover, .slot-target:focus-visible { background: #f5d18b66; }
-  .slot-target:hover span, .slot-target:focus-visible span { opacity: 1; }
-  .placing .hotspots { visibility: hidden; }
-  .placing .welcome-note, .placing .mobile-camera { visibility: hidden; }
-  .placement-note { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 11; text-align: center; width: max-content; max-width: 90%; }
-  .placement-note p { font: italic 17px var(--font-note); color: #ead2a0; margin-bottom: 5px; }
-  .placement-note > span { font-size: 11px; color: #bacab6; }
-  .placement-note button { display: block; margin: 6px auto 0; padding: 6px; font-size: 10px; color: #acbdab; }
+
   @keyframes coin-pop { 50% { transform: translateY(-2px) scale(1.1); } }
-  @keyframes object-in { from { opacity: 0; scale: .85; } to { opacity: 1; scale: 1; } }
-  @keyframes rainfall { to { transform: translate(-4px,60px); } }
-  @keyframes plant-breathe { 50% { rotate: .35deg; } }
-  @keyframes steam { 0%,100% { transform: translate(0,0); opacity: 0; } 50% { transform: translate(2px,-12px); opacity: .45; } }
-  @keyframes drift { 50% { transform: translate(8px,-14px); opacity: .1; } }
+  @keyframes object-in { from { opacity: 0; scale: .88; } to { opacity: 1; scale: 1; } }
   @keyframes lamp-breathe { 50% { opacity: 1; scale: 1.6; } }
-  @keyframes cat-love { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(-25px); } }
-  @keyframes slot-breathe { 50% { box-shadow: 0 0 22px #efd1956b; } }
 }
 @layer instruments {
   dialog { color-scheme: light; font-family: var(--font-ui); }
-  dialog::backdrop { background: #071c155c; backdrop-filter: blur(1.5px); }
+  dialog::backdrop { background: #06130fa8; }
   #world-panel { max-height: calc(100svh - 90px); padding: 36px 38px 23px; box-shadow: 0 25px 90px #0007, 4px 4px 0 #baa77d; border-radius: 5px 14px 14px 5px; background-color: var(--paper); }
   .panel-header h2 { font: 500 31px/1.15 var(--font-ui); letter-spacing: -1.2px; }
   .eyebrow { font: 8px var(--font-micro); letter-spacing: 1.8px; color: #707959; }
@@ -289,6 +289,143 @@
   .optional-start button .icon, .text-button .icon { width: 11px; height: 11px; }
   @keyframes checkbox-mark { 50% { scale: 1.12; } }
 }
+@layer builder {
+  /* ── Edit mode ──────────────────────────────────────────────────────────── */
+  .pill-button { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px;
+    border: 1px solid #4a6b5c; border-radius: 999px; color: #cfe0d2; font-size: 11px;
+    background: #1d2d26; transition: background var(--fast), border-color var(--fast); }
+  .pill-button:hover { background: #264034; border-color: #6d9c85; }
+  .pill-button[aria-pressed=true] { background: #e3c285; border-color: #e3c285; color: #22352c; }
+  .pill-button .icon { width: 14px; height: 14px; }
+
+  .editing .room-footer, .editing .masthead .room-status { opacity: .25; pointer-events: none; }
+  .editing .room-viewport { height: calc(100svh - 300px); }
+
+  .edit-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    background: #16221e; border-top: 1px solid #2e453b; box-shadow: 0 -18px 50px #0007;
+    padding: 14px 24px 18px; animation: tray-up var(--medium) var(--ease); }
+  .edit-head { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .edit-head strong { font-size: 12px; font-weight: 500; color: #e3d6b4; }
+  .edit-hint { flex: 1; font: italic 13px var(--font-note); color: #9db5a5; }
+  .edit-tray { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+  .tray-item { flex: 0 0 104px; display: grid; gap: 2px; padding: 8px 6px; border-radius: 9px;
+    border: 1px solid #2f473c; background: #1b2a24; text-align: center;
+    transition: border-color var(--fast), background var(--fast), translate var(--fast); }
+  .tray-item:hover { border-color: #6d9c85; translate: 0 -2px; }
+  .tray-item[aria-pressed=true] { border-color: #e3c285; background: #2a3a2c; }
+  .tray-art { display: block; height: 58px; }
+  .tray-art svg { width: 100%; height: 100%; overflow: visible; }
+  .tray-name { font-size: 10px; color: #d6e0d2; line-height: 1.3; }
+  .tray-meta { font: 9px var(--font-micro); color: #8aa194; }
+  .tray-empty { display: flex; align-items: center; gap: 8px; font: italic 13px var(--font-note); color: #8fa89b; margin: 10px 0; }
+
+  .held-bar { position: fixed; left: 50%; bottom: 190px; transform: translateX(-50%); z-index: 31;
+    display: flex; align-items: center; gap: 6px; padding: 7px 8px 7px 16px; border-radius: 999px;
+    background: #22352cf5; border: 1px solid #44624f; box-shadow: 0 14px 40px #0006; }
+  .held-bar > span { font-size: 11px; color: #e8d9ae; margin-right: 6px; }
+  .held-bar button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px;
+    border-radius: 999px; font-size: 10px; color: #cfe0d2; background: #2d4538; }
+  .held-bar button:hover { background: #3b5a49; }
+  .held-bar .icon { width: 13px; height: 13px; }
+
+  /* ── Build your first room ──────────────────────────────────────────────── */
+  .setup { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center;
+    padding: 24px; background: #0b1311f2; overflow: auto; }
+  .setup-panel { width: min(760px, 100%); background: var(--paper); color: #454b3b; border: 0;
+    border-radius: 14px; padding: 32px 34px 24px; box-shadow: 0 40px 120px #000a, 0 0 0 1px #cabd9d;
+    animation: setup-in var(--slow) var(--ease); }
+  .setup-panel h2 { font-size: 30px; letter-spacing: -.8px; margin: 6px 0 10px; }
+  .setup-copy { font: italic 15px/1.6 var(--font-note); color: #6a7157; margin-bottom: 22px; }
+  .setup-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    margin-top: 24px; padding-top: 18px; border-top: 1px solid #b6ab8a; }
+  .setup-budget { display: inline-flex; align-items: center; gap: 8px; font: 13px var(--font-micro); color: #8a6c3a; }
+  .setup-budget .icon-coin { width: 13px; height: 13px; }
+  .setup .primary { padding: 12px 22px; border-radius: 999px; background: #3e6d52; color: #f3ead2; font-size: 12px; }
+  .setup .primary:hover { background: #4d8364; }
+
+  .size-choice { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .size-choice button { display: grid; gap: 6px; justify-items: center; padding: 18px 12px;
+    border: 1px solid #c1b694; border-radius: 12px; background: #f7f0dc; color: #4b5540;
+    transition: border-color var(--fast), background var(--fast); }
+  .size-choice button:hover:not(:disabled) { border-color: #76875d; }
+  .size-choice button[aria-checked=true] { border-color: #5d7a4b; background: #e2e7c9; box-shadow: inset 0 0 0 1px #5d7a4b; }
+  .size-choice button:disabled { opacity: .4; }
+  .size-choice strong { font-size: 14px; font-weight: 500; }
+  .size-cells, .size-price { font: 10px var(--font-micro); color: #77805f; }
+  .size-price .icon-coin { width: 9px; height: 9px; }
+  .size-blurb { font: italic 11px/1.5 var(--font-note); color: #828a68; text-align: center; }
+  .size-grid { display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 2px;
+    width: calc(var(--n) * 11px); margin-bottom: 4px; }
+  .size-grid i { aspect-ratio: 1; background: #9fae84; border-radius: 1px; }
+  .size-choice.compact { grid-template-columns: repeat(3, 1fr); margin: 12px 0; }
+  .size-choice.compact button { padding: 12px 8px; background: #efe7d2; border-color: #c3b997; color: #4b5540; }
+  .size-choice.compact button[aria-checked=true] { background: #dfe3c6; border-color: #76875d; }
+
+  .basics { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px;
+    max-height: 46svh; overflow-y: auto; padding-right: 4px; }
+  .basic { position: relative; padding: 10px; border: 1px solid #c1b694; border-radius: 11px; background: #f7f0dc; }
+  .basic.owned { border-color: #6d8a58; box-shadow: inset 0 0 0 1px #6d8a58; }
+  .basic-art { height: 76px; }
+  .basic-art svg { width: 100%; height: 100%; overflow: visible; }
+  .basic h3 { font-size: 11px; font-weight: 500; margin-top: 4px; color: #434d38; }
+  .basic-meta { font: 10px var(--font-micro); color: #7d8663; margin: 3px 0 8px; }
+  .basic-meta .icon-coin { width: 9px; height: 9px; }
+  .basic-actions { display: flex; align-items: center; gap: 8px; }
+  .basic-actions button { font-size: 10px; padding: 6px 10px; border-radius: 6px; background: #637653; color: #fff9e9; }
+  .basic-actions button:hover:not(:disabled) { background: #4e6342; }
+  .basic-actions button:disabled { opacity: .4; }
+  .basic-actions .text-button { background: none; color: #85764e; padding: 6px 2px; }
+  .basic-count { position: absolute; top: 8px; right: 8px; min-width: 18px; height: 18px;
+    display: grid; place-items: center; border-radius: 50%; background: #637653; color: #fff9e9;
+    font: 10px var(--font-micro); }
+
+  /* ── Progress panel ─────────────────────────────────────────────────────── */
+  .section-head { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+    color: #8a8f73; margin: 26px 0 12px; font-family: var(--font-micro); }
+  .level-card { padding: 18px 20px; border-radius: 10px; background: #e5e1c6; border: 1px solid #c2bb98; }
+  .level-card strong { display: block; font-size: 24px; font-weight: 500; margin: 4px 0 6px; color: #3f5540; }
+  .level-card p { font-size: 11px; color: #6c7558; }
+  .level-card .values { display: flex; gap: 18px; margin-top: 12px; font: 10px var(--font-micro); color: #6c7558; }
+  .level-card .values b { color: #42603f; font-size: 13px; margin-left: 4px; }
+  .quest-list { list-style: none; padding: 0; margin: 0; }
+  .quest { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #91917226; }
+  .quest-mark { width: 20px; height: 20px; flex: none; border-radius: 50%; border: 1px solid #a3ad8b; display: grid; place-items: center; }
+  .quest.done .quest-mark { background: #7e8d67; border-color: #6e7d58; color: #f4eed9; }
+  .quest-mark .icon { width: 12px; height: 12px; stroke-width: 2.4; }
+  .quest-name { flex: 1; font-size: 12px; font-family: var(--font-note); }
+  .quest.done .quest-name { color: #8a8f7b; }
+  .quest-reward { font: 10px var(--font-micro); color: #9c844e; white-space: nowrap; }
+  .quest .primary { font-size: 10px; padding: 7px 12px; white-space: nowrap; }
+  .set-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+  .set { padding: 11px 12px; border: 1px solid #b7b795; border-radius: 8px; background: #efe8d3; }
+  .set.complete { border-color: #76875d; background: #e2e7c9; }
+  .set strong { display: block; font-size: 12px; font-weight: 500; color: #46543b; }
+  .set span { font: 11px var(--font-micro); color: #7d8a64; }
+  .set small { display: block; font-size: 10px; color: #8b9173; margin-top: 3px; }
+  .badge-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 9px; }
+  .badge { padding: 10px 12px; border-radius: 8px; background: #e9e3cd; opacity: .5; }
+  .badge.got { opacity: 1; background: #dfe6c6; box-shadow: inset 0 0 0 1px #8a9a6a; }
+  .badge b { display: block; font-size: 11px; font-weight: 500; color: #45533a; }
+  .badge small { font-size: 9px; color: #7e8768; }
+  .companion-note { font: italic 10px/1.5 var(--font-note); color: #91784d; margin-bottom: 8px; }
+  .shop-item.is-companion { box-shadow: inset 0 0 0 1px #c5a86a55; border-radius: 8px; padding: 8px; }
+
+  @keyframes tray-up { from { transform: translateY(100%); } }
+  @keyframes setup-in { from { opacity: 0; transform: translateY(18px); } }
+
+  @media (max-width: 760px) {
+    .masthead .room-status { display: none; }
+    .size-choice { grid-template-columns: 1fr; }
+    .size-choice button { grid-template-columns: auto 1fr auto; justify-items: start; align-items: center; gap: 4px 12px; }
+    .size-blurb { grid-column: 2 / -1; text-align: left; }
+    .setup-panel { padding: 24px 20px 18px; }
+    .setup-panel h2 { font-size: 24px; }
+    .editing .room-viewport { height: calc(100svh - 330px); }
+    .held-bar { bottom: 212px; }
+    .tray-item { flex-basis: 88px; }
+  }
+}
+
 @layer responsive {
   @media (min-width: 1700px) { .room-stage { width: min(1530px, 91vw, 155.555cqh); } }
   @media (max-width: 900px) {
