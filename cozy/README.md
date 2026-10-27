@@ -22,7 +22,7 @@ Esta implementación añade exclusivamente `cozy/`: no modifica la homepage, est
 
 Para publicar, incluir la carpeta `cozy/` en la misma rama y raíz que ya utiliza GitHub Pages. La URL resultante será `https://revikoo.com/cozy/`. No se necesitan redirects, fallback de SPA, cambio de dominio ni configuración adicional. Todas las referencias son relativas al documento o a `import.meta.url`: también funciona bajo `/revikoo-web/cozy/` en un dominio de proyecto.
 
-**Alcance de la verificación:** se ha probado un servidor estático local tanto en `/cozy/` como bajo `/revikoo-web/cozy/`. El endpoint público de configuración de Pages devolvió 404; no se pudo confirmar remotamente la rama fuente. No se ha hecho commit, push ni despliegue. Revisar la fuente existente en GitHub → Settings → Pages antes de publicar, sin cambiarla si ya sirve esta raíz.
+**Estado y alcance de la verificación (27 de octubre de 2026):** la V0.1 está guardada en el commit `037dec6` y publicada en `https://revikoo.com/cozy/`. Se han comprobado respuestas HTTP 200 para la aplicación, su módulo principal, estilos e ilustración, y se ha abierto el escritorio y el cuaderno en producción sin errores de ejecución ni recursos fallidos. La homepage de Revikoo también responde correctamente. El recorrido completo se ha probado localmente tanto en `/cozy/` como bajo `/revikoo-web/cozy/`, con 16 pruebas de lógica aprobadas entre Cozy Room y el micrositio existente. El endpoint público de configuración de Pages devolvió 404 durante la auditoría inicial; la rama fuente no se ha confirmado mediante esa API. Esta revisión no cambia la configuración de publicación ni realiza un nuevo despliegue.
 
 ## Estructura
 
