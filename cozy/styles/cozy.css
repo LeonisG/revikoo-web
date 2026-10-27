@@ -169,12 +169,13 @@
      floating beneath the sprite. */
   .contact { position: absolute; left: 50%; top: 82.5%; width: calc(var(--fw, 40) * 1%); height: calc(var(--fh, 14) * 1%);
     transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none;
+    opacity: var(--shadow-weight, 1);
     background: radial-gradient(ellipse at 50% 50%, #241607b0, #2a1c0f66 48%, transparent 74%); }
   .contact::after { content: ''; position: absolute; inset: -42% -26%; border-radius: 50%;
     transform: translate(6%, 10%);
     background: radial-gradient(ellipse at 50% 50%, #2a1c0f3d, transparent 68%); }
-  .app[data-light=night] .contact { opacity: .62; }
-  .app[data-light=sunset] .contact { opacity: .82; }
+  .app[data-light=night] .contact { opacity: calc(var(--shadow-weight, 1) * .62); }
+  .app[data-light=sunset] .contact { opacity: calc(var(--shadow-weight, 1) * .82); }
   .placed.is-flat { z-index: 0; }
   .editing .placed { pointer-events: auto; cursor: pointer; }
   .editing .placed:hover { filter: brightness(1.12) drop-shadow(0 0 10px #ffd79a66); }

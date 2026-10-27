@@ -7,14 +7,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5024,
-      "y": 0.6856
+      "y": 0.6643
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 44590,
-    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0000ffff0003ffffe003fffffc01ffffff81ffffffc1ffffffc1ffffff81ffffff81feffff81f63fff81c00fff81c00fff81c00fff80000fff80000fff80000fff800003fc000000f00000007000000070000000000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0000ffff0003ffffe003fffffc01ffffff81ffffffc1ffffffc1ffffff81ffffff81feffff81f63fff81c00fff81c00fff81c00fff80000fff80000fff80000fff800003fc000000f00000007000000070000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.14464,
+      "widen": 1.11325
+    }
   },
   "chair": {
     "src": "items/oak-cozy/furniture/chair.webp",
@@ -23,14 +27,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5032,
-      "y": 0.7517
+      "y": 0.7385
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 58424,
-    "hitMask": "000000000000000000000000000100000003e0000003f8000003fe000003ff800003ffe0000fffe0003fffe000ffffe003ffffe007ffffe007dfffe003ffffe003ffffe003ffffc003ffffc003ffffc003ffffc003ffffc003bfffc0018fffc00007f8000001f000000070000000700000007000000000000000000000000000"
+    "hitMask": "000000000000000000000000000100000003e0000003f8000003fe000003ff800003ffe0000fffe0003fffe000ffffe003ffffe007ffffe007dfffe003ffffe003ffffe003ffffc003ffffc003ffffc003ffffc003ffffc003bfffc0018fffc00007f8000001f000000070000000700000007000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.0197,
+      "widen": 1.08987
+    }
   },
   "wardrobe-oak": {
     "src": "items/oak-cozy/furniture/wardrobe-oak.webp",
@@ -39,14 +47,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5016,
-      "y": 0.8363
+      "y": 0.8132
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 37016,
-    "hitMask": "0000000000080000003f000000ffc00001fff80001fffe0001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff80001fff800007ff800003ff800000fc00000038000000380000000000"
+    "hitMask": "0000000000080000003f000000ffc00001fff80001fffe0001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff80001fff800007ff800003ff800000fc00000038000000380000000000",
+    "axisFix": {
+      "shear": 0.10507,
+      "widen": 1.18168
+    }
   },
   "bookshelf": {
     "src": "items/oak-cozy/furniture/bookshelf.webp",
@@ -55,14 +67,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.502,
-      "y": 0.8154
+      "y": 0.7974
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 39212,
-    "hitMask": "0000000000000000003c000000ff800001fff00001fffc0001ffff8001ffff8001ffffc001ffffc001ffff8001ffffc001ffffc001ffff8001ffffc001ffffc001ffff8001ffff8001ffffc001ffff8001ffffc001ffffc001ffff8001ffff80001fffc00007ff800003ff800000ff8000003c0000001c000000000000000000"
+    "hitMask": "0000000000000000003c000000ff800001fff00001fffc0001ffff8001ffff8001ffffc001ffffc001ffff8001ffffc001ffffc001ffff8001ffffc001ffffc001ffff8001ffff8001ffffc001ffff8001ffffc001ffffc001ffff8001ffff80001fffc00007ff800003ff800000ff8000003c0000001c000000000000000000",
+    "axisFix": {
+      "shear": 0.13797,
+      "widen": 1.14111
+    }
   },
   "bed-cream": {
     "src": "items/oak-cozy/furniture/bed-cream.webp",
@@ -87,14 +103,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.504,
-      "y": 0.7529
+      "y": 0.7273
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 46302,
-    "hitMask": "0000000000000000000000000000000000300000007c000001ff800007ffe0000ffffc000fffff000fffffc00ffffff00ffffff80ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff005fffff0007ffff0003ffff0000ffff00003ff000000fe0000003e0000001e0000000c000000000000000000"
+    "hitMask": "0000000000000000000000000000000000300000007c000001ff800007ffe0000ffffc000fffff000fffffc00ffffff00ffffff80ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff005fffff0007ffff0003ffff0000ffff00003ff000000fe0000003e0000001e0000000c000000000000000000",
+    "axisFix": {
+      "shear": 0.09638,
+      "widen": 1.15024
+    }
   },
   "floor-lamp": {
     "src": "items/oak-cozy/furniture/floor-lamp.webp",
@@ -199,14 +219,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.4968,
-      "y": 0.6896
+      "y": 0.7025
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 28108,
-    "hitMask": "00000000000000000000000000000000000000000000000000000000000080000001c000000ff000003ffc00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00003ffc00001ff800000ff00000000000000000000000000000000000000000000000000000000000"
+    "hitMask": "00000000000000000000000000000000000000000000000000000000000080000001c000000ff000003ffc00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00007ffe00003ffc00001ff800000ff00000000000000000000000000000000000000000000000000000000000",
+    "axisFix": {
+      "shear": -0.01657,
+      "widen": 0.86211
+    }
   },
   "laptop": {
     "src": "items/oak-cozy/accessories/laptop.webp",
@@ -247,14 +271,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5028,
-      "y": 0.6862
+      "y": 0.6615
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 38360,
-    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0000ffff0003ffffe003fffffc01ffffff01ffffffc1ffffffc1dfffffc1cfffffc1ceffffc1fe3fffc1f80fffc1e00fffc1c00fffc0000fffc0000fffc0000fffc00007fd800001f80000007000000070000000000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0000ffff0003ffffe003fffffc01ffffff01ffffffc1ffffffc1dfffffc1cfffffc1ceffffc1fe3fffc1f80fffc1e00fffc1c00fffc0000fffc0000fffc0000fffc00007fd800001f80000007000000070000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.14634,
+      "widen": 1.13142
+    }
   },
   "future-wardrobe": {
     "src": "items/futuristic/furniture/future-wardrobe.webp",
@@ -263,14 +291,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5024,
-      "y": 0.8071
+      "y": 0.7936
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 37516,
-    "hitMask": "000000000038000000ff000003ffc00007fff00007fffe0007ffff8007ffffc007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe0007fffe0001fffe00007ffe00003ffe00000ffe000003e0000001c000000180000000000"
+    "hitMask": "000000000038000000ff000003ffc00007fff00007fffe0007ffff8007ffffc007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe0007fffe0001fffe00007ffe00003ffe00000ffe000003e0000001c000000180000000000",
+    "axisFix": {
+      "shear": 0.04263,
+      "widen": 1.09014
+    }
   },
   "future-shelf": {
     "src": "items/futuristic/furniture/future-shelf.webp",
@@ -279,14 +311,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.504,
-      "y": 0.8565
+      "y": 0.8515
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 39026,
-    "hitMask": "00000000003c000000ff800001fff00001fffe0001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8000bfff80000fff800007ff800001ff8000007e0000001c0000000800"
+    "hitMask": "00000000003c000000ff800001fff00001fffe0001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8000bfff80000fff800007ff800001ff8000007e0000001c0000000800",
+    "axisFix": {
+      "shear": 0.11584,
+      "widen": 1.03986
+    }
   },
   "future-bed": {
     "src": "items/futuristic/furniture/future-bed.webp",
@@ -295,14 +331,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5096,
-      "y": 0.716
+      "y": 0.6892
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 60002,
-    "hitMask": "00000000000000000000000000000000000180000007c000001fc000007fc00001ffc00007ffc0001ffff0003ffffc003ffffe003fffffc03fffffe03ffffff83ffffff83ffffffc3ffffffc3ffffffc1ffffffc03fffffc01fffffc007fffe0003fff80000ffe000007f8000003f0000001c000000000000000000000000000"
+    "hitMask": "00000000000000000000000000000000000180000007c000001fc000007fc00001ffc00007ffc0001ffff0003ffffc003ffffe003fffffc03fffffe03ffffff83ffffff83ffffffc3ffffffc3ffffffc1ffffffc03fffffc01fffffc007fffe0003fff80000ffe000007f8000003f0000001c000000000000000000000000000",
+    "axisFix": {
+      "shear": -0.00995,
+      "widen": 1.13934
+    }
   },
   "future-dresser": {
     "src": "items/futuristic/furniture/future-dresser.webp",
@@ -311,14 +351,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5064,
-      "y": 0.7344
+      "y": 0.7115
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 43642,
-    "hitMask": "000000000000000000000000000000000000000000f0000003fe00000fffc0001ffff0001ffffe001fffff801ffffff01ffffffc1ffffffc1ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff80cfffff8003ffff8000ffffc0003fff80000ffc000007f0000001e0000000e00000004000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000f0000003fe00000fffc0001ffff0001ffffe001fffff801ffffff01ffffffc1ffffffc1ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff80cfffff8003ffff8000ffffc0003fff80000ffc000007f0000001e0000000e00000004000000000000000000",
+    "axisFix": {
+      "shear": 0.10231,
+      "widen": 1.12321
+    }
   },
   "future-floor-lamp": {
     "src": "items/futuristic/furniture/future-floor-lamp.webp",
@@ -423,14 +467,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.502,
-      "y": 0.7386
+      "y": 0.711
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 53748,
-    "hitMask": "000000000000000000000000000000000000000000060000001f8000007fe00000fff80003fffe0007ffff8007ffffe007ffffe007ffffe00fffffe00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff003fffff001fffff0007fffe0001fff80000ffe000003f8000001e000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000060000001f8000007fe00000fff80003fffe0007ffff8007ffffe007ffffe007ffffe00fffffe00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff003fffff001fffff0007fffe0001fff80000ffe000003f8000001e000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.00795,
+      "widen": 1.16303
+    }
   },
   "future-art": {
     "src": "items/futuristic/wall/future-art.webp",
@@ -487,14 +535,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5028,
-      "y": 0.6943
+      "y": 0.6718
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 55586,
-    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0001ffff8003ffffe003fffffc01ffffff01ffffffc1ffffffc1ffffffc1fdffffc1ffffffc1ffffffc1e03fffc1801fffc1800fffc0000fffc0000fffc0000fffc0000fff800001fc0000007000000070000000200000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0001ffff8003ffffe003fffffc01ffffff01ffffffc1ffffffc1ffffffc1fdffffc1ffffffc1ffffffc1e03fffc1801fffc1800fffc0000fffc0000fffc0000fffc0000fff800001fc0000007000000070000000200000000000000000000000000",
+    "axisFix": {
+      "shear": 0.12692,
+      "widen": 1.1166
+    }
   },
   "industrial-chair": {
     "src": "items/industrial/furniture/industrial-chair.webp",
@@ -503,14 +555,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.514,
-      "y": 0.8135
+      "y": 0.8205
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 66684,
-    "hitMask": "00000000000040000001f8000001fe000003ff800003ffc00003ffe00003ffe0003fffc000ffffc003ffffc003f7ffc0018fffc001ffffc001ffff8001ffff8003ffff8001ffff8001ffff00007ffc00001ffc000007ce00000fdc00003ffe0000ffff0000f3fe0001c38e0000c3070000070700000702000003000000000000"
+    "hitMask": "00000000000040000001f8000001fe000003ff800003ffc00003ffe00003ffe0003fffc000ffffc003ffffc003f7ffc0018fffc001ffffc001ffff8001ffff8003ffff8001ffff8001ffff00007ffc00001ffc000007ce00000fdc00003ffe0000ffff0000f3fe0001c38e0000c3070000070700000702000003000000000000",
+    "axisFix": {
+      "shear": -0.02343,
+      "widen": 0.94949
+    }
   },
   "wardrobe-rack": {
     "src": "items/industrial/furniture/wardrobe-rack.webp",
@@ -519,14 +575,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5132,
-      "y": 0.7945
+      "y": 0.8198
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 66362,
-    "hitMask": "000000000000000001f0000007ff00000fffe0000ffffc000effff800fdffff004fbfff004df7ff004c3dfb004c07b3004c00f3004c0033004c0033004c0033004c0033004e0033005f8033007ff03300fffc3300ffffb300e7fff30041fffb00007fff00001fff000007fb800001f3800000300000003800000030000000000"
+    "hitMask": "000000000000000001f0000007ff00000fffe0000ffffc000effff800fdffff004fbfff004df7ff004c3dfb004c07b3004c00f3004c0033004c0033004c0033004c0033004e0033005f8033007ff03300fffc3300ffffb300e7fff30041fffb00007fff00001fff000007fb800001f3800000300000003800000030000000000",
+    "axisFix": {
+      "shear": 0.0673,
+      "widen": 0.85203
+    }
   },
   "industrial-shelf": {
     "src": "items/industrial/furniture/industrial-shelf.webp",
@@ -535,14 +595,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5044,
-      "y": 0.8399
+      "y": 0.8504
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 75916,
-    "hitMask": "000000000038000000ff000003ffe00003fff80003ffff0003ffffc003dfffc003f9ffc003fe7fc003ff8fc003ffffc003ffffc003ffffc003dfffc003fbffc003feffc003ffbec003ffefc003ffffc0037fffc003ffffc003ffffc003ffffc0033fffc0001fffc00007ffc00001ffc000007e4000001c0000000c0000000000"
+    "hitMask": "000000000038000000ff000003ffe00003fff80003ffff0003ffffc003dfffc003f9ffc003fe7fc003ff8fc003ffffc003ffffc003ffffc003dfffc003fbffc003feffc003ffbec003ffefc003ffffc0037fffc003ffffc003ffffc003ffffc0033fffc0001fffc00007ffc00001ffc000007e4000001c0000000c0000000000",
+    "axisFix": {
+      "shear": 0.04184,
+      "widen": 0.9239
+    }
   },
   "industrial-bed": {
     "src": "items/industrial/furniture/industrial-bed.webp",
@@ -567,14 +631,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5116,
-      "y": 0.6899
+      "y": 0.6682
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 42378,
-    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0000ffff8003ffffe003fffffc01ffffff81ffffffc1ffffffc1ffffffc1ffffffc1feffffc1f63fffc1c00fffc1c00fffc1c00fffc0000fffc0000fffc0000fffc00007fe800001f80000007000000070000000200000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000f0000001fe000007ffc0000ffff8003ffffe003fffffc01ffffff81ffffffc1ffffffc1ffffffc1ffffffc1feffffc1f63fffc1c00fffc1c00fffc1c00fffc0000fffc0000fffc0000fffc00007fe800001f80000007000000070000000200000000000000000000000000",
+    "axisFix": {
+      "shear": 0.14222,
+      "widen": 1.11246
+    }
   },
   "gamer-chair": {
     "src": "items/gamer/furniture/gamer-chair.webp",
@@ -599,14 +667,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5104,
-      "y": 0.8224
+      "y": 0.7999
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 33626,
-    "hitMask": "0000000000040000001f0000003fc00000fff00001fffc0001ffff0001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8000ffff8000bfff80000fff800007ff800001fc0000007800000030000000000000000000"
+    "hitMask": "0000000000040000001f0000003fc00000fff00001fffc0001ffff0001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8001ffff8000ffff8000bfff80000fff800007ff800001fc0000007800000030000000000000000000",
+    "axisFix": {
+      "shear": 0.04274,
+      "widen": 1.1812
+    }
   },
   "gamer-shelf": {
     "src": "items/gamer/furniture/gamer-shelf.webp",
@@ -615,14 +687,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.4984,
-      "y": 0.8339
+      "y": 0.8235
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 52166,
-    "hitMask": "00000000007c000000ff000003ffe00003fff80003fffe0003ffff8003ffffc003fdff8003ff7f8003ffdf8003ffff8003ffff8003ffff8003fdff8003ff7f8003ffdf8003ffff8003ffff8003ffff8003ffff8003ffff8003ffff80013fff80000fff800007ff800001ff800000ffc000003c0000001c0000001c0000000000"
+    "hitMask": "00000000007c000000ff000003ffe00003fff80003fffe0003ffff8003ffffc003fdff8003ff7f8003ffdf8003ffff8003ffff8003ffff8003fdff8003ff7f8003ffdf8003ffff8003ffff8003ffff8003ffff8003ffff8003ffff80013fff80000fff800007ff800001ff800000ffc000003c0000001c0000001c0000000000",
+    "axisFix": {
+      "shear": 0.04603,
+      "widen": 1.07989
+    }
   },
   "gamer-bed": {
     "src": "items/gamer/furniture/gamer-bed.webp",
@@ -631,14 +707,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5167,
-      "y": 0.7047
+      "y": 0.682
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 51154,
-    "hitMask": "000000000000000000000000000000000001800000078000001f8000007f800001ff800007ff80003fffe0003ffff8003ffffe003fffff803fffffe03ffffff03ffffff83ffffffe3ffffffe3ffffffe07fffffe01fffffe00fffff4003fffe0001fff800007fe000003f8000000e0000000c000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000001800000078000001f8000007f800001ff800007ff80003fffe0003ffff8003ffffe003fffff803fffffe03ffffff03ffffff83ffffffe3ffffffe3ffffffe07fffffe01fffffe00fffff4003fffe0001fff800007fe000003f8000000e0000000c000000000000000000000000000",
+    "axisFix": {
+      "shear": -0.0119,
+      "widen": 1.11461
+    }
   },
   "industrial-dresser": {
     "src": "items/industrial/furniture/industrial-dresser.webp",
@@ -647,14 +727,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5012,
-      "y": 0.7524
+      "y": 0.7265
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 57150,
-    "hitMask": "0000000000000000000000000000000000f0000001fc000007ff80000ffff0003ffffe003fffff801ffffff01ffffffc1ffffffc1ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff800fffff8003ffff8000ffffc0007fff80001ff8000007f0000001e0000000e000000000000000000"
+    "hitMask": "0000000000000000000000000000000000f0000001fc000007ff80000ffff0003ffffe003fffff801ffffff01ffffffc1ffffffc1ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff800fffff8003ffff8000ffffc0007fff80001ff8000007f0000001e0000000e000000000000000000",
+    "axisFix": {
+      "shear": 0.14016,
+      "widen": 1.13733
+    }
   },
   "gamer-dresser": {
     "src": "items/gamer/furniture/gamer-dresser.webp",
@@ -663,14 +747,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.4984,
-      "y": 0.7681
+      "y": 0.7322
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 46710,
-    "hitMask": "0000000000000000000000000078000000fe000003ffc00007fff0000ffffc001fffff800fffffe00ffffff00ffffff80ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff0007ffff0001ffff00007fff00001fe000000fc0000003c0000001c000000000000000000"
+    "hitMask": "0000000000000000000000000078000000fe000003ffc00007fff0000ffffc001fffff800fffffe00ffffff00ffffff80ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff0007ffff0001ffff00007fff00001fe000000fc0000003c0000001c000000000000000000",
+    "axisFix": {
+      "shear": 0.109,
+      "widen": 1.21006
+    }
   },
   "gamer-floor-lamp": {
     "src": "items/gamer/furniture/gamer-floor-lamp.webp",
@@ -695,14 +783,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5048,
-      "y": 0.6194
+      "y": 0.5781
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 67010,
-    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000000000003c0000007f000001ffe00007fff8000ffffe003fffff807fffffe03ffffff80ffffffc03ffffff01fffffe007ffff8001ffff00007ffe00003ff800000ff0000003e00000008000000000000000000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000000000003c0000007f000001ffe00007fff8000ffffe003fffff807fffffe03ffffff80ffffffc03ffffff01fffffe007ffff8001ffff00007ffe00003ff800000ff0000003e00000008000000000000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.03537,
+      "widen": 1.19478
+    }
   },
   "gamer-lamp": {
     "src": "items/gamer/accessories/gamer-lamp.webp",
@@ -743,14 +835,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5223,
-      "y": 0.7828
+      "y": 0.7791
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 50106,
-    "hitMask": "000000000000000000000000000e0000003fc00000fff00003fffc0003ffff0003ffffc003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe001ffffe0001fffe0000fffe00003ffc00000fc0000007800000030000000000000000000"
+    "hitMask": "000000000000000000000000000e0000003fc00000fff00003fffc0003ffff0003ffffc003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe001ffffe0001fffe0000fffe00003ffc00000fc0000007800000030000000000000000000",
+    "axisFix": {
+      "shear": -0.00707,
+      "widen": 1.02549
+    }
   },
   "gamer-headset": {
     "src": "items/gamer/accessories/gamer-headset.webp",
@@ -839,14 +935,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.6109
+      "y": 0.5659
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 66000,
-    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000080000001e0000007fc00001fff00003fffc000fffff001fffffc07ffffff03ffffffc1ffffffe07fffffc01fffff8007ffff0003fffc0000fff800003ff000000fc0000007800000000000000000000000000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000080000001e0000007fc00001fff00003fffc000fffff001fffffc07ffffff03ffffffc1ffffffe07fffffc01fffff8007ffff0003fffc0000fff800003ff000000fc0000007800000000000000000000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.0601,
+      "widen": 1.22039
+    }
   },
   "gamer-games": {
     "src": "items/gamer/accessories/gamer-games.webp",
@@ -855,14 +955,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5068,
-      "y": 0.7436
+      "y": 0.7292
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 47058,
-    "hitMask": "000000000000000000000000000f8000003ff00000fff80003fffe0007ffff8007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe003ffffe000ffffe0007fff80001ffe000007f8000003e0000000c000000000000000000000000000"
+    "hitMask": "000000000000000000000000000f8000003ff00000fff80003fffe0007ffff8007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe003ffffe000ffffe0007fff80001ffe000007f8000003e0000000c000000000000000000000000000",
+    "axisFix": {
+      "shear": -0.01276,
+      "widen": 1.09526
+    }
   },
   "industrial-lamp": {
     "src": "items/industrial/accessories/industrial-lamp.webp",
@@ -951,14 +1055,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.506,
-      "y": 0.683
+      "y": 0.6581
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 46456,
-    "hitMask": "000000000000000000000000000000000000000000e0000003fc00000fff80001fffe0003ffffc007fffff003fffffe03ffffff83ffffffe3ffffffe3ffffffe3ffffffc3ff7fffc3fe1fffc07807ffc03807ffc00007ffc00007ffc00007ffe00007fe000007fc000000f000000070000000200000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000e0000003fc00000fff80001fffe0003ffffc007fffff003fffffe03ffffff83ffffffe3ffffffe3ffffffe3ffffffc3ff7fffc3fe1fffc07807ffc03807ffc00007ffc00007ffc00007ffe00007fe000007fc000000f000000070000000200000000000000000000000000",
+    "axisFix": {
+      "shear": 0.10166,
+      "widen": 1.12364
+    }
   },
   "shelf-small": {
     "src": "items/oak-cozy/furniture/shelf-small.webp",
@@ -967,14 +1075,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5076,
-      "y": 0.7507
+      "y": 0.7188
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 46442,
-    "hitMask": "000000000000000000000000000000000000000000f8000003fe000007ffc0001ffff0001ffffe001fffff801ffffff01ffffff81ffffffc1ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff800fffff8003ffff8000ffff80003fff80000ffc000003f0000001f00000007000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000f8000003fe000007ffc0001ffff0001ffffe001fffff801ffffff01ffffff81ffffffc1ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff81ffffff800fffff8003ffff8000ffff80003fff80000ffc000003f0000001f00000007000000000000000000",
+    "axisFix": {
+      "shear": 0.12684,
+      "widen": 1.1733
+    }
   },
   "side-table": {
     "src": "items/oak-cozy/furniture/side-table.webp",
@@ -983,14 +1095,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.7004
+      "y": 0.6836
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 40042,
-    "hitMask": "000000000000000000000000000000000000000000070000001fe000007ff80001ffff0003ffffc007ffffe00ffffff007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe0077fffe0071ffee00707f8e00701f0e00000f0400000f0000000f0000000f0000000f0000000400000000000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000070000001fe000007ff80001ffff0003ffffc007ffffe00ffffff007ffffe007ffffe007ffffe007ffffe007ffffe007ffffe0077fffe0071ffee00707f8e00701f0e00000f0400000f0000000f0000000f0000000f0000000400000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.08028,
+      "widen": 1.10646
+    }
   },
   "rug-cream": {
     "src": "items/oak-cozy/furniture/rug-cream.webp",
@@ -1015,14 +1131,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5056,
-      "y": 0.6057
+      "y": 0.5592
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 63372,
-    "hitMask": "0000000000000000000000000000000000000000000000000000000000000000001c0000003f000000ffc00001fff80007fffe001fffff803fffffe07ffffff83ffffffc0ffffffe03fffffc00fffff8003ffff0001fffc00007ff800001fe000000fc0000003800000000000000000000000000000000000000000000000000"
+    "hitMask": "0000000000000000000000000000000000000000000000000000000000000000001c0000003f000000ffc00001fff80007fffe001fffff803fffffe07ffffff83ffffffc0ffffffe03fffffc00fffff8003ffff0001fffc00007ff800001fe000000fc0000003800000000000000000000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.05894,
+      "widen": 1.2242
+    }
   },
   "vase": {
     "src": "items/oak-cozy/accessories/vase.webp",
@@ -1063,14 +1183,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5104,
-      "y": 0.687
+      "y": 0.6568
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 52646,
-    "hitMask": "000000000000000000000000000000000000000000000000007c000001ff000003ffe00007fff80007fffe0007ffff8007ffffe007fffff007fffff007fffff007fffff007fffff007fffff007fffff0007ffff0001ffff00007fff00001ffe00000ff0000003e0000001c000000000000000000000000000000000000000000"
+    "hitMask": "000000000000000000000000000000000000000000000000007c000001ff000003ffe00007fff80007fffe0007ffff8007ffffe007fffff007fffff007fffff007fffff007fffff007fffff007fffff0007ffff0001ffff00007fff00001ffe00000ff0000003e0000001c000000000000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.09856,
+      "widen": 1.18922
+    }
   },
   "print-botanical": {
     "src": "items/oak-cozy/wall/print-botanical.webp",
@@ -1287,14 +1411,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.514,
-      "y": 0.7055
+      "y": 0.6899
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 39118,
-    "hitMask": "00000000000000000000000000000000000000000000000000078000001fe000003ffc0000ffff0003ffffe007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff003ffffe000ffff80003ffe00000ffc000003f0000000e00000000000000000000000000000000000"
+    "hitMask": "00000000000000000000000000000000000000000000000000078000001fe000003ffc0000ffff0003ffffe007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff007fffff003ffffe000ffff80003ffe00000ffc000003f0000000e00000000000000000000000000000000000",
+    "axisFix": {
+      "shear": 0.10191,
+      "widen": 1.09823
+    }
   },
   "industrial-basket": {
     "src": "items/industrial/accessories/industrial-basket.webp",
@@ -1303,14 +1431,18 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.506,
-      "y": 0.7207
+      "y": 0.7042
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 122846,
-    "hitMask": "00000000000000000000000000000000000000000000000003fe000007ff800007d5f0001fd53c001dfd2f801fd725e01fd5e5781ffd3d781fdf2ff80fffa7f80fffe7f80ffffff80effff781fffdff80fffefe803f3fff800ffdf78003b79f8001fcfe000077fc00001ff0000007e0000003800000000000000000000000000"
+    "hitMask": "00000000000000000000000000000000000000000000000003fe000007ff800007d5f0001fd53c001dfd2f801fd725e01fd5e5781ffd3d781fdf2ff80fffa7f80fffe7f80ffffff80effff781fffdff80fffefe803f3fff800ffdf78003b79f8001fcfe000077fc00001ff0000007e0000003800000000000000000000000000",
+    "axisFix": {
+      "shear": 0.08501,
+      "widen": 1.09143
+    }
   },
   "cat": {
     "src": "items/oak-cozy/companions/cat.webp",

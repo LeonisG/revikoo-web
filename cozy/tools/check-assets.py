@@ -85,16 +85,23 @@ def inspect(sprite_id, sprite):
         return None
     issues = []
 
-    # AXIS — only decidable for pieces that lie in the floor plane.
-    if spec.get('placement') == 'floor' and sprite_id.startswith('rug') or 'rug' in sprite_id:
+    # AXIS — only decidable for pieces that lie in the floor plane, where the
+    # silhouette edges ARE the floor axes. Judged after the measured correction
+    # from tools/measure-axes.py, since that is what the room actually draws.
+    fix = sprite.get('axisFix')
+    if 'rug' in sprite_id:
         edges = bottom_edges(alpha.load(), width, height)
         if edges and edges[0] and edges[1]:
             (ml, el), (mr, er) = edges
+            if fix:
+                ml = (fix['shear'] + ml) / fix['widen']
+                mr = (fix['shear'] + mr) / fix['widen']
             left, right = math.degrees(math.atan(abs(ml))), math.degrees(math.atan(abs(mr)))
+            note = ' after correction' if fix else ''
             if abs(left - right) > AXIS_TOLERANCE:
-                issues.append(f'AXIS  edges disagree: {left:.1f}° vs {right:.1f}° — not one isometric plane')
+                issues.append(f'AXIS  edges disagree{note}: {left:.1f}° vs {right:.1f}° — not one isometric plane')
             elif abs((left + right) / 2 - CANON_DEG) > AXIS_TOLERANCE:
-                issues.append(f'AXIS  {(left + right) / 2:.1f}° vs room {CANON_DEG:.1f}°')
+                issues.append(f'AXIS  {(left + right) / 2:.1f}° vs room {CANON_DEG:.1f}°{note}')
 
     # GROUND — pivot plausibility and baked shadow.
     pivot = sprite.get('pivot') or {}
@@ -107,7 +114,7 @@ def inspect(sprite_id, sprite):
     # SCALE — share of the footprint the art fills.
     ratio = None
     if spec.get('placement') == 'floor' and sprite.get('width'):
-        visible = sprite['width'] * (solid[2] - solid[0]) / width
+        visible = sprite['width'] * (solid[2] - solid[0]) / width * (fix['widen'] if fix else 1)
         ratio = visible / (CELL * (spec['w'] + spec['h']))
         if not SCALE_BAND[0] <= ratio <= SCALE_BAND[1]:
             issues.append(f'SCALE fills {ratio:.0%} of its {spec["w"]}×{spec["h"]} footprint')

@@ -22,9 +22,13 @@ function contactShadow(item, placement) {
   const span = CELL * (w + h);                      // the footprint's screen width
   const width = span / SYMBOL.w * 100;
   const height = span * CAMERA.tilt / SYMBOL.h * 100;
-  // Something resting on a desk sits closer to it than a wardrobe does to the floor.
-  const tight = placement.on ? .52 : .84;
-  return `<span class="contact" style="--fw:${(width * tight).toFixed(2)};--fh:${(height * tight).toFixed(2)}"></span>`;
+  // A wardrobe blocks far more light than a mug, so the shadow grows with the
+  // object rather than staying a fixed share of the tile: bigger things pool
+  // more darkness and spread further past their own base.
+  const area = w * h;
+  const spread = placement.on ? .52 : Math.min(1.06, .78 + .05 * (area - 1));
+  const weight = placement.on ? .72 : Math.min(1.25, .9 + .07 * (area - 1));
+  return `<span class="contact" style="--fw:${(width * spread).toFixed(2)};--fh:${(height * spread).toFixed(2)};--shadow-weight:${weight.toFixed(2)}"></span>`;
 }
 
 export function createRoom() {

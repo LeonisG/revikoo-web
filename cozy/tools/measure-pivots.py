@@ -31,6 +31,7 @@ REGISTRY = ROOT / 'assets' / 'sprites.mjs'
 SOLID = 160          # alpha that counts as the object itself
 FAINT = 40           # alpha that counts as any ink at all, shadow included
 FOOTPRINTS = json.loads((ROOT / 'tools' / 'footprints.json').read_text(encoding='utf-8'))
+SPRITES = {}
 
 
 def measure(master: Path, sprite_id: str, art_width: float, tilt: float):
@@ -48,8 +49,11 @@ def measure(master: Path, sprite_id: str, art_width: float, tilt: float):
             'pivot': {'x': round(centre / width, 4), 'y': round((solid[1] + solid[3]) / 2 / height, 4)},
             'shadowBleed': 0.0,
         }
-    # Walk back from the front corner to the centre of the base diamond.
-    depth = (solid[2] - solid[0]) * tilt / 2
+    # Walk back from the front corner to the centre of the base diamond. The
+    # axis correction widens the sprite, so the base it will actually stand on
+    # is wider than the one in the master — measure-axes.py runs first.
+    widen = (SPRITES.get(sprite_id, {}).get('axisFix') or {}).get('widen', 1)
+    depth = (solid[2] - solid[0]) * widen * tilt / 2
     return {
         'pivot': {'x': round(centre / width, 4), 'y': round((solid[3] - depth) / height, 4)},
         'shadowBleed': round((faint[3] - solid[3]) / height, 4),
@@ -66,6 +70,7 @@ tilt = json.loads((ROOT / 'logic' / 'room-camera.mjs').read_text(encoding='utf-8
 raw = REGISTRY.read_text(encoding='utf-8')
 head, body = raw.split('export const SPRITES = ', 1)
 sprites = json.loads(body.strip().removesuffix(';'))
+SPRITES.update(sprites)
 
 
 def walk(entry):
