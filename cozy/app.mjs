@@ -13,6 +13,7 @@ const engine = createEngine(storage, { debug: DEBUG });
 const room = createRoom(), audio = createAudio();
 const edit = createEdit(engine, room, { onChange: () => update(), onError: message => room.reward(message) });
 const panels = createPanels(engine, room, audio, edit);
+edit.setConfirm(panels.confirm);
 const setup = createSetup(engine, { onFinish: () => { update(); edit.open(); } });
 let timerFailed = false;
 

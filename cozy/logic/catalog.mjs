@@ -13,12 +13,21 @@
 //   set         collection it belongs to, for the completion bonuses
 //   comfort/focus  the two soft room values; no RPG, just a reason to choose
 
-const item = (id, name, category, price, extra = {}) => ({
+const item = (id, name, category, price, extra = {}) => {
+  const definition = {
   id, name, category, price, asset: id,
   w: 1, h: 1, placement: 'floor', rotatable: false,
   surface: false, top: 0, flat: false, starter: false, set: null,
   comfort: 0, focus: 0, glow: 0, ...extra,
-});
+  };
+  definition.family = extra.family || (category === 'Luz' || id === 'chair' ? 'green-retro' : id.includes('cream') ? 'soft-cream' : 'oak-study');
+  definition.footprint = { width: definition.w, depth: definition.h };
+  definition.sprites = Object.fromEntries([0, 90, 180, 270].map(r => [r, definition.rotatable ? `${id}--${r}` : id]));
+  definition.surfaces = definition.surface ? Array.from({ length: definition.w }, (_, i) => ({ x: i + .5, y: .5 })) : [];
+  definition.animationStates = definition.companion ? { idle: id, sleep: id, sit: null } : {};
+  definition.unlock = extra.unlock || null;
+  return definition;
+};
 
 export const CATEGORIES = ['Muebles', 'Decoración', 'Plantas', 'Luz', 'Herramientas', 'Compañía'];
 
@@ -35,6 +44,7 @@ export const ITEMS = [
   item('desk', 'Escritorio sencillo', 'Muebles', 180, { w: 2, h: 1, surface: true, top: 142, rotatable: true, focus: 2, set: 'scholar' }),
   item('desk-wide', 'Escritorio largo', 'Muebles', 290, { w: 3, h: 1, surface: true, top: 142, rotatable: true, focus: 3, set: 'scholar' }),
   item('chair', 'Silla tapizada', 'Muebles', 90, { rotatable: true, comfort: 2 }),
+  item('bed-cream', 'Cama de lino · Soft Cream', 'Muebles', 240, { w: 3, h: 2, rotatable: true, comfort: 3, family: 'soft-cream' }),
   item('bookshelf', 'Biblioteca alta', 'Muebles', 240, { w: 2, h: 1, surface: true, top: 300, rotatable: true, focus: 1, comfort: 1, set: 'scholar' }),
   item('shelf-small', 'Estante bajo', 'Muebles', 120, { surface: true, top: 118, rotatable: true }),
   item('drawers', 'Cajonera', 'Muebles', 150, { surface: true, top: 120, rotatable: true, comfort: 1, set: 'vintage' }),
@@ -88,6 +98,15 @@ export const ITEMS = [
 
 export const CATALOG = Object.freeze(Object.fromEntries(ITEMS.map(i => [i.id, Object.freeze(i)])));
 export const STARTER_ITEMS = ITEMS.filter(i => i.starter).map(i => i.id);
+
+/** Access and ownership are independent: an expensive available item is not locked. */
+export function itemStatus(state, id) {
+  const definition = CATALOG[id];
+  const locked = !definition || (definition.unlock && !state.achievements.includes(definition.unlock));
+  const stored = state.inventory[id] || 0;
+  const placed = Object.values(state.room.placed).filter(p => p.item === id).length;
+  return { access: locked ? 'LOCKED' : 'AVAILABLE', owned: stored + placed, stored, placed };
+}
 
 /** Items in a set, and how many of them the player owns. */
 export function setProgress(setId, owned) {

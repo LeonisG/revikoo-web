@@ -1,3 +1,4 @@
+import { CATALOG } from '../logic/catalog.mjs';
 const root = new URL('./', import.meta.url);
 
 // The room's own layers come in one set per size, so choosing a bigger room
@@ -17,4 +18,9 @@ export const OBJECTS = new URL('objects.svg', root).href;
 // Optional per-object overrides, for swapping a drawn symbol for a bitmap later:
 // mushroom: { type: 'image', src: new URL('mushroom-lamp.webp', root).href }
 export const ITEM_ASSETS = {};
-export const objectAsset = id => ITEM_ASSETS[id] || { type: 'symbol', src: `${OBJECTS}#${id}` };
+export const objectAsset = (id, rotation = 0, state = 'idle') => {
+  const override = ITEM_ASSETS[id];
+  const symbol = CATALOG[id]?.sprites[rotation] || id;
+  return override?.sprites?.[rotation] || override?.states?.[state] || override
+    || { type: 'symbol', src: `${OBJECTS}#${symbol}` };
+};

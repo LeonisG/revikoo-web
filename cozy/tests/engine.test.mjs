@@ -224,3 +224,79 @@ test('the productivity loop still pays, and pays only once', () => {
   assert.equal(g.state.books[0].completed, true);
   assert.equal(ownedIds(g.state).includes('journal'), true);
 });
+
+test('surface instances follow all four host orientations and survive reload', () => {
+  const f = built(), g = f.engine;
+  g.buyItem('desk');
+  const host = g.placeItem('desk', { gx: 0, gy: 0 }).key;
+  const child = g.placeItem('journal', { gx: 1, gy: 0 }).key;
+  for (const [rotation, expected] of [[0,[3,2]], [90,[2,3]], [180,[2,2]], [270,[2,2]]]) {
+    g.moveItem(host, { gx: 2, gy: 2, rotation });
+    const p = g.state.room.placed[child];
+    assert.equal(p.parentSurfaceId, host);
+    assert.equal(p.surfaceSlot, 1);
+    assert.deepEqual([p.gx,p.gy], expected);
+    assert.deepEqual(f.reload().state.room.placed, g.state.room.placed);
+    const order = paintOrder({ placed:g.state.room.placed,cells:5 },CATALOG);
+    assert.ok(order.find(o=>o.key===child).layer > order.find(o=>o.key===host).layer);
+  }
+  g.storeItem(host);
+  assert.equal(g.state.inventory.journal, 1);
+  assert.equal(g.state.inventory.desk, 1);
+  assert.equal(Object.keys(g.state.room.placed).length, 0);
+});
+
+test('surface validation rejects forged parents and occupied slots atomically', () => {
+  const {engine:g}=built(); g.buyItem('desk');
+  const host=g.placeItem('desk',{gx:0,gy:0}).key;
+  g.placeItem('journal',{gx:0,gy:0,parentSurfaceId:host,surfaceSlot:0});
+  const before=g.state;
+  for(const p of [{parentSurfaceId:'missing',surfaceSlot:0},{parentSurfaceId:host,surfaceSlot:9},{parentSurfaceId:host,surfaceSlot:0}]) {
+    assert.throws(()=>g.placeItem('timer',{gx:0,gy:0,...p}));
+    assert.deepEqual(g.state,before);
+  }
+});
+
+test('disjoint rugs coexist, overlaps fail, and furniture can stand on rugs', () => {
+  const {engine:g}=built(); g.buyItem('rug-cream');g.buyItem('rug-moss');g.buyItem('chair');
+  g.placeItem('rug-cream',{gx:0,gy:0});
+  assert.throws(()=>g.placeItem('rug-moss',{gx:1,gy:1}));
+  g.placeItem('rug-moss',{gx:2,gy:2});g.placeItem('chair',{gx:0,gy:0});
+  assert.equal(Object.keys(g.state.room.placed).length,3);
+});
+
+test('malformed grid coordinates and unsupported rotations never consume inventory', () => {
+  const {engine:g}=built(); g.buyItem('desk'); const before=g.state;
+  for(const p of [{gx:.5,gy:0},{gx:0,gy:Infinity},{gx:0,gy:0,rotation:45},{gx:0,gy:0,rotation:-90},{gx:NaN,gy:0}]) {
+    assert.throws(()=>g.placeItem('desk',p));assert.deepEqual(g.state,before);
+  }
+});
+
+test('selling a placed host refunds only the host and safely stores its accessories', () => {
+  const {engine:g}=built();g.buyItem('desk');const host=g.placeItem('desk',{gx:0,gy:0}).key;
+  g.placeItem('journal',{gx:0,gy:0}); const coins=g.state.coins;
+  g.sellPlaced(host); assert.equal(g.state.coins,coins+135);
+  assert.equal(g.state.inventory.journal,1);assert.deepEqual(g.state.room.placed,{});
+  assert.throws(()=>g.sellPlaced(host));assert.equal(g.state.coins,coins+135);
+});
+
+test('older grid saves bind surface ownership without resetting progress or revision', () => {
+  const f=built(),g=f.engine;g.buyItem('desk');const host=g.placeItem('desk',{gx:0,gy:0}).key;
+  const child=g.placeItem('journal',{gx:0,gy:0}).key;
+  const saved=g.state;delete saved.room.placed[child].parentSurfaceId;delete saved.room.placed[child].surfaceSlot;
+  f.backend.setItem('test',JSON.stringify(saved));
+  const next=f.reload();assert.equal(next.state.room.placed[child].parentSurfaceId,host);
+  assert.equal(next.state.revision,saved.revision);assert.equal(next.state.coins,saved.coins);
+  next.moveItem(host,{gx:2,gy:1,rotation:90});
+  assert.equal(next.state.room.placed[child].gx,2);
+});
+
+test('orphan accessories from older grid saves are recovered without loss', () => {
+  const f=built(),saved=f.engine.state;
+  delete saved.inventory.journal;
+  saved.room.placed.orphan={item:'journal',gx:2,gy:2,rotation:0,on:true};
+  f.backend.setItem('test',JSON.stringify(saved));
+  const g=f.reload();assert.equal(g.state.inventory.journal,1);
+  assert.deepEqual(g.state.room.placed,{});assert.equal(g.state.coins,saved.coins);
+  g.preference('sound',true);assert.equal(f.reload().state.inventory.journal,1);
+});

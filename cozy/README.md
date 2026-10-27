@@ -1,4 +1,4 @@
-# Cozy Room · V0.2 — constructor de habitación
+# Cozy Room · constructor isométrico con arrastre
 
 Empiezas con una habitación vacía y un presupuesto. Lo que haces en tu día —tareas,
 sesiones de concentración, lectura— te da monedas, y con ellas amueblas y reorganizas
@@ -25,7 +25,7 @@ No hay instalación de dependencias, compilación, backend, fuentes remotas ni C
 ## El bucle
 
 1. Eliges el tamaño de la habitación y gastas el presupuesto inicial en lo básico.
-2. Colocas lo que has comprado sobre la rejilla, en modo **Editar**.
+2. Arrastras lo que has comprado desde la bandeja a la rejilla, en modo **Editar**.
 3. Haces cosas reales: tareas, foco, lectura. Eso da monedas.
 4. Compras, colocas, recolocas, vendes lo que no encaja.
 5. La habitación sube de nivel, se completan colecciones y aparecen compañeros.
@@ -86,19 +86,38 @@ una celda es simplemente `gx + gy`: cuanto mayor, más cerca del espectador. Esa
 la que ordena el pintado.
 
 `tools/draw-room.mjs` y `tools/draw-objects.mjs` usan exactamente la misma proyección
-(`tools/lib.mjs`). Si cambia la geometría, cambia en `lib.mjs` y en `grid.mjs`: son los
-dos únicos sitios.
+(`tools/lib.mjs` importa las constantes de `grid.mjs`). La geometría se define
+una sola vez en `logic/grid.mjs`.
 
 ### Reglas de colocación
 
 - **suelo**: ocupa sus celdas; nadie más puede ocuparlas.
-- **superficie**: necesita apoyarse en un mueble con `surface: true`, y solo cabe una
-  cosa por mueble. La habitación lo eleva hasta la cara superior de su anfitrión
+- **superficie**: necesita apoyarse en un mueble con `surface: true`; cada slot local
+  admite un accesorio. Se guardan `parentSurfaceId` y `surfaceSlot`. La habitación lo eleva hasta la cara superior de su anfitrión
   (`top`), así que un flexo sobre un escritorio se dibuja sobre el escritorio.
 - **pared**: cuelga en uno de los cuatro huecos de cada pared. No choca con el suelo.
 - **alfombras** (`flat: true`) se tumban bajo todo lo demás y comparten sus celdas.
 
-Girar un objeto solo intercambia su huella: un escritorio de 2×1 girado es de 1×2.
+Girar intercambia la huella y selecciona un sprite propio: un escritorio de 2×1
+girado es de 1×2. Mover o girar un mueble lleva consigo sus accesorios. Guardarlo o
+venderlo devuelve los accesorios al inventario. Alfombras separadas pueden coexistir;
+dos alfombras no pueden compartir celdas.
+
+## Construir
+
+Arrastra desde la bandeja con ratón o toque. El objeto aparece translúcido sobre su
+huella; verde suave si cabe y coral si no. Soltar confirma solo si es válido.
+También puedes elegir un objeto, moverlo con flechas, girarlo con R y colocarlo con
+Enter o el botón Colocar. Esc/Cancelar conserva exactamente el estado previo.
+
+Un clic, pulsación larga, clic secundario o Enter sobre un objeto abre Mover,
+Girar, Guardar y Vender. Comprar ofrece **Colocar ahora**. El presupuesto inicial
+es 450: en la habitación pequeña permite escritorio, silla, estante bajo, vela y
+planta (426 en total). Las partidas existentes conservan sus monedas.
+
+El controlador usa Pointer Events, captura del puntero y un umbral de movimiento.
+No escribe durante el drag. La misma validación de `grid.mjs` alimenta el ghost y
+la transacción final. El desplazamiento libre en píxeles nunca se persiste.
 
 ## Añadir un objeto
 
@@ -112,6 +131,12 @@ Girar un objeto solo intercambia su huella: un escritorio de 2×1 girado es de 1
 4. Abrir `tools/preview.html` para verlo a escala sobre su huella.
 
 No hace falta tocar colocación, pintado, tienda ni economía: todo sale de la definición.
+
+La [ASSET BIBLE](./ASSET-BIBLE.md) fija cámara, materiales, paleta, tamaños, pivotes,
+familias y exportación. Los muebles rotables se generan desde `tools/furniture.mjs`;
+los accesorios desde `tools/draw-objects.mjs`. La hoja de contacto incluye un
+selector de orientación. Son SVG originales preparados para sustitución por arte
+final, usando el mismo manifiesto para habitación, tienda, inventario y ghost.
 
 ## Iluminación
 
@@ -139,11 +164,16 @@ historial de foco y preferencias, y los objetos que ya estaban comprados vuelven
 unidades guardadas. La distribución en los diez huecos fijos de la V0.1 no sobrevive a
 la rejilla, así que la habitación se vuelve a montar desde cero.
 
+Las partidas de la V0.2 conservan su distribución. Al cargar se vinculan los
+accesorios antiguos a su anfitrión sin reiniciar monedas ni productividad; estos
+campos adicionales se persisten con la siguiente acción. Se mantiene la clave v2.
+
 ## Pruebas
 
 ```sh
 node --test tests/engine.test.mjs     # reglas, rejilla, economía, migración
 node tests/browser.cjs                # QA de navegador, necesita Playwright
+node tests/builder.cjs                # drag real, touch, cancel, superficies, compra
 ```
 
 Las pruebas de navegador son opcionales y no son dependencia de producción. Usar

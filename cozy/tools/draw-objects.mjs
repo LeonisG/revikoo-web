@@ -8,6 +8,8 @@
  * from its own base — the room lifts it to the top of whatever holds it up.
  */
 import { writeFileSync } from 'node:fs';
+import { ITEMS } from '../logic/catalog.mjs';
+import { furnitureSprite } from './furniture.mjs';
 import { footprintProjection, contact, ellipse, pts, polygon, line, MAT, CELL, SYM, DEFS, NL } from './lib.mjs';
 
 const base = new URL('../assets/', import.meta.url);
@@ -270,6 +272,17 @@ onWall('goal-board', `<rect x="-64" y="-118" width="128" height="114" rx="5" fil
   + [0, 1, 2, 3].map(i => `<g transform="translate(-44 ${-96 + i * 22})"><rect width="12" height="12" rx="2" fill="none" stroke="#9fc4ae" stroke-width="2.5"/>`
     + (i < 2 ? `<path d="M2 6l4 4 7-9" stroke="#e8c87f" stroke-width="2.5" fill="none" stroke-linecap="round"/>` : '')
     + `<path d="M22 6h${48 - i * 7}" stroke="#7da58f" stroke-width="3" stroke-linecap="round"/></g>`).join(''));
+
+// The shared art bible now governs the entire atlas. Legacy decorative drawings
+// use the same subtle outline; furniture has four independently rendered views.
+for (const item of ITEMS) {
+  if (item.rotatable) {
+    for (const rotation of [0, 90, 180, 270]) symbols[`${item.id}--${rotation}`] = furnitureSprite(item, rotation);
+    symbols[item.id] = `<use href="#${item.id}--0"/>`;
+  } else if (symbols[item.id]) {
+    symbols[item.id] = `<g stroke="#493d32" stroke-width="1.25" stroke-linejoin="round">${symbols[item.id]}</g>`;
+  }
+}
 
 writeFileSync(new URL('objects.svg', base),
   `<svg xmlns="http://www.w3.org/2000/svg" fill="none">${DEFS}${NL}`

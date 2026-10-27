@@ -1,244 +1,238 @@
-import { CATALOG, ROOM_SIZES } from '../logic/config.mjs';
-import { placementError, cellsOf, footprint, cellPolygon, anchorOf, wallAnchor, WALL_SLOTS } from '../logic/grid.mjs';
-import { art, escapeHTML, icon } from './helpers.mjs';
+import { CATALOG, ROOM_SIZES, GAME_CONFIG } from '../logic/config.mjs';
+import { placementError, footprint, cellPolygon, wallAnchor, WALL_SLOTS, paintOrder, occupancy, bindSurface, surfacePosition, toStage, CELL } from '../logic/grid.mjs';
+import { art, escapeHTML } from './helpers.mjs';
 
-/**
- * Edit mode: the grid appears, the drawer opens and the room becomes the
- * interface. There are only two things to hold — something from the drawer that
- * is not placed yet, or something already in the room that is being moved — and
- * both behave the same from the moment they are picked up.
- */
+// A gesture is speculative: only a valid release/Enter writes to the engine.
 export function createEdit(engine, room, { onChange = () => {}, onError = () => {} } = {}) {
-  const app = document.querySelector('#app');
-  const stage = document.querySelector('#room-stage');
-  const bar = document.querySelector('#edit-bar');
-  const tray = document.querySelector('#edit-tray');
-  const heldBar = document.querySelector('#held-bar');
-  const ghost = document.querySelector('#ghost-overlay');
-  const hint = document.querySelector('#edit-hint');
-
-  let editing = false;
-  // held = { item, rotation, from: 'tray' | key }  — null when nothing is picked up.
-  let held = null, hover = null;
-
+  const app = document.querySelector('#app'), stage = document.querySelector('#room-stage');
+  const bar = document.querySelector('#edit-bar'), tray = document.querySelector('#edit-tray');
+  const heldBar = document.querySelector('#held-bar'), ghost = document.querySelector('#ghost-overlay');
+  const objects = document.querySelector('#room-objects'), hint = document.querySelector('#edit-hint');
+  const context = document.createElement('div');
+  context.className = 'object-actions'; context.hidden = true; context.setAttribute('role', 'group');
+  context.setAttribute('aria-label', 'Editar objeto'); app.append(context);
+  hint.setAttribute('role', 'status'); hint.setAttribute('aria-live', 'polite');
+  let editing = false, held = null, hover = null, gesture = null, selected = null, suppressClick = false, longPress, confirmSale;
   const cells = () => ROOM_SIZES[engine.state.room.size].cells;
+  const say = text => { if (hint.textContent !== text) hint.textContent = text; };
   const isEditing = () => editing;
-
   function open() {
-    if (editing) return;
-    editing = true;
-    app.classList.add('editing');
-    bar.hidden = false;
-    document.querySelector('#edit-toggle').setAttribute('aria-pressed', 'true');
-    refresh();
+    room.view('room'); if (editing) return;
+    editing = true; app.classList.add('editing'); bar.hidden = false;
+    document.querySelector('#edit-toggle').setAttribute('aria-pressed', 'true'); refresh();
+  }
+  function clearPreview() {
+    ghost.innerHTML = '';
+    objects.querySelectorAll('.placement-preview').forEach(el => el.remove());
+    objects.querySelectorAll('.is-moving').forEach(el => el.classList.remove('is-moving'));
+  }
+  function drop() {
+    held = null; hover = null; gesture = null; clearTimeout(longPress);
+    heldBar.hidden = true; clearPreview(); app.classList.remove('holding', 'dragging');
+    tray.querySelectorAll('[aria-pressed=true]').forEach(el => el.setAttribute('aria-pressed', 'false'));
+    say('Arrastra algo a la habitación. También puedes elegirlo y usar las flechas.'); paintGrid();
   }
   function close() {
-    if (!editing) return;
-    editing = false; drop();
-    app.classList.remove('editing');
-    bar.hidden = true;
-    ghost.innerHTML = '';
+    editing = false; drop(); hideContext(); app.classList.remove('editing'); bar.hidden = true;
     document.querySelector('#grid-overlay').innerHTML = '';
-    document.querySelector('#edit-toggle').setAttribute('aria-pressed', 'false');
-    onChange();
+    document.querySelector('#edit-toggle').setAttribute('aria-pressed', 'false'); onChange();
   }
-  const toggle = () => (editing ? close() : open());
-
-  /** Put down whatever is being held, without moving anything. */
-  function drop() {
-    held = null; hover = null;
-    heldBar.hidden = true;
-    ghost.innerHTML = '';
-    tray.querySelectorAll('[aria-pressed="true"]').forEach(b => b.setAttribute('aria-pressed', 'false'));
-    app.classList.remove('holding');
-    say('Elige algo para colocarlo, o toca un mueble para moverlo.');
-    paintGrid();
+  function hideContext() { selected = null; context.hidden = true; }
+  function select(key) {
+    const p = engine.state.room.placed[key]; if (!p) return;
+    selected = key; const item = CATALOG[p.item];
+    context.innerHTML = `<span>${escapeHTML(item.name)}</span><button data-edit="move">Mover</button>
+      ${item.rotatable ? '<button data-edit="rotate">Girar</button>' : ''}<button data-edit="store">Guardar</button>
+      ${!item.starter ? '<button data-edit="sell">Vender</button>' : ''}<button data-edit="dismiss" aria-label="Cerrar controles">×</button>`;
+    context.hidden = false;
   }
-  const say = text => { hint.textContent = text; };
-
-  function pickFromTray(id) {
-    const item = CATALOG[id];
-    if (!item) return;
-    held = { item, rotation: 0, from: 'tray' };
-    app.classList.add('holding');
+  function begin(id, from = 'tray') {
+    if (!CATALOG[id] || (from === 'tray' && !engine.state.inventory[id])) return;
+    const wasEditing = editing;
+    drop(); hideContext(); open();
+    const p = engine.state.room.placed[from], item = CATALOG[id];
+    held = { item, from, rotation: p?.rotation || 0, wasEditing }; hover = p ? { ...p } : null;
+    heldBar.hidden = false; app.classList.add('holding');
     document.querySelector('#held-name').textContent = item.name;
-    heldBar.hidden = false;
     heldBar.querySelector('[data-held=rotate]').hidden = !item.rotatable;
-    heldBar.querySelector('[data-held=store]').hidden = true;
-    say(item.placement === 'wall' ? 'Elige un hueco en la pared.' : 'Elige dónde va.');
-    paintGrid();
+    heldBar.querySelector('[data-held=store]').hidden = from === 'tray';
+    tray.querySelector(`[data-pick="${id}"]`)?.setAttribute('aria-pressed', 'true');
+    say('Arrastra y suelta · R gira · Esc cancela.'); paintGrid();
   }
-
-  function pickPlaced(key) {
-    const placement = engine.state.room.placed[key];
-    if (!placement) return;
-    const item = CATALOG[placement.item];
-    held = { item, rotation: placement.rotation || 0, from: key };
-    app.classList.add('holding');
-    document.querySelector('#held-name').textContent = item.name;
-    heldBar.hidden = false;
-    heldBar.querySelector('[data-held=rotate]').hidden = !item.rotatable;
-    heldBar.querySelector('[data-held=store]').hidden = false;
-    say('Muévelo a otro sitio, gíralo o guárdalo.');
-    paintGrid();
+  function spot() {
+    if (!held || !hover) return null;
+    const p = { ...hover, rotation: held.rotation };
+    return held.item.placement === 'surface' ? bindSurface(p, engine.state.room.placed, CATALOG) : p;
   }
-
-  /** Every wall slot on both walls, with whether it is free. */
   function wallSlots() {
-    const taken = new Set(Object.values(engine.state.room.placed)
-      .filter(p => p.wall).map(p => `${p.wall},${p.index}`));
-    const out = [];
-    for (const wall of ['left', 'right'])
-      for (let index = 0; index < WALL_SLOTS; index++)
-        out.push({ wall, index, ...wallAnchor(wall, index, cells()), free: !taken.has(`${wall},${index}`) });
-    return out;
+    return ['left', 'right'].flatMap(wall => Array.from({ length: WALL_SLOTS }, (_, index) => ({
+      wall, index, ...wallAnchor(wall, index, cells()),
+      free: !Object.entries(engine.state.room.placed).some(([key, p]) => key !== held?.from && p.wall === wall && p.index === index),
+    })));
   }
-
-  /** The grid itself: free cells, cells already taken, and the hovered footprint. */
   function paintGrid() {
     if (!editing) return;
-    const n = cells();
-    const state = engine.state;
-    // Hanging something shows the hooks instead of the floor grid.
-    if (held?.item.placement === 'wall') {
-      room.drawGrid(n, {}, wallSlots());
-      paintGhost();
-      return;
-    }
-    const taken = {};
-    for (const [key, placement] of Object.entries(state.room.placed)) {
-      const item = CATALOG[placement.item];
-      if (!item || item.placement === 'wall' || item.flat) continue;
-      if (held?.from === key) continue;
-      for (const cell of cellsOf(placement, item)) taken[cell] = 'taken';
-    }
-    room.drawGrid(n, taken);
-    paintGhost();
+    const marks = Object.fromEntries([...occupancy(engine.state.room.placed, CATALOG, held?.from)]
+      .filter(([, entries]) => entries.some(p => !p.flat)).map(([cell]) => [cell, 'taken']));
+    room.drawGrid(cells(), marks, held?.item.placement === 'wall' ? wallSlots() : null); paintGhost();
   }
-
-  /** The preview under the cursor: green when it fits, red when it does not. */
   function paintGhost() {
-    if (!held || !hover) { ghost.innerHTML = ''; return; }
-    const state = engine.state;
-    const spot = held.item.placement === 'wall'
-      ? { wall: hover.wall, index: hover.index }
-      : { gx: hover.gx, gy: hover.gy, rotation: held.rotation, ...(held.item.placement === 'surface' ? { on: true } : {}) };
-    const problem = placementError(spot, held.item, { placed: state.room.placed, cells: cells() }, CATALOG,
-      held.from === 'tray' ? null : held.from);
+    clearPreview(); if (!held) return;
+    const state = engine.state, p = spot();
+    const moving = new Set([held.from, ...Object.entries(state.room.placed).filter(([, v]) => v.parentSurfaceId === held.from).map(([k]) => k)]);
+    objects.querySelectorAll('.placed').forEach(el => el.classList.toggle('is-moving', moving.has(el.dataset.key)));
+    if (!p) return;
+    const problem = placementError(p, held.item, { placed: state.room.placed, cells: cells() }, CATALOG, held.from);
     const klass = problem ? 'bad' : 'good';
-
-    let svg = '';
     if (held.item.placement === 'wall') {
-      const a = wallAnchor(hover.wall, hover.index, cells());
-      svg = `<circle cx="${a.x / 100 * 1400}" cy="${a.y / 100 * 900}" r="46" class="ghost-wall ${klass}"/>`;
+      const a = wallAnchor(p.wall, p.index, cells());
+      ghost.innerHTML = `<circle cx="${a.x * 14}" cy="${a.y * 9}" r="35" class="ghost-wall ${klass}"/>`;
     } else {
       const { w, h } = footprint(held.item, held.rotation);
-      for (let x = hover.gx; x < hover.gx + w; x++)
-        for (let y = hover.gy; y < hover.gy + h; y++)
-          if (x < cells() && y < cells()) svg += `<polygon points="${cellPolygon(x, y)}" class="ghost ${klass}"/>`;
+      ghost.innerHTML = Array.from({ length: w }, (_, x) => Array.from({ length: h }, (_, y) =>
+        `<polygon points="${cellPolygon(p.gx + x, p.gy + y)}" class="ghost ${klass}"/>`).join('')).join('');
     }
-    ghost.innerHTML = svg;
-    say(problem || `${held.item.name} cabe aquí.`);
+    const key = held.from === 'tray' ? '__preview' : held.from;
+    const preview = { ...state.room.placed, [key]: { item: held.item.id, ...p } };
+    for (const entry of paintOrder({ placed: preview, cells: cells() }, CATALOG).filter(e => e.key === key || e.placement.parentSurfaceId === key)) {
+      const el = document.createElement('div'); el.className = `placement-preview ${klass}`; el.setAttribute('aria-hidden', 'true');
+      el.style.cssText = `left:${entry.spot.x}%;top:${entry.spot.y}%;z-index:${entry.layer + 500};${entry.spot.surface ? `--wall:${entry.spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}`;
+      el.innerHTML = art(entry.item.id, '', entry.placement.rotation); objects.append(el);
+    }
+    say(problem || `${held.item.name} cabe aquí. Suelta para colocarlo.`);
+    app.dataset.placement = problem ? 'invalid' : 'valid';
   }
-
-  /** Commit whatever is held to the cell under the cursor. */
-  function put() {
-    if (!held || !hover) return;
-    const spot = held.item.placement === 'wall'
-      ? { wall: hover.wall, index: hover.index }
-      : { gx: hover.gx, gy: hover.gy, rotation: held.rotation, ...(held.item.placement === 'surface' ? { on: true } : {}) };
+  function put(returnOnFailure = false) {
+    const p = spot(); if (!held) return;
+    if (!p) { if (returnOnFailure) reject('Fuera de la habitación. El objeto vuelve a su sitio.'); return; }
     try {
-      if (held.from === 'tray') engine.placeItem(held.item.id, spot);
-      else engine.moveItem(held.from, spot);
-      drop(); refresh();
-    } catch (error) { onError(error.message); say(error.message); }
+      const result = held.from === 'tray' ? engine.placeItem(held.item.id, p) : engine.moveItem(held.from, p);
+      drop(); refresh(); objects.querySelector(`[data-key="${result.key}"]`)?.classList.add('just-placed');
+      return true;
+    } catch (error) { if (returnOnFailure) reject(error.message); else { onError(error.message); say(error.message); } }
   }
-
+  function reject(message) {
+    const id = held?.item.id; drop(); const tile = tray.querySelector(`[data-pick="${id}"]`);
+    tile?.classList.remove('returned'); void tile?.offsetWidth; tile?.classList.add('returned'); onError(message); say(message);
+  }
   function store() {
     if (!held || held.from === 'tray') return;
-    try { engine.storeItem(held.from); drop(); refresh(); }
-    catch (error) { onError(error.message); }
+    try { engine.storeItem(held.from); drop(); refresh(); } catch (e) { onError(e.message); }
   }
-
-  function rotate() {
-    if (!held?.item.rotatable) return;
-    held.rotation = (held.rotation + 90) % 360;
-    paintGhost();
-  }
-
-  /** The drawer: one tile per spare unit sitting in the inventory. */
+  function rotate() { if (held?.item.rotatable) { held.rotation = (held.rotation + 90) % 360; paintGhost(); } }
+  function cancel() { const wasEditing = held?.wasEditing; drop(); if (wasEditing === false) close(); }
   function refresh() {
     if (!editing) return;
-    const state = engine.state;
-    const entries = Object.entries(state.inventory).filter(([, n]) => n > 0);
-    tray.innerHTML = entries.length
-      ? entries.map(([id, n]) => {
-        const item = CATALOG[id];
-        if (!item) return '';
-        const { w, h } = footprint(item, 0);
-        return `<button class="tray-item" data-pick="${id}" aria-pressed="false">
-          <span class="tray-art">${art(id)}</span>
-          <span class="tray-name">${escapeHTML(item.name)}</span>
-          <span class="tray-meta">${w}×${h}${n > 1 ? ` · ${n}` : ''}</span></button>`;
-      }).join('')
-      : `<p class="tray-empty">No te queda nada guardado. Pasa por la tienda ${icon('arrow')}</p>`;
-    paintGrid();
-    onChange();
+    tray.innerHTML = Object.entries(engine.state.inventory).filter(([, n]) => n > 0).map(([id, n]) => {
+      const item = CATALOG[id];
+      return `<button class="tray-item" data-pick="${id}" aria-pressed="${held?.item.id === id}" aria-label="Colocar ${escapeHTML(item.name)}. ${n} guardados">
+        <span class="tray-art">${art(id)}</span><span class="tray-name">${escapeHTML(item.name)}</span>
+        <span class="tray-meta">${item.w}×${item.h} · ${n} guardado${n > 1 ? 's' : ''}</span></button>`;
+    }).join('') || '<p class="tray-empty">Todo está en su sitio. Encontrarás más cosas en la tienda.</p>';
+    paintGrid(); onChange();
   }
-
-  // ── Input ─────────────────────────────────────────────────────────────────
-  tray.addEventListener('click', event => {
-    const button = event.target.closest('[data-pick]');
-    if (!button) return;
-    if (held?.from === 'tray' && held.item.id === button.dataset.pick) { drop(); return; }
-    drop();
-    button.setAttribute('aria-pressed', 'true');
-    pickFromTray(button.dataset.pick);
+  function surfaceSlots() {
+    return Object.entries(engine.state.room.placed).flatMap(([key, host]) => CATALOG[host.item].surfaces.map((_, i) => {
+      const pos = surfacePosition(host, CATALOG[host.item], i), a = toStage(pos.x * CELL, pos.y * CELL, pos.z);
+      return { parentSurfaceId: key, surfaceSlot: i, gx: Math.floor(pos.x), gy: Math.floor(pos.y), x: a.x, y: a.y };
+    }));
+  }
+  function locate(event) {
+    const box = stage.getBoundingClientRect();
+    const x = (event.clientX - box.left) / box.width * 100, y = (event.clientY - box.top) / box.height * 100;
+    const nearest = list => list.map(slot => ({ ...slot, d: Math.hypot((slot.x - x) * 14, (slot.y - y) * 9) })).sort((a, b) => a.d - b.d)[0];
+    if (held?.item.placement === 'wall') { const n = nearest(wallSlots()); return n?.d < 100 ? n : null; }
+    if (held?.item.placement === 'surface') { const n = nearest(surfaceSlots()); if (n?.d < 65) return n; }
+    return room.cellFromEvent(event, cells());
+  }
+  function pointerDown(event) {
+    if (event.button !== 0 || event.target.closest('button:not(.tray-item):not(.hotspot)') || engine.state.activeFocus) return;
+    const tile = event.target.closest('[data-pick]'), placed = event.target.closest('.placed');
+    const key = placed?.dataset.key || event.target.closest('[data-room-key]')?.dataset.roomKey;
+    if ((!tile && !key) || (held && !tile)) return;
+    gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, tile: tile?.dataset.pick, key, active: false, target: event.currentTarget, wasEditing: editing };
+    if (key && event.pointerType === 'touch') longPress = setTimeout(() => {
+      if (!gesture || gesture.active) return; select(gesture.key); gesture = null; suppressClick = true;
+    }, 450);
+  }
+  tray.addEventListener('pointerdown', pointerDown); stage.addEventListener('pointerdown', pointerDown);
+  document.addEventListener('pointermove', event => {
+    if (gesture && gesture.pointerId === event.pointerId) {
+      if (!gesture.active && Math.hypot(event.clientX - gesture.x, event.clientY - gesture.y) > 6) {
+        clearTimeout(longPress); const g = gesture;
+        begin(g.tile || engine.state.room.placed[g.key]?.item, g.tile ? 'tray' : g.key);
+        gesture = { ...g, active: true }; app.classList.add('dragging'); suppressClick = true;
+        g.target.setPointerCapture(event.pointerId);
+      }
+      if (gesture?.active) { event.preventDefault(); hover = locate(event); paintGhost(); }
+    } else if (held && editing && stage.contains(event.target)) { hover = locate(event); paintGhost(); }
+  }, { passive: false });
+  document.addEventListener('pointerup', event => {
+    clearTimeout(longPress); if (!gesture || event.pointerId !== gesture.pointerId) return;
+    const g = gesture; gesture = null;
+    if (g.active) {
+      hover = locate(event); const committed = put(true);
+      if (!committed && !g.wasEditing) close();
+      suppressClick = true; setTimeout(() => { suppressClick = false; }, 0);
+    }
+    if (g.target.hasPointerCapture(event.pointerId)) g.target.releasePointerCapture(event.pointerId);
   });
-
+  document.addEventListener('pointercancel', cancel);
+  window.addEventListener('blur', () => { if (gesture?.active) cancel(); });
+  tray.addEventListener('click', event => {
+    if (suppressClick) { suppressClick = false; return; }
+    const id = event.target.closest('[data-pick]')?.dataset.pick; if (id) begin(id);
+  });
+  stage.addEventListener('click', event => {
+    if (suppressClick) { suppressClick = false; event.stopPropagation(); return; }
+    if (held) { hover = locate(event); put(); return; }
+    const key = event.target.closest('.placed')?.dataset.key; if (key) select(key); else hideContext();
+  });
+  stage.addEventListener('contextmenu', event => {
+    const key = event.target.closest('.placed')?.dataset.key || event.target.closest('[data-room-key]')?.dataset.roomKey;
+    if (key) { event.preventDefault(); drop(); select(key); }
+  });
+  context.addEventListener('click', event => {
+    const action = event.target.closest('[data-edit]')?.dataset.edit;
+    const key = selected, p = engine.state.room.placed[key]; if (!p) { hideContext(); return; }
+    if (action === 'move' || action === 'rotate') { begin(p.item, key); if (action === 'rotate') rotate(); }
+    if (action === 'store') { try { engine.storeItem(key); refresh(); hideContext(); } catch (e) { onError(e.message); } }
+    if (action === 'sell') confirmSale?.('¿Vender este objeto?', `Recibirás ${Math.floor(CATALOG[p.item].price * GAME_CONFIG.resaleRate)} monedas. Sus accesorios volverán al inventario.`, 'Vender', () => {
+      try { engine.sellPlaced(key); refresh(); hideContext(); } catch (e) { onError(e.message); }
+    });
+    if (action === 'dismiss') hideContext();
+  });
   heldBar.addEventListener('click', event => {
     const action = event.target.closest('[data-held]')?.dataset.held;
-    if (action === 'rotate') rotate();
-    if (action === 'store') store();
-    if (action === 'cancel') drop();
+    if (action === 'rotate') rotate(); if (action === 'store') store(); if (action === 'cancel') cancel(); if (action === 'place') put();
   });
-
-  stage.addEventListener('pointermove', event => {
-    if (!editing || !held) return;
-    hover = locate(event);
-    paintGhost();
-  });
-  stage.addEventListener('pointerleave', () => { if (editing && held) { hover = null; ghost.innerHTML = ''; } });
-
-  stage.addEventListener('click', event => {
-    if (!editing) return;
-    if (held) { hover = locate(event) || hover; put(); return; }
-    // Nothing held: picking up whatever was clicked on.
-    const placed = event.target.closest('.placed');
-    if (placed) pickPlaced(placed.dataset.key);
-  });
-
-  /** Where the pointer is: the nearest wall hook, or the floor cell under it. */
-  function locate(event) {
-    if (held?.item.placement !== 'wall') return room.cellFromEvent(event, cells());
-    const box = stage.getBoundingClientRect();
-    const x = (event.clientX - box.left) / box.width * 100;
-    const y = (event.clientY - box.top) / box.height * 100;
-    // Nearest hook wins, so a rough aim still lands somewhere sensible.
-    return wallSlots().reduce((best, slot) => {
-      const d = (slot.x - x) ** 2 + ((slot.y - y) * 1.6) ** 2;
-      return !best || d < best.d ? { wall: slot.wall, index: slot.index, d } : best;
-    }, null);
-  }
-
   document.addEventListener('keydown', event => {
-    if (!editing) return;
-    if (event.key === 'Escape') { held ? drop() : close(); }
-    if ((event.key === 'r' || event.key === 'R') && held) { event.preventDefault(); rotate(); }
+    if (event.target.matches('input,textarea,select') || document.querySelector('dialog[open]')) return;
+    if (event.key === 'Escape') { if (held) cancel(); else if (selected) hideContext(); else if (editing) close(); }
+    if (!held) {
+      const key = event.target.closest('.placed')?.dataset.key;
+      if (key && ['Enter', ' '].includes(event.key)) { event.preventDefault(); select(key); context.querySelector('button').focus(); }
+      return;
+    }
+    if (event.key.toLowerCase() === 'r') { event.preventDefault(); rotate(); }
+    if (event.key === 'Enter') { event.preventDefault(); put(); }
+    if (event.key.startsWith('Arrow')) {
+      event.preventDefault();
+      if (held.item.placement !== 'floor') {
+        const slots = held.item.placement === 'wall' ? wallSlots() : surfaceSlots();
+        const index = slots.findIndex(s => held.item.placement === 'wall' ? s.wall === hover?.wall && s.index === hover?.index : s.parentSurfaceId === hover?.parentSurfaceId && s.surfaceSlot === hover?.surfaceSlot);
+        const delta = ['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1;
+        hover = slots[(index + delta + slots.length) % slots.length] || null;
+      } else {
+        const delta = { ArrowRight: [1, 0], ArrowLeft: [-1, 0], ArrowDown: [0, 1], ArrowUp: [0, -1] }[event.key];
+        hover = hover ? { gx: Math.max(0, Math.min(cells() - 1, hover.gx + delta[0])), gy: Math.max(0, Math.min(cells() - 1, hover.gy + delta[1])) } : { gx: 0, gy: 0 };
+      }
+      paintGhost();
+    }
   });
-
   document.querySelector('#edit-done').addEventListener('click', close);
+  const toggle = () => editing ? close() : open();
   document.querySelector('#edit-toggle').addEventListener('click', toggle);
-
-  return { open, close, toggle, refresh, isEditing, get held() { return held; } };
+  return { open, close, toggle, refresh, isEditing, startPlacement: begin, cancel,
+    setConfirm: callback => { confirmSale = callback; }, get held() { return held; } };
 }

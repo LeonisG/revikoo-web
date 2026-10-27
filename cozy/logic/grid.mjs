@@ -40,8 +40,47 @@ export const cellsOf = (placement, item) => {
 
 export const inBounds = (placement, item, size) => {
   const { w, h } = footprint(item, placement.rotation);
-  return placement.gx >= 0 && placement.gy >= 0 && placement.gx + w <= size && placement.gy + h <= size;
+  return Number.isInteger(placement.gx) && Number.isInteger(placement.gy)
+    && [0, 90, 180, 270].includes(placement.rotation ?? 0)
+    && placement.gx >= 0 && placement.gy >= 0 && placement.gx + w <= size && placement.gy + h <= size;
 };
+
+/** Surface slots are local to their host; rotate in world space before projecting. */
+export function surfacePosition(host, item, slot) {
+  const local = item.surfaces?.[slot];
+  if (!local) return null;
+  let x = local.x, y = local.y;
+  if (host.rotation === 90) [x, y] = [item.h - y, x];
+  if (host.rotation === 180) [x, y] = [item.w - x, item.h - y];
+  if (host.rotation === 270) [x, y] = [y, item.w - x];
+  return { x: host.gx + x, y: host.gy + y, z: item.top };
+}
+
+export function bindSurface(p, placed, catalog) {
+  if (p.parentSurfaceId) return { ...p, on: true };
+  const match = Object.entries(placed).find(([, host]) => catalog[host.item]?.surface
+    && cellsOf(host, catalog[host.item]).includes(`${p.gx},${p.gy}`));
+  if (!match) return { ...p, on: true };
+  const [parentSurfaceId, host] = match, item = catalog[host.item];
+  const slots = item.surfaces.map((_, i) => ({ i, pos: surfacePosition(host, item, i) }));
+  slots.sort((a, b) => ((a.pos.x - p.gx - .5) ** 2 + (a.pos.y - p.gy - .5) ** 2)
+    - ((b.pos.x - p.gx - .5) ** 2 + (b.pos.y - p.gy - .5) ** 2));
+  return { ...p, on: true, parentSurfaceId, surfaceSlot: slots[0].i };
+}
+
+/** One occupancy index, shared by validation and the build overlay. */
+export function occupancy(placed, catalog, ignoreId) {
+  const map = new Map();
+  for (const [key, p] of Object.entries(placed)) {
+    const item = catalog[p.item];
+    if (key === ignoreId || item?.placement !== 'floor') continue;
+    for (const cell of cellsOf(p, item)) {
+      if (!map.has(cell)) map.set(cell, []);
+      map.get(cell).push({ key, flat: item.flat });
+    }
+  }
+  return map;
+}
 
 // Where an object sits on the stage: centred over its footprint, standing on the
 // floor at the footprint's centre. `depth` is the paint order.
@@ -91,7 +130,7 @@ export function placementError(placement, item, room, catalog, ignoreId = null) 
   const placed = Object.entries(room.placed).filter(([id]) => id !== ignoreId);
   if (item.placement === 'wall') {
     if (placement.wall !== 'left' && placement.wall !== 'right') return 'Esa pared no existe.';
-    if (placement.index < 0 || placement.index >= WALL_SLOTS) return 'Ahí no cabe.';
+    if (!Number.isInteger(placement.index) || placement.index < 0 || placement.index >= WALL_SLOTS) return 'Ahí no cabe.';
     const taken = placed.some(([, p]) => p.wall === placement.wall && p.index === placement.index);
     return taken ? 'Ya hay algo colgado ahí.' : null;
   }
@@ -99,25 +138,23 @@ export function placementError(placement, item, room, catalog, ignoreId = null) 
   const wanted = new Set(cellsOf(placement, item));
 
   if (item.placement === 'surface') {
-    // A small object needs something to stand on, and only one thing per surface.
-    const host = placed.find(([, p]) => {
-      const hostItem = catalog[p.item];
-      return hostItem?.surface && p.on !== true && cellsOf(p, hostItem).some(c => wanted.has(c));
-    });
-    if (!host) return 'Esto necesita apoyarse en un mueble.';
-    const occupied = placed.some(([, p]) => p.on === true && cellsOf(p, catalog[p.item]).some(c => wanted.has(c)));
-    return occupied ? 'Ese mueble ya tiene algo encima.' : null;
+    const bound = bindSurface(placement, room.placed, catalog);
+    const host = room.placed[bound.parentSurfaceId];
+    if (!host || !catalog[host.item]?.surface || !Number.isInteger(bound.surfaceSlot)
+      || !surfacePosition(host, catalog[host.item], bound.surfaceSlot)) return 'Esto necesita apoyarse en un mueble.';
+    const occupied = placed.some(([, p]) => p.on && (() => {
+      const other = bindSurface(p, room.placed, catalog);
+      return other.parentSurfaceId === bound.parentSurfaceId && other.surfaceSlot === bound.surfaceSlot;
+    })());
+    return occupied ? 'Ese punto del mueble ya tiene algo encima.' : null;
   }
 
   // Floor objects: a rug lies flat, so things may stand on it; everything else
   // needs its cells to itself.
-  for (const [, p] of placed) {
-    const other = catalog[p.item];
-    if (!other || other.placement === 'wall') continue;
-    if (other.placement === 'surface' || p.on === true) continue;
-    if (other.flat && item.flat) return 'Ya hay una alfombra ahí.';
-    if (other.flat || item.flat) continue;
-    if (cellsOf(p, other).some(c => wanted.has(c))) return 'Ese espacio ya está ocupado.';
+  const map = occupancy(room.placed, catalog, ignoreId);
+  for (const cell of wanted) {
+    if (map.get(cell)?.some(other => Boolean(other.flat) === Boolean(item.flat)))
+      return item.flat ? 'Ya hay una alfombra ahí.' : 'Ese espacio ya está ocupado.';
   }
   return null;
 }
@@ -140,11 +177,13 @@ export function paintOrder(room, catalog) {
 
   return entries
     .map(entry => {
-      const host = entry.placement.on ? hostOf(entry.placement) : null;
+      const host = entry.placement.on ? (floors.find(f => f.key === entry.placement.parentSurfaceId) || hostOf(entry.placement)) : null;
+      const local = host && surfacePosition(host.placement, host.item, entry.placement.surfaceSlot);
       const spot = entry.item.placement === 'wall'
         ? wallAnchor(entry.placement.wall, entry.placement.index, room.cells)
         // Something resting on a desk is lifted to the desk's top face, not left
         // standing on the floor the desk happens to occupy.
+        : local ? { ...toStage(local.x * CELL, local.y * CELL, local.z), depth: anchorOf(host.placement, host.item).depth }
         : anchorOf(entry.placement, entry.item, host ? host.item.top : 0);
       // Wall art hangs behind everything, rugs lie flat under the furniture, and
       // objects on a surface ride one step in front of whatever holds them up.

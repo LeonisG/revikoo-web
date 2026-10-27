@@ -4,7 +4,7 @@ import { art, escapeHTML, coin, icon } from './helpers.mjs';
 // The basics offered in the first session. Short on purpose: the point is to
 // make two or three real choices, not to shop.
 const BASICS = ['desk', 'chair', 'bookshelf', 'shelf-small', 'drawers', 'side-table',
-  'wardrobe-oak', 'rug-moss', 'rug-cream', 'monstera', 'mushroom', 'floor-lamp'];
+  'wardrobe-oak', 'rug-moss', 'rug-cream', 'monstera', 'candle', 'mushroom', 'floor-lamp'];
 
 /**
  * Build your first room: pick a size, pick a few basics, then go in and place

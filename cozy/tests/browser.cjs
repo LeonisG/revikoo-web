@@ -26,6 +26,7 @@ const server = http.createServer((request, response) => {
   const errors = [], badResponses = [], external = [];
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
+  await page.clock.install();
   await page.addInitScript(() => {
     window.__cozyAudioContexts = [];
     const Original = window.AudioContext;
@@ -37,7 +38,10 @@ const server = http.createServer((request, response) => {
   const shots = path.join(os.tmpdir(), 'cozy-qa'); fs.mkdirSync(shots, { recursive: true });
   const stored = () => page.evaluate(() => JSON.parse(localStorage.getItem('cozy-room:debug:v2')));
   const close = async () => { await page.getByRole('button', { name: 'Cerrar y volver a la habitación' }).click(); await page.locator('#world-panel').waitFor({ state: 'hidden' }); };
-  const open = async name => { await page.locator(`.room-nav [data-open="${name}"]`).click(); await page.locator('#world-panel').waitFor({ state: 'visible' }); };
+  const open = async name => {
+    if (!await page.locator('.room-nav').isVisible()) await page.locator('#explore-toggle').click();
+    await page.locator(`.room-nav [data-open="${name}"]`).click(); await page.locator('#world-panel').waitFor({ state: 'visible' });
+  };
 
   /** Click the centre of a grid cell, resolved through the app's own projection. */
   const clickCell = async (gx, gy) => {
@@ -58,18 +62,18 @@ const server = http.createServer((request, response) => {
 
     // ── Build your first room ────────────────────────────────────────────────
     await page.locator('#setup').waitFor({ state: 'visible' });
-    assert.equal(await page.locator('#coins').textContent(), '420', 'the starter budget is granted up front');
+    assert.equal(await page.locator('#coins').textContent(), '450', 'the starter budget is granted up front');
     assert.equal(await page.locator('.placed').count(), 0, 'a new room starts empty');
     await page.screenshot({ path: path.join(shots, 'setup-size.png'), fullPage: true });
     await page.locator('[data-size=medium]').click();
-    assert.equal((await stored()).coins, 300, 'a bigger room costs budget that cannot go into furniture');
+    assert.equal((await stored()).coins, 330, 'a bigger room costs budget that cannot go into furniture');
     await page.locator('[data-size=small]').click();
-    assert.equal((await stored()).coins, 420, 'the size choice is reversible during setup');
+    assert.equal((await stored()).coins, 450, 'the size choice is reversible during setup');
     await page.locator('[data-size=medium]').click();
     await page.locator('#setup-next').click();
     await page.locator('[data-buy=desk]').click();
     await page.locator('[data-buy=chair]').click();
-    assert.equal((await stored()).coins, 30);
+    assert.equal((await stored()).coins, 60);
     await page.screenshot({ path: path.join(shots, 'setup-basics.png'), fullPage: true });
     await page.locator('#setup-next').click();
     await page.locator('#setup').waitFor({ state: 'hidden' });
@@ -103,7 +107,9 @@ const server = http.createServer((request, response) => {
     await page.screenshot({ path: path.join(shots, 'edit-mode.png'), fullPage: true });
 
     // Pick a placed piece back up, turn it, move it.
-    await page.locator('.placed[data-item=chair]').click();
+    await page.locator('.placed[data-item=chair]').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[data-edit=move]').click();
     await page.locator('#held-bar').waitFor({ state: 'visible' });
     await page.locator('[data-held=rotate]').click();
     await clickCell(3, 3);
@@ -112,8 +118,9 @@ const server = http.createServer((request, response) => {
     assert.equal((await stored()).stats.moves, 1);
 
     // Putting a surface away brings down whatever was standing on it.
-    await page.locator('.placed[data-item=desk]').click();
-    await page.locator('[data-held=store]').click();
+    await page.locator('.placed[data-item=desk]').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[data-edit=store]').click();
     assert.equal((await stored()).inventory.desk, 1);
     assert.equal((await stored()).inventory.journal, 1);
     await pick('desk'); await clickCell(1, 0);
@@ -126,7 +133,7 @@ const server = http.createServer((request, response) => {
 
     // The layout survives a reload.
     await page.reload();
-    assert.equal(await page.locator('.placed').count(), 4);
+    await page.waitForFunction(() => document.querySelectorAll('.placed').length === 3);
 
     // ── The loop pays, and the shop spends ───────────────────────────────────
     await open('tasks');
@@ -134,29 +141,41 @@ const server = http.createServer((request, response) => {
     await page.locator('#task-form [name=difficulty]').selectOption('big');
     await page.locator('#task-form button').click();
     await page.locator('[data-action=complete-task]').click();
-    assert.equal((await stored()).coins, 40);
+    assert.equal((await stored()).coins, 70);
     await close();
     await open('focus');
-    await page.clock.install();
     await page.locator('[data-action=start-focus]').click();
     await page.clock.runFor(1000);
     assert.equal(await page.locator('#focus-active').isVisible(), true);
     assert.equal(await page.locator('#focus-cancel').isVisible(), true, 'a running session can always be ended');
     await page.clock.fastForward(26000);
-    assert.equal((await stored()).coins, 45);
+    assert.equal((await stored()).coins, 75);
     assert.equal((await stored()).focusHistory.length, 1);
 
     await open('shop');
     await page.locator('[data-filter=Plantas]').click();
     await page.locator('[data-action=buy][data-id=monstera]').click();
     assert.equal((await stored()).inventory.monstera, 1);
-    assert.equal((await stored()).coins, 25);
+    assert.equal((await stored()).coins, 55);
     await page.screenshot({ path: path.join(shots, 'shop.png'), fullPage: true });
     // Selling returns most of the price, so experimenting stays cheap.
     await page.locator('[data-action=sell][data-id=monstera]').click();
     await page.locator('#confirm-yes').click();
-    assert.equal((await stored()).coins, 25 + Math.floor(20 * 0.75));
+    assert.equal((await stored()).coins, 55 + Math.floor(20 * 0.75));
     assert.equal((await stored()).inventory.monstera, undefined);
+    await close();
+
+    await open('books');
+    const beforeBook = (await stored()).coins;
+    await page.locator('#book-form [name=title]').fill('Una habitación propia');
+    await page.locator('#book-form [name=author]').fill('Virginia Woolf');
+    await page.locator('#book-form [name=total]').fill('120');
+    await page.locator('#book-form [name=page]').fill('20');
+    await page.locator('#book-form button').click();
+    await page.locator('[data-action=select-book]').click();
+    await page.locator('[data-action=finish-book]').click();
+    assert.equal((await stored()).coins, beforeBook + 25);
+    assert.equal((await stored()).books[0].completed, true);
     await close();
 
     // ── Progress is offered, never demanded ──────────────────────────────────
@@ -184,7 +203,7 @@ const server = http.createServer((request, response) => {
     await open('tasks');
     await page.locator('#task-form input').fill('<img src=x onerror=alert(1)>');
     await page.locator('#task-form button').click();
-    assert.equal(await page.locator('.task-title').first().textContent(), '<img src=x onerror=alert(1)>');
+    assert.equal(await page.locator('.task-title').last().textContent(), '<img src=x onerror=alert(1)>');
     assert.equal(await page.locator('.task-title img').count(), 0);
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('#world-panel').isVisible(), false);

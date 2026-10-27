@@ -1,5 +1,6 @@
 import { CATALOG, ITEMS, CATEGORIES, SETS, setProgress, GAME_CONFIG, ROOM_SIZES, QUESTS, ACHIEVEMENTS, roomLevel, DEBUG } from '../logic/config.mjs';
 import { ownedIds } from '../logic/engine.mjs';
+import { itemStatus } from '../logic/catalog.mjs';
 import { escapeHTML as e, art, bookStyle, difficultyName, difficulties, icon, coin } from './helpers.mjs';
 
 const titles = {
@@ -61,17 +62,16 @@ export function createPanels(engine, room, audio, edit) {
       <div class="shop-tabs" role="group" aria-label="Categorías">${filters.map(f =>
         `<button data-action="filter" data-filter="${f}" aria-pressed="${f === shopFilter}">${f}</button>`).join('')}</div>
       <div class="shop-grid">${list.map(item => {
-        const spare = s.inventory[item.id] || 0;
-        const placed = Object.values(s.room.placed).filter(p => p.item === item.id).length;
-        const afford = s.coins >= item.price;
+        const { stored: spare, placed, access } = itemStatus(s, item.id);
+        const afford = access === 'AVAILABLE' && s.coins >= item.price;
         return `<article class="shop-item ${item.companion ? 'is-companion' : ''}">
           ${placed || spare ? `<span class="owned-label">${placed ? `${placed} EN LA HABITACIÓN` : `${spare} GUARDADO${spare > 1 ? 'S' : ''}`}</span>` : ''}
           <div class="shop-illustration">${art(item.id, item.name)}</div>
           <h3>${e(item.name)}</h3>
           <p class="item-price">${item.w}×${item.h} · ${item.price} ${coin}</p>
           ${item.companion ? '<p class="companion-note">Tardarás en poder permitírtelo. Esa es la idea.</p>' : ''}
-          <button class="${afford ? 'primary' : 'secondary'}" data-action="buy" data-id="${item.id}" ${afford ? '' : 'disabled'}>Comprar · ${item.price} ${coin}</button>
-          ${spare ? `<button class="text-button" data-action="place" data-id="${item.id}">Colocar ${icon('arrow')}</button>
+          <button class="${afford ? 'primary' : 'secondary'}" data-action="buy" data-id="${item.id}" ${afford ? '' : 'disabled'}>${access === 'LOCKED' ? 'Por descubrir' : `Comprar · ${item.price} ${coin}`}</button>
+          ${spare ? `<button class="text-button" data-action="place" data-id="${item.id}">Colocar ahora ${icon('arrow')}</button>
             <button class="text-button" data-action="sell" data-id="${item.id}">Vender · ${Math.floor(item.price * GAME_CONFIG.resaleRate)} ${coin}</button>` : ''}
         </article>`;
       }).join('') || '<div class="empty-state collection-empty"><h3>Aquí no hay nada todavía.</h3></div>'}</div>
@@ -203,10 +203,11 @@ export function createPanels(engine, room, audio, edit) {
     if (action === 'finish-book') execute(() => engine.updateBook(id, engine.state.books.find(b => b.id === id).totalPages), 'Una historia terminada.');
     if (action === 'delete-book') confirm('¿Retirar este libro?', 'Desaparecerá del estante. Las monedas ganadas se conservan.', 'Retirar libro', () => execute(() => { const r = engine.deleteBook(id); selectedBook = null; return r; }, 'Libro retirado.'));
     if (action === 'filter') { shopFilter = button.dataset.filter; render(); content.querySelector(`[data-filter="${shopFilter}"]`)?.focus(); }
-    if (action === 'buy') execute(() => engine.buyItem(id), 'Ya es tuyo. Entra en Editar para colocarlo.');
+    if (action === 'buy' && execute(() => engine.buyItem(id), 'Ya es tuyo. Colócalo ahora o guárdalo para después.'))
+      content.querySelector(`[data-action="place"][data-id="${id}"]`)?.focus();
     if (action === 'sell') confirm('¿Vender este objeto?', `Te devolverá ${Math.floor(CATALOG[id].price * GAME_CONFIG.resaleRate)} monedas. Puedes volver a comprarlo cuando quieras.`, 'Vender', () => execute(() => engine.sellItem(id), 'Vendido.'));
     // Placing happens in the room, so the catalogue gets out of the way first.
-    if (action === 'place') { close(); edit?.open(); setTimeout(() => document.querySelector(`[data-pick="${id}"]`)?.click(), 80); }
+    if (action === 'place') { close(); edit?.startPlacement(id); }
     if (action === 'claim') execute(() => engine.claimQuest(id), '¡Recogida!');
     if (action === 'resize') {
       const size = button.dataset.size;

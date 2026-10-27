@@ -1,8 +1,8 @@
 import { GAME_CONFIG, ROOM_SIZES, QUESTS, SETS, setProgress } from './config.mjs';
-import { CATALOG, STARTER_ITEMS } from './catalog.mjs';
+import { CATALOG, STARTER_ITEMS, itemStatus } from './catalog.mjs';
 import { initialState } from './storage.mjs';
 import { createEvents } from './events.mjs';
-import { placementError, inBounds, footprint } from './grid.mjs';
+import { placementError, inBounds, bindSurface, surfacePosition } from './grid.mjs';
 
 /** The grid works in cell counts, so hand it the room with its size resolved. */
 const gridRoom = s => ({ placed: s.room.placed, cells: ROOM_SIZES[s.room.size].cells });
@@ -22,7 +22,16 @@ const take = (s, id, n = 1) => {
 export const ownedIds = s => [...new Set([...Object.keys(s.inventory), ...Object.values(s.room.placed).map(p => p.item)])];
 
 export function createEngine(storage, { debug = false, now = () => Date.now() } = {}) {
-  let state = storage.load();
+  const upgrade = s => {
+    for (const [key, p] of Object.entries(s.room.placed)) {
+      if (CATALOG[p.item]?.placement !== 'surface') continue;
+      const bound = bindSurface(p, s.room.placed, CATALOG);
+      if (bound.parentSurfaceId) s.room.placed[key] = bound;
+      else { delete s.room.placed[key]; give(s, p.item); }
+    }
+    return s;
+  };
+  let state = upgrade(storage.load());
   const events = createEvents();
 
   function transact(event, mutate) {
@@ -31,7 +40,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
     settle(next, payload);
     next.revision = state.revision + 1;
     try { storage.save(next, state.revision); }
-    catch (error) { state = storage.load(); events.emit('STATE_SYNCED', {}); throw error; }
+    catch (error) { state = upgrade(storage.load()); events.emit('STATE_SYNCED', {}); throw error; }
     state = next;
     events.emit(event, payload);
     return payload;
@@ -70,7 +79,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
   const api = {
     get state() { return structuredClone(state); },
     subscribe: events.subscribe,
-    sync() { const next = storage.load(); if (JSON.stringify(next) !== JSON.stringify(state)) { state = next; events.emit('STATE_SYNCED', {}); } },
+    sync() { const next = upgrade(storage.load()); if (JSON.stringify(next) !== JSON.stringify(state)) { state = next; events.emit('STATE_SYNCED', {}); } },
 
     // ── Building the first room ───────────────────────────────────────────────
     startSetup() {
@@ -107,6 +116,9 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
           if (inBounds(placement, item, size.cells)) continue;
           delete s.room.placed[key]; give(s, placement.item); displaced++;
         }
+        for (const [key, p] of Object.entries(s.room.placed)) {
+          if (p.parentSurfaceId && !s.room.placed[p.parentSurfaceId]) { delete s.room.placed[key]; give(s, p.item); displaced++; }
+        }
         return { size: sizeId, cost, displaced };
       });
     },
@@ -120,6 +132,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         const item = CATALOG[id];
         if (!item) throw new Error('No se encuentra este objeto.');
         if (item.starter) throw new Error('Esto ya viene con tu habitación.');
+        if (itemStatus(s, id).access === 'LOCKED') throw new Error('Este objeto aún no está disponible.');
         if (s.coins < item.price) throw new Error('Aún te faltan algunas monedas. Tu habitación puede esperar.');
         s.coins -= item.price; s.stats.spent += item.price; give(s, id);
         return { item: id };
@@ -143,7 +156,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
       return transact('ITEM_PLACED', s => {
         const item = CATALOG[id];
         if (!item) throw new Error('No se encuentra este objeto.');
-        const spot = normalise(item, placement);
+        const spot = normalise(item, placement, s.room.placed);
         const problem = placementError(spot, item, gridRoom(s), CATALOG);
         if (problem) throw new Error(problem);
         take(s, id);
@@ -157,10 +170,15 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         const current = s.room.placed[key];
         if (!current) throw new Error('Ese objeto ya no está en la habitación.');
         const item = CATALOG[current.item];
-        const spot = normalise(item, placement);
+        const spot = normalise(item, placement, s.room.placed);
         const problem = placementError(spot, item, gridRoom(s), CATALOG, key);
         if (problem) throw new Error(problem);
         s.room.placed[key] = { item: current.item, ...spot };
+        for (const p of Object.values(s.room.placed)) {
+          if (p.parentSurfaceId !== key) continue;
+          const local = surfacePosition(spot, item, p.surfaceSlot);
+          p.gx = Math.floor(local.x); p.gy = Math.floor(local.y);
+        }
         s.stats.moves += 1;
         return { item: current.item, key };
       });
@@ -170,19 +188,20 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         const current = s.room.placed[key];
         if (!current) throw new Error('Ese objeto ya no está en la habitación.');
         // Anything resting on this one comes down with it.
-        const item = CATALOG[current.item];
-        if (item?.surface) {
-          for (const [other, p] of Object.entries(s.room.placed)) {
-            if (other === key || !p.on) continue;
-            if (p.gx >= current.gx && p.gy >= current.gy
-              && p.gx < current.gx + footprint(item, current.rotation).w
-              && p.gy < current.gy + footprint(item, current.rotation).h) {
-              delete s.room.placed[other]; give(s, p.item);
-            }
-          }
-        }
+        storeChildren(s, key);
         delete s.room.placed[key]; give(s, current.item);
         return { item: current.item };
+      });
+    },
+    sellPlaced(key) {
+      return transact('ITEM_SOLD', s => {
+        const current = s.room.placed[key], item = CATALOG[current?.item];
+        if (!item || item.starter) throw new Error('Este objeto no se puede vender.');
+        storeChildren(s, key);
+        delete s.room.placed[key];
+        const refund = Math.floor(item.price * GAME_CONFIG.resaleRate);
+        s.coins += refund; s.stats.sold++;
+        return { item: item.id, refund };
       });
     },
 
@@ -280,12 +299,24 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
 }
 
 /** Keep only the fields that belong to this kind of placement, and sane values. */
-function normalise(item, placement = {}) {
+function normalise(item, placement = {}, placed = {}) {
   if (item.placement === 'wall') return { wall: placement.wall, index: Number(placement.index) };
   const spot = {
     gx: Number(placement.gx), gy: Number(placement.gy),
-    rotation: item.rotatable ? (Number(placement.rotation) || 0) % 360 : 0,
+    rotation: item.rotatable ? Number(placement.rotation ?? 0) : 0,
   };
-  if (item.placement === 'surface') spot.on = true;
+  if (item.placement === 'surface') {
+    const bound = bindSurface({ ...spot, parentSurfaceId: placement.parentSurfaceId, surfaceSlot: placement.surfaceSlot }, placed, CATALOG);
+    const host = placed[bound.parentSurfaceId];
+    const local = host && surfacePosition(host, CATALOG[host.item], bound.surfaceSlot);
+    if (local) { bound.gx = Math.floor(local.x); bound.gy = Math.floor(local.y); }
+    return bound;
+  }
   return spot;
+}
+
+function storeChildren(s, key) {
+  for (const [id, p] of Object.entries(s.room.placed)) {
+    if (p.parentSurfaceId === key) { delete s.room.placed[id]; give(s, p.item); }
+  }
 }

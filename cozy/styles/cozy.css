@@ -498,3 +498,69 @@
   .reduce-motion *, .reduce-motion *:before, .reduce-motion *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .reduce-motion .room-layer { translate: 0 0 !important; } .reduce-motion .room-tilt { transform: none !important; }
 }
+
+/* Builder interaction layer: the projection remains stable during gestures. */
+@layer builder {
+  .editing .room-camera, .editing .room-tilt { transform: none !important; transition: none; }
+  .editing .room-layer, .editing .placed { translate: 0 0 !important; }
+  .editing .room-camera { filter: brightness(1) !important; }
+  .editing .hotspots { visibility: hidden; }
+  .placed { transform: translate(-50%, -82.5%); pointer-events: none; touch-action: none; animation: none; }
+  .placed svg { pointer-events: visiblePainted; cursor: grab; }
+  .placed img { pointer-events: auto; cursor: grab; }
+  .placed[style*="--wall"] svg, .placement-preview[style*="--wall"] svg { transform: skewY(var(--wall)); transform-origin: 50% 82.5%; }
+  .editing .placed { pointer-events: none; }
+  .holding .placed svg, .holding .placed img { pointer-events: none; }
+  .placed.is-moving { visibility: hidden; }
+  .placement-preview { position: absolute; width: 30%; aspect-ratio: 420/400; transform: translate(-50%,-82.5%); opacity: .72; pointer-events: none; }
+  .placement-preview svg, .placement-preview img { width: 100%; height: 100%; overflow: visible; }
+  .placement-preview.good { filter: drop-shadow(0 0 3px #b4d8a9); }
+  .placement-preview.bad { filter: sepia(.4) saturate(.65) drop-shadow(0 0 6px #d99785); }
+  .ghost-overlay { z-index: 3; }
+  .ghost.good { fill: #b7d2a735; stroke: #b7d2a7b0; }
+  .ghost.bad { fill: #d89c8544; stroke: #d89c85bb; }
+  .tray-item { touch-action: none; cursor: grab; user-select: none; }
+  .tray-item svg, .tray-item img { pointer-events: none; user-select: none; -webkit-user-drag: none; }
+  .tray-item[aria-pressed=true] { translate: 0 -4px; box-shadow: 0 5px 12px #0005; }
+  .edit-tray { padding-top: 7px; scrollbar-width: thin; scrollbar-color: #718577 #16221e; }
+  .dragging, .dragging * { cursor: grabbing !important; user-select: none; }
+  .dragging[data-placement=invalid], .dragging[data-placement=invalid] * { cursor: not-allowed !important; }
+  .object-actions { position: fixed; z-index: 32; bottom: 92px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 5px; padding: 8px 12px; background: #24372ff5; border: 1px solid #69806b; border-radius: 14px; box-shadow: 0 12px 32px #0005; max-width: calc(100vw - 24px); }
+  .object-actions span { font-size: 11px; color: #e7d5ab; padding: 0 8px; }
+  .object-actions button { padding: 12px 10px; font-size: 12px; border-radius: 7px; }
+  .object-actions button:hover { background: #415c45; }
+  .editing .object-actions { bottom: 202px; }
+  .held-bar { max-width: calc(100vw - 20px); border-radius: 14px; }
+  .held-bar button { min-height: 44px; }
+  .held-bar [data-held=place] { background: #b5c49c; color: #24372b; border-radius: 8px; }
+  .placed.just-placed { animation: settle 210ms ease-out; }
+  .tray-item.returned { animation: return-to-tray 230ms ease-out; }
+  @keyframes settle { from { translate: 0 -4px; opacity: .7; } to { translate: 0 0; opacity: 1; } }
+  @keyframes return-to-tray { from { translate: 0 -12px; opacity: .4; } to { translate: 0 0; opacity: 1; } }
+  @media (max-width: 680px) {
+    .editing .room-viewport { min-height: 0; height: calc(100svh - 290px); }
+    .editing .room-stage { width: min(170vw, 155.555cqh); top: 50%; }
+    .edit-bar { padding: 10px 12px 14px; }
+    .edit-head { gap: 8px; margin-bottom: 2px; }
+    .edit-hint { font-size: 11px; }
+    .held-bar { bottom: 183px; padding: 5px; gap: 2px; }
+    .held-bar > span { display: none; }
+    .held-bar button { font-size: 11px; padding: 8px; }
+    .object-actions { flex-wrap: wrap; justify-content: center; width: max-content; }
+    .object-actions span { flex-basis: 100%; text-align: center; padding: 4px; }
+    .editing .object-actions { bottom: 185px; }
+  }
+}
+@layer builder {
+  .placed svg { pointer-events: none; }
+  .placed svg > use { pointer-events: visiblePainted; }
+  .holding .placed svg > use { pointer-events: none; }
+}
+@layer builder {
+  .cell { fill: #bec6a60b; stroke: #c1ccab70; stroke-width: 1.5; }
+  .cell.taken { fill: #1f2a2426; stroke: #89977c55; }
+  .hook { fill: #b7d2a718; stroke: #b7d2a790; stroke-width: 2; }
+  .ghost-wall.good { fill: #b7d2a735; stroke: #b7d2a7b0; }
+  .ghost-wall.bad { fill: #d89c8544; stroke: #d89c85bb; }
+}
+@layer builder { .hotspot { touch-action: none; } }

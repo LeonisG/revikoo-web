@@ -48,14 +48,13 @@ export function createRoom() {
     if (key === lastPaint) return order;
     lastPaint = key;
 
-    objects.innerHTML = order.map(({ key, item, spot, placement }) => {
+    objects.innerHTML = order.map(({ key, item, spot, placement, layer }) => {
       // Normalised depth drives the parallax: one custom property on the
       // container moves every object by its own distance, with no per-frame work.
       const depth = Math.min(1, Math.max(0, (spot.depth || 0) / (cells * 22)));
-      const flip = placement.rotation === 180 || placement.rotation === 270;
       return `<div class="placed ${item.flat ? 'is-flat' : ''}" data-key="${key}" data-item="${item.id}"
-        style="left:${spot.x}%;top:${spot.y}%;--d:${depth.toFixed(3)};${spot.surface ? `--wall:${spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}${flip ? '--flip:-1;' : ''}"
-        role="img" aria-label="${escapeHTML(item.name)}">${art(item.id)}</div>`;
+        style="left:${spot.x}%;top:${spot.y}%;z-index:${layer + 500};--d:${depth.toFixed(3)};${spot.surface ? `--wall:${spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}"
+        role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${art(item.id, '', placement.rotation)}</div>`;
     }).join('');
 
     // Light sources are whatever the player has actually put down.
@@ -124,8 +123,8 @@ export function createRoom() {
    */
   function hotspots(order) {
     const controls = document.querySelector('#room-controls');
-    controls.innerHTML = order.filter(o => o.item.opens).map(({ item, spot }) =>
-      `<button class="hotspot" data-open="${item.opens}" style="left:${spot.x}%;top:${spot.y}%"
+    controls.innerHTML = order.filter(o => o.item.opens).map(({ key, item, spot }) =>
+      `<button class="hotspot" data-room-key="${key}" data-open="${item.opens}" style="left:${spot.x}%;top:${spot.y}%"
         aria-label="Abrir ${escapeHTML(item.name)}"><span>${escapeHTML(item.name)} ${icon('arrow')}</span></button>`).join('');
   }
 

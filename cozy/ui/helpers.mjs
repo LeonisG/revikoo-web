@@ -12,8 +12,8 @@ export const coin = '<svg class="icon icon-coin" aria-hidden="true"><use href="#
 export const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 /** Every object shares one symbol box, so this needs no per-item knowledge. */
-export function art(id, label = '') {
-  const asset = objectAsset(id);
+export function art(id, label = '', rotation = 0, state = 'idle') {
+  const asset = objectAsset(id, rotation, state);
   if (asset.type === 'image') return `<img src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}" loading="lazy" decoding="async">`;
   return `<svg viewBox="0 0 ${SYMBOL.w} ${SYMBOL.h}" ${label ? `role="img" aria-label="${escapeHTML(label)}"` : 'aria-hidden="true"'}><use href="${escapeHTML(asset.src)}"></use></svg>`;
 }

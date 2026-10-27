@@ -5,6 +5,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <title>Cozy · hoja de contacto</title>
 <style>
   :root { --cell: 88; }
@@ -21,14 +22,16 @@
 </head>
 <body>
 <h1>Hoja de contacto — todos los objetos a la misma escala, sobre su huella</h1>
+<label>Orientación <select id="rotation"><option>0</option><option>90</option><option>180</option><option>270</option></select>°</label>
 <div class="sheet" id="sheet"></div>
 <script type="module">
 import { ITEMS } from '../logic/catalog.mjs';
-import { footprint } from '../logic/grid.mjs';
+import { footprint, CELL, TILT, SYMBOL } from '../logic/grid.mjs';
+import { art } from '../ui/helpers.mjs';
 
 // The same projection the room uses, drawn into the symbol's own box so the
 // footprint sits exactly where the object is standing.
-const CELL = 88, TILT = .36, AX = 210, AY = 330;
+const AX = SYMBOL.anchorX, AY = SYMBOL.anchorY;
 const cellPath = (w, h) => {
   const q = (x, y) => [AX + (x - w * CELL / 2) - (y - h * CELL / 2), AY + ((x - w * CELL / 2) + (y - h * CELL / 2)) * TILT];
   let d = '';
@@ -36,13 +39,17 @@ const cellPath = (w, h) => {
   for (let j = 0; j <= h; j++) d += `M${q(0, j * CELL)}L${q(w * CELL, j * CELL)}`;
   return d;
 };
+function render() {
+const rotation = Number(document.querySelector('#rotation').value);
 document.querySelector('#sheet').innerHTML = ITEMS.map(item => {
-  const { w, h } = footprint(item, 0);
+  const { w, h } = footprint(item, item.rotatable ? rotation : 0);
   return `<figure><div class="frame">
     <svg viewBox="0 0 420 400"><path d="${cellPath(w, h)}" stroke="#4e6f62" stroke-width="1.4" fill="none" opacity=".75"/></svg>
-    <svg viewBox="0 0 420 400"><use href="../assets/objects.svg#${item.id}"></use></svg>
+    ${art(item.id, item.name, rotation)}
   </div><figcaption><b>${item.name}</b><span>${w}×${h} · ${item.placement}</span></figcaption></figure>`;
 }).join('');
+}
+document.querySelector('#rotation').addEventListener('change', render); render();
 </script>
 </body>
 </html>

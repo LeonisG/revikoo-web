@@ -1,5 +1,6 @@
 import { GAME_CONFIG, ROOM_SIZES, DEFAULT_SIZE } from './config.mjs';
 import { CATALOG } from './catalog.mjs';
+import { WALL_SLOTS } from './grid.mjs';
 
 export function initialState() {
   return {
@@ -25,7 +26,8 @@ const isCount = v => Number.isSafeInteger(v) && v >= 0;
 function validPlacement(p) {
   if (!p || typeof p.item !== 'string' || !CATALOG[p.item]) return false;
   if (CATALOG[p.item].placement === 'wall')
-    return (p.wall === 'left' || p.wall === 'right') && Number.isSafeInteger(p.index) && p.index >= 0;
+    return (p.wall === 'left' || p.wall === 'right') && Number.isSafeInteger(p.index) && p.index >= 0 && p.index < WALL_SLOTS;
+  if (p.parentSurfaceId !== undefined && (typeof p.parentSurfaceId !== 'string' || !Number.isSafeInteger(p.surfaceSlot) || p.surfaceSlot < 0)) return false;
   return Number.isSafeInteger(p.gx) && Number.isSafeInteger(p.gy) && p.gx >= 0 && p.gy >= 0
     && [0, 90, 180, 270].includes(p.rotation);
 }
@@ -37,6 +39,11 @@ export function validateState(s) {
   if (!s.inventory || typeof s.inventory !== 'object' || Array.isArray(s.inventory)) return false;
   if (!Object.entries(s.inventory).every(([id, n]) => CATALOG[id] && isCount(n))) return false;
   if (!Object.values(s.room.placed).every(validPlacement)) return false;
+  if (!Object.values(s.room.placed).every(p => {
+    if (!p.parentSurfaceId) return true;
+    const host = s.room.placed[p.parentSurfaceId], item = CATALOG[host?.item];
+    return CATALOG[p.item].placement === 'surface' && item?.surface && Boolean(item.surfaces[p.surfaceSlot]);
+  })) return false;
   if (!['tasks', 'books', 'focusHistory', 'ledger', 'quests', 'achievements'].every(k => Array.isArray(s[k]))) return false;
   if (!s.tasks.every(t => typeof t.id === 'string' && typeof t.title === 'string' && ['small', 'medium', 'big'].includes(t.difficulty))) return false;
   if (!s.books.every(b => typeof b.id === 'string' && typeof b.title === 'string' && typeof b.author === 'string' && Number.isSafeInteger(b.totalPages) && b.totalPages > 0 && Number.isSafeInteger(b.currentPage) && b.currentPage >= 0 && b.currentPage <= b.totalPages)) return false;
@@ -61,7 +68,7 @@ export function migrate(saved) {
     const mapped = id === 'vintage' ? 'vintage-lamp' : id;
     if (CATALOG[mapped]) next.inventory[mapped] = (next.inventory[mapped] || 0) + 1;
   }
-  next.revision = Number.isSafeInteger(saved.revision) ? saved.revision + 1 : 1;
+  next.revision = Number.isSafeInteger(saved.revision) ? saved.revision : 0;
   return validateState(next) ? next : null;
 }
 

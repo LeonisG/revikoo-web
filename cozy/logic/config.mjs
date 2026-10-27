@@ -4,7 +4,7 @@ export const GAME_CONFIG = Object.freeze({
   version: 2,
   // Enough to choose a room and furnish a corner of it, never enough to buy the
   // room you want AND everything in it. The first session should cost a decision.
-  starterBudget: 420,
+  starterBudget: 450,
   // Selling back at three quarters keeps experimenting cheap without making
   // money out of nothing.
   resaleRate: .75,

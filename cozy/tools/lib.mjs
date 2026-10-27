@@ -8,17 +8,15 @@
  * belongs on the floor it is standing on.
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
+import { CELL, TILT, ORIGIN, SCENE, SYMBOL, project } from '../logic/grid.mjs';
+export { CELL, TILT, ORIGIN, SCENE };
 
 export const NL = String.fromCharCode(10);
-export const CELL = 88;                 // world units per grid cell
-export const TILT = .36;
-export const ORIGIN = { x: 700, y: 480 };
-export const SCENE = { w: 1400, h: 900 };
 // Every object symbol shares this box, and the art is drawn at its true size
 // inside it: two objects at the same scale really are the same size in the room.
-export const SYM = { w: 420, h: 400, ax: 210, ay: 330 };
+export const SYM = { w: SYMBOL.w, h: SYMBOL.h, ax: SYMBOL.anchorX, ay: SYMBOL.anchorY };
 
-export const p = (x, y, z = 0) => [ORIGIN.x + x - y, ORIGIN.y + (x + y) * TILT - z];
+export const p = project;
 export const pts = points => points.map(a => a.map(n => +n.toFixed(2)).join(',')).join(' ');
 export const polygon = (points, fill, extra = '') => `<polygon points="${pts(points)}" fill="${fill}" ${extra}/>`;
 export const line = (a, b, color, width = 2, extra = '') => `<path d="M${a}L${b}" stroke="${color}" stroke-width="${width}" stroke-linecap="round" fill="none" ${extra}/>`;
@@ -53,8 +51,12 @@ export const contact = (q, cx, cy, rx, ry = rx * .36, opacity = .36) => {
 };
 
 export const MAT = {
-  oak: ['#dca36c', '#9e653f', '#bc8050'],
-  pine: ['#e0b183', '#a97950', '#c6945f'],
+  sage: ['#a8b28a', '#7a8660', '#626e4c'],
+  moss: ['#87945c', '#626f41', '#485534'],
+  burgundy: ['#aa7971', '#805650', '#67443e'],
+  charcoal: ['#69695e', '#4d4c43', '#383a33'],
+  oak: ['#d5a16c', '#b47e50', '#92613e'],
+  pine: ['#dfb785', '#c29765', '#a97b4f'],
   walnut: ['#8f6244', '#573a28', '#714c34'],
   white: ['#eae4d4', '#bdb5a3', '#d3ccba'],
   slate: ['#5f6b63', '#38433d', '#2a332e'],
