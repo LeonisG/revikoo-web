@@ -86,8 +86,10 @@ def inspect(sprite_id, sprite):
     issues = []
 
     # AXIS — only decidable for pieces that lie in the floor plane, where the
-    # silhouette edges approximate the floor axes. Production no longer applies
-    # the legacy axisFix: assess authored art, not an imaginary affine correction.
+    # silhouette edges approximate the floor axes. Production applies a measured
+    # affine (axisFix) to volumetric art, but deliberately not to rugs: their two
+    # edges disagree, so no affine can square them. These are judged as authored,
+    # which is how they ship, and they stay failing until they are redrawn.
     if 'rug' in sprite_id:
         edges = bottom_edges(alpha.load(), width, height)
         if edges and edges[0] and edges[1]:
@@ -108,9 +110,13 @@ def inspect(sprite_id, sprite):
         issues.append(f'GROUND possible baked shadow / faint alpha ({bleed:.0%} below solid bounds); inspect visually')
 
     # SCALE — share of the footprint the art fills.
+    # SCALE — measured on what actually reaches the floor. The renderer lays art
+    # out 1/widen narrower so the corrected base still spans its footprint, so a
+    # corrected sprite must be judged at that width, not its authored one.
     ratio = None
     if spec.get('placement') == 'floor' and sprite.get('width'):
-        visible = sprite['width'] * (solid[2] - solid[0]) / width
+        widen = (sprite.get('axisFix') or {}).get('widen', 1)
+        visible = sprite['width'] / widen * (solid[2] - solid[0]) / width
         ratio = visible / (CELL * (spec['w'] + spec['h']))
         if not SCALE_BAND[0] <= ratio <= SCALE_BAND[1]:
             issues.append(f'SCALE fills {ratio:.0%} of its {spec["w"]}×{spec["h"]} footprint')

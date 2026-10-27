@@ -90,14 +90,48 @@ how its footprint projects. The whole error is horizontal, so squashing heights
 would introduce a second, different mistake. Verticals stay vertical, which
 matters more than anything else for this camera.
 
-The correction is pinned at the pivot, so the object stays anchored, and it
-travels with the catalogue thumbnail so the shop shows the object that will
-actually be placed.
+The correction is pinned at the pivot, so the object stays anchored. It applies
+in the room and **not** to catalogue thumbnails: a thumbnail sits in a tight box
+with no floor to agree with, and widening can push the art past its frame.
+
+Three guards keep this honest. The tool abstains on 49 sprites whose silhouette
+gives no trustworthy reading rather than inventing a number. It leaves alone
+anything already within 2.5 degrees of the floor, because when two honest
+measurements disagree the art should not be warped — `industrial-chair` measured
+21.9/24.1 here and 24.7/24.2 under the independent estimator, and correcting it
+on the first reading pushed it 2.1 degrees off. And the result is re-measured by
+`tools/verify-angles.py`, written separately on purpose: sharing one routine
+would let a bug in it agree with itself.
+
+Because widening is forced by the geometry, the renderer lays art out `1/widen`
+narrower and lets the transform put the width back, so a corrected base spans
+exactly the footprint it is calibrated for. `ui/edit.mjs` inverts the same
+transform before sampling the hit mask, or the pointer would meet the
+transformed art while the mask described the authored one.
+
+This is a bridge over legacy art, not a licence. Art authored at 24.105 degrees
+from the start needs no `axisFix` at all, and the entry disappears on its own.
 
 ```sh
 python tools/measure-axes.py            # write axisFix into sprites.mjs
 python tools/measure-axes.py --report   # table of measured angles
+python tools/verify-angles.py --strict  # independent re-measurement of the result
 ```
+
+## One floor for every size
+
+The three room masters were drawn at 24.738, 24.105 and 23.627 degrees, so a
+sprite grounded in one was wrong in the others — no asset could be right
+everywhere. `tools/measure-room.py` now scales each master vertically by
+`stretch = canonical / measured`, the one axis an elevation change touches, and
+all three ship at **24.105 degrees**. Re-measured after stretching they read
+24.21/24.05, 24.22/24.00 and 24.06/24.21. No room moves more than 3 per cent,
+well under what reads as a stretch, and `authoredDegrees` records what the art
+had. The medium room sets the canon: lowest fit residual (0.91 px) and between
+the other two.
+
+Changing that value re-grounds everything: re-run `measure-room.py`,
+`measure-axes.py`, `measure-pivots.py` and `verify-angles.py`, in that order.
 
 It abstains wherever the top is not a flat floor-parallel face — a lampshade, a
 cushion, foliage — and rejects any correction outside a plausible band, because

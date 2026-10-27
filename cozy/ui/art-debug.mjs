@@ -1,9 +1,10 @@
 // Loaded only for ?art-debug=true. Uses a separate save selected in config.mjs.
 import { CATALOG, ROOM_SIZES } from '../logic/config.mjs';
 import { ART_ASSETS, GOLDEN_IDS } from '../assets/art-registry.mjs';
-import { objectAsset } from '../assets/manifest.mjs';
+import { objectAsset, availableOrientations, ART_PILOT } from '../assets/manifest.mjs';
 import { CAMERA, SCENE, CELL, project, cellPolygon, paintOrder, occupancy } from '../logic/grid.mjs';
 import { escapeHTML } from './helpers.mjs';
+import { geometryProfile } from '../logic/geometry-profile.mjs';
 
 export function createArtDebug(engine, room, onChange, resetGolden) {
   const style = document.createElement('link'); style.rel = 'stylesheet';
@@ -13,11 +14,12 @@ export function createArtDebug(engine, room, onChange, resetGolden) {
   const panel = document.createElement('aside');
   panel.className = 'art-inspector'; panel.setAttribute('aria-label', 'Inspección artística');
   panel.innerHTML = `<details open><summary>Cozy · inspección artística <span>DRAFT</span></summary>
-    <p>Escena de prueba · guardado separado · sin créditos</p>
+    <p>Revisión local · guardado separado</p>
     <div class="art-toolbar"><label>Habitación <select id="art-size">${Object.values(ROOM_SIZES).map(s => `<option value="${s.id}">${s.cells} × ${s.cells}</option>`).join('')}</select></label>
     <label>Luz <select id="art-light"><option value="day">Día neutro</option><option value="night">Noche</option><option value="sunset">Atardecer</option></select></label></div>
     <label>Objeto <select id="art-item">${Object.values(CATALOG).map(i => `<option value="${i.id}">${escapeHTML(i.name)}</option>`).join('')}</select></label>
     <div class="art-toolbar"><button type="button" id="art-golden">Golden candidato</button><button type="button" id="art-empty">Room vacía</button><button type="button" id="art-solo">Objeto solo</button></div>
+    ${ART_PILOT ? `<p>Piloto Tripo · fuente GLB · 4 vistas renderizadas · DRAFT</p><div class="art-toolbar"><button type="button" id="art-pilot-fixture">Escritorio + taza</button><label>Giro real <select id="art-rotation"><option>0</option><option>90</option><option>180</option><option>270</option></select></label></div><p>Superficie calibrada al GLB: 113,7 unidades proyectadas. El original conserva 132. Revisar acabado y contactos.</p><a href="./tools/model-review.html" target="_blank" rel="noopener">Inspeccionar GLB y geometría</a><a href="?art-debug=true">Comparar con arte original</a>` : '<a href="?art-debug=true&pilot=tripo-desk">Abrir piloto Tripo (sin generar)</a>'}
     <fieldset><legend>Capas de revisión</legend>${[['axes','Ejes y grid'],['bounds','Límites de imagen'],['footprints','Footprints y pivots'],['shadows','Contactos'],['lights','Emisores y atmósfera']].map(([key,label]) => `<label><input type="checkbox" data-art-layer="${key}" checked> ${label}</label>`).join('')}</fieldset>
     <output id="art-readout"></output><p class="art-error" id="art-error" role="status"></p>
     <a href="./docs/ASSET_AUDIT.md" target="_blank" rel="noopener">Auditoría y limitaciones</a>
@@ -45,6 +47,19 @@ export function createArtDebug(engine, room, onChange, resetGolden) {
     onChange();
   }));
   byId('item').addEventListener('change', refresh);
+  if (ART_PILOT) {
+    byId('pilot-fixture').addEventListener('click', () => guarded(() => {
+      engine.debug('clear'); engine.debug('add','desk'); engine.debug('add','mug');
+      const host=engine.placeItem('desk',{gx:1,gy:1,rotation:0});
+      engine.placeItem('mug',{gx:1,gy:1,parentSurfaceId:host.key,surfaceSlot:0});
+      byId('item').value='desk';byId('rotation').value='0';onChange();
+    }));
+    byId('rotation').addEventListener('change', () => guarded(() => {
+      const entry=Object.entries(engine.state.room.placed).find(([,p])=>p.item==='desk');
+      if(!entry)throw new Error('Coloca primero el escritorio.');
+      engine.moveItem(entry[0],{...entry[1],rotation:Number(byId('rotation').value)});onChange();
+    }));
+  }
   panel.querySelectorAll('[data-art-layer]').forEach(input => input.addEventListener('change', () => {
     app.classList.toggle('art-no-shadows', !enabled('shadows'));
     app.classList.toggle('art-no-lights', !enabled('lights'));
@@ -57,20 +72,23 @@ export function createArtDebug(engine, room, onChange, resetGolden) {
     const order = paintOrder({ placed: state.room.placed, cells }, CATALOG);
     const selected = byId('item').value, meta = ART_ASSETS[selected], item = CATALOG[selected];
     const placed = order.find(o => o.item.id === selected);
+    const frame = objectAsset(selected,placed?.placement.rotation || 0);
     const matrix = `[[1,-1,0],[${CAMERA.tilt},${CAMERA.tilt},-1]]`;
     const text = [
       `Cámara raster heredada · ±${(Math.atan(CAMERA.tilt)*180/Math.PI).toFixed(3)}°`,
       `M ${matrix} · origen ${CAMERA.origin.x}, ${CAMERA.origin.y}`,
       `Celda ${CELL} · escena ${SCENE.w}×${SCENE.h}`,
       `${selected} · ${meta.representation} · ${meta.visualStatus}`,
-      `Footprint ${item.w}×${item.h} · ancho ${meta.width.toFixed(1)} · pivot ${meta.pivot.x}, ${meta.pivot.y}`,
-      `Orientaciones reales: ${meta.orientations.join(', ')}° · material pintado, sin mapas PBR`,
-      `Contacto ${meta.shadowProfile} (aproximado) · emisor ${meta.lightAnchor?.join(', ') || 'ninguno'}`,
+      `Footprint ${item.w}×${item.h} · ancho ${frame.width.toFixed(1)} · pivot ${frame.pivot.x}, ${frame.pivot.y}`,
+      `Altura de superficie ${geometryProfile(item).top.toFixed(2)}`,
+      `Orientaciones reales: ${availableOrientations(selected).join(', ')}° · ${frame.candidate ? 'GLB renderizado, candidato' : 'material pintado'}`,
+      `Sombra ${frame.shadowSrc ? 'render desde geometría, pase separado' : meta.shadowProfile+' (aproximado)'} · emisor ${meta.lightAnchor?.join(', ') || 'ninguno'}`,
       placed ? `Posición ${JSON.stringify(placed.placement)}` : 'Objeto seleccionado sin colocar',
       `${order.length} colocados · ${occupancy(state.room.placed, CATALOG).size} celdas ocupadas`,
       `Golden: ${GOLDEN_IDS.filter(id => order.some(o => o.item.id === id)).length}/5 candidatos`,
       'Cian: grid · amarillo: pivot · coral: imagen · verde: emisor',
-      'Sin corrección affine. Un residual bajo no aprueba la cámara.',
+      frame.candidate ? 'Piloto sin affine: cuatro renders geométricos.' : 'Arte heredado: comprobar axisFix en el manifiesto actual.',
+      'Un residual bajo no aprueba la cámara ni el material.',
     ];
     byId('readout').textContent = text.join('\n');
     const parts = [];

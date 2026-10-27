@@ -167,6 +167,7 @@
     opacity: .22; filter: blur(2px); }
   .app[data-light=night] .art-contact { opacity: .14; }
   .app[data-light=sunset] .art-contact { opacity: .18; }
+  .art-cast { position: absolute; pointer-events: none; max-width: none; }
   .placed.is-flat { z-index: 0; }
   .editing .placed { pointer-events: auto; cursor: pointer; }
   .editing .placed:hover { filter: brightness(1.12) drop-shadow(0 0 10px #ffd79a66); }

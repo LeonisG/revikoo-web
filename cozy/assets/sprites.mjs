@@ -555,18 +555,14 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.514,
-      "y": 0.8205
+      "y": 0.8135
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 66684,
-    "hitMask": "00000000000040000001f8000001fe000003ff800003ffc00003ffe00003ffe0003fffc000ffffc003ffffc003f7ffc0018fffc001ffffc001ffff8001ffff8003ffff8001ffff8001ffff00007ffc00001ffc000007ce00000fdc00003ffe0000ffff0000f3fe0001c38e0000c3070000070700000702000003000000000000",
-    "axisFix": {
-      "shear": -0.02343,
-      "widen": 0.94949
-    }
+    "hitMask": "00000000000040000001f8000001fe000003ff800003ffc00003ffe00003ffe0003fffc000ffffc003ffffc003f7ffc0018fffc001ffffc001ffff8001ffff8003ffff8001ffff8001ffff00007ffc00001ffc000007ce00000fdc00003ffe0000ffff0000f3fe0001c38e0000c3070000070700000702000003000000000000"
   },
   "wardrobe-rack": {
     "src": "items/industrial/furniture/wardrobe-rack.webp",
@@ -783,18 +779,14 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5048,
-      "y": 0.5781
+      "y": 0.6194
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 67010,
-    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000000000003c0000007f000001ffe00007fff8000ffffe003fffff807fffffe03ffffff80ffffffc03ffffff01fffffe007ffff8001ffff00007ffe00003ff800000ff0000003e00000008000000000000000000000000000000000000000000",
-    "axisFix": {
-      "shear": 0.03537,
-      "widen": 1.19478
-    }
+    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000000000003c0000007f000001ffe00007fff8000ffffe003fffff807fffffe03ffffff80ffffffc03ffffff01fffffe007ffff8001ffff00007ffe00003ff800000ff0000003e00000008000000000000000000000000000000000000000000"
   },
   "gamer-lamp": {
     "src": "items/gamer/accessories/gamer-lamp.webp",
@@ -835,18 +827,14 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5223,
-      "y": 0.7791
+      "y": 0.7828
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 50106,
-    "hitMask": "000000000000000000000000000e0000003fc00000fff00003fffc0003ffff0003ffffc003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe001ffffe0001fffe0000fffe00003ffc00000fc0000007800000030000000000000000000",
-    "axisFix": {
-      "shear": -0.00707,
-      "widen": 1.02549
-    }
+    "hitMask": "000000000000000000000000000e0000003fc00000fff00003fffc0003ffff0003ffffc003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe003ffffe001ffffe0001fffe0000fffe00003ffc00000fc0000007800000030000000000000000000"
   },
   "gamer-headset": {
     "src": "items/gamer/accessories/gamer-headset.webp",
@@ -935,18 +923,14 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.5659
+      "y": 0.6109
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 66000,
-    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000080000001e0000007fc00001fff00003fffc000fffff001fffffc07ffffff03ffffffc1ffffffe07fffffc01fffff8007ffff0003fffc0000fff800003ff000000fc0000007800000000000000000000000000000000000000000000000000",
-    "axisFix": {
-      "shear": 0.0601,
-      "widen": 1.22039
-    }
+    "hitMask": "000000000000000000000000000000000000000000000000000000000000000000080000001e0000007fc00001fff00003fffc000fffff001fffffc07ffffff03ffffffc1ffffffe07fffffc01fffff8007ffff0003fffc0000fff800003ff000000fc0000007800000000000000000000000000000000000000000000000000"
   },
   "gamer-games": {
     "src": "items/gamer/accessories/gamer-games.webp",
@@ -1131,18 +1115,14 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5056,
-      "y": 0.5592
+      "y": 0.6057
     },
     "pixels": [
       768,
       768
     ],
     "bytes": 63372,
-    "hitMask": "0000000000000000000000000000000000000000000000000000000000000000001c0000003f000000ffc00001fff80007fffe001fffff803fffffe07ffffff83ffffffc0ffffffe03fffffc00fffff8003ffff0001fffc00007ff800001fe000000fc0000003800000000000000000000000000000000000000000000000000",
-    "axisFix": {
-      "shear": 0.05894,
-      "widen": 1.2242
-    }
+    "hitMask": "0000000000000000000000000000000000000000000000000000000000000000001c0000003f000000ffc00001fff80007fffe001fffff803fffffe07ffffff83ffffffc0ffffffe03fffffc00fffff8003ffff0001fffc00007ff800001fe000000fc0000003800000000000000000000000000000000000000000000000000"
   },
   "vase": {
     "src": "items/oak-cozy/accessories/vase.webp",

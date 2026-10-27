@@ -14,7 +14,7 @@
 .art-inspector input { accent-color: #d3b36b; }
 .art-inspector output { display: block; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.65 ui-monospace, monospace; }
 .art-inspector .art-error { color: #ffc2a9; }
-.art-inspector a { color: #bdd9ae; }
+.art-inspector a { display: block; margin: 8px 0; color: #bdd9ae; }
 .art-inspector :focus-visible { outline: 2px solid #ffd166; outline-offset: 3px; }
 #art-overlay { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 14; pointer-events: none; overflow: visible; }
 #art-overlay text { fill: #e8f6d8; font: 14px monospace; paint-order: stroke; stroke: #17221f; stroke-width: 3px; }
@@ -23,7 +23,7 @@
 #art-overlay .art-bounds { stroke: #eeac87; stroke-width: 1px; stroke-dasharray: 5 5; fill: none; }
 #art-overlay .art-bound-label { font-size: 11px; fill: #ffd3b5; }
 #art-overlay .art-emitter { fill: #b0f0ac; stroke: #243f28; stroke-width: 2px; }
-.art-no-shadows .art-contact { visibility: hidden; }
+.art-no-shadows .art-contact, .art-no-shadows .art-cast { visibility: hidden; }
 .art-no-lights .glow-layer, .art-no-lights .scene-light, .art-no-lights .scene-shade, .art-no-lights .daylight-layer { visibility: hidden; }
 .art-debug .reward { display: none; }
 .art-debug *, .asset-test * { animation: none !important; transition: none !important; }

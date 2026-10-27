@@ -14,15 +14,34 @@ export const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => 
 /** Every sprite shares one logical anchor; art metadata supplies scale and pivot. */
 export function art(id, label = '', rotation = 0, state = 'idle', eager = false) {
   const asset = objectAsset(id, rotation, state);
-    // Show the authored view without affine camera compensation. Historical
-    // axisFix metadata is retained for the audit, never applied to production.
+    // Thumbnails keep the authored view: they sit in a tight box with no floor to
+    // agree with, and the correction below can push art past the frame.
     if (!eager) return `<span class="sprite-frame thumbnail"><img class="item-sprite" data-sprite="${id}" src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}" loading="lazy" decoding="async" draggable="false" style="width:100%;height:100%;left:0;top:0;object-fit:contain;"></span>`;
-    const width = asset.width || SYMBOL.w, height = width / (asset.aspect || 1);
+    // Camera correction. The masters were drawn at disagreeing floor angles — the
+    // large casework worst of all, around 33 and 20 degrees against a 24.1 degree
+    // floor — so they read as twisted when set on it. `axisFix`, measured per
+    // sprite by tools/measure-axes.py, is the one linear map that carries both
+    // authored floor directions onto the canonical pair while leaving verticals
+    // vertical: x' = widen*x, y' = shear*x + y. That is the difference between
+    // two orthographic cameras over the floor plane, not a cosmetic skew, which
+    // is why it is measured and never hand-tuned, and why measure-axes abstains
+    // wherever the silhouette gives no honest reading rather than guessing.
+    //
+    // Widening is forced by the geometry, so the art is laid out 1/widen narrower
+    // and the transform puts the width back: the corrected base spans exactly the
+    // footprint it is calibrated for. Height follows that same scale, which is
+    // the one liberty taken here — the alternative, decoupling it, re-introduces
+    // the twist this removes. Pinned at the pivot so the contact point cannot drift.
+    const { widen = 1, shear = 0 } = asset.axisFix || {};
+    const width = (asset.width || SYMBOL.w) / widen, height = width / (asset.aspect || 1);
     const pivot = asset.pivot || { x: .5, y: .825 };
+    const correction = asset.axisFix
+      ? `transform:matrix(${widen},${shear},0,1,0,0);transform-origin:${(pivot.x * 100).toFixed(2)}% ${(pivot.y * 100).toFixed(2)}%;`
+      : '';
     const left = (SYMBOL.anchorX - width * pivot.x) / SYMBOL.w * 100;
     const top = (SYMBOL.anchorY - height * pivot.y) / SYMBOL.h * 100;
     return `<span class="sprite-frame"><img class="item-sprite" data-sprite="${id}" src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}"
-      loading="${eager ? 'eager' : 'lazy'}" decoding="async" draggable="false" style="width:${width / SYMBOL.w * 100}%;height:${height / SYMBOL.h * 100}%;left:${left}%;top:${top}%;--sprite-ground:${pivot.y * 100}%"></span>`;
+      loading="${eager ? 'eager' : 'lazy'}" decoding="async" draggable="false" style="width:${width / SYMBOL.w * 100}%;height:${height / SYMBOL.h * 100}%;left:${left}%;top:${top}%;${correction}--sprite-ground:${pivot.y * 100}%"></span>`;
 }
 
 export function bookStyle(title) {

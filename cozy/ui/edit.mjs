@@ -164,14 +164,33 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
       if (!img) { if (el.contains(event.target)) return el.dataset.key; continue; }
       const bounds = img.getBoundingClientRect(), p = engine.state.room.placed[el.dataset.key];
       const asset = objectAsset(p.item, p.rotation, p.pose || 'idle');
-      const nx = (event.clientX - bounds.left) / bounds.width;
-      // Invert planar wall skew. Bounding-rect normalization alone samples the
-      // wrong alpha row near the upper/lower corners of a hanging picture.
-      const slope = p.wall ? (p.wall === 'left' ? -1 : 1) * CAMERA.tilt : 0;
-      const originalHeight = bounds.height - Math.abs(slope) * bounds.width;
-      const ny = slope
-        ? (event.clientY - bounds.top - Math.abs(slope) * bounds.width / 2 - slope * (nx - .5) * bounds.width) / originalHeight
-        : (event.clientY - bounds.top) / bounds.height;
+      // The hit mask is stored against the authored image, but what the pointer
+      // meets on screen is the transformed one. getBoundingClientRect reports the
+      // transformed box, so normalising against it samples the wrong pixel unless
+      // the transform is undone first. Floor art carries the measured axisFix;
+      // wall art carries the planar skew. An asset never has both — measure-axes
+      // skips wall placements — so these are two branches, never a composition.
+      let nx, ny;
+      if (asset.axisFix) {
+        // Undo x' = widen*x, y' = shear*x + y, taken about the pivot, in units
+        // of the untransformed box. k is the shear expressed against height.
+        const { widen, shear } = asset.axisFix;
+        const a = asset.pivot.x, k = shear * (asset.aspect || 1);
+        const spanY = 1 + Math.abs(k), minY = k > 0 ? -k * a : k * (1 - a);
+        const u = (event.clientX - bounds.left) / bounds.width * widen + a * (1 - widen);
+        const v = (event.clientY - bounds.top) / bounds.height * spanY + minY;
+        nx = a + (u - a) / widen;
+        ny = v - k * (nx - a);
+      } else {
+        nx = (event.clientX - bounds.left) / bounds.width;
+        // Invert planar wall skew. Bounding-rect normalization alone samples the
+        // wrong alpha row near the upper/lower corners of a hanging picture.
+        const slope = p.wall ? (p.wall === 'left' ? -1 : 1) * CAMERA.tilt : 0;
+        const originalHeight = bounds.height - Math.abs(slope) * bounds.width;
+        ny = slope
+          ? (event.clientY - bounds.top - Math.abs(slope) * bounds.width / 2 - slope * (nx - .5) * bounds.width) / originalHeight
+          : (event.clientY - bounds.top) / bounds.height;
+      }
       if (spriteHit(asset.hitMask, nx, ny)) return el.dataset.key;
     }
     return null;

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "baselineCommit": "7b801a34e0046fbd3795f5795064c380a1cc837d",
+  "baselineCommit": "ca1ca5b6a275dacd57c2b660690c27bac6a275c8",
   "method": "File inspection + live catalog metadata. Image measurements are not artistic approval.",
   "assets": [
     {
@@ -104,7 +104,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -208,7 +208,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -312,7 +312,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -518,7 +518,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -622,7 +622,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -726,7 +726,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -830,7 +830,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -934,7 +934,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -1038,7 +1038,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -1142,7 +1142,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -1361,10 +1361,7 @@
       "orientations": [
         0
       ],
-      "legacyAxisFix": {
-        "shear": 0.05894,
-        "widen": 1.2242
-      },
+      "legacyAxisFix": null,
       "projectedAxes": {
         "leftDegrees": -31.244,
         "rightDegrees": 26.049,
@@ -1449,8 +1446,6 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
-        "HIGH: silhouette fit does not establish horizontal structural edges",
         "HIGH: rug edges disagree with room; see check-assets --strict"
       ]
     },
@@ -1959,7 +1954,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -2839,7 +2834,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges",
         "HIGH: glow anchored at ground; no occlusion or material relighting"
       ]
@@ -4539,7 +4534,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -4744,7 +4739,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -4848,7 +4843,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -4953,7 +4948,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -5070,10 +5065,7 @@
       "orientations": [
         0
       ],
-      "legacyAxisFix": {
-        "shear": 0.03537,
-        "widen": 1.19478
-      },
+      "legacyAxisFix": null,
       "projectedAxes": {
         "leftDegrees": -29.681,
         "rightDegrees": 26.528,
@@ -5158,8 +5150,6 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
-        "HIGH: silhouette fit does not establish horizontal structural edges",
         "HIGH: rug edges disagree with room; see check-assets --strict"
       ]
     },
@@ -5378,10 +5368,7 @@
       "orientations": [
         0
       ],
-      "legacyAxisFix": {
-        "shear": -0.00707,
-        "widen": 1.02549
-      },
+      "legacyAxisFix": null,
       "projectedAxes": {
         "leftDegrees": -24.312,
         "rightDegrees": 24.981,
@@ -5466,7 +5453,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: contact and scale need in-scene validation; alpha-derived pivot is a heuristic"
       ]
     },
     {
@@ -6059,7 +6046,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -6257,7 +6244,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -6462,7 +6449,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -6566,7 +6553,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -6671,7 +6658,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -6776,7 +6763,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -7470,7 +7457,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -7870,7 +7857,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -7886,10 +7873,7 @@
       "orientations": [
         0
       ],
-      "legacyAxisFix": {
-        "shear": -0.02343,
-        "widen": 0.94949
-      },
+      "legacyAxisFix": null,
       "projectedAxes": {
         "leftDegrees": -21.87,
         "rightDegrees": 24.144,
@@ -7974,8 +7958,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
-        "HIGH: silhouette fit does not establish horizontal structural edges"
+        "MEDIUM: contact and scale need in-scene validation; alpha-derived pivot is a heuristic"
       ]
     },
     {
@@ -8079,7 +8062,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -8284,7 +8267,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     },
     {
@@ -8401,10 +8384,7 @@
       "orientations": [
         0
       ],
-      "legacyAxisFix": {
-        "shear": 0.0601,
-        "widen": 1.22039
-      },
+      "legacyAxisFix": null,
       "projectedAxes": {
         "leftDegrees": -31.221,
         "rightDegrees": 25.917,
@@ -8489,8 +8469,6 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
-        "HIGH: silhouette fit does not establish horizontal structural edges",
         "HIGH: rug edges disagree with room; see check-assets --strict"
       ]
     },
@@ -8999,7 +8977,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering",
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it",
         "HIGH: silhouette fit does not establish horizontal structural edges"
       ]
     },
@@ -9290,7 +9268,7 @@
       "detail": "768px delivery; full-size material detail reduces at room scale",
       "consistency": "See collection and object notes in ASSET_AUDIT.md; no camera-approved golden asset yet",
       "issues": [
-        "HIGH: legacy affine changes shape, not camera; remove from production rendering"
+        "MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it"
       ]
     }
   ],
@@ -9300,24 +9278,26 @@
       "type": "ROOM",
       "camera": {
         "cells": 4,
-        "tilt": 0.46075,
-        "degrees": 24.738,
+        "tilt": 0.44742,
+        "degrees": 24.105,
+        "stretch": 0.97108,
+        "authoredDegrees": 24.738,
         "origin": {
           "x": 700,
-          "y": 451.18
+          "y": 451.15
         },
         "fit": {
           "x": 2.1613,
-          "y": 2.1341,
+          "y": 3.5184,
           "w": 95.6774,
-          "h": 95.7318
+          "h": 92.9631
         },
         "quality": {
           "leftDeg": 24.799,
           "rightDeg": 24.677,
           "residualPx": 1.24,
           "samples": 580,
-          "frontY": 775.6
+          "frontY": 766.1
         }
       },
       "delivery": {
@@ -9361,6 +9341,8 @@
         "cells": 5,
         "tilt": 0.44742,
         "degrees": 24.105,
+        "stretch": 1,
+        "authoredDegrees": 24.105,
         "origin": {
           "x": 700,
           "y": 447.57
@@ -9418,24 +9400,26 @@
       "type": "ROOM",
       "camera": {
         "cells": 6,
-        "tilt": 0.43746,
-        "degrees": 23.627,
+        "tilt": 0.44742,
+        "degrees": 24.105,
+        "stretch": 1.02277,
+        "authoredDegrees": 23.627,
         "origin": {
           "x": 700.42,
-          "y": 421.7
+          "y": 421.05
         },
         "fit": {
           "x": 3.0747,
-          "y": 3.048,
+          "y": 1.9787,
           "w": 93.8507,
-          "h": 93.904
+          "h": 96.0426
         },
         "quality": {
           "leftDeg": 23.587,
           "rightDeg": 23.668,
           "residualPx": 0.99,
           "samples": 942,
-          "frontY": 883.7
+          "frontY": 893.5
         }
       },
       "delivery": {
@@ -9474,6 +9458,16 @@
     }
   ],
   "files": [
+    {
+      "file": "assets/art-registry.mjs",
+      "bytes": 3030,
+      "role": "other"
+    },
+    {
+      "file": "assets/candidates/tripo-desk/provenance.json",
+      "bytes": 2494,
+      "role": "other"
+    },
     {
       "file": "assets/favicon.svg",
       "bytes": 307,
@@ -9961,7 +9955,7 @@
     },
     {
       "file": "assets/manifest.mjs",
-      "bytes": 1398,
+      "bytes": 1617,
       "role": "other"
     },
     {
@@ -10576,7 +10570,7 @@
     },
     {
       "file": "assets/sprites.mjs",
-      "bytes": 58370,
+      "bytes": 57995,
       "role": "other"
     }
   ],

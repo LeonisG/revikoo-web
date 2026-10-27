@@ -1,5 +1,5 @@
 {
-  "status": "submitted-unverified",
+  "status": "completed-downloaded",
   "visualStatus": "DRAFT",
   "userBudgetCredits": 9,
   "approvedGenerations": 1,
@@ -71,5 +71,36 @@
     "outcome": "NO VERIFICADO. El job sigue registrado como pending y el historial 3D no se puede leer. No se confirma ni GLB entregado ni crédito consumido.",
     "generationToolsInSession": false,
     "doNotResubmit": "Reenviar el mismo job arriesga un cargo duplicado. Resolver el estado antes de volver a generar."
+  },
+  "finalJobVerification": {
+    "method": "Higgsfield jobs_wait timeout_seconds=0",
+    "jobId": "df3e1594-4357-4ef4-a64f-accd526fef70",
+    "status": "completed",
+    "resultUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3KviCEABNdmp8bzxvvCzQQmlL56/hf_20261027_215553_df3e1594-4357-4ef4-a64f-accd526fef70.glb"
+  },
+  "download": {
+    "file": "desk.glb",
+    "bytes": 848004,
+    "sha256": "eaac88e0a9c66b5276dce0ef8bfb2e3a3d19451a4f718914b2d19ee965a356d5"
+  },
+  "referenceSha256": "081d972d3a8197eec2a29ce496fc4a12523402f4e90941edbbe8303bd6179caa",
+  "generationCount": 1,
+  "additionalGenerations": 0,
+  "costNote": "9-credit quote reconfirmed immediately before one authorized submission; tool does not return an itemized final debit.",
+  "qa": {
+    "technicalStatus": "PASS",
+    "visualStatus": "DRAFT",
+    "renderedViews": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "separateShadowPasses": true,
+    "calibratedSurfaceHeight": 113.73869858923008,
+    "productionPromoted": false,
+    "reason": "Illustrated grain, outline and contrast need further art work; mesh has no articulated drawers.",
+    "report": "cozy/docs/GLB_PILOT_REPORT.md",
+    "tests": "cozy/docs/qa/tripo-pilot/results.json"
   }
 }

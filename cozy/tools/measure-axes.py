@@ -50,6 +50,12 @@ MIN_CORRECTION = .012  # below this the sprite already agrees with the room
 # means the "top" we measured is a lampshade or a cushion, not a flat face.
 WIDEN_BAND = (.85, 1.25)
 MAX_SHEAR = .25
+# Art already this close to the floor is left alone. Correcting it buys nothing
+# the eye can see, and on a shaky reading it makes things worse: industrial-chair
+# measured 21.9/24.1 here and 24.7/24.2 under the independent estimator in
+# tools/verify-angles.py, and "correcting" it on the first reading pushed it
+# 2.1 degrees off. When two honest measurements disagree, do not warp the art.
+ALREADY_CANONICAL = 2.5
 PLAUSIBLE_ANGLE = (14., 42.)   # degrees; a floor-parallel edge lives in here
 
 
@@ -148,9 +154,26 @@ for sprite_id, sprite in sprites.items():
     if not spec or spec.get('placement') == 'wall' or not sprite.get('master') or not master.exists():
         sprite.pop('axisFix', None)
         continue
+    # Flat goods lie in the floor plane, so their silhouette edges ARE the floor
+    # axes — and tools/check-assets.py shows the rugs' top and bottom edges
+    # disagree by up to 7 degrees. That shape is not a parallelogram, and an
+    # affine maps parallelograms to parallelograms, so no correction here can be
+    # right: fixing the top edge would only tilt the bottom further. They are
+    # recorded as CRITICAL in docs/ASSET_AUDIT.md and need redrawing flat on the
+    # canonical floor, not patching.
+    if 'rug' in sprite_id:
+        skipped.append((sprite_id, None))
+        sprite.pop('axisFix', None)
+        continue
     found = measure(master)
     if not found or found['residual'] > MAX_RESIDUAL:
         skipped.append((sprite_id, found['residual'] if found else None))
+        sprite.pop('axisFix', None)
+        continue
+    drift = max(abs(math.degrees(math.atan(abs(found[side]))) - math.degrees(math.atan(CANON)))
+                for side in ('left', 'right'))
+    if drift <= ALREADY_CANONICAL:
+        skipped.append((sprite_id, found['residual']))
         sprite.pop('axisFix', None)
         continue
     fix = correction(found['left'], found['right'])

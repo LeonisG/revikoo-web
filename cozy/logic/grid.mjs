@@ -11,6 +11,7 @@
 // cell's screen depth is simply gx + gy: larger means nearer the viewer.
 
 import { ROOM_CAMERAS } from './room-camera.mjs';
+import { geometryProfile } from './geometry-profile.mjs';
 
 export const CELL = 88;              // world units per cell — the authoring unit
 export const SCENE = { w: 1400, h: 900 };
@@ -67,6 +68,7 @@ export const inBounds = (placement, item, size) => {
 
 /** Surface slots are local to their host; rotate in world space before projecting. */
 export function surfacePosition(host, item, slot) {
+  item = geometryProfile(item);
   const local = item.surfaces?.[slot];
   if (!local) return null;
   let x = local.x, y = local.y;
@@ -204,7 +206,7 @@ export function paintOrder(room, catalog) {
         // Something resting on a desk is lifted to the desk's top face, not left
         // standing on the floor the desk happens to occupy.
         : local ? { ...toStage(local.x * CELL, local.y * CELL, local.z), depth: anchorOf(host.placement, host.item).depth }
-        : anchorOf(entry.placement, entry.item, host ? host.item.top : 0);
+        : anchorOf(entry.placement, entry.item, host ? geometryProfile(host.item).top : 0);
       // Wall art hangs behind everything, rugs lie flat under the furniture, and
       // objects on a surface ride one step in front of whatever holds them up.
       const layer = entry.item.placement === 'wall' ? -200

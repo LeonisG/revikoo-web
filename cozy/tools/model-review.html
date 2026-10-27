@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cozy · piloto GLB</title>
+<style>body{margin:0;background:#17221f;color:#efe4c9;font:14px system-ui}main{display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:100vh}canvas{display:block;width:min(100%,800px)!important;height:auto!important;margin:auto}aside{padding:24px;background:#21372c}button,select,a{font:inherit;color:inherit}button,select{padding:8px;background:#35513e;border:1px solid #8a9c77;border-radius:4px;margin:4px}label{display:block;margin:15px 0}pre{white-space:pre-wrap;font:12px/1.6 monospace}a{display:block;margin:16px 0}@media(max-width:700px){main{display:block}aside{padding:16px}}</style>
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
+</head><body><main><div id="viewport"></div><aside><h1>Escritorio · Tripo</h1><p>Candidato DRAFT · GLB real · una generación</p>
+<label>Orientación <select id="angle"><option>0</option><option>90</option><option>180</option><option>270</option></select></label>
+<label>Material <select id="material"><option value="albedo">Color sin luz añadida</option><option value="lit">Material + iluminación</option><option value="clay">Geometría neutra</option><option value="wire">Malla</option><option value="shadow">Solo sombra geométrica</option></select></label>
+<label>Vista <select id="view"><option value="canonical">Cámara Cozy</option><option value="back">Trasera</option><option value="underside">Inferior</option></select></label>
+<button id="spin" type="button">Girar 15°</button><pre id="report">Cargando GLB…</pre>
+<a href="../?art-debug=true&pilot=tripo-desk">Ver candidato dentro de Cozy</a><a href="../assets/candidates/tripo-desk/desk.glb" download>Descargar GLB original</a></aside></main>
+<script type="module" src="./model-review.mjs"></script></body></html>

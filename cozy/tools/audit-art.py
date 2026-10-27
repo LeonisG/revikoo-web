@@ -80,8 +80,12 @@ def main():
                            'master': image_info(ROOT / frame['master']), 'pivot': frame['pivot'],
                            'displayWidth': frame['width'], 'displayHeight': round(frame['width'] / frame['aspect'], 3)})
         issues = []
+        # The measured affine ships: see the derivation in docs/PROJECTION_SPEC.md
+        # and the independent re-measurement in tools/verify-angles.py. It is a
+        # bridge over legacy art, so it is still worth reporting — but as debt to
+        # retire by reauthoring, not as a defect to strip out of the renderer.
         if sprite.get('axisFix'):
-            issues.append('HIGH: legacy affine changes shape, not camera; remove from production rendering')
+            issues.append('MEDIUM: ships corrected by measured axisFix; reauthor at 24.105 deg to retire it')
         if sprite.get('axisFix') and not (angles and angles['structuralCandidate']):
             issues.append('HIGH: silhouette fit does not establish horizontal structural edges')
         if item['flat']:

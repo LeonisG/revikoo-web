@@ -1,4 +1,4 @@
-# Higgsfield — pipeline comprobado y piloto pendiente de presupuesto
+# Higgsfield — pipeline comprobado y piloto ejecutado
 
 Consultado mediante la integración MCP el 27-10-2026. [Especificaciones y cotizaciones recibidas](audit/higgsfield-catalog.json). **Estado al 27-10-2026: 1 job 3D enviado (piloto autorizado, 9 créditos), resultado NO verificado — ver «Estado del piloto» al final.** Ninguna otra generación enviada. Los costes son cotizaciones, no cargos ni garantías para parámetros diferentes. La sección 5 del encargo exige autorización antes de gastar créditos.
 
@@ -34,7 +34,7 @@ Los nombres de procesamiento anteriores son **modelos**; no se encontró una her
 
 **Recomendación provisional: B con exportación a sprites**, mantener A hasta aprobar reemplazo. No incorporar Three.js a producción por anticipado. B en vivo no es una opción «gratis»: requiere la misma cámara que el fondo, plano receptor y datos de oclusión de paredes. C se reevalúa si abrir puertas/cajones, cambiar cámara o iluminar dinámicamente aporta valor real y el piloto conserva el acabado.
 
-## Piloto concreto para autorización
+## Piloto concreto — presupuesto autorizado y ejecutado
 
 Referencia: `assets/masters/oak-cozy/desk.png`, escritorio vacío actual. Usarlo como candidato de identidad, **no llamarlo Golden aprobado**. Referencia secundaria de estilo: `docs/reference-oak-cozy.png`; no enviarla como imagen de un solo objeto a image-to-3D porque contiene un catálogo completo. Revisar la identidad del escritorio: tablero, cuatro apoyos/cuerpo de cajones según la imagen, número de cajones/tiradores, laterales y espacio para piernas; no aceptar accesorios incrustados.
 
@@ -59,7 +59,7 @@ Referencia: `assets/masters/oak-cozy/desk.png`, escritorio vacío actual. Usarlo
 
 `face_limit` es objetivo, no prueba del recuento final. El método image-to-3D no expone control de geometría por prompt libre en esa ficha: no añadir parámetros inventados. El texto de la plantilla guía la revisión y modelos que sí admitan instrucciones; no garantiza cajones separados en Tripo.
 
-Alternativa comparativa, solo si se autoriza después: Meshy 7, 12000 triángulos objetivo, standard, remesh/textura sí, PBR/rig/animation/ultra no: **38 créditos** cotizados. Comparar ambos sumaría **47**. Concepto independiente GPT Image 2.5 flare high 1k transparente, 1:1, count1: **1,5 créditos** cotizados; no incluido ni necesario para el primer escritorio. No hay presupuesto aprobado para producir Golden Set completo.
+Alternativa comparativa, solo si se autoriza después: Meshy 7, 12000 triángulos objetivo, standard, remesh/textura sí, PBR/rig/animation/ultra no: **38 créditos** cotizados. Comparar ambos sumaría **47**. Concepto independiente GPT Image 2.5 flare high 1k transparente, 1:1, count1: **1,5 créditos** cotizados; no incluido ni necesario para el primer escritorio. El único presupuesto autorizado fue una generación Tripo hasta 9 créditos. No hay presupuesto aprobado para producir Golden Set completo.
 
 Tras autorización: revisar coste con mismos parámetros; si sube, parar. Consultar preferencias de la integración; subir solo PNG seleccionado mediante flujo de media verificado; guardar hash y referencia. Enviar UNA solicitud. Conservar ID de job. Si hay respuesta ambigua, consultar historial/estado antes de reintentar; nunca duplicar un cargo por timeout. Descargar resultado a `assets/candidates/` sin sustituir producción. Registrar proveedor, modelo, opciones, job, coste cotizado, fecha y hashes. No publicar ni promover por el mero estado completed.
 
@@ -70,7 +70,7 @@ Tras autorización: revisar coste con mismos parámetros; si sube, parar. Consul
 3. **GLB técnico:** parseo y glTF validator, normales, UV, textura integrada, ausencia de URLs externas inesperadas, estructura/nodos, transforms aplicadas, bounds, pivot de base, unidades y eje vertical. Medir triángulos y materiales reales. «Válido» no equivale a bonito.
 4. **Material:** baseColor sin cast shadow pegada; sin doble key. Comparar unlit y luz neutra; si textura ya hornea iluminación fuerte, corregirla o rechazar ruta PBR. Evaluar estilizado PBR de roughness alta primero; toon solo si conserva madera/tejido. No lanzar retexture extra sin coste autorizado.
 5. **Cámara/export:** aplicar `PROJECTION_SPEC.md`, cuatro vistas, same light, pivot por vista y footprint 2×1 o 1×2. Capturar color/alpha y contacto/cast por separado. No construir NE/NW a partir de espejar una vista.
-6. **Browser:** cargar el archivo real en visor de QA local, inspeccionar 360°, consola y memoria. Componer capturas en `?art-debug=true` con tamaños reales. Hasta disponer del GLB esto está **pendiente**, no simulado ni «validado» por un placeholder.
+6. **Browser:** cargar el archivo real en visor de QA local, inspeccionar 360°, consola y memoria. Componer capturas en `?art-debug=true` con tamaños reales. Este control ya se ejecutó sobre el escritorio: ver GLB_PILOT_REPORT. Para las demás piezas sigue pendiente.
 7. **Performance:** objetivo inicial escritorio ≤12000 triángulos, textura 1024, ≤4 materiales, GLB ≤3 MB; límites de proyecto propuestos, no promesas del proveedor. WebP ≤350 KB por vista. Si optamos por vivo, medir al menos 30 objetos en móvil real, frame time p95 y memoria antes de fijar presupuesto total.
 8. **Approval:** evidencia comparativa, revisión de contacto/escala/materiales y cero errores técnicos. Promoción por cambio de manifiesto, conservar versión anterior. Solo entonces APPROVED y siguiente pieza del Golden Set.
 
