@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#e9e3d4">
+  <meta name="theme-color" content="#17221F">
   <meta name="description" content="Un pequeño refugio digital. Haz espacio para lo que importa y deja que tu habitación crezca contigo.">
   <title>Cozy Room · Un ratito para ti</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="./assets/fonts/space-grotesk.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="./styles/cozy.css">
   <script type="module" src="./app.mjs"></script>
 </head>
@@ -14,43 +15,63 @@
   <a class="skip-link" href="#room-controls">Ir a los controles de la habitación</a>
   <div class="app" id="app">
     <header class="masthead">
-      <div class="wordmark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 15L16 6l10 9v12H6Z"/><path d="M13 27V17h7v10M2 15L16 2l14 13"/></svg><span>cozy room<small>UN RATITO PARA TI</small></span></div>
+      <div class="wordmark" aria-label="Cozy Room">cozy<span>room.</span></div>
       <div class="room-status"><span class="status-dot"></span><span id="day-label">Tu pequeño refugio</span><span class="status-divider">/</span><time id="local-time"></time></div>
       <div class="header-actions"><span class="coin-counter" aria-label="Monedas disponibles"><span aria-hidden="true">✦</span> <span id="coins">20</span></span><button class="icon-button" id="sound-button" aria-label="Activar sonido" title="Activar sonido"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9Zm13 0 5 6m0-6-5 6"/></svg></button><button class="icon-button" data-open="settings" aria-label="Abrir ajustes" title="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v16M12 4v16M19 4v16M2 8h6m1 8h6m1-10h6"/></svg></button></div>
     </header>
     <main id="main">
       <div id="save-warning" role="alert" hidden></div>
       <section class="room-viewport" aria-label="Tu habitación interactiva">
-        <div class="room-caption"><span id="room-eyebrow">ESTÁS EN CASA</span><h1 id="room-title">A tu ritmo.</h1><p id="room-subtitle">Hoy también hay espacio para empezar despacio.</p></div>
-        <div class="room-stage" id="room-stage" data-view="room">
+        <h1 class="sr-only">Tu pequeño mundo</h1>
+        <div class="room-stage" id="room-stage" data-view="room" data-zone="center">
           <div class="room-camera" id="room-camera">
-            <div class="room-layer back-layer" data-depth="1"><img id="room-background" alt="Habitación ilustrada de madera con una ventana, cortinas de lino y luz suave." width="1400" height="900" draggable="false"><svg class="window-atmosphere" viewBox="0 0 1400 900" aria-hidden="true"><defs><clipPath id="window-panes"><path d="M264 171L374 167V282L264 286ZM384 167L496 164V278L384 282ZM264 296L374 292V416L264 420ZM384 292L496 288V410L384 415Z"/></clipPath><pattern id="rain-lines" width="35" height="70" patternUnits="userSpaceOnUse"><path d="M23 3L17 26M8 45L4 61" stroke="#d7e5df" opacity=".45" stroke-width="1.3"/></pattern><linearGradient id="night-window" x2="0" y2="1"><stop stop-color="#263c51"/><stop offset="1" stop-color="#657d80"/></linearGradient></defs><g clip-path="url(#window-panes)"><g class="night-sky"><path d="M255 155h250v275H255Z" fill="url(#night-window)"/><path d="M453 194a24 24 0 1 0 5 40a24 24 0 0 1-5-40Z" fill="#dbd7ae"/><path d="M264 350Q325 285 388 330Q441 285 497 319V425H264Z" fill="#4e6a65"/><path d="M264 382Q311 338 354 355Q421 309 497 365V425H264Z" fill="#36574f"/><g fill="#e6dfb8"><circle cx="304" cy="202" r="1.5"/><circle cx="357" cy="241" r="1.3"/><circle cx="402" cy="197" r="1.6"/><circle cx="467" cy="263" r="1.2"/><circle cx="284" cy="267" r="1.2"/></g></g><path class="rain" fill="url(#rain-lines)" d="M240 50h290v450H240Z"/></g></svg><div id="wall-decor" class="decoration-layer"></div></div>
-            <div class="room-layer middle-layer" data-depth="2"><div id="floor-rug" class="decoration-layer"></div><img id="room-furniture" alt="Escritorio con portátil, cuaderno, reloj, taza y lámpara; estantería y un gato dormido." width="1400" height="900" draggable="false"><div id="room-books" class="room-books" aria-hidden="true"></div><div id="middle-decor" class="decoration-layer"></div><div class="lamp-glow" aria-hidden="true"></div><div class="tea-steam" aria-hidden="true"><i></i><i></i></div></div>
-            <div class="room-layer front-layer" data-depth="3"><img id="room-foreground" alt="Silla tapizada en verde musgo y una planta de terracota." width="1400" height="900" draggable="false"><div id="floor-decor" class="decoration-layer"></div></div>
-            <div class="dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="room-tilt" id="room-tilt">
+            <div class="room-layer back-layer" data-depth="1">
+              <img id="room-background" alt="Una pequeña habitación esmeralda de dos paredes, suelo de madera y bordes redondeados." width="1400" height="900" draggable="false">
+              <img id="room-window" alt="" width="1400" height="900" draggable="false">
+              <img id="window-sunset" class="sky-state sunset-sky" alt="" width="1400" height="900">
+              <img id="window-night" class="sky-state night-sky" alt="" width="1400" height="900">
+              <img id="window-rain" class="sky-state rain-sky" alt="" width="1400" height="900">
+              <svg class="window-atmosphere" viewBox="0 0 1400 900" aria-hidden="true"><defs><clipPath id="window-panes"><path d="M8 8h93v81H8ZM111 8h95v81H111ZM8 99h93v81H8ZM111 99h95v81H111Z"/></clipPath><pattern id="rain-lines" width="30" height="60" patternUnits="userSpaceOnUse"><path d="M20 4L16 23M5 39L2 53" stroke="#cfdfdb" opacity=".5" stroke-width="1.2"/></pattern></defs><g transform="matrix(1 .36 0 1 790 170)" clip-path="url(#window-panes)"><path class="rain" fill="url(#rain-lines)" d="M-20-70h260v320H-20Z"/></g></svg>
+              <img id="room-wall-decor" alt="" width="1400" height="900">
+              <div id="wall-decor" class="decoration-layer"></div>
+            </div>
+            <div class="room-layer rug-layer" data-depth="1.5"><div id="floor-rug" class="decoration-layer"></div></div>
+            <div class="room-layer shelf-layer" data-depth="1.5"><img id="room-bookshelf" alt="Una biblioteca de madera con libros de colores, cerámica y recuerdos." width="1400" height="900" draggable="false"><div id="room-books" class="room-books" aria-hidden="true"></div><div id="shelf-decor" class="decoration-layer"></div></div>
+            <div class="room-layer middle-layer" data-depth="2.5"><img id="room-furniture" alt="Escritorio en miniatura con portátil, cuaderno coral, reloj, taza y lámpara ámbar." width="1400" height="900" draggable="false"><div id="middle-decor" class="decoration-layer"></div><div class="lamp-glow" aria-hidden="true"></div><div class="monitor-glow" aria-hidden="true"></div><div class="tea-steam" aria-hidden="true"><i></i><i></i></div></div>
+            <div class="room-layer front-layer" data-depth="3.5"><img id="room-foreground" alt="Silla de respaldo suave tapizada en coral." width="1400" height="900" draggable="false"><img id="room-plant" class="plant-illustration" alt="Una planta grande con hojas esculpidas y maceta coral." width="1400" height="900" draggable="false"><img id="room-cat" alt="Un gato dormido sobre un cojín verde." width="1400" height="900" draggable="false"><div id="floor-decor" class="decoration-layer"></div></div>
+            <div class="scene-light" aria-hidden="true"></div>
+            <div class="dust" aria-hidden="true"><i></i><i></i></div>
+            <div id="focus-active" class="focus-active" hidden><span id="focus-kicker" class="sr-only">SOLO ESTE MOMENTO</span><time id="focus-countdown">25:00</time></div>
+            <div id="slot-targets" class="slot-targets" aria-label="Rincones disponibles"></div>
             <div class="hotspots" id="room-controls" tabindex="-1">
               <button class="hotspot hotspot-desk" data-open="desk" aria-label="Acercarse al escritorio"><span>El escritorio <b>↗</b></span></button>
               <button class="hotspot hotspot-books" data-open="books" aria-label="Acercarse a la biblioteca"><span>Tu biblioteca <b>↗</b></span></button>
               <button class="hotspot hotspot-window" data-open="window" aria-label="Mirar por la ventana y cambiar el ambiente"><span>Un poco de aire <b>↗</b></span></button>
               <button class="hotspot hotspot-lamp" id="lamp-button" aria-label="Apagar lámpara"><span>La luz</span></button>
+              <button class="hotspot catalog-object" data-open="shop" aria-label="Abrir el catálogo de decoración"><span>El catálogo <b>↗</b></span></button>
               <button class="hotspot hotspot-cat" id="cat-button" aria-label="Acariciar al gato dormido"><span>Está soñando…</span></button>
               <button class="hotspot desk-object journal-object" data-open="tasks" aria-label="Abrir el cuaderno de tareas"><span>Tu cuaderno <b>↗</b></span></button>
               <button class="hotspot desk-object clock-object" data-open="focus" aria-label="Abrir el reloj de concentración"><span>Un rato de foco <b>↗</b></span></button>
               <button class="hotspot desk-object laptop-object" data-open="stats" aria-label="Abrir el portátil y ver tu progreso"><span>Tu progreso <b>↗</b></span></button>
             </div>
+            </div>
           </div>
         </div>
-        <div class="welcome-note" id="welcome-note" hidden><span class="note-pin" aria-hidden="true"></span><p>Este rincón crece contigo.</p><small>Haz algo que importe. Gana ✦.<br>Hazlo un poco más tuyo.</small><button id="welcome-dismiss">Empieza por el escritorio <span>↗</span></button></div>
-        <div id="desk-note" class="desk-note" hidden><p>Todo empieza con un pequeño gesto.</p><span>Abre el cuaderno, prepara el reloj o enciende el portátil.</span></div>
-        <button id="back-room" class="back-room" hidden>← Volver a la habitación</button>
+        <div class="welcome-note" id="welcome-note" hidden><p>Un pequeño mundo. Un poco más tuyo cada día.</p><button id="welcome-dismiss">Empieza por el escritorio <span>↗</span></button></div>
+        <div id="desk-note" class="desk-note" hidden><p>Un cuaderno. Un rato. Una cosa cada vez.</p><span>Elige un objeto del escritorio.</span></div>
+        <button id="back-room" class="back-room" hidden>← Tu habitación</button>
         <div id="reward" class="reward" role="status" aria-live="polite"></div>
-        <div id="focus-active" class="focus-active" hidden><span id="focus-kicker">SOLO ESTE MOMENTO</span><time id="focus-countdown">25:00</time><p>Una cosa cada vez.</p><button id="focus-cancel">Terminar antes</button></div>
+        <button id="focus-cancel" class="focus-exit" hidden>Terminar este rato</button>
+        <div id="placement-note" class="placement-note" hidden><p id="placement-title"></p><span>Elige uno de los rincones iluminados.</span><button id="placement-cancel">Cancelar</button></div>
+        <div class="mobile-camera" aria-label="Mirar otras zonas"><button id="zone-prev" aria-label="Mirar a la izquierda">←</button><span id="zone-name">El escritorio</span><button id="zone-next" aria-label="Mirar a la derecha">→</button></div>
       </section>
     </main>
     <footer class="room-footer">
-      <div class="footer-note"><span aria-hidden="true">✧</span> Sin prisa. Sin rachas. A tu manera.</div>
-      <nav class="room-nav" aria-label="Accesos a los objetos de la habitación"><button data-open="tasks"><span aria-hidden="true">▤</span> Cuaderno</button><button data-open="focus"><span aria-hidden="true">◷</span> Concentración</button><button data-open="books"><span aria-hidden="true">▥</span> Biblioteca</button><span class="nav-separator"></span><button data-open="shop"><span aria-hidden="true">❀</span> Catálogo</button></nav>
-      <span class="save-status" id="save-status">Solo en este navegador <span aria-hidden="true">◦</span></span>
+      <span class="context-hint" id="context-hint">Acércate. Hay pequeñas cosas por descubrir.</span>
+      <button id="explore-toggle" aria-expanded="false" aria-controls="room-navigation">Explorar <span>＋</span></button>
+      <nav class="room-nav" id="room-navigation" aria-label="Accesos a los objetos de la habitación"><button data-open="tasks">Cuaderno</button><button data-open="focus">Concentración</button><button data-open="books">Biblioteca</button><button data-open="shop">Catálogo</button></nav>
+      <span class="save-status sr-only" id="save-status">Solo en este navegador</span>
     </footer>
     <dialog id="world-panel" aria-labelledby="panel-title"><div class="paper-edge"></div><header class="panel-header"><div><span id="panel-kicker" class="eyebrow"></span><h2 id="panel-title"></h2></div><button class="close-panel icon-button" aria-label="Cerrar y volver a la habitación">×</button></header><div id="panel-content"></div><p class="panel-feedback" id="panel-feedback" role="status" aria-live="polite"></p><footer class="panel-footer"><span>COZY ROOM</span><span id="panel-page">Un espacio para lo que importa.</span></footer></dialog>
     <dialog id="confirmation" aria-labelledby="confirm-title"><h2 id="confirm-title"></h2><p id="confirm-copy"></p><div class="form-actions"><button id="confirm-no" class="secondary">Volver</button><button id="confirm-yes" class="primary">Confirmar</button></div></dialog>

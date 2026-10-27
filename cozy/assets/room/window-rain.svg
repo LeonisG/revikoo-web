@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none"><defs>
+ <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+ <filter id="contact" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#09251e" flood-opacity=".45"/></filter>
+ <linearGradient id="left-wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#397f67"/><stop offset=".6" stop-color="#24624f"/><stop offset="1" stop-color="#174c40"/></linearGradient>
+ <linearGradient id="right-wall" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#164a40"/><stop offset="1" stop-color="#347968"/></linearGradient>
+ <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#b67b4f"/><stop offset="1" stop-color="#d19561"/></linearGradient>
+ <radialGradient id="warm"><stop stop-color="#ffd086" stop-opacity=".4"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+ <radialGradient id="screen"><stop stop-color="#a4dbc3"/><stop offset="1" stop-color="#599e91"/></radialGradient>
+ <linearGradient id="pot"><stop stop-color="#e99570"/><stop offset=".5" stop-color="#cf6d55"/><stop offset="1" stop-color="#9b4f42"/></linearGradient>
+ <linearGradient id="leaf"><stop stop-color="#93c86d"/><stop offset="1" stop-color="#408857"/></linearGradient>
+ <linearGradient id="cloth"><stop stop-color="#d1795a"/><stop offset="1" stop-color="#914c3a"/></linearGradient>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#79b9c3"/><stop offset="1" stop-color="#d7dbb0"/></linearGradient>
+</defs>
+<defs><linearGradient id="phase-sky" x2="0" y2="1"><stop stop-color="#658a96"/><stop offset="1" stop-color="#95acaf"/></linearGradient><clipPath id="glass"><path d="M8 8h93v81H8ZM111 8h95v81H111ZM8 99h93v81H8ZM111 99h95v81H111Z"/></clipPath></defs><g transform="matrix(1 .36 0 1 790 170)" clip-path="url(#glass)"><rect x="8" y="8" width="198" height="172" fill="url(#phase-sky)"/><path d="M8 130Q60 80 109 120Q153 74 206 113V180H8Z" fill="#5c8583"/><path d="M8 160Q70 119 109 153Q156 124 206 146V180H8Z" fill="#386b68"/></g></svg>
