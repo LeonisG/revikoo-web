@@ -1,0 +1,208 @@
+[
+  [
+    "desk-wide",
+    "Escritorio de roble ancho",
+    "furniture",
+    260,
+    "Extra-wide warm oak study desk, empty thick top, two small drawer pedestals at left and right, generous central legroom. No props.",
+    335,
+    0.78,
+    3,
+    1,
+    142
+  ],
+  [
+    "shelf-small",
+    "Estante bajo",
+    "furniture",
+    120,
+    "Low small warm oak two-shelf bookcase, two EMPTY shelves and bare top, rounded solid corners.",
+    150,
+    0.85,
+    1,
+    1,
+    118
+  ],
+  [
+    "side-table",
+    "Mesita auxiliar",
+    "furniture",
+    95,
+    "Small warm oak side table, square bare top, one drawer and four rounded feet, no objects.",
+    130,
+    0.84,
+    1,
+    1,
+    92
+  ],
+  [
+    "rug-cream",
+    "Alfombra de avena",
+    "furniture",
+    55,
+    "Rectangular cream oatmeal woven rug flat in isometric floor plane, understated sage border, short cream fringe, no objects.",
+    320,
+    0.53,
+    2,
+    2
+  ],
+  [
+    "rug-clay",
+    "Alfombra de arcilla",
+    "furniture",
+    70,
+    "Rectangular terracotta and cream woven rug flat in isometric floor plane, warm moss geometric border, short cream fringe, no objects.",
+    320,
+    0.53,
+    2,
+    2
+  ],
+  [
+    "vase",
+    "Jarrón de cerámica",
+    "accessories",
+    24,
+    "Small empty cream ceramic vase with muted terracotta band, slightly irregular handmade glaze and rounded silhouette, no flowers.",
+    34,
+    0.83
+  ],
+  [
+    "teapot",
+    "Tetera de domingo",
+    "accessories",
+    34,
+    "One small sage glazed ceramic teapot, cream lid and warm wooden handle, no cups or tray.",
+    48,
+    0.83
+  ],
+  [
+    "radio",
+    "Radio de madera",
+    "accessories",
+    60,
+    "Small vintage warm oak tabletop radio, woven cream speaker front, brass tuning knobs, blank simple dial no letters, no antenna wire.",
+    65,
+    0.84
+  ],
+  [
+    "print-botanical",
+    "Herbario enmarcado",
+    "wall",
+    30,
+    "Original painted botanical illustration of delicate sage fern leaves on cream paper in warm oak frame, STRICT straight-on frontal elevation, no lettering.",
+    110,
+    0.5
+  ],
+  [
+    "print-sunset",
+    "Un atardecer lento",
+    "wall",
+    40,
+    "Original painted landscape of gentle moss hills and terracotta setting sun on warm cream paper in thick oak frame, STRICT straight-on frontal elevation, no lettering.",
+    110,
+    0.5
+  ],
+  [
+    "print-moon",
+    "Las fases de la calma",
+    "wall",
+    85,
+    "Original beautiful painted cream moon phases on muted moss green paper in warm oak frame, STRICT straight-on frontal elevation, no lettering.",
+    110,
+    0.5
+  ],
+  [
+    "cork-board",
+    "Tablón de corcho",
+    "wall",
+    45,
+    "Small natural cork pinboard in warm oak frame with three cream blank paper notes fixed by sage and terracotta pins, STRICT straight-on frontal elevation, no lettering.",
+    120,
+    0.5
+  ],
+  [
+    "fern",
+    "Helecho de bosque",
+    "furniture",
+    26,
+    "Small lush forest fern floor plant with soft fine fronds, terracotta pot, isolated no floor.",
+    105,
+    0.84,
+    1,
+    1
+  ],
+  [
+    "ficus",
+    "Ficus de suelo",
+    "furniture",
+    75,
+    "Tall healthy ficus floor plant, rounded dark green waxy leaves on slim woody stems, large cream ceramic pot, no floor.",
+    160,
+    0.9,
+    1,
+    1
+  ],
+  [
+    "mushroom",
+    "Lámpara seta",
+    "accessories",
+    38,
+    "Small sage green mushroom-shaped ceramic lamp with cream stem, warm amber soft glow under cap, charming but refined.",
+    45,
+    0.85
+  ],
+  [
+    "journal",
+    "Tu cuaderno",
+    "accessories",
+    0,
+    "One open cream paper journal with warm leather terracotta cover and simple sage ribbon bookmark, only subtle blank ruled lines no writing, no pen or other objects.",
+    60,
+    0.72
+  ],
+  [
+    "timer",
+    "Reloj de concentración",
+    "accessories",
+    0,
+    "Small round sage enamel mechanical tabletop timer, cream blank dial with subtle dark tick marks and two hands, wooden base, no numerals or lettering.",
+    38,
+    0.84
+  ],
+  [
+    "savings-jar",
+    "Bote de ahorros",
+    "accessories",
+    70,
+    "Small clear glass savings jar with warm wooden lid and several softly illustrated brass coins inside, plain blank cream label, no letters.",
+    42,
+    0.85
+  ],
+  [
+    "goal-board",
+    "Tablón de objetivos",
+    "wall",
+    95,
+    "Small warm oak framed cream chalkboard with a few sage abstract checkbox marks and short blank horizontal lines, STRICT frontal elevation, no readable letters or text.",
+    120,
+    0.5
+  ],
+  [
+    "oak-hooks",
+    "Colgador de roble",
+    "wall",
+    55,
+    "Small warm oak wall coat rack with three rounded wooden pegs, completely empty, STRICT straight-on frontal elevation, no clothes.",
+    100,
+    0.5
+  ],
+  [
+    "oak-box",
+    "Caja de almacenaje",
+    "accessories",
+    45,
+    "Single small sage fabric storage box with cream lid and brass label holder with blank label, closed box only.",
+    58,
+    0.83
+  ]
+]

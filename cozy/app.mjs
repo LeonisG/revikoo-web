@@ -7,10 +7,13 @@ import { createPanels } from './ui/panels.mjs';
 import { createEdit } from './ui/edit.mjs';
 import { createSetup } from './ui/setup.mjs';
 import { coin } from './ui/helpers.mjs';
+import { availableOrientations } from './assets/manifest.mjs';
 
 const storage = createStorage({ onWarning(message) { const warning = document.querySelector('#save-warning'); warning.textContent = message; warning.hidden = false; } });
 const engine = createEngine(storage, { debug: DEBUG });
+const artUpdate = engine.reconcileOrientations(Object.fromEntries(Object.keys(CATALOG).map(id => [id, availableOrientations(id)])));
 const room = createRoom(), audio = createAudio();
+if (artUpdate.stored) room.reward(`${artUpdate.stored} objetos han vuelto a tu inventario para adaptarse a sus nuevas ilustraciones.`);
 const edit = createEdit(engine, room, { onChange: () => update(), onError: message => room.reward(message) });
 const panels = createPanels(engine, room, audio, edit);
 edit.setConfirm(panels.confirm);

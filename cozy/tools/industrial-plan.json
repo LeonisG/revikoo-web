@@ -1,0 +1,169 @@
+[
+  [
+    "industrial-desk",
+    "Escritorio Industrial",
+    "furniture",
+    260,
+    "Empty warm raw oak desk with black iron frame, cross brace and three drawer pedestal, dark handles, worn wood grain. NO devices/accessories.",
+    260,
+    0.78,
+    2,
+    1,
+    132
+  ],
+  [
+    "industrial-chair",
+    "Silla de cuero",
+    "furniture",
+    180,
+    "Warm cognac leather padded chair with black iron arms and swivel caster base, stitched cushions and gently worn leather, no logos.",
+    125,
+    0.85,
+    1,
+    1
+  ],
+  [
+    "wardrobe-rack",
+    "Perchero abierto",
+    "furniture",
+    220,
+    "Open black iron pipe clothing rack with warm raw wood top and bottom shelves, EMPTY hanging rail and shelves, chunky castors. No clothes, hangers, bags or props.",
+    200,
+    0.9,
+    2,
+    1
+  ],
+  [
+    "industrial-shelf",
+    "Estantería de taller",
+    "furniture",
+    250,
+    "Tall black iron frame raw wood shelving unit, four EMPTY shelves, dark metal cross braces on sides, soft worn edges. No books/props/plants.",
+    200,
+    0.89,
+    2,
+    1,
+    242
+  ],
+  [
+    "industrial-bed",
+    "Cama Industrial",
+    "furniture",
+    320,
+    "Raw oak and black iron bed, rounded iron posts, olive quilt and cream linen blanket, two cream sleeping pillows, subtle stitched fabric, no accessories.",
+    365,
+    0.74,
+    3,
+    2
+  ],
+  [
+    "industrial-dresser",
+    "Cajonera Industrial",
+    "furniture",
+    210,
+    "Three-drawer raw oak dresser with black iron edges, rounded dark handles, completely EMPTY top, warm subtle wear.",
+    158,
+    0.87,
+    1,
+    1,
+    120
+  ],
+  [
+    "industrial-floor-lamp",
+    "Lámpara de taller",
+    "furniture",
+    145,
+    "Tall black iron task floor lamp with adjustable arm and downward angled enamel shade, aged brass hinge, amber interior light, weighted circular base.",
+    86,
+    0.89,
+    1,
+    1
+  ],
+  [
+    "industrial-rug",
+    "Alfombra tejida",
+    "furniture",
+    80,
+    "Rectangular woven olive cream and terracotta rug flat in floor plane, tasteful diamond pattern, short fringes, rich natural fabric.",
+    320,
+    0.53,
+    2,
+    2
+  ],
+  [
+    "industrial-lamp",
+    "Flexo Workshop",
+    "accessories",
+    65,
+    "Small olive enamel adjustable desk task lamp, dark iron articulated arm, aged brass hinges, heavy circular base and warm amber bulb.",
+    52,
+    0.82
+  ],
+  [
+    "industrial-mug",
+    "Taza esmaltada",
+    "accessories",
+    28,
+    "Cream enamel coffee mug with black iron rim and small olive abstract mountain emblem, no lettering.",
+    30,
+    0.76
+  ],
+  [
+    "monstera",
+    "Monstera",
+    "furniture",
+    40,
+    "Lush medium floor monstera plant with split deep green leaves, heavy small concrete gray pot, independent plant only.",
+    130,
+    0.83,
+    1,
+    1
+  ],
+  [
+    "industrial-coat-rack",
+    "Perchero de pie",
+    "furniture",
+    130,
+    "Tall freestanding black iron coat stand with four rounded hooks and round weighted base, completely EMPTY, no clothes or hat.",
+    82,
+    0.9,
+    1,
+    1
+  ],
+  [
+    "industrial-books",
+    "Libros antiguos",
+    "accessories",
+    32,
+    "Stack of four worn old hardback books in olive tobacco cream and rust covers, visible paper pages, no lettering.",
+    47,
+    0.83
+  ],
+  [
+    "industrial-basket",
+    "Cesta metálica",
+    "accessories",
+    45,
+    "Small EMPTY black wire storage basket with worn leather handles and simple cream label plate, no text or contents.",
+    64,
+    0.82
+  ],
+  [
+    "industrial-print",
+    "Lámina Industrial",
+    "wall",
+    48,
+    "Original illustrated warm terracotta sun over abstract industrial brick buildings in simple dark wood frame, STRICT straight-on frontal elevation, no text, no logos.",
+    110,
+    0.5
+  ],
+  [
+    "lantern",
+    "Farol de taller",
+    "accessories",
+    62,
+    "Compact black iron storm lantern with handle, warm glowing amber glass chamber and candle within, independent tabletop object.",
+    45,
+    0.85
+  ]
+]

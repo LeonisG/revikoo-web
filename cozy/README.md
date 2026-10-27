@@ -1,12 +1,6 @@
-# Cozy Room · constructor isométrico con arrastre
+# Cozy Room · constructor isométrico ilustrado
 
-Empiezas con una habitación vacía y un presupuesto. Lo que haces en tu día —tareas,
-sesiones de concentración, lectura— te da monedas, y con ellas amueblas y reorganizas
-tu espacio sobre una rejilla. La habitación es el producto; la productividad es lo que
-la hace crecer.
-
-Aplicación estática, sin dependencias, sin compilación y completamente aislada dentro
-de `/cozy/`.
+Aplicación estática aislada en `/cozy/`: HTML, CSS y JavaScript sin frameworks, compilación, backend, fuentes remotas ni CDN. Empiezas con una habitación vacía y 450 monedas. Tareas, concentración y lectura financian los muebles; no hay rachas, castigos ni compras reales.
 
 ## Ejecutar
 
@@ -16,172 +10,66 @@ Desde la raíz del repositorio:
 python -m http.server 4173 --bind 127.0.0.1
 ```
 
-Abrir `http://127.0.0.1:4173/cozy/`. Los módulos ES necesitan HTTP; no abrir
-`index.html` mediante `file://`. Añadir `?debug=true` para la mesa de pruebas, que usa
-su propio almacenamiento y no toca el progreso normal.
+Abrir `http://127.0.0.1:4173/cozy/`. Los módulos ES necesitan HTTP. `?debug=true` usa un guardado separado y ofrece monedas, objetos, compañeros, tamaños, grid y reinicio del comienzo.
 
-No hay instalación de dependencias, compilación, backend, fuentes remotas ni CDN.
+## Arte y motor
 
-## El bucle
+- [Asset Bible](docs/ASSET_BIBLE.md): cámara, pivotes, materiales, escala, exportación y reglas de producción.
+- [Plantilla de prompts](docs/ASSET_PROMPT_TEMPLATE.md): referencia y prompts para mantener el estilo.
+- `assets/masters/`: maestros PNG con alfa.
+- `assets/items/`: WebP independientes por colección y tipo.
+- `assets/sprites.mjs`: rutas, pivotes, escala, vistas, estados y máscara alfa.
+- `assets/room/illustrated-*.webp`: las tres habitaciones vacías.
+- `logic/catalog.mjs` y `logic/collections.mjs`: precios, huellas, superficies, colecciones y desbloqueos.
+- `logic/grid.mjs`: proyección, colisiones, superficies y profundidad.
+- `logic/engine.mjs`: transacciones, economía y productividad.
+- `logic/storage.mjs`: validación, migración y único acceso a localStorage.
+- `ui/edit.mjs`: Pointer Events, ghost, teclado y selección por alfa.
+- `ui/helpers.mjs`: renderer común a habitación, ghost, tienda e inventario.
+- `tools/preview.html`: revisión de cada colección, posturas y escala real.
+- `tools/import-sprite.py`: importación y optimización; no dibuja mobiliario.
 
-1. Eliges el tamaño de la habitación y gastas el presupuesto inicial en lo básico.
-2. Arrastras lo que has comprado desde la bandeja a la rejilla, en modo **Editar**.
-3. Haces cosas reales: tareas, foco, lectura. Eso da monedas.
-4. Compras, colocas, recolocas, vendes lo que no encaja.
-5. La habitación sube de nivel, se completan colecciones y aparecen compañeros.
-
-Las monedas solo se ganan haciendo. No hay rachas, ni castigos, ni nada que caduque:
-una propuesta que hoy no te apetece sigue ahí mañana.
-
-## Estructura
-
-```text
-cozy/
-  index.html                 Escena, modo edición, flujo inicial y diálogos
-  app.mjs                    Coordinación, reloj y pistas contextuales
-  styles/cozy.css            Estilos por capas: reset, world, objects, paper,
-                             instruments, builder, responsive
-  assets/
-    manifest.mjs             Rutas de las capas por tamaño de habitación
-    room/shell-*.svg         Habitación vacía: paredes, suelo, zócalo
-    room/window-*.svg        Ventana por tamaño y por estado del cielo
-    room/light-*.svg         Luz de la ventana proyectada en el suelo
-    room/mask-*.svg          Silueta plana: recorta las pasadas de iluminación
-    objects.svg              Un símbolo por objeto del catálogo
-  logic/
-    grid.mjs                 Proyección, huellas, colisiones y orden de pintado
-    catalog.mjs              Definición de cada objeto que se puede poseer
-    config.mjs               Economía, tamaños, niveles, propuestas y logros
-    engine.mjs               Transacciones y reglas del juego
-    storage.mjs              Único acceso a localStorage, versión y migración
-    events.mjs               Eventos internos, sin red
-    audio.mjs                Ambiente e interacciones Web Audio
-  ui/
-    room.mjs                 Pintado de la habitación, iluminación y parallax
-    edit.mjs                 Modo edición: rejilla, previsualización, girar, guardar
-    setup.mjs                Construye tu primera habitación
-    panels.mjs               Cuaderno, foco, biblioteca, tienda, progreso, ajustes
-    helpers.mjs              Iconos, escape de HTML y arte de objetos
-  tools/
-    lib.mjs                  Primitivas de dibujo compartidas
-    draw-room.mjs            Genera la habitación vacía, por tamaño
-    draw-objects.mjs         Genera objects.svg
-    preview.html             Hoja de contacto de todos los objetos
-```
-
-## La rejilla
-
-Todo lo espacial vive en `logic/grid.mjs`, que no toca el DOM ni el almacenamiento.
-Hay tres sistemas de coordenadas y conviene no mezclarlos:
-
-| | |
-|---|---|
-| celda `(gx, gy)` | índices enteros de la rejilla |
-| mundo `(x, y, z)` | unidades del diorama; `x` e `y` recorren el suelo, `z` es altura |
-| escena `(%, %)` | posición dentro del lienzo 1400 × 900 |
-
-La proyección es ortográfica: `pantalla = [700 + x - y, 480 + (x + y) · 0,36 - z]`.
-`gx` crece hacia abajo-derecha y `gy` hacia abajo-izquierda, así que la profundidad de
-una celda es simplemente `gx + gy`: cuanto mayor, más cerca del espectador. Esa suma es
-la que ordena el pintado.
-
-`tools/draw-room.mjs` y `tools/draw-objects.mjs` usan exactamente la misma proyección
-(`tools/lib.mjs` importa las constantes de `grid.mjs`). La geometría se define
-una sola vez en `logic/grid.mjs`.
-
-### Reglas de colocación
-
-- **suelo**: ocupa sus celdas; nadie más puede ocuparlas.
-- **superficie**: necesita apoyarse en un mueble con `surface: true`; cada slot local
-  admite un accesorio. Se guardan `parentSurfaceId` y `surfaceSlot`. La habitación lo eleva hasta la cara superior de su anfitrión
-  (`top`), así que un flexo sobre un escritorio se dibuja sobre el escritorio.
-- **pared**: cuelga en uno de los cuatro huecos de cada pared. No choca con el suelo.
-- **alfombras** (`flat: true`) se tumban bajo todo lo demás y comparten sus celdas.
-
-Girar intercambia la huella y selecciona un sprite propio: un escritorio de 2×1
-girado es de 1×2. Mover o girar un mueble lleva consigo sus accesorios. Guardarlo o
-venderlo devuelve los accesorios al inventario. Alfombras separadas pueden coexistir;
-dos alfombras no pueden compartir celdas.
+Las ilustraciones son archivos externos. Cambiar un WebP no cambia placement. Los antiguos generadores SVG se conservan como referencia del prototipo y no se usan para producir nuevos muebles.
 
 ## Construir
 
-Arrastra desde la bandeja con ratón o toque. El objeto aparece translúcido sobre su
-huella; verde suave si cabe y coral si no. Soltar confirma solo si es válido.
-También puedes elegir un objeto, moverlo con flechas, girarlo con R y colocarlo con
-Enter o el botón Colocar. Esc/Cancelar conserva exactamente el estado previo.
+Arrastrar desde la bandeja con ratón o toque. El ghost utiliza el mismo sprite, pivot y escala que el objeto colocado. Verde suave si cabe; coral si no. Soltar solo modifica el guardado si la posición es válida. Esc cancela sin modificarlo.
 
-Un clic, pulsación larga, clic secundario o Enter sobre un objeto abre Mover,
-Girar, Guardar y Vender. Comprar ofrece **Colocar ahora**. El presupuesto inicial
-es 450: en la habitación pequeña permite escritorio, silla, estante bajo, vela y
-planta (426 en total). Las partidas existentes conservan sus monedas.
+Alternativa de teclado: seleccionar una pieza, mover con flechas, colocar con Enter o el botón Colocar. Enter sobre una pieza colocada abre Mover, Guardar y Vender. Clic secundario y pulsación larga ofrecen los mismos controles. Comprar ofrece Colocar ahora.
 
-El controlador usa Pointer Events, captura del puntero y un umbral de movimiento.
-No escribe durante el drag. La misma validación de `grid.mjs` alimenta el ghost y
-la transacción final. El desplazamiento libre en píxeles nunca se persiste.
+La primera entrega ilustrada tiene una orientación canónica por pieza. El motor admite cuatro orientaciones y la UI ofrecerá Girar cuando existan vistas ilustradas adicionales; nunca gira un PNG con CSS.
 
-## Añadir un objeto
+## Colocación
 
-1. Dibujarlo en `tools/draw-objects.mjs` con `draw(id, w, h, ...)`, usando la
-   proyección de su propia huella. El arte se dibuja a tamaño real dentro de una caja
-   común, que es lo que hace que una silla sea del tamaño de una silla al lado de un
-   escritorio.
-2. `node tools/draw-objects.mjs` para regenerar `assets/objects.svg`.
-3. Añadir su definición a `logic/catalog.mjs`: huella, precio, categoría, tipo de
-   colocación, si gira, si es superficie, su `glow` si da luz, y su colección.
-4. Abrir `tools/preview.html` para verlo a escala sobre su huella.
+Coordenadas lógicas gx/gy, celdas de 88 unidades y escena 1400×900. Proyección `[700+x-y,480+(x+y)*0.36-z]`.
 
-No hace falta tocar colocación, pintado, tienda ni economía: todo sale de la definición.
+Suelo: ocupación por huella. Alfombras: capa separada que admite muebles encima. Pared: cuatro huecos por lado. Superficie: un accesorio por slot local, con padre persistido. Los escritorios principales tienen tres apoyos; las cajoneras dos; los estantes admiten diferentes alturas. Mover el anfitrión mueve sus accesorios. Guardarlo o venderlo devuelve estos al inventario.
 
-La [ASSET BIBLE](./ASSET-BIBLE.md) fija cámara, materiales, paleta, tamaños, pivotes,
-familias y exportación. Los muebles rotables se generan desde `tools/furniture.mjs`;
-los accesorios desde `tools/draw-objects.mjs`. La hoja de contacto incluye un
-selector de orientación. Son SVG originales preparados para sustitución por arte
-final, usando el mismo manifiesto para habitación, tienda, inventario y ghost.
-
-## Iluminación
-
-Son tres pasadas superpuestas y el orden importa:
-
-1. un grado de color sobre `.room-camera` — el color de la hora;
-2. `.scene-shade` y `.scene-light` en `multiply` — la sombra;
-3. `.glow-layer` en `screen` por encima — las luces.
-
-Una luz colocada por debajo de la pasada de sombra se apaga justo cuando debería
-sostener la habitación. Las tres se recortan con `mask-*.svg`, la silueta plana de la
-habitación: un polígono no basta, porque una capa `multiply` sobre un fondo transparente
-pinta su propio color y aparece como un bloque pálido.
-
-La luz la dan los objetos que hayas colocado. Una habitación sin lámparas de noche está
-oscura de verdad, y por eso merece la pena comprar una.
+Las colecciones Oak Cozy, Gamer, Futuristic e Industrial se combinan libremente. La tienda filtra por colección y por Muebles, Accesorios, Pared y Compañeros. Los animales permiten descansar, dormir o sentarse; no necesitan cuidados.
 
 ## Persistencia
 
-`logic/storage.mjs` es el único módulo que toca `localStorage`. El estado se valida al
-cargar; si no es válido se guarda una copia de recuperación y se empieza de cero.
+Se conserva la clave v2 y todo el progreso existente. Los accesorios antiguos se vinculan a su anfitrión. Las vistas retiradas se adaptan si caben; cuando chocan, el mueble y sus accesorios regresan al inventario. No se pierden monedas, tareas, libros ni unidades compradas.
 
-Una partida de la V0.1 se migra automáticamente: se conservan monedas, tareas, libros,
-historial de foco y preferencias, y los objetos que ya estaban comprados vuelven como
-unidades guardadas. La distribución en los diez huecos fijos de la V0.1 no sobrevive a
-la rejilla, así que la habitación se vuelve a montar desde cero.
+Los datos se guardan solo en este navegador. Si un guardado no es válido se mantiene una copia de recuperación. No hay sincronización de cuenta ni servidor.
 
-Las partidas de la V0.2 conservan su distribución. Al cargar se vinculan los
-accesorios antiguos a su anfitrión sin reiniciar monedas ni productividad; estos
-campos adicionales se persisten con la siguiente acción. Se mantiene la clave v2.
+## Validación
 
-## Pruebas
+Desde la raíz:
 
 ```sh
-node --test tests/engine.test.mjs     # reglas, rejilla, economía, migración
-node tests/browser.cjs                # QA de navegador, necesita Playwright
-node tests/builder.cjs                # drag real, touch, cancel, superficies, compra
+node --test cozy/tests/engine.test.mjs
+node --test cozy/tests/assets.test.mjs
+node cozy/tests/browser.cjs
+node cozy/tests/builder.cjs
 ```
 
-Las pruebas de navegador son opcionales y no son dependencia de producción. Usar
-`PLAYWRIGHT_MODULE` si Playwright no está en el entorno.
+Las dos últimas pruebas requieren Playwright solo en desarrollo. Se puede indicar su ruta mediante `PLAYWRIGHT_MODULE` y el navegador mediante `PLAYWRIGHT_CHANNEL=msedge`.
 
-## Aislamiento
+`node cozy/tools/capture-art.cjs` captura el Golden Set en una sesión de pruebas separada. Usa `COZY_URL` para cambiar la URL local. `--guides` captura la geometría de referencia del grid.
 
-Todo vive bajo `/cozy/`. No se modifican la homepage, los estilos, los logos, la
-navegación, el `CNAME`, el `.nojekyll` ni las demás aplicaciones del repositorio. Todas
-las rutas son relativas al documento o a `import.meta.url`, así que funciona igual en
-`localhost`, en `revikoo.com/cozy/` y bajo `/revikoo-web/cozy/`.
+`node cozy/tools/review-art.cjs` revisa las cuatro colecciones, una escena mezclada, compañeros, móvil y solicitudes de imágenes. Capturas y resultados en [docs/qa](docs/qa/). Hay 88 objetos, seis variantes de postura y tres habitaciones ilustradas; los maestros no se descargan durante el juego.
+
+## Hosting
+
+Todas las rutas se resuelven respecto al documento o a import.meta.url. Funciona en localhost, `revikoo.com/cozy/` y `/revikoo-web/cozy/`. No se modifican la homepage, identidad, logos, CNAME ni otras aplicaciones del repositorio.

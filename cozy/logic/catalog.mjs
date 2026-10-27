@@ -13,7 +13,11 @@
 //   set         collection it belongs to, for the completion bonuses
 //   comfort/focus  the two soft room values; no RPG, just a reason to choose
 
+import { COLLECTION_ITEMS } from './collections.mjs';
+import { SPRITES } from '../assets/sprites.mjs';
+const collectionById = Object.fromEntries(COLLECTION_ITEMS.map(i => [i.id, i]));
 const item = (id, name, category, price, extra = {}) => {
+  extra = { ...extra, ...collectionById[id] };
   const definition = {
   id, name, category, price, asset: id,
   w: 1, h: 1, placement: 'floor', rotatable: false,
@@ -22,10 +26,15 @@ const item = (id, name, category, price, extra = {}) => {
   };
   definition.family = extra.family || (category === 'Luz' || id === 'chair' ? 'green-retro' : id.includes('cream') ? 'soft-cream' : 'oak-study');
   definition.footprint = { width: definition.w, depth: definition.h };
-  definition.sprites = Object.fromEntries([0, 90, 180, 270].map(r => [r, definition.rotatable ? `${id}--${r}` : id]));
-  definition.surfaces = definition.surface ? Array.from({ length: definition.w }, (_, i) => ({ x: i + .5, y: .5 })) : [];
-  definition.animationStates = definition.companion ? { idle: id, sleep: id, sit: null } : {};
+  definition.sprites = SPRITES[id]?.src ? { 0: SPRITES[id].src, ...Object.fromEntries(Object.entries(SPRITES[id].orientations || {}).map(([r,v])=>[r,v.src])) } : {};
+  definition.pivot = SPRITES[id]?.pivot || null;
+  definition.spriteScale = SPRITES[id]?.width || null;
+  definition.surfaces = extra.surfaces || (definition.surface ? Array.from({ length: definition.w }, (_, i) => ({ x: i + .5, y: .5 })) : []);
+  definition.animationStates = definition.companion ? Object.fromEntries(['idle','sleep','sit'].map(pose=>[pose,SPRITES[id]?.states?.[pose]?.src || (pose === 'idle' ? SPRITES[id]?.src : null)])) : {};
   definition.unlock = extra.unlock || null;
+  definition.collection = extra.collection || 'oak-cozy';
+  definition.group = extra.group || (definition.companion ? 'companions' : definition.placement === 'wall' ? 'wall' : definition.placement === 'surface' ? 'accessories' : 'furniture');
+  definition.rarity = definition.companion ? 'special' : definition.unlock ? 'uncommon' : 'common';
   return definition;
 };
 
@@ -39,15 +48,15 @@ export const SETS = {
   amber: { name: 'Luz ámbar', bonus: 'Una vela que no se gasta', reward: 'candle' },
 };
 
-export const ITEMS = [
+const classicItems = [
   // ── Muebles ────────────────────────────────────────────────────────────────
-  item('desk', 'Escritorio sencillo', 'Muebles', 180, { w: 2, h: 1, surface: true, top: 142, rotatable: true, focus: 2, set: 'scholar' }),
+  item('desk', 'Escritorio Oak Cozy', 'Muebles', 180, { w: 2, h: 1, surface: true, top: 132, surfaces: [{x:.35,y:.5},{x:1,y:.5},{x:1.65,y:.5}], rotatable: true, focus: 2, set: 'scholar' }),
   item('desk-wide', 'Escritorio largo', 'Muebles', 290, { w: 3, h: 1, surface: true, top: 142, rotatable: true, focus: 3, set: 'scholar' }),
   item('chair', 'Silla tapizada', 'Muebles', 90, { rotatable: true, comfort: 2 }),
   item('bed-cream', 'Cama de lino · Soft Cream', 'Muebles', 240, { w: 3, h: 2, rotatable: true, comfort: 3, family: 'soft-cream' }),
-  item('bookshelf', 'Biblioteca alta', 'Muebles', 240, { w: 2, h: 1, surface: true, top: 300, rotatable: true, focus: 1, comfort: 1, set: 'scholar' }),
+  item('bookshelf', 'Biblioteca alta', 'Muebles', 240, { w: 2, h: 1, surface: true, top: 242, surfaces: [{x:.5,y:.5,z:242},{x:1.5,y:.5,z:242},{x:.5,y:.8,z:176},{x:1.5,y:.8,z:176},{x:.5,y:.8,z:108},{x:1.5,y:.8,z:108}], rotatable: true, focus: 1, comfort: 1, set: 'scholar' }),
   item('shelf-small', 'Estante bajo', 'Muebles', 120, { surface: true, top: 118, rotatable: true }),
-  item('drawers', 'Cajonera', 'Muebles', 150, { surface: true, top: 120, rotatable: true, comfort: 1, set: 'vintage' }),
+  item('drawers', 'Cajonera', 'Muebles', 150, { surface: true, top: 120, surfaces: [{x:.25,y:.5},{x:.75,y:.5}], rotatable: true, comfort: 1, set: 'vintage' }),
   item('side-table', 'Mesita auxiliar', 'Muebles', 95, { surface: true, top: 92, comfort: 1, set: 'vintage' }),
   item('wardrobe-oak', 'Armario de roble', 'Muebles', 280, { w: 2, h: 1, rotatable: true, comfort: 2, set: 'woodland' }),
   item('wardrobe-dark', 'Armario de nogal', 'Muebles', 320, { w: 2, h: 1, rotatable: true, comfort: 2 }),
@@ -57,6 +66,7 @@ export const ITEMS = [
   item('rug-cream', 'Alfombra de avena', 'Decoración', 55, { w: 2, h: 2, flat: true, comfort: 1 }),
   item('rug-moss', 'Alfombra de musgo', 'Decoración', 55, { w: 2, h: 2, flat: true, comfort: 1, set: 'woodland' }),
   item('rug-clay', 'Alfombra de arcilla', 'Decoración', 70, { w: 2, h: 2, flat: true, comfort: 2 }),
+  item('mug', 'Taza de cerámica', 'Decoración', 24, { placement: 'surface', comfort: 1 }),
   item('vase', 'Jarrón de cerámica', 'Decoración', 24, { placement: 'surface', comfort: 1 }),
   item('book-stack', 'Libros de segunda mano', 'Decoración', 26, { placement: 'surface', focus: 1, set: 'scholar' }),
   item('teapot', 'Tetera de domingo', 'Decoración', 34, { placement: 'surface', comfort: 1, set: 'vintage' }),
@@ -91,10 +101,12 @@ export const ITEMS = [
   // ── Compañía ───────────────────────────────────────────────────────────────
   // Deliberately out of reach for a long while. A companion should be the thing
   // somebody saves toward for weeks, not another prop in the catalogue.
-  item('cat', 'Un gato que duerme', 'Compañía', 420, { comfort: 5, companion: true }),
-  item('rabbit', 'Un conejo tranquilo', 'Compañía', 380, { comfort: 4, companion: true }),
-  item('dog', 'Un perro soñoliento', 'Compañía', 480, { comfort: 5, companion: true }),
+  item('cat', 'Un gato tranquilo', 'Compañía', 950, { comfort: 5, companion: true }),
+  item('rabbit', 'Un conejo tranquilo', 'Compañía', 900, { comfort: 4, companion: true }),
+  item('dog', 'Un perro soñoliento', 'Compañía', 1100, { comfort: 5, companion: true }),
 ];
+
+export const ITEMS = [...classicItems, ...COLLECTION_ITEMS.filter(i => !classicItems.some(old => old.id === i.id)).map(i => item(i.id, i.name, i.category, i.price, i))];
 
 export const CATALOG = Object.freeze(Object.fromEntries(ITEMS.map(i => [i.id, Object.freeze(i)])));
 export const STARTER_ITEMS = ITEMS.filter(i => i.starter).map(i => i.id);

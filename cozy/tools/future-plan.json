@@ -1,0 +1,165 @@
+[
+  [
+    "future-desk",
+    "Escritorio Future",
+    "furniture",
+    310,
+    "Empty matte ivory and graphite desk, rounded chunky rectangular top, graphite U legs, small integrated two drawer pedestal, one slender mint light strip. NO devices/accessories.",
+    260,
+    0.78,
+    2,
+    1,
+    132
+  ],
+  [
+    "future-chair",
+    "Silla Future",
+    "furniture",
+    190,
+    "Matte ivory and graphite ergonomic swivel chair, soft padded charcoal seat, friendly rounded headrest and armrests, five casters, subtle mint piping. No logos.",
+    125,
+    0.85,
+    1,
+    1
+  ],
+  [
+    "future-wardrobe",
+    "Armario modular",
+    "furniture",
+    360,
+    "Matte ivory and graphite two-door closed wardrobe with rounded edges, integrated recessed handles, slender mint light strips, EMPTY top.",
+    200,
+    0.9,
+    2,
+    1
+  ],
+  [
+    "future-shelf",
+    "Estantería modular",
+    "furniture",
+    290,
+    "Tall friendly futuristic shelving unit, ivory rounded frame and graphite interiors, four completely EMPTY open shelves, thin mint edge light.",
+    200,
+    0.89,
+    2,
+    1,
+    242
+  ],
+  [
+    "future-bed",
+    "Cama Future",
+    "furniture",
+    350,
+    "Rounded matte ivory platform bed, graphite inset storage base, charcoal linen quilt and mint blanket, two cream sleeping pillows, tiny mint headboard light. Bed only.",
+    365,
+    0.74,
+    3,
+    2
+  ],
+  [
+    "future-dresser",
+    "Cajonera inteligente",
+    "furniture",
+    240,
+    "Matte ivory rounded dresser with three graphite-accent drawers, recessed handles, tiny mint edge light, completely EMPTY top.",
+    158,
+    0.87,
+    1,
+    1,
+    120
+  ],
+  [
+    "future-floor-lamp",
+    "Lámpara Halo",
+    "furniture",
+    180,
+    "Tall slender graphite and ivory floor lamp on round weighted base with glowing mint horizontal halo ring at top, warm friendly modern look.",
+    86,
+    0.89,
+    1,
+    1
+  ],
+  [
+    "future-rug",
+    "Alfombra Circuit",
+    "furniture",
+    90,
+    "Rectangular woven light gray rug flat in floor plane with graphite rounded circuit-like geometric border and small muted mint inlays, soft fabric no actual electronics.",
+    320,
+    0.53,
+    2,
+    2
+  ],
+  [
+    "future-lamp",
+    "Lámpara Smart",
+    "accessories",
+    85,
+    "Compact matte ivory and graphite articulated desk lamp, broad rounded bar head glowing soft mint, small round base.",
+    52,
+    0.82
+  ],
+  [
+    "future-mug",
+    "Taza Smart",
+    "accessories",
+    40,
+    "Small insulated ivory ceramic coffee mug with graphite handle and slender mint temperature indicator, no text.",
+    30,
+    0.76
+  ],
+  [
+    "future-plant",
+    "Planta Minimal",
+    "accessories",
+    48,
+    "Small lush leafy green tabletop plant in rounded matte ivory pot, tiny mint rim detail, independent plant only.",
+    60,
+    0.78
+  ],
+  [
+    "future-hook",
+    "Colgador modular",
+    "wall",
+    65,
+    "Small modular ivory and graphite wall-mounted hook rack, three rounded pegs with mint accent lines, EMPTY hooks. STRICT frontal elevation for wall sprite.",
+    100,
+    0.5
+  ],
+  [
+    "future-books",
+    "Libros digitales",
+    "accessories",
+    65,
+    "Three slim graphite and ivory digital books stacked, mint spine accents, beautifully painted material, no letters, no separate screen.",
+    47,
+    0.83
+  ],
+  [
+    "future-art",
+    "Arte digital",
+    "wall",
+    85,
+    "Original illustrated soft pastel landscape of distant imaginary planet and mountains inside slim ivory digital photo frame with mint rim. STRICT straight-on frontal elevation, no text.",
+    110,
+    0.5
+  ],
+  [
+    "future-orb",
+    "Orbe ambiental",
+    "accessories",
+    110,
+    "Small softly luminous frosted glass orb on graphite circular base, pale mint and blue diffuse glow, no runes or lettering, tabletop accessory.",
+    45,
+    0.82
+  ],
+  [
+    "future-device",
+    "Dispositivo portátil",
+    "accessories",
+    95,
+    "Small rounded ivory and graphite handheld digital device resting on its back in isometric perspective, tiny mint display showing simple abstract shapes, no text, no brand, independent object.",
+    52,
+    0.78
+  ]
+]

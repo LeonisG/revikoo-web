@@ -1,5 +1,6 @@
-import { roomAssets } from '../assets/manifest.mjs';
+import { roomAssets, objectAsset } from '../assets/manifest.mjs';
 import { CATALOG, GAME_CONFIG, ROOM_SIZES, roomLevel } from '../logic/config.mjs';
+import { GLOW_TINTS } from '../logic/collections.mjs';
 import { paintOrder, cellPolygon, cellAt } from '../logic/grid.mjs';
 import { art, escapeHTML, icon } from './helpers.mjs';
 
@@ -12,6 +13,7 @@ export function createRoom() {
   app.style.setProperty('--camera-duration', `${GAME_CONFIG.animationDurations.camera}ms`);
   let preferences = {}, lastPaint = '', lastSize = '', lastCoins = null, rewardTimeout, frame = 0;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const preloaded = new Set();
 
   function useSize(size) {
     if (size === lastSize) return;
@@ -20,6 +22,11 @@ export function createRoom() {
       'room-shell': 'shell', 'room-window': 'window', 'window-sunset': 'windowSunset',
       'window-night': 'windowNight', 'window-rain': 'windowRain', 'room-daylight': 'daylight',
     })) document.querySelector(`#${id}`).src = assets[key];
+    app.classList.toggle('illustrated-room', assets.illustrated);
+    const shell = document.querySelector('#room-shell');
+    shell.style.cssText = assets.illustrated ? `left:${assets.fit.x}%;top:${assets.fit.y}%;width:${assets.fit.w}%;height:${assets.fit.h}%;` : '';
+    app.style.setProperty('--room-mask-size', assets.illustrated ? `${assets.fit.w}% ${assets.fit.h}%` : '100% 100%');
+    app.style.setProperty('--room-mask-position', assets.illustrated ? `${assets.fit.x / (100-assets.fit.w)*100}% ${assets.fit.y/(100-assets.fit.h)*100}%` : '0 0');
     // The lighting passes are masked by the shell itself. A polygon is not good
     // enough: a multiply layer over a transparent backdrop paints its own colour,
     // so any part of the mask that is not actually room shows up as a pale block.
@@ -47,19 +54,29 @@ export function createRoom() {
     const key = JSON.stringify([state.room.size, order.map(o => [o.key, o.placement, o.layer])]);
     if (key === lastPaint) return order;
     lastPaint = key;
+    // Only placed pieces are prioritised. Catalog previews remain lazy.
+    for (const { item, placement } of order) {
+      const asset = objectAsset(item.id, placement.rotation, placement.pose || 'idle');
+      if (asset.type !== 'image' || preloaded.has(asset.src)) continue;
+      preloaded.add(asset.src);
+      const preload = document.createElement('link'); preload.rel = 'preload'; preload.as = 'image'; preload.href = asset.src;
+      document.head.append(preload);
+    }
 
     objects.innerHTML = order.map(({ key, item, spot, placement, layer }) => {
       // Normalised depth drives the parallax: one custom property on the
       // container moves every object by its own distance, with no per-frame work.
       const depth = Math.min(1, Math.max(0, (spot.depth || 0) / (cells * 22)));
-      return `<div class="placed ${item.flat ? 'is-flat' : ''}" data-key="${key}" data-item="${item.id}"
+      return `<div class="placed ${item.flat ? 'is-flat' : ''} ${item.companion ? 'is-companion' : ''}" data-key="${key}" data-item="${item.id}" data-pose="${placement.pose || 'idle'}"
         style="left:${spot.x}%;top:${spot.y}%;z-index:${layer + 500};--d:${depth.toFixed(3)};${spot.surface ? `--wall:${spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}"
-        role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${art(item.id, '', placement.rotation)}</div>`;
+        role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${art(item.id, '', placement.rotation, placement.pose || 'idle', true)}</div>`;
     }).join('');
 
     // Light sources are whatever the player has actually put down.
-    glows.innerHTML = order.filter(o => o.item.glow > 0).map(({ item, spot }) =>
-      `<div class="object-glow" style="left:${spot.x}%;top:${spot.y}%;--glow:${item.glow}"></div>`).join('');
+    glows.innerHTML = order.filter(o => o.item.glow > 0).map(({ item, spot }) => {
+      const tint = GLOW_TINTS[item.collection] || GLOW_TINTS['oak-cozy'];
+      return `<div class="object-glow" style="left:${spot.x}%;top:${spot.y}%;--glow:${item.glow};--glow-core:${tint.core};--glow-mid:${tint.mid}"></div>`;
+    }).join('');
     app.dataset.lit = order.some(o => o.item.glow >= .8) ? 'bright' : order.some(o => o.item.glow > 0) ? 'dim' : 'none';
     return order;
   }

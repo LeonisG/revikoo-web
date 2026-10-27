@@ -11,11 +11,16 @@ export const coin = '<svg class="icon icon-coin" aria-hidden="true"><use href="#
 
 export const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-/** Every object shares one symbol box, so this needs no per-item knowledge. */
-export function art(id, label = '', rotation = 0, state = 'idle') {
+/** Every sprite shares one logical anchor; art metadata supplies scale and pivot. */
+export function art(id, label = '', rotation = 0, state = 'idle', eager = false) {
   const asset = objectAsset(id, rotation, state);
-  if (asset.type === 'image') return `<img src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}" loading="lazy" decoding="async">`;
-  return `<svg viewBox="0 0 ${SYMBOL.w} ${SYMBOL.h}" ${label ? `role="img" aria-label="${escapeHTML(label)}"` : 'aria-hidden="true"'}><use href="${escapeHTML(asset.src)}"></use></svg>`;
+    if (!eager) return `<span class="sprite-frame thumbnail"><img class="item-sprite" data-sprite="${id}" src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}" loading="lazy" decoding="async" draggable="false" style="width:100%;height:100%;left:0;top:0;object-fit:contain"></span>`;
+    const width = asset.width || SYMBOL.w, height = width / (asset.aspect || 1);
+    const pivot = asset.pivot || { x: .5, y: .825 };
+    const left = (SYMBOL.anchorX - width * pivot.x) / SYMBOL.w * 100;
+    const top = (SYMBOL.anchorY - height * pivot.y) / SYMBOL.h * 100;
+    return `<span class="sprite-frame"><img class="item-sprite" data-sprite="${id}" src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}"
+      loading="${eager ? 'eager' : 'lazy'}" decoding="async" draggable="false" style="width:${width / SYMBOL.w * 100}%;height:${height / SYMBOL.h * 100}%;left:${left}%;top:${top}%;--sprite-ground:${pivot.y * 100}%"></span>`;
 }
 
 export function bookStyle(title) {

@@ -1,6 +1,7 @@
 import { CATALOG, ITEMS, CATEGORIES, SETS, setProgress, GAME_CONFIG, ROOM_SIZES, QUESTS, ACHIEVEMENTS, roomLevel, DEBUG } from '../logic/config.mjs';
 import { ownedIds } from '../logic/engine.mjs';
 import { itemStatus } from '../logic/catalog.mjs';
+import { COLLECTIONS, ITEM_GROUPS } from '../logic/collections.mjs';
 import { escapeHTML as e, art, bookStyle, difficultyName, difficulties, icon, coin } from './helpers.mjs';
 
 const titles = {
@@ -15,6 +16,7 @@ export function createPanels(engine, room, audio, edit) {
   const dialog = document.querySelector('#world-panel'), content = document.querySelector('#panel-content');
   let current = '', selectedDuration = 25, selectedBook = null, shopFilter = 'Todo', editingTask = null, previousFocus, openTimer;
   let justCompleted = null, confirmAction = null;
+  let shopCollection = 'all';
   const confirmation = document.querySelector('#confirmation');
 
   function feedback(html, error = false) {
@@ -55,11 +57,13 @@ export function createPanels(engine, room, audio, edit) {
   // ── Shop ──────────────────────────────────────────────────────────────────
   function shop(s) {
     const owned = ownedIds(s);
-    const filters = ['Todo', ...CATEGORIES, 'Mi colección'];
+    const filters = ['Todo', ...Object.values(ITEM_GROUPS), 'Mi colección'];
     const list = ITEMS.filter(i => !i.starter).filter(i =>
-      shopFilter === 'Todo' ? true : shopFilter === 'Mi colección' ? owned.includes(i.id) : i.category === shopFilter);
+      shopFilter === 'Todo' ? true : shopFilter === 'Mi colección' ? owned.includes(i.id) : ITEM_GROUPS[i.group] === shopFilter)
+      .filter(i => shopCollection === 'all' || i.collection === shopCollection);
     return `<p class="panel-intro">Tu habitación crece con lo que haces. Esto es lo que puedes traerle.</p>
-      <div class="shop-tabs" role="group" aria-label="Categorías">${filters.map(f =>
+      <label class="collection-select">Colección <select data-collection aria-label="Colección"><option value="all">Todas las colecciones</option>${Object.entries(COLLECTIONS).map(([id,name])=>`<option value="${id}" ${id === shopCollection ? 'selected' : ''}>${name}</option>`).join('')}</select></label>
+      <div class="shop-tabs" role="group" aria-label="Tipos de objeto">${filters.map(f =>
         `<button data-action="filter" data-filter="${f}" aria-pressed="${f === shopFilter}">${f}</button>`).join('')}</div>
       <div class="shop-grid">${list.map(item => {
         const { stored: spare, placed, access } = itemStatus(s, item.id);
@@ -68,7 +72,7 @@ export function createPanels(engine, room, audio, edit) {
           ${placed || spare ? `<span class="owned-label">${placed ? `${placed} EN LA HABITACIÓN` : `${spare} GUARDADO${spare > 1 ? 'S' : ''}`}</span>` : ''}
           <div class="shop-illustration">${art(item.id, item.name)}</div>
           <h3>${e(item.name)}</h3>
-          <p class="item-price">${item.w}×${item.h} · ${item.price} ${coin}</p>
+          <p class="item-collection">${COLLECTIONS[item.collection]}</p><p class="item-price">${item.w}×${item.h} · ${item.price} ${coin}</p>
           ${item.companion ? '<p class="companion-note">Tardarás en poder permitírtelo. Esa es la idea.</p>' : ''}
           <button class="${afford ? 'primary' : 'secondary'}" data-action="buy" data-id="${item.id}" ${afford ? '' : 'disabled'}>${access === 'LOCKED' ? 'Por descubrir' : `Comprar · ${item.price} ${coin}`}</button>
           ${spare ? `<button class="text-button" data-action="place" data-id="${item.id}">Colocar ahora ${icon('arrow')}</button>
@@ -155,6 +159,9 @@ export function createPanels(engine, room, audio, edit) {
     return `<p class="debug-note">Almacenamiento separado. Nada de esto toca tu progreso normal.</p>
       <div class="shortcut-list">${[['coins', '+250'], ['rich', '+2000'], ['zero', 'Sin monedas'], ['unlock', 'Desbloquear todo'], ['clear', 'Vaciar habitación'], ['resetSetup', 'Repetir el inicio'], ['finish', 'Completar focus']].map(([a, label]) => `<button class="secondary" data-action="debug" data-debug="${a}">${label}</button>`).join('')}</div>
       <div class="shortcut-list">${Object.values(ROOM_SIZES).map(size => `<button class="secondary" data-action="debug" data-debug="size" data-value="${size.id}">Tamaño ${size.name}</button>`).join('')}</div>
+      <label class="collection-select">Añadir objeto<select id="debug-item">${ITEMS.map(i=>`<option value="${i.id}">${e(i.name)}</option>`).join('')}</select></label>
+      <div class="shortcut-list"><button class="secondary" data-action="debug-add">Añadir al inventario</button><button class="secondary" data-action="debug-build">Ver grid y probar arrastre</button><button class="secondary" data-action="debug-pets">Probar compañeros</button></div>
+      <div class="debug-placed">${Object.entries(s.room.placed).map(([key,p])=>`<button class="text-button" data-action="debug-store" data-id="${key}">Guardar ${e(CATALOG[p.item].name)}</button>`).join('')}</div>
       ${atmosphere(s)}<div class="form-actions"><button class="danger-button" data-action="reset">Reiniciar pruebas</button></div>`;
   }
 
@@ -183,6 +190,7 @@ export function createPanels(engine, room, audio, edit) {
 
   content.addEventListener('change', event => {
     const input = event.target;
+    if (input.matches('[data-collection]')) { shopCollection = input.value; render(); content.querySelector('[data-collection]').focus(); return; }
     if (!input.dataset.pref) return;
     const value = input.type === 'checkbox' ? input.checked : input.type === 'range' ? Number(input.value) : input.value;
     execute(() => engine.preference(input.dataset.pref, value), 'Así se queda.', false);
@@ -215,6 +223,10 @@ export function createPanels(engine, room, audio, edit) {
     }
     if (action === 'reset') confirm('¿Empezar de nuevo?', 'Se borrarán tus tareas, libros, monedas y toda la habitación. No se puede deshacer.', 'Borrar mi progreso', () => { if (execute(() => engine.reset(), '', false)) { selectedBook = null; close(); location.reload(); } });
     if (action === 'debug' && DEBUG) execute(() => { const r = engine.debug(button.dataset.debug, button.dataset.value); engine.completeFocus(); return r; }, 'Prueba aplicada.');
+    if (action === 'debug-add' && DEBUG) execute(() => engine.debug('add', content.querySelector('#debug-item').value), 'Objeto añadido.');
+    if (action === 'debug-store' && DEBUG) execute(() => engine.storeItem(id), 'Objeto guardado.');
+    if (action === 'debug-build' && DEBUG) { close(); edit.open(); }
+    if (action === 'debug-pets' && DEBUG) { engine.debug('pets'); close(); edit.open(); }
   });
 
   return { open, close, render, confirm, execute, get current() { return current; } };

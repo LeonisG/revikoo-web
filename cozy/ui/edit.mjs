@@ -1,6 +1,8 @@
 import { CATALOG, ROOM_SIZES, GAME_CONFIG } from '../logic/config.mjs';
 import { placementError, footprint, cellPolygon, wallAnchor, WALL_SLOTS, paintOrder, occupancy, bindSurface, surfacePosition, toStage, CELL } from '../logic/grid.mjs';
 import { art, escapeHTML } from './helpers.mjs';
+import { availableOrientations, objectAsset } from '../assets/manifest.mjs';
+import { spriteHit } from '../logic/sprite-hit.mjs';
 
 // A gesture is speculative: only a valid release/Enter writes to the engine.
 export function createEdit(engine, room, { onChange = () => {}, onError = () => {} } = {}) {
@@ -42,8 +44,10 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
     const p = engine.state.room.placed[key]; if (!p) return;
     selected = key; const item = CATALOG[p.item];
     context.innerHTML = `<span>${escapeHTML(item.name)}</span><button data-edit="move">Mover</button>
-      ${item.rotatable ? '<button data-edit="rotate">Girar</button>' : ''}<button data-edit="store">Guardar</button>
-      ${!item.starter ? '<button data-edit="sell">Vender</button>' : ''}<button data-edit="dismiss" aria-label="Cerrar controles">×</button>`;
+      ${item.rotatable && availableOrientations(item.id).length > 1 ? '<button data-edit="rotate">Girar</button>' : ''}<button data-edit="store">Guardar</button>
+      ${!item.starter ? '<button data-edit="sell">Vender</button>' : ''}
+      ${item.companion ? `<label>Postura <select data-pet-pose aria-label="Postura del compañero">${[['idle','Descansar'],['sleep','Dormir'],['sit','Sentarse']].map(([value,label])=>`<option value="${value}" ${value === (p.pose || 'idle') ? 'selected' : ''}>${label}</option>`).join('')}</select></label>` : ''}
+      <button data-edit="dismiss" aria-label="Cerrar controles">×</button>`;
     context.hidden = false;
   }
   function begin(id, from = 'tray') {
@@ -51,13 +55,13 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
     const wasEditing = editing;
     drop(); hideContext(); open();
     const p = engine.state.room.placed[from], item = CATALOG[id];
-    held = { item, from, rotation: p?.rotation || 0, wasEditing }; hover = p ? { ...p } : null;
+    held = { item, from, rotation: p?.rotation || 0, pose: p?.pose || 'idle', wasEditing }; hover = p ? { ...p } : null;
     heldBar.hidden = false; app.classList.add('holding');
     document.querySelector('#held-name').textContent = item.name;
-    heldBar.querySelector('[data-held=rotate]').hidden = !item.rotatable;
+    heldBar.querySelector('[data-held=rotate]').hidden = !item.rotatable || availableOrientations(id).length < 2;
     heldBar.querySelector('[data-held=store]').hidden = from === 'tray';
     tray.querySelector(`[data-pick="${id}"]`)?.setAttribute('aria-pressed', 'true');
-    say('Arrastra y suelta · R gira · Esc cancela.'); paintGrid();
+    say(`Arrastra y suelta${availableOrientations(id).length > 1 ? ' · R gira' : ''} · Esc cancela.`); paintGrid();
   }
   function spot() {
     if (!held || !hover) return null;
@@ -93,11 +97,11 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
         `<polygon points="${cellPolygon(p.gx + x, p.gy + y)}" class="ghost ${klass}"/>`).join('')).join('');
     }
     const key = held.from === 'tray' ? '__preview' : held.from;
-    const preview = { ...state.room.placed, [key]: { item: held.item.id, ...p } };
+    const preview = { ...state.room.placed, [key]: { item: held.item.id, ...p, pose: held.pose } };
     for (const entry of paintOrder({ placed: preview, cells: cells() }, CATALOG).filter(e => e.key === key || e.placement.parentSurfaceId === key)) {
       const el = document.createElement('div'); el.className = `placement-preview ${klass}`; el.setAttribute('aria-hidden', 'true');
       el.style.cssText = `left:${entry.spot.x}%;top:${entry.spot.y}%;z-index:${entry.layer + 500};${entry.spot.surface ? `--wall:${entry.spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}`;
-      el.innerHTML = art(entry.item.id, '', entry.placement.rotation); objects.append(el);
+      el.innerHTML = art(entry.item.id, '', entry.placement.rotation, entry.placement.pose || 'idle', true); objects.append(el);
     }
     say(problem || `${held.item.name} cabe aquí. Suelta para colocarlo.`);
     app.dataset.placement = problem ? 'invalid' : 'valid';
@@ -119,7 +123,12 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
     if (!held || held.from === 'tray') return;
     try { engine.storeItem(held.from); drop(); refresh(); } catch (e) { onError(e.message); }
   }
-  function rotate() { if (held?.item.rotatable) { held.rotation = (held.rotation + 90) % 360; paintGhost(); } }
+  function rotate() {
+    if (!held?.item.rotatable) return;
+    const views = availableOrientations(held.item.id);
+    if (views.length < 2) { say('Esta pieza tiene una orientación ilustrada.'); return; }
+    held.rotation = views[(views.indexOf(held.rotation) + 1) % views.length]; paintGhost();
+  }
   function cancel() { const wasEditing = held?.wasEditing; drop(); if (wasEditing === false) close(); }
   function refresh() {
     if (!editing) return;
@@ -145,10 +154,23 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
     if (held?.item.placement === 'surface') { const n = nearest(surfaceSlots()); if (n?.d < 65) return n; }
     return room.cellFromEvent(event, cells());
   }
+  function hitObject(event) {
+    // Transparent image margins must not steal gestures from the object behind.
+    const layers = [...objects.querySelectorAll('.placed:not(.is-moving)')].reverse()
+      .sort((a, b) => Number(b.style.zIndex) - Number(a.style.zIndex));
+    for (const el of layers) {
+      const img = el.querySelector('.item-sprite');
+      if (!img) { if (el.contains(event.target)) return el.dataset.key; continue; }
+      const bounds = img.getBoundingClientRect(), p = engine.state.room.placed[el.dataset.key];
+      const asset = objectAsset(p.item, p.rotation, p.pose || 'idle');
+      if (spriteHit(asset.hitMask, (event.clientX - bounds.left) / bounds.width, (event.clientY - bounds.top) / bounds.height)) return el.dataset.key;
+    }
+    return null;
+  }
   function pointerDown(event) {
     if (event.button !== 0 || event.target.closest('button:not(.tray-item):not(.hotspot)') || engine.state.activeFocus) return;
-    const tile = event.target.closest('[data-pick]'), placed = event.target.closest('.placed');
-    const key = placed?.dataset.key || event.target.closest('[data-room-key]')?.dataset.roomKey;
+    const tile = event.target.closest('[data-pick]');
+    const key = tile ? null : event.target.closest('[data-room-key]')?.dataset.roomKey || hitObject(event);
     if ((!tile && !key) || (held && !tile)) return;
     gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, tile: tile?.dataset.pick, key, active: false, target: event.currentTarget, wasEditing: editing };
     if (key && event.pointerType === 'touch') longPress = setTimeout(() => {
@@ -162,7 +184,11 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
         clearTimeout(longPress); const g = gesture;
         begin(g.tile || engine.state.room.placed[g.key]?.item, g.tile ? 'tray' : g.key);
         gesture = { ...g, active: true }; app.classList.add('dragging'); suppressClick = true;
-        g.target.setPointerCapture(event.pointerId);
+        // Capture keeps the drag alive outside the tile, but the pointer can
+        // already be gone (cancelled, or synthesised by a test or assistive
+        // tool). Losing capture is survivable; letting it throw would abort
+        // the drag mid-gesture.
+        try { g.target.setPointerCapture(event.pointerId); } catch { /* drag continues without capture */ }
       }
       if (gesture?.active) { event.preventDefault(); hover = locate(event); paintGhost(); }
     } else if (held && editing && stage.contains(event.target)) { hover = locate(event); paintGhost(); }
@@ -186,10 +212,11 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
   stage.addEventListener('click', event => {
     if (suppressClick) { suppressClick = false; event.stopPropagation(); return; }
     if (held) { hover = locate(event); put(); return; }
-    const key = event.target.closest('.placed')?.dataset.key; if (key) select(key); else hideContext();
+    if (event.target.closest('[data-room-key]')) return;
+    const key = hitObject(event); if (key) select(key); else hideContext();
   });
   stage.addEventListener('contextmenu', event => {
-    const key = event.target.closest('.placed')?.dataset.key || event.target.closest('[data-room-key]')?.dataset.roomKey;
+    const key = event.target.closest('[data-room-key]')?.dataset.roomKey || hitObject(event);
     if (key) { event.preventDefault(); drop(); select(key); }
   });
   context.addEventListener('click', event => {
@@ -201,6 +228,10 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
       try { engine.sellPlaced(key); refresh(); hideContext(); } catch (e) { onError(e.message); }
     });
     if (action === 'dismiss') hideContext();
+  });
+  context.addEventListener('change', event => {
+    if (!event.target.matches('[data-pet-pose]') || !selected) return;
+    try { engine.setCompanionPose(selected, event.target.value); } catch(error) { onError(error.message); }
   });
   heldBar.addEventListener('click', event => {
     const action = event.target.closest('[data-held]')?.dataset.held;

@@ -5,6 +5,7 @@ import { createStorage, initialState, validateState, migrate } from '../logic/st
 import { CATALOG } from '../logic/catalog.mjs';
 import { GAME_CONFIG, ROOM_SIZES, QUESTS } from '../logic/config.mjs';
 import { placementError, cellsOf, footprint, anchorOf, cellAt, paintOrder } from '../logic/grid.mjs';
+import { spriteHit } from '../logic/sprite-hit.mjs';
 
 function fixture({ debug = false } = {}) {
   const data = new Map();
@@ -25,6 +26,46 @@ function built({ size = 'medium' } = {}) {
   return f;
 }
 const placedKey = (g, item) => Object.entries(g.state.room.placed).find(([, p]) => p.item === item)?.[0];
+
+test('transparent sprite margins do not steal an object hit', () => {
+  const mask = '8' + '0'.repeat(255);
+  assert.equal(spriteHit(mask,.01,.01),true);
+  assert.equal(spriteHit(mask,.06,.01),false);
+  assert.equal(spriteHit(mask,-.1,.01),false);
+  assert.equal(spriteHit(mask,1,.01),false);
+});
+
+test('three independent accessories share a desk and preserve their slots on reload', () => {
+  const f=built(),g=f.engine;g.debug('unlock');
+  const host=g.placeItem('desk',{gx:0,gy:0}).key;
+  for(const [surfaceSlot,id] of ['mug','laptop','vintage-lamp'].entries()) g.placeItem(id,{gx:0,gy:0,parentSurfaceId:host,surfaceSlot});
+  assert.equal(Object.values(g.state.room.placed).filter(p=>p.parentSurfaceId===host).length,3);
+  assert.throws(()=>g.placeItem('candle',{gx:0,gy:0,parentSurfaceId:host,surfaceSlot:2}),/ya tiene/);
+  g.moveItem(host,{gx:2,gy:2});
+  assert.deepEqual(f.reload().state.room.placed,g.state.room.placed);
+});
+
+test('obsolete orientations preserve owned counts, money, and productivity', () => {
+  const f=built(),g=f.engine;g.debug('unlock');
+  g.addTask('Una tarea conservada','small');
+  const host=g.placeItem('desk',{gx:0,gy:0,rotation:90}).key;
+  g.placeItem('mug',{gx:0,gy:0,parentSurfaceId:host,surfaceSlot:0});
+  g.placeItem('chair',{gx:1,gy:0}); // blocks the new canonical desk footprint
+  const before=g.state;
+  assert.deepEqual(g.reconcileOrientations({desk:[0]}),{adapted:0,stored:2});
+  assert.equal(g.state.coins,before.coins);assert.deepEqual(g.state.tasks,before.tasks);
+  assert.equal(g.state.inventory.desk,1);assert.equal(g.state.inventory.mug,1);
+  assert.deepEqual(g.reconcileOrientations({desk:[0]}),{adapted:0,stored:0});
+  assert.deepEqual(f.reload().state.room.placed,g.state.room.placed);
+});
+
+test('companion poses survive movement and reload without economic side effects', () => {
+  const f=built(),g=f.engine;g.debug('pets');const key=g.placeItem('cat',{gx:1,gy:1}).key;
+  const coins=g.state.coins;g.setCompanionPose(key,'sleep');g.moveItem(key,{gx:2,gy:2});
+  assert.equal(f.reload().state.room.placed[key].pose,'sleep');assert.equal(g.state.coins,coins);
+  assert.throws(()=>g.setCompanionPose(key,'hungry'),/no válida/);
+  g.setCompanionPose(key,'sit');assert.equal(g.state.room.placed[key].pose,'sit');
+});
 
 test('a new room is empty and has no money until the budget is granted', () => {
   const { engine: g } = fixture();
@@ -234,7 +275,7 @@ test('surface instances follow all four host orientations and survive reload', (
     g.moveItem(host, { gx: 2, gy: 2, rotation });
     const p = g.state.room.placed[child];
     assert.equal(p.parentSurfaceId, host);
-    assert.equal(p.surfaceSlot, 1);
+    assert.equal(p.surfaceSlot, 2);
     assert.deepEqual([p.gx,p.gy], expected);
     assert.deepEqual(f.reload().state.room.placed, g.state.room.placed);
     const order = paintOrder({ placed:g.state.room.placed,cells:5 },CATALOG);

@@ -1,0 +1,162 @@
+{
+  "empty": [
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/fonts/space-grotesk.ttf",
+      "bytes": 136676
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/manifest.mjs",
+      "bytes": 1376
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/sprites.mjs",
+      "bytes": 55451
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-small.svg",
+      "bytes": 2541
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-small-sunset.svg",
+      "bytes": 1994
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-small-night.svg",
+      "bytes": 2241
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-small-rain.svg",
+      "bytes": 1915
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/light-small.svg",
+      "bytes": 1927
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/illustrated-small.webp",
+      "bytes": 94644
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/illustrated-small.webp",
+      "bytes": 94644
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/favicon.svg",
+      "bytes": 307
+    }
+  ],
+  "decorated": [
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/fonts/space-grotesk.ttf",
+      "bytes": 136676
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/manifest.mjs",
+      "bytes": 1376
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/sprites.mjs",
+      "bytes": 55451
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/rug-moss.webp",
+      "bytes": 75156
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/desk.webp",
+      "bytes": 44590
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/accessories/vintage-lamp.webp",
+      "bytes": 45116
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/accessories/laptop.webp",
+      "bytes": 45784
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/accessories/mug.webp",
+      "bytes": 36240
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/chair.webp",
+      "bytes": 58424
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/drawers.webp",
+      "bytes": 46302
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/accessories/pothos.webp",
+      "bytes": 71486
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/accessories/candle.webp",
+      "bytes": 28108
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/wardrobe-oak.webp",
+      "bytes": 37016
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/bookshelf.webp",
+      "bytes": 39212
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/companions/dog.webp",
+      "bytes": 61378
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/accessories/book-stack.webp",
+      "bytes": 56888
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/floor-lamp.webp",
+      "bytes": 32304
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/companions/rabbit.webp",
+      "bytes": 64860
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/furniture/bed-cream.webp",
+      "bytes": 56148
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/items/oak-cozy/companions/cat.webp",
+      "bytes": 71624
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/illustrated-large.webp",
+      "bytes": 145390
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-large.svg",
+      "bytes": 2526
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-large-sunset.svg",
+      "bytes": 1987
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-large-night.svg",
+      "bytes": 2221
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/window-large-rain.svg",
+      "bytes": 1908
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/light-large.svg",
+      "bytes": 1930
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/room/illustrated-large.webp",
+      "bytes": 145390
+    },
+    {
+      "url": "http://127.0.0.1:8765/cozy/assets/favicon.svg",
+      "bytes": 307
+    }
+  ]
+}

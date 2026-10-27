@@ -1,4 +1,4 @@
-import { GAME_CONFIG, ROOM_SIZES, QUESTS, SETS, setProgress } from './config.mjs';
+import { GAME_CONFIG, ROOM_SIZES, QUESTS, SETS, setProgress, ACHIEVEMENTS } from './config.mjs';
 import { CATALOG, STARTER_ITEMS, itemStatus } from './catalog.mjs';
 import { initialState } from './storage.mjs';
 import { createEvents } from './events.mjs';
@@ -79,6 +79,32 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
   const api = {
     get state() { return structuredClone(state); },
     subscribe: events.subscribe,
+    /** Reconcile obsolete views without losing owned items or productivity data. */
+    reconcileOrientations(views) {
+      const unsupported = Object.entries(state.room.placed).filter(([, p]) =>
+        views[p.item] && !views[p.item].includes(p.rotation ?? 0));
+      if (!unsupported.length) return { adapted: 0, stored: 0 };
+      return transact('ART_VIEWS_UPDATED', s => {
+        let adapted = 0, stored = 0;
+        for (const [key] of unsupported) {
+          const p = s.room.placed[key]; if (!p) continue;
+          const item = CATALOG[p.item], spot = { ...p, rotation: views[p.item][0] };
+          if (!placementError(spot, item, gridRoom(s), CATALOG, key)) {
+            s.room.placed[key] = spot; adapted++;
+            for (const child of Object.values(s.room.placed).filter(c => c.parentSurfaceId === key)) {
+              const pos = surfacePosition(spot, item, child.surfaceSlot);
+              child.gx = Math.floor(pos.x); child.gy = Math.floor(pos.y);
+            }
+          } else {
+            for (const [childKey, child] of Object.entries(s.room.placed).filter(([,c]) => c.parentSurfaceId === key)) {
+              give(s, child.item); delete s.room.placed[childKey]; stored++;
+            }
+            give(s, p.item); delete s.room.placed[key]; stored++;
+          }
+        }
+        return { adapted, stored };
+      });
+    },
     sync() { const next = upgrade(storage.load()); if (JSON.stringify(next) !== JSON.stringify(state)) { state = next; events.emit('STATE_SYNCED', {}); } },
 
     // ── Building the first room ───────────────────────────────────────────────
@@ -173,7 +199,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         const spot = normalise(item, placement, s.room.placed);
         const problem = placementError(spot, item, gridRoom(s), CATALOG, key);
         if (problem) throw new Error(problem);
-        s.room.placed[key] = { item: current.item, ...spot };
+        s.room.placed[key] = { item: current.item, ...(current.pose ? { pose: current.pose } : {}), ...spot };
         for (const p of Object.values(s.room.placed)) {
           if (p.parentSurfaceId !== key) continue;
           const local = surfacePosition(spot, item, p.surfaceSlot);
@@ -181,6 +207,13 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         }
         s.stats.moves += 1;
         return { item: current.item, key };
+      });
+    },
+    setCompanionPose(key, pose) {
+      return transact('COMPANION_POSE_CHANGED', s => {
+        const p = s.room.placed[key];
+        if (!CATALOG[p?.item]?.companion || !['idle', 'sleep', 'sit'].includes(pose)) throw new Error('Postura no válida.');
+        p.pose = pose;
       });
     },
     storeItem(key) {
@@ -279,7 +312,9 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         if (action === 'coins') s.coins += 250;
         if (action === 'rich') s.coins += 2000;
         if (action === 'zero') s.coins = 0;
-        if (action === 'unlock') for (const id of Object.keys(CATALOG)) give(s, id);
+        if (action === 'unlock') { for (const id of Object.keys(CATALOG)) give(s, id); s.achievements = [...new Set([...s.achievements,...ACHIEVEMENTS.map(a=>a.id)])]; }
+        if (action === 'add' && CATALOG[value]) give(s, value);
+        if (action === 'pets') for (const id of ['cat','dog','rabbit']) give(s,id);
         if (action === 'clear') { for (const [key, p] of Object.entries(s.room.placed)) { give(s, p.item); delete s.room.placed[key]; } }
         if (action === 'resetSetup') { s.profile.setupCompleted = false; s.ledger = s.ledger.filter(e => e !== 'starter-budget'); }
         if (action === 'size' && ROOM_SIZES[value]) s.room.size = value;

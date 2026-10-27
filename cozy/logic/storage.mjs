@@ -24,6 +24,7 @@ export function initialState() {
 const isCount = v => Number.isSafeInteger(v) && v >= 0;
 
 function validPlacement(p) {
+  if (p?.pose !== undefined && !['idle', 'sleep', 'sit'].includes(p.pose)) return false;
   if (!p || typeof p.item !== 'string' || !CATALOG[p.item]) return false;
   if (CATALOG[p.item].placement === 'wall')
     return (p.wall === 'left' || p.wall === 'right') && Number.isSafeInteger(p.index) && p.index >= 0 && p.index < WALL_SLOTS;

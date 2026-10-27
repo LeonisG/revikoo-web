@@ -111,10 +111,11 @@ const server = http.createServer((request, response) => {
     await page.keyboard.press('Enter');
     await page.locator('[data-edit=move]').click();
     await page.locator('#held-bar').waitFor({ state: 'visible' });
-    await page.locator('[data-held=rotate]').click();
+    assert.equal(await page.locator('[data-held=rotate]').isVisible(), false, 'only published sprite views can be selected');
+    await page.keyboard.press('r');
     await clickCell(3, 3);
     const chair = Object.values((await stored()).room.placed).find(p => p.item === 'chair');
-    assert.deepEqual([chair.gx, chair.gy, chair.rotation], [3, 3, 90]);
+    assert.deepEqual([chair.gx, chair.gy, chair.rotation], [3, 3, 0]);
     assert.equal((await stored()).stats.moves, 1);
 
     // Putting a surface away brings down whatever was standing on it.
@@ -153,15 +154,18 @@ const server = http.createServer((request, response) => {
     assert.equal((await stored()).focusHistory.length, 1);
 
     await open('shop');
-    await page.locator('[data-filter=Plantas]').click();
+    await page.locator('[data-collection]').selectOption('industrial');
+    await page.locator('[data-filter=Muebles]').click();
+    const beforePlant = (await stored()).coins;
+    const plantPrice = await page.evaluate(async()=> (await import('./logic/catalog.mjs')).CATALOG.monstera.price);
     await page.locator('[data-action=buy][data-id=monstera]').click();
     assert.equal((await stored()).inventory.monstera, 1);
-    assert.equal((await stored()).coins, 55);
+    assert.equal((await stored()).coins, beforePlant - plantPrice);
     await page.screenshot({ path: path.join(shots, 'shop.png'), fullPage: true });
     // Selling returns most of the price, so experimenting stays cheap.
     await page.locator('[data-action=sell][data-id=monstera]').click();
     await page.locator('#confirm-yes').click();
-    assert.equal((await stored()).coins, 55 + Math.floor(20 * 0.75));
+    assert.equal((await stored()).coins, beforePlant - plantPrice + Math.floor(plantPrice * 0.75));
     assert.equal((await stored()).inventory.monstera, undefined);
     await close();
 

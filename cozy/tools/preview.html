@@ -1,7 +1,5 @@
 <!doctype html>
-<!-- Art contact sheet. Open /cozy/tools/preview.html after running the
-     generators to see every object symbol at its true relative scale, with the
-     grid cell it has to stand in drawn underneath. Not part of the app. -->
+<!-- Development contact sheet for independently authored raster sprites. -->
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -16,18 +14,26 @@
   figure { margin: 0; background: #1d2a26; border: 1px solid #2c3c36; border-radius: 8px; padding: 6px; }
   .frame { position: relative; aspect-ratio: 420/400; }
   .frame svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .sprite-frame { display:block;position:relative;width:100%;height:100%;pointer-events:none; }
+  .item-sprite { position:absolute;max-width:none; }
+  .controls {display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px;}
+  select {padding:6px;background:#e7dfc5;border-radius:5px;color:#24382d;}
   figcaption { display: flex; justify-content: space-between; gap: 8px; padding: 6px 4px 2px; color: #8fa89b; font-size: 10px; }
   figcaption b { color: #e3d6b4; font-weight: 500; }
 </style>
 </head>
 <body>
-<h1>Hoja de contacto — todos los objetos a la misma escala, sobre su huella</h1>
-<label>Orientación <select id="rotation"><option>0</option><option>90</option><option>180</option><option>270</option></select>°</label>
+<h1>Soft Isometric Game Art · revisión de sprites</h1>
+<div class="controls"><label>Colección <select id="collection"><option value="all">Todas</option></select></label>
+<label>Vista <select id="scale"><option value="catalog">Catálogo</option><option value="world">Escala del mundo y huella</option></select></label>
+<label>Postura <select id="pose"><option>idle</option><option>sleep</option><option>sit</option></select></label></div>
 <div class="sheet" id="sheet"></div>
 <script type="module">
 import { ITEMS } from '../logic/catalog.mjs';
 import { footprint, CELL, TILT, SYMBOL } from '../logic/grid.mjs';
 import { art } from '../ui/helpers.mjs';
+import { COLLECTIONS } from '../logic/collections.mjs';
+document.querySelector('#collection').insertAdjacentHTML('beforeend',Object.entries(COLLECTIONS).map(([id,name])=>`<option value="${id}">${name}</option>`).join(''));
 
 // The same projection the room uses, drawn into the symbol's own box so the
 // footprint sits exactly where the object is standing.
@@ -40,16 +46,16 @@ const cellPath = (w, h) => {
   return d;
 };
 function render() {
-const rotation = Number(document.querySelector('#rotation').value);
-document.querySelector('#sheet').innerHTML = ITEMS.map(item => {
+const rotation = 0, collection=document.querySelector('#collection').value, world=document.querySelector('#scale').value==='world', pose=document.querySelector('#pose').value;
+document.querySelector('#sheet').innerHTML = ITEMS.filter(i=>collection==='all'||i.collection===collection).map(item => {
   const { w, h } = footprint(item, item.rotatable ? rotation : 0);
   return `<figure><div class="frame">
-    <svg viewBox="0 0 420 400"><path d="${cellPath(w, h)}" stroke="#4e6f62" stroke-width="1.4" fill="none" opacity=".75"/></svg>
-    ${art(item.id, item.name, rotation)}
+    ${world ? `<svg viewBox="0 0 420 400"><path d="${cellPath(w, h)}" stroke="#4e6f62" stroke-width="1.4" fill="none" opacity=".75"/></svg>` : ''}
+    ${art(item.id, item.name, rotation, pose, world)}
   </div><figcaption><b>${item.name}</b><span>${w}×${h} · ${item.placement}</span></figcaption></figure>`;
 }).join('');
 }
-document.querySelector('#rotation').addEventListener('change', render); render();
+document.querySelectorAll('select').forEach(s=>s.addEventListener('change', render)); render();
 </script>
 </body>
 </html>

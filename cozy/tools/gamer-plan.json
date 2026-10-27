@@ -1,0 +1,183 @@
+[
+  [
+    "gamer-desk",
+    "Escritorio Gamer",
+    "furniture",
+    280,
+    "Empty wide gaming desk, dark walnut top, charcoal two-drawer pedestal and legs, one restrained thin teal LED strip under rear edge. NO monitors, keyboard, peripherals or decoration.",
+    260,
+    0.78,
+    2,
+    1,
+    132
+  ],
+  [
+    "gamer-chair",
+    "Silla Gamer",
+    "furniture",
+    170,
+    "Premium ergonomic charcoal gaming chair with softly padded bucket back, teal piping, dark walnut arm pads, swivel five caster base. No logos or racing words.",
+    125,
+    0.85,
+    1,
+    1
+  ],
+  [
+    "wardrobe-dark",
+    "Armario Gamer",
+    "furniture",
+    340,
+    "Dark walnut and charcoal wardrobe with two closed doors and bottom drawer, slim teal handles, empty top, no mirror no accessories.",
+    200,
+    0.9,
+    2,
+    1
+  ],
+  [
+    "gamer-shelf",
+    "Estantería Gamer",
+    "furniture",
+    280,
+    "Tall charcoal frame dark walnut shelving unit with four EMPTY open shelves, subtle teal concealed edge lighting, no books, games, plants or decor.",
+    200,
+    0.89,
+    2,
+    1,
+    242
+  ],
+  [
+    "gamer-bed",
+    "Cama Gamer",
+    "furniture",
+    330,
+    "Low dark walnut storage bed, charcoal quilt with teal blanket stripe, two charcoal sleeping pillows, softly padded headboard with very thin teal light edge. Bed only no props or cushions with pictures.",
+    365,
+    0.74,
+    3,
+    2
+  ],
+  [
+    "gamer-dresser",
+    "Cajonera Gamer",
+    "furniture",
+    220,
+    "Compact three drawer dark walnut dresser within chunky charcoal frame, simple dark handles, subtle teal accent at base, EMPTY top.",
+    158,
+    0.87,
+    1,
+    1,
+    120
+  ],
+  [
+    "gamer-floor-lamp",
+    "Lámpara RGB",
+    "furniture",
+    160,
+    "Tall slender charcoal floor lamp, round base, cylindrical black fabric lampshade with restrained purple inner glow and teal rim. No wires.",
+    86,
+    0.89,
+    1,
+    1
+  ],
+  [
+    "gamer-rug",
+    "Alfombra Gamer",
+    "furniture",
+    85,
+    "Flat rectangular woven charcoal rug in isometric floor plane, tasteful abstract teal and purple geometric border and small pixel-inspired abstract shapes, no logos or controller, cozy fabric texture.",
+    320,
+    0.53,
+    2,
+    2
+  ],
+  [
+    "gamer-lamp",
+    "Lámpara LED",
+    "accessories",
+    70,
+    "Small adjustable charcoal desk task lamp, subtle violet inner lampshade glow and teal joint accents, round heavy base, no cables.",
+    52,
+    0.82
+  ],
+  [
+    "gamer-mug",
+    "Taza Gamer",
+    "accessories",
+    30,
+    "Single small charcoal ceramic coffee mug with teal rim and tiny abstract crescent emblem, filled coffee, no letters or brand.",
+    30,
+    0.76
+  ],
+  [
+    "gamer-pc",
+    "PC de sobremesa",
+    "accessories",
+    190,
+    "Single compact premium charcoal desktop PC tower, glass side panel showing two quiet teal and purple fan rings, chunky feet, no logos, no cable, no desk, no screen.",
+    64,
+    0.83
+  ],
+  [
+    "gamer-monitor",
+    "Monitor Gamer",
+    "accessories",
+    150,
+    "Single desktop widescreen monitor on compact charcoal stand, subtle teal trim, screen showing painted purple mountain night landscape, no text or UI, no keyboard or other props.",
+    102,
+    0.84
+  ],
+  [
+    "gamer-headset",
+    "Auriculares en soporte",
+    "accessories",
+    65,
+    "One pair padded charcoal headphones with teal piping hanging on a compact charcoal headset stand, a single atomic accessory. No logo.",
+    42,
+    0.84
+  ],
+  [
+    "gamer-controller",
+    "Mando",
+    "accessories",
+    45,
+    "Single charcoal game controller resting in three-quarter isometric view, teal buttons and purple thumbsticks, original generic shape, no brand or logo.",
+    39,
+    0.75
+  ],
+  [
+    "gamer-plant",
+    "Planta nocturna",
+    "accessories",
+    40,
+    "Compact leafy green plant in square charcoal ceramic pot with thin teal rim, no logo, one independent tabletop plant.",
+    60,
+    0.78
+  ],
+  [
+    "gamer-hoodie",
+    "Sudadera colgada",
+    "wall",
+    65,
+    "A single dark charcoal hoodie hanging from a small dark wooden wall peg, teal sleeve stripe, original tiny crescent embroidery, no logo or letters. Frontal elevation, NOT isometric, painted game wall sprite to be mapped by engine.",
+    92,
+    0.5
+  ],
+  [
+    "gamer-games",
+    "Colección de juegos",
+    "accessories",
+    45,
+    "Four chunky upright video game cases with dark purple charcoal and teal spines, blank symbolic covers no lettering, no copyrighted artwork, independent small stack on no surface.",
+    47,
+    0.83
+  ],
+  [
+    "gamer-poster",
+    "Póster nocturno",
+    "wall",
+    55,
+    "A framed original painted purple mountain night landscape, teal moon, charcoal wooden frame. STRICT straight-on frontal flat elevation with frame depth but no three-quarter slant; transparent exterior, no words. Wall art sprite.",
+    110,
+    0.5
+  ]
+]

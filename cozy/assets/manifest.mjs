@@ -1,26 +1,26 @@
-import { CATALOG } from '../logic/catalog.mjs';
+import { SPRITES } from './sprites.mjs';
 const root = new URL('./', import.meta.url);
 
 // The room's own layers come in one set per size, so choosing a bigger room
 // swaps the shell, the window and the daylight together.
 export const roomAssets = size => ({
-  shell: new URL(`room/shell-${size}.svg`, root).href,
+  shell: new URL(`room/illustrated-${size}.webp`, root).href,
+  illustrated: true,
+  fit: ({ small:{x:-.9,y:7.4,w:101.8,h:86.4}, medium:{x:-1.2,y:2,w:102.4,h:96.7}, large:{x:1,y:11.2,w:98,h:88.6} })[size],
   window: new URL(`room/window-${size}.svg`, root).href,
   windowSunset: new URL(`room/window-${size}-sunset.svg`, root).href,
   windowNight: new URL(`room/window-${size}-night.svg`, root).href,
   windowRain: new URL(`room/window-${size}-rain.svg`, root).href,
   daylight: new URL(`room/light-${size}.svg`, root).href,
-  mask: new URL(`room/mask-${size}.svg`, root).href,
+  mask: new URL(`room/illustrated-${size}.webp`, root).href,
 });
 
-export const OBJECTS = new URL('objects.svg', root).href;
-
-// Optional per-object overrides, for swapping a drawn symbol for a bitmap later:
-// mushroom: { type: 'image', src: new URL('mushroom-lamp.webp', root).href }
-export const ITEM_ASSETS = {};
 export const objectAsset = (id, rotation = 0, state = 'idle') => {
-  const override = ITEM_ASSETS[id];
-  const symbol = CATALOG[id]?.sprites[rotation] || id;
-  return override?.sprites?.[rotation] || override?.states?.[state] || override
-    || { type: 'symbol', src: `${OBJECTS}#${symbol}` };
+  const sprite = SPRITES[id];
+  if (!sprite?.src) throw new Error(`Missing production sprite: ${id}`);
+  const view = sprite.orientations?.[rotation] || sprite;
+  const frame = view.states?.[state] || view;
+  return { ...frame, type: 'image', src: new URL(frame.src, root).href, rotation: view === sprite ? 0 : rotation };
 };
+
+export const availableOrientations = id => SPRITES[id]?.src ? [0, ...Object.keys(SPRITES[id].orientations || {}).map(Number)] : [];

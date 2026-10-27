@@ -53,7 +53,7 @@ export function surfacePosition(host, item, slot) {
   if (host.rotation === 90) [x, y] = [item.h - y, x];
   if (host.rotation === 180) [x, y] = [item.w - x, item.h - y];
   if (host.rotation === 270) [x, y] = [y, item.w - x];
-  return { x: host.gx + x, y: host.gy + y, z: item.top };
+  return { x: host.gx + x, y: host.gy + y, z: local.z ?? item.top };
 }
 
 export function bindSurface(p, placed, catalog) {
