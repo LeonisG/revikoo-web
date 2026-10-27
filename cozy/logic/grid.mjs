@@ -10,17 +10,37 @@
 // gx grows toward the lower right of the screen, gy toward the lower left, so a
 // cell's screen depth is simply gx + gy: larger means nearer the viewer.
 
-export const CELL = 88;              // world units per cell
+import { ROOM_CAMERAS } from './room-camera.mjs';
+
+export const CELL = 88;              // world units per cell — the authoring unit
 export const SCENE = { w: 1400, h: 900 };
-export const ORIGIN = { x: 700, y: 480 };  // where world (0,0,0) lands on stage
-export const TILT = .36;             // how far one unit of depth drops on screen
+
+// The camera is measured off the room artwork, not assumed. The painted floor is
+// the source of truth: rooms are scaled so one cell is exactly CELL world units,
+// and the projection below reads the active room's calibration, so a footprint
+// the grid draws lands on the floorboards rather than near them.
+// Regenerate with `python tools/measure-room.py`.
+export const CAMERA = { tilt: ROOM_CAMERAS.medium.tilt, origin: { ...ROOM_CAMERAS.medium.origin } };
+
+/** Point the camera at a room size. Returns that room's calibration. */
+export function useRoomCamera(size) {
+  const room = ROOM_CAMERAS[size] || ROOM_CAMERAS.medium;
+  CAMERA.tilt = room.tilt;
+  CAMERA.origin = { ...room.origin };
+  return room;
+}
+
+// The canonical authoring values, for art tools and documentation. Runtime
+// projection uses CAMERA, which varies by a fraction of a degree between rooms.
+export const TILT = ROOM_CAMERAS.medium.tilt;
+export const ORIGIN = ROOM_CAMERAS.medium.origin;
 
 // A symbol's box is the same for every object so that two objects drawn at the
 // same scale really are the same size in the room. The art is centred on the
 // footprint and stands on the anchor line.
 export const SYMBOL = { w: 420, h: 400, anchorX: 210, anchorY: 330 };
 
-export const project = (x, y, z = 0) => [ORIGIN.x + x - y, ORIGIN.y + (x + y) * TILT - z];
+export const project = (x, y, z = 0) => [CAMERA.origin.x + x - y, CAMERA.origin.y + (x + y) * CAMERA.tilt - z];
 export const toStage = (x, y, z = 0) => {
   const [sx, sy] = project(x, y, z);
   return { x: +(sx / SCENE.w * 100).toFixed(3), y: +(sy / SCENE.h * 100).toFixed(3) };
@@ -101,9 +121,9 @@ export function cellPolygon(gx, gy) {
 // Which cell a point on the stage falls in. Inverting the projection is exact:
 // screen x gives x - y and screen y gives x + y, so the pair solves directly.
 export function cellAt(stageX, stageY, size) {
-  const sx = stageX / 100 * SCENE.w - ORIGIN.x;
-  const sy = stageY / 100 * SCENE.h - ORIGIN.y;
-  const sum = sy / TILT, diff = sx;
+  const sx = stageX / 100 * SCENE.w - CAMERA.origin.x;
+  const sy = stageY / 100 * SCENE.h - CAMERA.origin.y;
+  const sum = sy / CAMERA.tilt, diff = sx;
   const gx = Math.floor(((sum + diff) / 2) / CELL);
   const gy = Math.floor(((sum - diff) / 2) / CELL);
   return gx >= 0 && gy >= 0 && gx < size && gy < size ? { gx, gy } : null;

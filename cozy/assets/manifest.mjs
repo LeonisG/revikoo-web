@@ -1,4 +1,5 @@
 import { SPRITES } from './sprites.mjs';
+import { ROOM_CAMERAS } from '../logic/room-camera.mjs';
 const root = new URL('./', import.meta.url);
 
 // The room's own layers come in one set per size, so choosing a bigger room
@@ -6,7 +7,8 @@ const root = new URL('./', import.meta.url);
 export const roomAssets = size => ({
   shell: new URL(`room/illustrated-${size}.webp`, root).href,
   illustrated: true,
-  fit: ({ small:{x:-.9,y:7.4,w:101.8,h:86.4}, medium:{x:-1.2,y:2,w:102.4,h:96.7}, large:{x:1,y:11.2,w:98,h:88.6} })[size],
+  // Measured, not eyeballed: see tools/measure-room.py.
+  fit: ROOM_CAMERAS[size].fit,
   window: new URL(`room/window-${size}.svg`, root).href,
   windowSunset: new URL(`room/window-${size}-sunset.svg`, root).href,
   windowNight: new URL(`room/window-${size}-night.svg`, root).href,

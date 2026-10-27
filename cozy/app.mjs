@@ -1,4 +1,4 @@
-import { DEBUG, CATALOG, roomLevel } from './logic/config.mjs';
+import { DEBUG, ASSET_TEST, CATALOG, roomLevel } from './logic/config.mjs';
 import { createStorage } from './logic/storage.mjs';
 import { createEngine } from './logic/engine.mjs';
 import { createAudio } from './logic/audio.mjs';
@@ -10,7 +10,8 @@ import { coin } from './ui/helpers.mjs';
 import { availableOrientations } from './assets/manifest.mjs';
 
 const storage = createStorage({ onWarning(message) { const warning = document.querySelector('#save-warning'); warning.textContent = message; warning.hidden = false; } });
-const engine = createEngine(storage, { debug: DEBUG });
+// The golden test room needs the same shortcuts the debug table uses.
+const engine = createEngine(storage, { debug: DEBUG || ASSET_TEST });
 const artUpdate = engine.reconcileOrientations(Object.fromEntries(Object.keys(CATALOG).map(id => [id, availableOrientations(id)])));
 const room = createRoom(), audio = createAudio();
 if (artUpdate.stored) room.reward(`${artUpdate.stored} objetos han vuelto a tu inventario para adaptarse a sus nuevas ilustraciones.`);
@@ -99,9 +100,32 @@ window.addEventListener('storage', event => {
 document.addEventListener('visibilitychange', () => { audio.update(engine.state.preferences, !!engine.state.activeFocus); if (!document.hidden) { engine.sync(); tick(); room.lighting(); } });
 document.querySelector('#debug-badge').hidden = !DEBUG;
 
+/**
+ * The golden test room. One fixed layout of the six reference pieces on a bare
+ * floor with the grid and footprints showing, so perspective, scale, grounding
+ * and light can be judged the same way every time. Rebuilt on every load, in its
+ * own save, so it never drifts and never touches a real room.
+ */
+function goldenRoom() {
+  document.querySelector('#app').classList.add('asset-test');
+  if (!engine.state.ledger.includes('starter-budget')) engine.startSetup();
+  engine.debug('rich');
+  engine.debug('clear');
+  if (engine.state.room.size !== 'medium') engine.chooseSize('medium');
+  if (!engine.state.profile.setupCompleted) engine.completeSetup();
+  for (const [id, gx, gy] of [['desk', 2, 0], ['chair', 2, 1], ['bookshelf', 0, 0],
+    ['wardrobe-oak', 0, 3], ['bed-cream', 2, 3], ['floor-lamp', 4, 0]]) {
+    if (!CATALOG[id]) continue;
+    if (!engine.state.inventory[id]) { try { engine.buyItem(id); } catch { continue; } }
+    try { engine.placeItem(id, { gx, gy, rotation: 0 }); } catch { /* skip what will not fit */ }
+  }
+  update();
+}
+
 update();
+if (ASSET_TEST) goldenRoom();
 // A room that has never been built opens straight into building it.
-if (!engine.state.profile.setupCompleted) setup.start();
+else if (!engine.state.profile.setupCompleted) setup.start();
 tick();
 setInterval(tick, 500);
 setInterval(() => room.lighting(), 60000);

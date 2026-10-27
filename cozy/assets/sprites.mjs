@@ -6,8 +6,8 @@ export const SPRITES = {
     "width": 308.458,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.5024,
+      "y": 0.6856
     },
     "pixels": [
       768,
@@ -22,8 +22,8 @@ export const SPRITES = {
     "width": 190.0,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.85
+      "x": 0.5032,
+      "y": 0.7517
     },
     "pixels": [
       768,
@@ -38,8 +38,8 @@ export const SPRITES = {
     "width": 351.261,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.9
+      "x": 0.5016,
+      "y": 0.8363
     },
     "pixels": [
       768,
@@ -54,8 +54,8 @@ export const SPRITES = {
     "width": 350.769,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.89
+      "x": 0.502,
+      "y": 0.8154
     },
     "pixels": [
       768,
@@ -70,8 +70,8 @@ export const SPRITES = {
     "width": 410.134,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.74
+      "x": 0.5124,
+      "y": 0.7253
     },
     "pixels": [
       768,
@@ -86,8 +86,8 @@ export const SPRITES = {
     "width": 207.034,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.87
+      "x": 0.504,
+      "y": 0.7529
     },
     "pixels": [
       768,
@@ -102,8 +102,8 @@ export const SPRITES = {
     "width": 237.02,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.89
+      "x": 0.4996,
+      "y": 0.8458
     },
     "pixels": [
       768,
@@ -118,8 +118,8 @@ export const SPRITES = {
     "width": 340.645,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.53
+      "x": 0.5032,
+      "y": 0.6251
     },
     "pixels": [
       768,
@@ -134,8 +134,8 @@ export const SPRITES = {
     "width": 51.045,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.76
+      "x": 0.5339,
+      "y": 0.6711
     },
     "pixels": [
       768,
@@ -150,8 +150,8 @@ export const SPRITES = {
     "width": 93.555,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.82
+      "x": 0.5363,
+      "y": 0.7524
     },
     "pixels": [
       768,
@@ -166,8 +166,8 @@ export const SPRITES = {
     "width": 79.283,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.72
+      "x": 0.5163,
+      "y": 0.674
     },
     "pixels": [
       768,
@@ -182,8 +182,8 @@ export const SPRITES = {
     "width": 68.612,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.502,
+      "y": 0.7275
     },
     "pixels": [
       768,
@@ -198,8 +198,8 @@ export const SPRITES = {
     "width": 59.714,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.76
+      "x": 0.4968,
+      "y": 0.6896
     },
     "pixels": [
       768,
@@ -214,8 +214,8 @@ export const SPRITES = {
     "width": 115.204,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.84
+      "x": 0.5028,
+      "y": 0.719
     },
     "pixels": [
       768,
@@ -230,8 +230,8 @@ export const SPRITES = {
     "width": 225.216,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.85
+      "x": 0.5092,
+      "y": 0.8282
     },
     "pixels": [
       768,
@@ -246,8 +246,8 @@ export const SPRITES = {
     "width": 307.875,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.5028,
+      "y": 0.6862
     },
     "pixels": [
       768,
@@ -262,8 +262,8 @@ export const SPRITES = {
     "width": 297.862,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.9
+      "x": 0.5024,
+      "y": 0.8071
     },
     "pixels": [
       768,
@@ -278,8 +278,8 @@ export const SPRITES = {
     "width": 354.237,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.89
+      "x": 0.504,
+      "y": 0.8565
     },
     "pixels": [
       768,
@@ -294,8 +294,8 @@ export const SPRITES = {
     "width": 423.806,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.74
+      "x": 0.5096,
+      "y": 0.716
     },
     "pixels": [
       768,
@@ -310,8 +310,8 @@ export const SPRITES = {
     "width": 189.782,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.87
+      "x": 0.5064,
+      "y": 0.7344
     },
     "pixels": [
       768,
@@ -326,8 +326,8 @@ export const SPRITES = {
     "width": 250.218,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.89
+      "x": 0.5004,
+      "y": 0.8777
     },
     "pixels": [
       768,
@@ -342,8 +342,8 @@ export const SPRITES = {
     "width": 359.892,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.53
+      "x": 0.506,
+      "y": 0.6188
     },
     "pixels": [
       768,
@@ -358,8 +358,8 @@ export const SPRITES = {
     "width": 65.143,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.82
+      "x": 0.4964,
+      "y": 0.7532
     },
     "pixels": [
       768,
@@ -374,8 +374,8 @@ export const SPRITES = {
     "width": 45.878,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.76
+      "x": 0.5323,
+      "y": 0.6729
     },
     "pixels": [
       768,
@@ -390,8 +390,8 @@ export const SPRITES = {
     "width": 90.0,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.5191,
+      "y": 0.6758
     },
     "pixels": [
       768,
@@ -406,8 +406,8 @@ export const SPRITES = {
     "width": 115.046,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.5004,
+      "y": 0.5211
     },
     "pixels": [
       768,
@@ -422,8 +422,8 @@ export const SPRITES = {
     "width": 62.105,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.502,
+      "y": 0.7386
     },
     "pixels": [
       768,
@@ -438,8 +438,8 @@ export const SPRITES = {
     "width": 179.844,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.5004,
+      "y": 0.5004
     },
     "pixels": [
       768,
@@ -454,8 +454,8 @@ export const SPRITES = {
     "width": 98.654,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.82
+      "x": 0.4964,
+      "y": 0.6948
     },
     "pixels": [
       768,
@@ -470,8 +470,8 @@ export const SPRITES = {
     "width": 70.801,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.502,
+      "y": 0.6861
     },
     "pixels": [
       768,
@@ -486,8 +486,8 @@ export const SPRITES = {
     "width": 301.61,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.5028,
+      "y": 0.6943
     },
     "pixels": [
       768,
@@ -502,8 +502,8 @@ export const SPRITES = {
     "width": 201.22,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.85
+      "x": 0.514,
+      "y": 0.8135
     },
     "pixels": [
       768,
@@ -518,8 +518,8 @@ export const SPRITES = {
     "width": 262.343,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.9
+      "x": 0.5132,
+      "y": 0.7945
     },
     "pixels": [
       768,
@@ -534,8 +534,8 @@ export const SPRITES = {
     "width": 321.951,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.89
+      "x": 0.5044,
+      "y": 0.8399
     },
     "pixels": [
       768,
@@ -550,8 +550,8 @@ export const SPRITES = {
     "width": 414.217,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.74
+      "x": 0.5179,
+      "y": 0.7275
     },
     "pixels": [
       768,
@@ -566,8 +566,8 @@ export const SPRITES = {
     "width": 301.053,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.5116,
+      "y": 0.6899
     },
     "pixels": [
       768,
@@ -582,8 +582,8 @@ export const SPRITES = {
     "width": 228.166,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.85
+      "x": 0.5124,
+      "y": 0.826
     },
     "pixels": [
       768,
@@ -598,8 +598,8 @@ export const SPRITES = {
     "width": 359.828,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.9
+      "x": 0.5104,
+      "y": 0.8224
     },
     "pixels": [
       768,
@@ -614,8 +614,8 @@ export const SPRITES = {
     "width": 342.623,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.89
+      "x": 0.4984,
+      "y": 0.8339
     },
     "pixels": [
       768,
@@ -630,8 +630,8 @@ export const SPRITES = {
     "width": 411.61,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.74
+      "x": 0.5167,
+      "y": 0.7047
     },
     "pixels": [
       768,
@@ -646,8 +646,8 @@ export const SPRITES = {
     "width": 187.093,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.87
+      "x": 0.5012,
+      "y": 0.7524
     },
     "pixels": [
       768,
@@ -662,8 +662,8 @@ export const SPRITES = {
     "width": 206.173,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.87
+      "x": 0.4984,
+      "y": 0.7681
     },
     "pixels": [
       768,
@@ -679,7 +679,7 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.89
+      "y": 0.8804
     },
     "pixels": [
       768,
@@ -694,8 +694,8 @@ export const SPRITES = {
     "width": 336.644,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.53
+      "x": 0.5048,
+      "y": 0.6194
     },
     "pixels": [
       768,
@@ -710,8 +710,8 @@ export const SPRITES = {
     "width": 96.604,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.82
+      "x": 0.5275,
+      "y": 0.7675
     },
     "pixels": [
       768,
@@ -726,8 +726,8 @@ export const SPRITES = {
     "width": 48.479,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.76
+      "x": 0.5331,
+      "y": 0.6863
     },
     "pixels": [
       768,
@@ -742,8 +742,8 @@ export const SPRITES = {
     "width": 99.821,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.5223,
+      "y": 0.7828
     },
     "pixels": [
       768,
@@ -758,8 +758,8 @@ export const SPRITES = {
     "width": 76.441,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.84
+      "x": 0.5004,
+      "y": 0.7913
     },
     "pixels": [
       768,
@@ -774,8 +774,8 @@ export const SPRITES = {
     "width": 49.053,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.75
+      "x": 0.4928,
+      "y": 0.6644
     },
     "pixels": [
       768,
@@ -790,8 +790,8 @@ export const SPRITES = {
     "width": 80.816,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.5263,
+      "y": 0.7488
     },
     "pixels": [
       768,
@@ -806,8 +806,8 @@ export const SPRITES = {
     "width": 256.354,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.89
+      "x": 0.5211,
+      "y": 0.8462
     },
     "pixels": [
       768,
@@ -822,8 +822,8 @@ export const SPRITES = {
     "width": 135.25,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.5028,
+      "y": 0.4932
     },
     "pixels": [
       768,
@@ -839,7 +839,7 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.53
+      "y": 0.6109
     },
     "pixels": [
       768,
@@ -854,8 +854,8 @@ export const SPRITES = {
     "width": 69.502,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.5068,
+      "y": 0.7436
     },
     "pixels": [
       768,
@@ -870,8 +870,8 @@ export const SPRITES = {
     "width": 77.629,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.82
+      "x": 0.5211,
+      "y": 0.7993
     },
     "pixels": [
       768,
@@ -886,8 +886,8 @@ export const SPRITES = {
     "width": 147.529,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.5004,
+      "y": 0.5064
     },
     "pixels": [
       768,
@@ -902,8 +902,8 @@ export const SPRITES = {
     "width": 44.311,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.76
+      "x": 0.498,
+      "y": 0.6862
     },
     "pixels": [
       768,
@@ -918,8 +918,8 @@ export const SPRITES = {
     "width": 164.169,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.5108,
+      "y": 0.7164
     },
     "pixels": [
       768,
@@ -934,8 +934,8 @@ export const SPRITES = {
     "width": 287.229,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.9
+      "x": 0.5012,
+      "y": 0.8909
     },
     "pixels": [
       768,
@@ -950,8 +950,8 @@ export const SPRITES = {
     "width": 370.45,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.78
+      "x": 0.506,
+      "y": 0.683
     },
     "pixels": [
       768,
@@ -966,8 +966,8 @@ export const SPRITES = {
     "width": 182.267,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.85
+      "x": 0.5076,
+      "y": 0.7507
     },
     "pixels": [
       768,
@@ -983,7 +983,7 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.84
+      "y": 0.7004
     },
     "pixels": [
       768,
@@ -998,8 +998,8 @@ export const SPRITES = {
     "width": 346.23,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.53
+      "x": 0.5012,
+      "y": 0.6122
     },
     "pixels": [
       768,
@@ -1014,8 +1014,8 @@ export const SPRITES = {
     "width": 344.151,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.53
+      "x": 0.5056,
+      "y": 0.6057
     },
     "pixels": [
       768,
@@ -1030,8 +1030,8 @@ export const SPRITES = {
     "width": 60.391,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.4988,
+      "y": 0.7554
     },
     "pixels": [
       768,
@@ -1046,8 +1046,8 @@ export const SPRITES = {
     "width": 71.065,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.4936,
+      "y": 0.7159
     },
     "pixels": [
       768,
@@ -1062,8 +1062,8 @@ export const SPRITES = {
     "width": 90.87,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.84
+      "x": 0.5104,
+      "y": 0.687
     },
     "pixels": [
       768,
@@ -1079,7 +1079,7 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.5
+      "y": 0.5004
     },
     "pixels": [
       768,
@@ -1094,8 +1094,8 @@ export const SPRITES = {
     "width": 65.56,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.4992,
+      "y": 0.764
     },
     "pixels": [
       768,
@@ -1110,8 +1110,8 @@ export const SPRITES = {
     "width": 161.712,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.504,
+      "y": 0.5116
     },
     "pixels": [
       768,
@@ -1126,8 +1126,8 @@ export const SPRITES = {
     "width": 165.594,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.5012,
+      "y": 0.5084
     },
     "pixels": [
       768,
@@ -1142,8 +1142,8 @@ export const SPRITES = {
     "width": 160.941,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.5004,
+      "y": 0.5016
     },
     "pixels": [
       768,
@@ -1158,8 +1158,8 @@ export const SPRITES = {
     "width": 133.269,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.84
+      "x": 0.5008,
+      "y": 0.6766
     },
     "pixels": [
       768,
@@ -1174,8 +1174,8 @@ export const SPRITES = {
     "width": 213.918,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.9
+      "x": 0.5108,
+      "y": 0.8111
     },
     "pixels": [
       768,
@@ -1191,7 +1191,7 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.85
+      "y": 0.7253
     },
     "pixels": [
       768,
@@ -1206,8 +1206,8 @@ export const SPRITES = {
     "width": 71.589,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.72
+      "x": 0.5068,
+      "y": 0.6294
     },
     "pixels": [
       768,
@@ -1222,8 +1222,8 @@ export const SPRITES = {
     "width": 69.769,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.84
+      "x": 0.5144,
+      "y": 0.6925
     },
     "pixels": [
       768,
@@ -1238,8 +1238,8 @@ export const SPRITES = {
     "width": 92.077,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.85
+      "x": 0.5008,
+      "y": 0.6758
     },
     "pixels": [
       768,
@@ -1255,7 +1255,7 @@ export const SPRITES = {
     "aspect": 1.0,
     "pivot": {
       "x": 0.5,
-      "y": 0.5
+      "y": 0.5004
     },
     "pixels": [
       768,
@@ -1270,8 +1270,8 @@ export const SPRITES = {
     "width": 114.521,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.502,
+      "y": 0.508
     },
     "pixels": [
       768,
@@ -1286,8 +1286,8 @@ export const SPRITES = {
     "width": 81.538,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.83
+      "x": 0.514,
+      "y": 0.7055
     },
     "pixels": [
       768,
@@ -1302,8 +1302,8 @@ export const SPRITES = {
     "width": 79.54,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.82
+      "x": 0.506,
+      "y": 0.7207
     },
     "pixels": [
       768,
@@ -1318,8 +1318,8 @@ export const SPRITES = {
     "width": 123.518,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.8
+      "x": 0.5112,
+      "y": 0.6782
     },
     "pixels": [
       768,
@@ -1334,8 +1334,8 @@ export const SPRITES = {
         "width": 107.926,
         "aspect": 1.0,
         "pivot": {
-          "x": 0.5,
-          "y": 0.8
+          "x": 0.5124,
+          "y": 0.5987
         },
         "pixels": [
           768,
@@ -1350,8 +1350,8 @@ export const SPRITES = {
         "width": 112.179,
         "aspect": 1.0,
         "pivot": {
-          "x": 0.5,
-          "y": 0.8
+          "x": 0.514,
+          "y": 0.7854
         },
         "pixels": [
           768,
@@ -1368,8 +1368,8 @@ export const SPRITES = {
     "width": 156.46,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.79
+      "x": 0.5068,
+      "y": 0.6245
     },
     "pixels": [
       768,
@@ -1384,8 +1384,8 @@ export const SPRITES = {
         "width": 149.154,
         "aspect": 1.0,
         "pivot": {
-          "x": 0.5,
-          "y": 0.79
+          "x": 0.5199,
+          "y": 0.501
         },
         "pixels": [
           768,
@@ -1400,8 +1400,8 @@ export const SPRITES = {
         "width": 152.685,
         "aspect": 1.0,
         "pivot": {
-          "x": 0.5,
-          "y": 0.79
+          "x": 0.5283,
+          "y": 0.7664
         },
         "pixels": [
           768,
@@ -1418,8 +1418,8 @@ export const SPRITES = {
     "width": 157.646,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.5
+      "x": 0.5004,
+      "y": 0.5056
     },
     "pixels": [
       768,
@@ -1434,8 +1434,8 @@ export const SPRITES = {
     "width": 104.612,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.84
+      "x": 0.5064,
+      "y": 0.7403
     },
     "pixels": [
       768,
@@ -1450,8 +1450,8 @@ export const SPRITES = {
         "width": 88.198,
         "aspect": 1.0,
         "pivot": {
-          "x": 0.5,
-          "y": 0.84
+          "x": 0.5116,
+          "y": 0.6242
         },
         "pixels": [
           768,
@@ -1466,8 +1466,8 @@ export const SPRITES = {
         "width": 93.154,
         "aspect": 1.0,
         "pivot": {
-          "x": 0.5,
-          "y": 0.84
+          "x": 0.5407,
+          "y": 0.8237
         },
         "pixels": [
           768,
@@ -1484,8 +1484,8 @@ export const SPRITES = {
     "width": 143.079,
     "aspect": 1.5,
     "pivot": {
-      "x": 0.5,
-      "y": 0.84
+      "x": 0.5003,
+      "y": 0.7104
     },
     "pixels": [
       768,
@@ -1500,8 +1500,8 @@ export const SPRITES = {
     "width": 112.635,
     "aspect": 1.0,
     "pivot": {
-      "x": 0.5,
-      "y": 0.85
+      "x": 0.5004,
+      "y": 0.8352
     },
     "pixels": [
       768,

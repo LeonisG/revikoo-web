@@ -1,5 +1,44 @@
 # Asset prompt template
 
+## Cláusula obligatoria de cámara canónica
+
+Esta cláusula va en **todos** los prompts de assets, sin excepción. La referencia
+no es abstracta: es `docs/canonical-room.png`, la habitación vacía real contra la
+que se mide todo. Sus valores están medidos, no estimados
+(`python tools/measure-room.py`):
+
+| | |
+|---|---|
+| eje del suelo | **24.10°** (pendiente 0.4474) |
+| celda lógica | 88 unidades de mundo → 176 × 79 px en pantalla |
+| cámara | ortográfica, tres cuartos elevada, verticales verticales |
+| luz | arriba-izquierda; sombra proyectada abajo-derecha |
+
+```text
+Use the attached empty room (docs/canonical-room.png) as the canonical camera reference.
+Match exactly its isometric projection, camera elevation, floor-axis angles and lighting
+direction. Its floor axes run at 24.1 degrees from horizontal; the object's own floor-plane
+edges must be parallel to them. The object's footprint must align perfectly with the room's
+floor tiles. The object must look physically grounded in that room. Do not use a generic
+isometric camera. Do not create a 3/4 perspective approximation. The object should be
+insertable into the attached room without rotation, skew or perspective correction.
+```
+
+Después de generar, **comprobar antes de aceptar**:
+
+```sh
+python tools/check-assets.py          # AXIS / GROUND / SCALE
+```
+
+y mirarlo en la habitación real con la rejilla y las huellas visibles:
+
+```text
+/cozy/?asset-test=true
+```
+
+Si las patas caen fuera de su huella, el sprite o su pivot están mal. Los pivots
+se miden, nunca se escriben a mano: `python tools/measure-pivots.py`.
+
 Usar ImageGen con `transparent_background: true`. Una llamada por asset. Referencia 1: `docs/reference-oak-cozy.png`. Referencia 2: `assets/masters/oak-cozy/desk.png`, o una pieza equivalente ya aprobada de la colección. Para accesorios, preferir un accesorio aprobado como segunda referencia para evitar que el generador añada el escritorio.
 
 ## Prompt base exacto del Golden Set

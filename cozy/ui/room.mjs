@@ -1,10 +1,31 @@
 import { roomAssets, objectAsset } from '../assets/manifest.mjs';
-import { CATALOG, GAME_CONFIG, ROOM_SIZES, roomLevel } from '../logic/config.mjs';
+import { CATALOG, GAME_CONFIG, ROOM_SIZES, roomLevel, ASSET_TEST } from '../logic/config.mjs';
 import { GLOW_TINTS } from '../logic/collections.mjs';
-import { paintOrder, cellPolygon, cellAt } from '../logic/grid.mjs';
+import { paintOrder, cellPolygon, cellAt, useRoomCamera, footprint, CELL, SYMBOL, SCENE, CAMERA } from '../logic/grid.mjs';
 import { art, escapeHTML, icon } from './helpers.mjs';
 
 const MAX_TILT = 1; // degrees, deliberately barely perceptible
+
+
+/**
+ * The shadow an object casts where it meets the surface it stands on. Sized to
+ * the object's own footprint and squashed by the camera's tilt, so it lies in
+ * the floor plane rather than hovering as a round blob — which is what makes a
+ * sprite read as standing in the room instead of pasted over it.
+ *
+ * Deliberately not a CSS drop-shadow on the sprite: that traces the artwork's
+ * silhouette, travels with it, and ignores the room's light direction.
+ */
+function contactShadow(item, placement) {
+  if (item.placement === 'wall' || item.flat) return '';
+  const { w, h } = footprint(item, placement.rotation);
+  const span = CELL * (w + h);                      // the footprint's screen width
+  const width = span / SYMBOL.w * 100;
+  const height = span * CAMERA.tilt / SYMBOL.h * 100;
+  // Something resting on a desk sits closer to it than a wardrobe does to the floor.
+  const tight = placement.on ? .52 : .84;
+  return `<span class="contact" style="--fw:${(width * tight).toFixed(2)};--fh:${(height * tight).toFixed(2)}"></span>`;
+}
 
 export function createRoom() {
   const app = document.querySelector('#app'), stage = document.querySelector('#room-stage');
@@ -12,11 +33,14 @@ export function createRoom() {
   const glows = document.querySelector('#room-glows');
   app.style.setProperty('--camera-duration', `${GAME_CONFIG.animationDurations.camera}ms`);
   let preferences = {}, lastPaint = '', lastSize = '', lastCoins = null, rewardTimeout, frame = 0;
+  let showFootprints = ASSET_TEST;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const preloaded = new Set();
 
   function useSize(size) {
     if (size === lastSize) return;
+    // Aim the camera at this room's measured floor before projecting anything.
+    useRoomCamera(size);
     const assets = roomAssets(size);
     for (const [id, key] of Object.entries({
       'room-shell': 'shell', 'room-window': 'window', 'window-sunset': 'windowSunset',
@@ -69,7 +93,7 @@ export function createRoom() {
       const depth = Math.min(1, Math.max(0, (spot.depth || 0) / (cells * 22)));
       return `<div class="placed ${item.flat ? 'is-flat' : ''} ${item.companion ? 'is-companion' : ''}" data-key="${key}" data-item="${item.id}" data-pose="${placement.pose || 'idle'}"
         style="left:${spot.x}%;top:${spot.y}%;z-index:${layer + 500};--d:${depth.toFixed(3)};${spot.surface ? `--wall:${spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}"
-        role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${art(item.id, '', placement.rotation, placement.pose || 'idle', true)}</div>`;
+        role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${contactShadow(item, placement)}${art(item.id, '', placement.rotation, placement.pose || 'idle', true)}</div>`;
     }).join('');
 
     // Light sources are whatever the player has actually put down.
@@ -79,6 +103,29 @@ export function createRoom() {
     }).join('');
     app.dataset.lit = order.some(o => o.item.glow >= .8) ? 'bright' : order.some(o => o.item.glow > 0) ? 'dim' : 'none';
     return order;
+  }
+
+  /**
+   * Footprint debug: the tiles an object occupies, its anchor and its pivot,
+   * drawn on the floor plane. If a chair's legs land outside its diamond, the
+   * sprite's width or pivot is wrong — that is the check this exists for.
+   */
+  function drawFootprints(state, cells) {
+    const layer = document.querySelector('#footprint-overlay');
+    if (!layer) return;
+    if (!showFootprints) { layer.innerHTML = ''; return; }
+    layer.innerHTML = paintOrder({ placed: state.room.placed, cells }, CATALOG)
+      .filter(({ item }) => item.placement !== 'wall')
+      .map(({ item, placement, spot }) => {
+        const { w, h } = footprint(item, placement.rotation);
+        const tiles = [];
+        for (let x = placement.gx; x < placement.gx + w; x++)
+          for (let y = placement.gy; y < placement.gy + h; y++)
+            tiles.push(`<polygon points="${cellPolygon(x, y)}" class="fp-tile"/>`);
+        const cx = spot.x / 100 * SCENE.w, cy = spot.y / 100 * SCENE.h;
+        return `${tiles.join('')}<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" class="fp-anchor"/>`
+          + `<text x="${cx.toFixed(1)}" y="${(cy - 12).toFixed(1)}" class="fp-label">${w}×${h}</text>`;
+      }).join('');
   }
 
   /** The grid, drawn only while editing; wall hooks replace it for wall items. */
@@ -127,6 +174,7 @@ export function createRoom() {
     sound.innerHTML = icon(preferences.sound ? 'sound-on' : 'sound-off');
 
     const order = paint(state);
+    drawFootprints(state, ROOM_SIZES[state.room.size].cells);
     hotspots(order);
     const level = roomLevel(Object.keys(state.room.placed).length);
     document.querySelector('#room-level').textContent = level.name;
@@ -184,5 +232,6 @@ export function createRoom() {
   viewport.addEventListener('pointerleave', still);
   reduced.addEventListener('change', still);
 
-  return { render, view, reward, lighting, drawGrid, cellFromEvent, repaint: () => { lastPaint = ''; } };
+  return { render, view, reward, lighting, drawGrid, cellFromEvent, repaint: () => { lastPaint = ''; },
+    toggleFootprints: on => { showFootprints = on ?? !showFootprints; return showFootprints; } };
 }
