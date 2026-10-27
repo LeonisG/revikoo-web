@@ -68,6 +68,48 @@ python tools/measure-pivots.py           # rewrite pivots from the masters
 python tools/measure-pivots.py --check   # report drift
 ```
 
+## Axis correction
+
+Most masters came back from generation at the wrong azimuth. Their two
+floor-plane directions disagree with the room's floor **and with each other** —
+`desk` measures 32.7° on the left and 19.5° on the right against a 24.10° floor.
+That is what makes a piece look turned relative to the room it stands in, and no
+pivot adjustment can help: the angles themselves are wrong.
+
+`tools/measure-axes.py` reads both directions off the top of each silhouette
+(on anything box-shaped the highest feature is its flat top, whose far edges run
+along the floor axes by definition — the fits come in under 3 px) and derives the
+affine that sends them to the canonical axes:
+
+    x' = widen * x
+    y' = shear * x + y
+
+**Heights are deliberately untouched.** Under an orthographic camera at fixed
+elevation, turning the azimuth does not change how tall anything appears, only
+how its footprint projects. The whole error is horizontal, so squashing heights
+would introduce a second, different mistake. Verticals stay vertical, which
+matters more than anything else for this camera.
+
+The correction is pinned at the pivot, so the object stays anchored, and it
+travels with the catalogue thumbnail so the shop shows the object that will
+actually be placed.
+
+```sh
+python tools/measure-axes.py            # write axisFix into sprites.mjs
+python tools/measure-axes.py --report   # table of measured angles
+```
+
+It abstains wherever the top is not a flat floor-parallel face — a lampshade, a
+cushion, foliage — and rejects any correction outside a plausible band, because
+a 40 % squash means the measurement was of the wrong thing, not that the art is
+that wrong. 33 of 88 sprites currently carry a correction; the rest already agree
+with the room or cannot be measured this way.
+
+**This is a correction, not a substitute for correct art.** A 2D map cannot
+invent the faces a real azimuth change would reveal. Sprites regenerated properly
+against `docs/canonical-room.png` measure as identity and the correction drops
+out on its own. Run the tool after every regeneration.
+
 ## Ground contact belongs to the engine
 
 Sprites ship as the object only. The room draws the shadow, in two levels:
@@ -115,12 +157,16 @@ own save and rebuilds itself on every load, so it never drifts.
 
 ## Known failures
 
-The six rugs fail AXIS. Their two edges disagree with each other by 2–9°
-(`rug-clay` is 30.4° against 36.1°), so they are not parallelograms and not one
-isometric plane. No transform can rectify that — an affine map can take one
-parallelogram to another, but these are not parallelograms, and a projective warp
-would distort the pattern.
+The six rugs fail AXIS, and they are the one case the correction cannot rescue.
+A rug is a flat quad, so its top and bottom edges must be parallel — but they
+are not: `rug-cream` measures 30.6°/34.0° along the bottom and 31.0°/28.7° along
+the top. The shape is not a parallelogram, so no affine map exists that takes it
+to the floor plane; a projective warp would be needed and would distort the
+pattern.
+
+The correction still helps where it applies (`gamer-rug` goes from 29.5°/36.0°
+to 26.7°/30.1°) but `tools/check-assets.py` keeps reporting them, which is
+correct — they need redrawing flat on the 24.10° floor.
 
 Rugs are the least forgiving case because they *are* the floor plane, so any
-error shows immediately. They need redrawing against this reference, flat on the
-24.10° floor.
+error shows immediately.
