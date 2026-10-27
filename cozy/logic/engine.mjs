@@ -85,7 +85,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         const item = CATALOG.find(i => i.id === id);
         if (!item) throw new Error('No se encuentra este objeto.');
         if (s.inventory.includes(id)) throw new Error('Ya forma parte de tu colección.');
-        if (s.coins < item.price) throw new Error('Aún te faltan algunas ✦. Tu habitación puede esperar.');
+        if (s.coins < item.price) throw new Error('Aún te faltan algunas monedas. Tu habitación puede esperar.');
         s.coins -= item.price; s.inventory.push(id); return { item: id };
       });
     },

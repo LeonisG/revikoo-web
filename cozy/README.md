@@ -33,11 +33,14 @@ cozy/
   styles/cozy.css            Estilos de esta aplicación, por capas CSS
   assets/
     manifest.mjs             Referencias de ilustraciones y sustituciones
-    room.svg                 Arquitectura, ventana y paisaje diurno
-    furniture.svg            Escritorio, biblioteca y gato
-    foreground.svg           Silla y planta de primer plano
-    rug.svg                  Alfombra inicial separada del mobiliario
-    objects.svg              16 ilustraciones de catálogo en símbolos SVG
+    room/shell.svg           Paredes, zócalo, suelo y sombras de contacto
+    room/window*.svg         Cristal: día, atardecer, noche y lluvia
+    room/light-floor.svg     Luz de la ventana proyectada en el suelo
+    room/wall-decor.svg      Repisa y marco fijos de la pared derecha
+    room/rug.svg             Alfombra inicial, separada del mobiliario
+    furniture/*.svg          Escritorio, biblioteca, silla y gato
+    plants/large-plant.svg   Planta grande del suelo derecho
+    objects.svg              16 símbolos de catálogo en la misma proyección
     favicon.svg
   logic/
     config.mjs               Recompensas, precios, slots y configuración
@@ -96,16 +99,23 @@ Valores iniciales:
 
 Para añadir un objeto:
 
-1. Crear un símbolo con `id` único en `assets/objects.svg`, preferiblemente en un `viewBox` de `0 0 160 180` (alfombras: `0 0 300 120`).
-2. Añadir un registro a `CATALOG` con `id`, `name`, `category`, `price`, `asset` y `compatibleSlots`.
-3. Usar slots existentes de `SLOTS` o añadir uno con coordenadas porcentuales relativas a la escena 1400 × 900. Cada slot admite un objeto.
-4. Probar compra, colocación, sustitución, devolución a inventario y recarga.
+1. Dibujar el símbolo en `tools/draw-diorama.mjs`, dentro del bloque de catálogo, usando la proyección `o(x, y, z)` y `obox(...)`. La línea de suelo del objeto va en `y = 150`; al generar el símbolo se desplaza 18 px para que apoye en el punto del slot. Alfombras: `viewBox` `0 0 300 120`.
+2. Ejecutar `node tools/draw-diorama.mjs` para regenerar `assets/objects.svg`.
+3. Añadir un registro a `CATALOG` con `id`, `name`, `category`, `price`, `asset` y `compatibleSlots`.
+4. Usar slots existentes de `SLOTS` o añadir uno con `slot(nombre, at(x, y, z), tamaño, plano)`. `at()` proyecta coordenadas del mundo del diorama a porcentajes de la escena 1400 × 900, igual que la herramienta de ilustración: si cambia la geometría de la habitación, los slots se corrigen ahí y en ningún otro sitio. Cada slot admite un objeto.
+5. Probar compra, colocación en la habitación, sustitución, devolución a inventario y recarga.
+
+La colocación ocurre dentro del mundo: comprar cierra el catálogo, ilumina solo los rincones compatibles (`#slot-targets`) y coloca el objeto donde se elija. `Escape` o «Cancelar» abandonan sin mover nada.
 
 `owned` y `equipped` se derivan del inventario y los slots, evitando mantener varias copias contradictorias. Todos los objetos de V0.1 son únicos; `repeatable` queda como metadato a futuro y no habilita compras múltiples todavía.
 
 ## Sustituir ilustraciones
 
-Las referencias de capas están centralizadas en `assets/manifest.mjs`. Para cambiar una capa completa, sustituir su URL conservando el lienzo 1400 × 900 y los puntos de apoyo de los objetos.
+Las referencias de capas están centralizadas en `assets/manifest.mjs`. Cada entrada corresponde a una imagen de la escena: si se añade una capa al manifiesto hay que enlazarla también en el bucle de `ui/room.mjs` que asigna los `src`, o la capa no llega a cargarse. Para cambiar una capa completa, sustituir su URL conservando el lienzo 1400 × 900 y los puntos de apoyo de los objetos.
+
+Las ilustraciones las genera `tools/draw-diorama.mjs` (`node tools/draw-diorama.mjs`). No es un paso de compilación: el navegador sirve los SVG ya generados. La proyección ortográfica `p(x, y, z)` de esa herramienta es el origen de toda la geometría del diorama, incluidos los slots.
+
+La iluminación son tres pasadas superpuestas, y el orden importa: un grado de color sobre `.room-camera`, la sombra `.scene-shade` / `.scene-light` en `multiply`, y las fuentes de luz `.glow-layer` en `screen` por encima. Una luz colocada por debajo de la pasada de sombra se apaga justo cuando debería sostener la habitación.
 
 Para cambiar un objeto SVG por una ilustración WebP/AVIF, añadir una entrada a `ITEM_ASSETS` en ese manifiesto:
 

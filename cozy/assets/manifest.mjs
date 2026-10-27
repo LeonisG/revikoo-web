@@ -12,6 +12,7 @@ export const ROOM_ASSETS = {
   plant: new URL('plants/large-plant.svg', root).href,
   cat: new URL('furniture/cat.svg', root).href,
   rug: new URL('room/rug.svg', root).href,
+  daylight: new URL('room/light-floor.svg', root).href,
   objects: new URL('objects.svg', root).href,
 };
 // Optional per-object overrides, e.g.:

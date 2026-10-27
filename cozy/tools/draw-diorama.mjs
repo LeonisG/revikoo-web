@@ -4,16 +4,20 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 const base = new URL('../assets/', import.meta.url);
 const p = (x, y, z = 0) => [700 + x - y, 480 + (x + y) * .36 - z];
+const NL = String.fromCharCode(10);
 const pts = points => points.map(a => a.map(n => +n.toFixed(2)).join(',')).join(' ');
 const polygon = (points, fill, extra = '') => `<polygon points="${pts(points)}" fill="${fill}" ${extra}/>`;
 const line = (a, b, color, width = 2, extra = '') => `<path d="M${a}L${b}" stroke="${color}" stroke-width="${width}" stroke-linecap="round" ${extra}/>`;
 const ellipse = (x, y, rx, ry, fill, extra = '') => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${fill}" ${extra}/>`;
 const plane = (x, y, z, w, d, color, extra = '') => polygon([p(x,y,z),p(x+w,y,z),p(x+w,y+d,z),p(x,y+d,z)],color,extra);
-function box(x,y,z,w,d,h,top,front,side,round=3) {
-  return polygon([p(x,y+d,z),p(x+w,y+d,z),p(x+w,y+d,z+h),p(x,y+d,z+h)],front,`stroke="${front}" stroke-width="${round}" stroke-linejoin="round"`)
-    + polygon([p(x+w,y,z),p(x+w,y+d,z),p(x+w,y+d,z+h),p(x+w,y,z+h)],side,`stroke="${side}" stroke-width="${round}" stroke-linejoin="round"`)
-    + plane(x,y,z+h,w,d,top,`stroke="${top}" stroke-width="${round}" stroke-linejoin="round"`);
-}
+// A box is three visible faces: front, side and top. Taking the projection as a
+// parameter lets catalogue objects be built in their own 160x180 symbol box
+// while keeping exactly the same geometry as the room.
+const makeBox = P => (x,y,z,w,d,h,top,front,side,round=3) =>
+  polygon([P(x,y+d,z),P(x+w,y+d,z),P(x+w,y+d,z+h),P(x,y+d,z+h)],front,`stroke="${front}" stroke-width="${round}" stroke-linejoin="round"`)
+  + polygon([P(x+w,y,z),P(x+w,y+d,z),P(x+w,y+d,z+h),P(x+w,y,z+h)],side,`stroke="${side}" stroke-width="${round}" stroke-linejoin="round"`)
+  + polygon([P(x,y,z+h),P(x+w,y,z+h),P(x+w,y+d,z+h),P(x,y+d,z+h)],top,`stroke="${top}" stroke-width="${round}" stroke-linejoin="round"`);
+const box = makeBox(p);
 const shadow = (x,y,rx,ry,opacity=.28) => ellipse(x,y,rx,ry,'#0c211a',`opacity="${opacity}" filter="url(#soft)"`);
 const defs = `<defs>
  <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
@@ -27,29 +31,78 @@ const defs = `<defs>
  <linearGradient id="leaf"><stop stop-color="#93c86d"/><stop offset="1" stop-color="#408857"/></linearGradient>
  <linearGradient id="cloth"><stop stop-color="#d1795a"/><stop offset="1" stop-color="#914c3a"/></linearGradient>
  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#79b9c3"/><stop offset="1" stop-color="#d7dbb0"/></linearGradient>
+ <linearGradient id="wainscot-left" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2d6c58"/><stop offset="1" stop-color="#1b5244"/></linearGradient>
+ <linearGradient id="wainscot-right" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#174b40"/><stop offset="1" stop-color="#2a6755"/></linearGradient>
+ <linearGradient id="ao-corner-left" gradientUnits="userSpaceOnUse" x1="700" y1="0" x2="584" y2="0"><stop stop-color="#03150f" stop-opacity=".62"/><stop offset="1" stop-color="#03150f" stop-opacity="0"/></linearGradient>
+ <linearGradient id="ao-corner-right" gradientUnits="userSpaceOnUse" x1="700" y1="0" x2="816" y2="0"><stop stop-color="#03150f" stop-opacity=".52"/><stop offset="1" stop-color="#03150f" stop-opacity="0"/></linearGradient>
+ <linearGradient id="wall-fade" gradientUnits="userSpaceOnUse" x1="0" y1="86" x2="0" y2="560"><stop stop-color="#02100b" stop-opacity=".58"/><stop offset=".55" stop-color="#02100b" stop-opacity=".14"/><stop offset="1" stop-color="#02100b" stop-opacity="0"/></linearGradient>
+ <radialGradient id="floor-bounce"><stop stop-color="#ffd9a2" stop-opacity=".22"/><stop offset="1" stop-color="#ffd9a2" stop-opacity="0"/></radialGradient>
+ <linearGradient id="daylight" gradientUnits="userSpaceOnUse" x1="880" y1="560" x2="580" y2="700"><stop stop-color="#fffaec" stop-opacity="1"/><stop offset=".55" stop-color="#f6efd9" stop-opacity=".78"/><stop offset="1" stop-color="#e2ecf4" stop-opacity=".26"/></linearGradient>
+ <filter id="pool" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+ <radialGradient id="halo"><stop stop-color="#e8f4ff" stop-opacity=".3"/><stop offset="1" stop-color="#e8f4ff" stop-opacity="0"/></radialGradient>
 </defs>`;
 function save(file, content) {
   mkdirSync(new URL('./',new URL(file,base)),{recursive:true});
   writeFileSync(new URL(file,base),`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none">${defs}\n${content}</svg>\n`);
 }
 
-// Rounded shell: a sculpted front plinth, thick exposed wall edges and a curved crown.
-let shell = `<ellipse cx="703" cy="815" rx="425" ry="52" fill="#080f0d" opacity=".6" filter="url(#soft)"/>
-<path d="M202 655L700 478L1198 655V684Q1198 697 1184 702L723 870Q700 879 678 870L217 702Q202 696 202 681Z" fill="#313f32"/>
-<path d="M202 655L700 478L1198 655L715 833Q700 840 685 833Z" fill="#e4a371"/>
-<path d="M202 663L686 839Q700 845 714 839L1198 663" stroke="#e6b083" stroke-width="5" opacity=".6"/>
+// ── Room shell ───────────────────────────────────────────────────────────────
+// A thick-walled maquette: two slab walls standing on a plinth, over a plank
+// floor. Surface detail is drawn on the wall planes so it keeps the projection,
+// and every meeting of two surfaces gets a blurred contact seam (fake AO) —
+// that seam is what makes the room read as a physical model rather than flat art.
+const FLOOR = 484, SKIRT = 19, RAIL = 124;
+const wallL = (y0, z0, y1, z1) => [p(0, y0, z0), p(0, y1, z0), p(0, y1, z1), p(0, y0, z1)];
+const wallR = (x0, z0, x1, z1) => [p(x0, 0, z0), p(x1, 0, z0), p(x1, 0, z1), p(x0, 0, z1)];
+const seam = (a, b, width, opacity, color = '#04170f') => line(a, b, color, width, `opacity="${opacity}" filter="url(#soft)"`);
+
+// Plinth: a chunky base with a dark underside so the model has visible mass.
+let shell = `<ellipse cx="703" cy="822" rx="438" ry="57" fill="#040a08" opacity=".78" filter="url(#soft)"/>
+<path d="M202 655L700 478L1198 655V692Q1198 706 1184 711L723 879Q700 888 678 879L217 711Q202 705 202 689Z" fill="#2b3d33"/>
+<path d="M202 672L700 495L1198 672V692Q1198 706 1184 711L723 879Q700 888 678 879L217 711Q202 705 202 689Z" fill="#131e18" opacity=".85"/>
+<path d="M202 655L700 478L1198 655L715 833Q700 840 685 833Z" fill="#dc9b6a"/>
+<path d="M202 658L686 834Q700 840 714 834L1198 658" stroke="#f6c896" stroke-width="5" opacity=".6"/>
 <path d="M216 654V287Q216 261 241 252L674 96Q700 86 700 113V480Z" fill="url(#left-wall)"/>
-<path d="M700 113Q700 86 726 96L1159 252Q1184 261 1184 287V654L700 480Z" fill="url(#right-wall)"/>
-<path d="M216 654V287Q216 261 241 252L674 96Q700 86 726 96L1159 252Q1184 261 1184 287V654" stroke="#102f29" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M216 646V280Q216 253 243 245L674 89Q700 80 726 89L1157 245Q1184 253 1184 280V646" stroke="#519378" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M700 111V481" stroke="#0b382e" stroke-opacity=".5" stroke-width="12"/>
-${polygon([p(0,0),p(484,0),p(484,484),p(0,484)],'url(#floor)')}
-${line(p(0,0,4),p(0,484,4),'#6f5036',14)}${line(p(0,0,4),p(484,0,4),'#684a34',14)}
-${line(p(0,0,13),p(0,484,13),'#ce9b67',4)}${line(p(0,0,13),p(484,0,13),'#ce9b67',4)}`;
-for(let y=60;y<484;y+=60) shell+=line(p(0,y),p(484,y),'#90603d',2,'opacity=".55"');
-for(let y=0;y<480;y+=60) for(let x=(y/60%2?100:230);x<484;x+=260) shell+=line(p(x,y+2),p(x,Math.min(484,y+58)),'#9b6b45',1.7,'opacity=".55"');
-shell+=plane(90,70,1,240,270,'url(#warm)');
+<path d="M700 113Q700 86 726 96L1159 252Q1184 261 1184 287V654L700 480Z" fill="url(#right-wall)"/>`;
+// Plank floor, laid along the left wall and tinted toward the open front edges.
+shell += polygon([p(0,0),p(FLOOR,0),p(FLOOR,FLOOR),p(0,FLOOR)],'url(#floor)');
+for (let y = 60; y < FLOOR; y += 60) shell += line(p(0,y), p(FLOOR,y), '#8e5f3c', 2, 'opacity=".5"');
+for (let y = 0; y < 480; y += 60) for (let x = (y/60 % 2 ? 100 : 230); x < FLOOR; x += 260) shell += line(p(x,y+2), p(x,Math.min(FLOOR,y+58)), '#9a6a44', 1.7, 'opacity=".5"');
+// Wainscot panelling with a capping rail, then the skirting board beneath it.
+shell += polygon(wallL(0,0,FLOOR,RAIL),'url(#wainscot-left)') + polygon(wallR(0,0,FLOOR,RAIL),'url(#wainscot-right)');
+for (let y = 66; y < FLOOR; y += 66) shell += line(p(0,y,SKIRT+8), p(0,y,RAIL-10), '#154438', 3, 'opacity=".5"');
+for (let x = 66; x < FLOOR; x += 66) shell += line(p(x,0,SKIRT+8), p(x,0,RAIL-10), '#123e34', 3, 'opacity=".5"');
+shell += line(p(0,0,RAIL), p(0,FLOOR,RAIL), '#63ad8e', 5, 'opacity=".75"') + line(p(0,0,RAIL), p(FLOOR,0,RAIL), '#539b7f', 5, 'opacity=".75"');
+shell += polygon(wallL(0,0,FLOOR,SKIRT),'#27604f') + polygon(wallR(0,0,FLOOR,SKIRT),'#20574a');
+shell += line(p(0,0,SKIRT), p(0,FLOOR,SKIRT), '#6fb393', 3, 'opacity=".6"') + line(p(0,0,SKIRT), p(FLOOR,0,SKIRT), '#5ea183', 3, 'opacity=".6"');
+// Light falls off toward the ceiling, and the inner corner is the darkest place.
+shell += `<path d="M216 654V287Q216 261 241 252L674 96Q700 86 700 113V480Z" fill="url(#wall-fade)"/>
+<path d="M700 113Q700 86 726 96L1159 252Q1184 261 1184 287V654L700 480Z" fill="url(#wall-fade)"/>`;
+shell += polygon(wallL(0,0,116,420),'url(#ao-corner-left)') + polygon(wallR(0,0,116,420),'url(#ao-corner-right)');
+// Contact seams: wall-to-wall, wall-to-floor, and the floor's own outer edges.
+shell += seam(p(0,0,0), p(0,0,400), 22, '.5');
+shell += seam(p(0,0), p(0,FLOOR), 26, '.42') + seam(p(0,0), p(FLOOR,0), 26, '.4');
+shell += seam(p(0,FLOOR), p(FLOOR,FLOOR), 20, '.22') + seam(p(FLOOR,0), p(FLOOR,FLOOR), 20, '.22');
+// A warm bounce under the desk lamp stays baked in; daylight gets its own layer.
+shell += ellipse(...p(300,150), 190, 86, 'url(#floor-bounce)', 'filter="url(#soft)"');
+// The open edges of the floor catch the light — it reads as a cut slab.
+shell += line(p(0,FLOOR,5), p(FLOOR,FLOOR,5), '#e7ab73', 4, 'opacity=".45"') + line(p(FLOOR,0,5), p(FLOOR,FLOOR,5), '#e7ab73', 4, 'opacity=".45"');
+// Thick exposed wall edges and the curved crown, drawn last so they stay crisp.
+shell += `<path d="M216 654V287Q216 261 241 252L674 96Q700 86 726 96L1159 252Q1184 261 1184 287V654" stroke="#0e2b25" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M216 646V280Q216 253 243 245L674 89Q700 80 726 89L1157 245Q1184 253 1184 280V646" stroke="#56997e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M216 640V277Q216 252 244 243L676 86Q700 77 724 86L1156 243Q1184 252 1184 277V640" stroke="#7ec0a0" stroke-width="3" stroke-linejoin="round" fill="none" opacity=".4"/>`;
 save('room/shell.svg',shell);
+
+// ── Daylight ─────────────────────────────────────────────────────────────────
+// The window's four panes projected onto the floor. The gaps between them are
+// the shadow of the mullions, which is what makes the pool read as window light
+// rather than a glow. The app fades this layer with the time of day.
+const cast = (x, z) => p(x + z * .05, z * .75);
+const pane = (x0, z0, x1, z1) => polygon([cast(x0,z0),cast(x1,z0),cast(x1,z1),cast(x0,z1)], 'url(#daylight)');
+let daylight = `<g filter="url(#pool)">${pane(98,253,191,334)}${pane(201,253,296,334)}${pane(98,162,191,243)}${pane(201,162,296,243)}</g>`;
+// A softer halo ties the four panes together and lifts the wall beside them.
+daylight += ellipse(...cast(197, 248), 190, 108, 'url(#halo)', 'filter="url(#soft)"');
+save('room/light-floor.svg', daylight);
 
 // A deep window on the right wall. Lighting states replace only its glass.
 const windowShape = `<g transform="matrix(1 .36 0 1 790 170)"><rect x="-10" y="-10" width="234" height="208" rx="12" fill="#123f38"/><rect width="214" height="188" rx="7" fill="#92c1ba"/><rect x="8" y="8" width="198" height="172" rx="3" fill="url(#sky)"/><path d="M8 130Q60 80 109 120Q153 74 206 113V180H8Z" fill="#529b91"/><path d="M8 160Q70 119 109 153Q156 124 206 146V180H8Z" fill="#32746b"/><path d="M106 0V188M0 94H214" stroke="#b6c4a8" stroke-width="9"/><rect width="214" height="188" rx="7" stroke="#d9cfb0" stroke-width="10" fill="none"/><path d="M-10 196H224" stroke="#c69667" stroke-width="16" stroke-linecap="round"/><path d="M-13 189H220" stroke="#e5b783" stroke-width="7" stroke-linecap="round"/></g>`;
@@ -63,7 +116,8 @@ for (const phase of ['sunset','night','rain']) {
 }
 // Small artwork, wall ledge, peg rail and soft practical light.
 let wall=`<g transform="matrix(1 .36 0 1 1068 336)" filter="url(#contact)"><rect width="66" height="85" rx="4" fill="#a36242"/><rect x="6" y="6" width="54" height="73" rx="2" fill="#e7b15e"/><circle cx="33" cy="30" r="16" fill="#e27855"/><path d="M6 61Q29 38 60 56V79H6Z" fill="#3f8069"/><path d="M6 72Q37 54 60 66V79H6Z" fill="#285f53"/></g>`;
-wall+=`<g transform="matrix(1 -.36 0 1 584 234)"><rect width="59" height="70" rx="3" fill="#d39a64"/><rect x="5" y="5" width="49" height="60" fill="#e7d9af"/><path d="M15 44L25 19l21 27Z" fill="#e78d5c"/><circle cx="41" cy="18" r="7" fill="#deb95a"/><path d="M15 54h30" stroke="#879175" stroke-width="2"/></g>`;
+// The wall above the bookcase is deliberately left bare: it is where the
+// wall-left slot hangs, and the room is meant to start unfinished.
 wall+=box(405,3,132,52,29,8,'#c49260','#815b40','#9d7049');
 wall+=`<g transform="translate(1126 462)"><ellipse cy="23" rx="15" ry="6" fill="#142e24" opacity=".4"/><path d="M-13-7H13L10 22Q0 28-10 22Z" fill="#c5a862"/><ellipse cy="-7" rx="13" ry="5" fill="#ead3a0"/><path d="M0-9Q-11-22 1-35Q12-20 0-9Z" fill="#ffe0a0"/>${ellipse(0,-17,35,42,'url(#warm)')}</g>`;
 save('room/wall-decor.svg',wall);
@@ -147,3 +201,122 @@ rug+=plane(208,258,3,174,159,'none',`stroke="#739783" stroke-width="2"`);
 for(let x=190;x<405;x+=13)rug+=line(p(x,447,2),p(x,458,2),'#a5ac86',2);
 save('room/rug.svg',rug);
 console.log('Diorama layers regenerated (no runtime/build dependency).');
+
+// ── Catalogue objects ────────────────────────────────────────────────────────
+// Every buyable object is drawn in the same orthographic projection as the room,
+// so a thing looks like the same physical object in the catalogue and on the
+// shelf. Each symbol owns a 160x180 box whose floor line sits at y=150 — that is
+// the point a room slot anchors to, so objects of different heights all stand on
+// the same surface. Shapes stay simple: a clear silhouette, two or three flat
+// tones per material, a contact shadow, and no detail that dies at 90px.
+const o = (x, y, z = 0) => [80 + x - y, 150 + (x + y) * .36 - z];
+const obox = makeBox(o);
+const ground = (rx, opacity = .34, cy = 152) => `<ellipse cx="80" cy="${cy}" rx="${rx}" ry="${(rx * .36).toFixed(1)}" fill="#08231c" opacity="${opacity}" filter="url(#soft)"/>`;
+// A tapered vessel: body, a shaded left flank, a rim, and what sits inside it.
+const cyl = (cy, rTop, rBot, h, body, rim, inner) => {
+  const e = r => +(r * .4).toFixed(1);
+  return `<path d="M${80 - rTop} ${cy - h}L${80 - rBot} ${cy - 4}A${rBot} ${e(rBot)} 0 0 0 ${80 + rBot} ${cy - 4}L${80 + rTop} ${cy - h}Z" fill="${body}"/>`
+    + `<path d="M${80 - rTop} ${cy - h}L${80 - rBot} ${cy - 4}A${rBot} ${e(rBot)} 0 0 0 ${80 - rBot * .3} ${cy - 4 + e(rBot)}L${80 - rTop * .4} ${cy - h}Z" fill="#06150f" opacity=".17"/>`
+    + `<ellipse cx="80" cy="${cy - h}" rx="${rTop}" ry="${e(rTop)}" fill="${rim}"/>`
+    + (inner ? `<ellipse cx="80" cy="${cy - h}" rx="${rTop - 4}" ry="${e(rTop - 4)}" fill="${inner}"/>` : '');
+};
+// Leaves are one shape rotated and scaled: a limited vocabulary keeps every
+// plant looking like it came from the same hand.
+const leaf = (x, y, size, angle, fill, vein = '#ffffff30', split = false) =>
+  `<g transform="translate(${x} ${y}) rotate(${angle}) scale(${size})">`
+  + `<path d="M0 14Q-15 4-11-11Q-2-21 10-12Q17 1 0 14Z" fill="${fill}"/>`
+  + (split ? `<path d="M-1 10L-8-3M0 4L7-5" stroke="#0c2a1e" stroke-width="1.6" opacity=".38" stroke-linecap="round" fill="none"/>` : '')
+  + `<path d="M0 12V-12" stroke="${vein}" stroke-width="1.4"/></g>`;
+const symbols = {};
+
+symbols.monstera = ground(30) + cyl(152, 27, 20, 40, '#c4714f', '#e49168', '#4c3a2b')
+  + `<path d="M80 112V72m0 26-20-20m22-6 19-17" stroke="#4e6b41" stroke-width="4" fill="none" stroke-linecap="round"/>`
+  + [[58, 66, 1.5, -28], [100, 58, 1.7, 26], [66, 36, 1.4, -14], [98, 88, 1.3, 52], [80, 28, 1.2, 4]]
+      .map(([x, y, s, a]) => leaf(x, y, s, a, '#5d8a4e', '#9fd07e44', true)).join('');
+
+symbols.fern = ground(28) + cyl(152, 25, 19, 36, '#9aa37e', '#c2caa2', '#43372a')
+  + `<g fill="none" stroke="#587a46" stroke-width="3.4" stroke-linecap="round"><path d="M80 116Q62 70 46 58M80 116Q74 62 70 38M80 116Q88 64 94 42M80 116Q100 74 116 62"/></g>`
+  + [[46, 58, -62], [70, 38, -14], [94, 42, 16], [116, 62, 64]].map(([x, y, a]) =>
+      `<g transform="translate(${x} ${y}) rotate(${a})">${[0, 8, 16, 24].map(d =>
+        `<path d="M0 ${d}l-9-5 9-3 9 3Z" fill="#6d9552"/>`).join('')}</g>`).join('');
+
+symbols.pothos = ground(27) + cyl(152, 25, 19, 34, '#8f8f7e', '#b3b39d', '#453c2c')
+  + `<path d="M66 116q-26 8-30 32m42-32q-5 22 4 36m16-38q24 8 28 30m-10-34q14-16 10-30" stroke="#4f7a4a" stroke-width="3.2" fill="none" stroke-linecap="round"/>`
+  + [[38, 146, .85, -58], [52, 128, .8, -32], [80, 152, .85, 4], [110, 144, .82, 38], [124, 146, .8, 64], [66, 100, .88, -14], [100, 96, .85, 18], [112, 80, .75, 34]]
+      .map(([x, y, s, a]) => leaf(x, y, s, a, '#5f9150')).join('');
+
+symbols.mushroom = ground(26) + `<path d="M74 116h12l3 32H71Z" fill="#e8dcc0"/><ellipse cx="80" cy="116" rx="7" ry="3" fill="#f2e9d2"/>`
+  + `<path d="M46 112Q50 66 80 65Q110 66 114 112Q80 128 46 112Z" fill="#d9834f"/>`
+  + `<path d="M53 106Q57 72 79 70" stroke="#efa871" stroke-width="5" fill="none" stroke-linecap="round"/>`
+  + `<ellipse cx="80" cy="113" rx="34" ry="9" fill="#f7e2b4"/><ellipse cx="80" cy="113" rx="25" ry="6" fill="#ffd79a" opacity=".8"/>`
+  + `<ellipse cx="80" cy="110" rx="52" ry="30" fill="url(#obj-glow)"/>`;
+
+symbols.vintage = ground(24) + obox(-13, -13, 0, 26, 26, 5, '#5f6b63', '#38433d', '#2a332e', 3)
+  + `<path d="M80 136V74" stroke="#8d7047" stroke-width="4" stroke-linecap="round"/>`
+  + `<path d="M58 70h44l-9-28H67Z" fill="#3f6f5f"/><path d="M58 70h17l-6-28h-2Z" fill="#558a76"/>`
+  + `<ellipse cx="80" cy="70" rx="22" ry="6" fill="#ffdfa4"/><ellipse cx="80" cy="42" rx="13" ry="4" fill="#2e5a4c"/>`
+  + `<ellipse cx="80" cy="82" rx="40" ry="24" fill="url(#obj-glow)"/>`;
+
+symbols.lantern = ground(22) + obox(-11, -11, 0, 22, 22, 6, '#b2854f', '#7b5634', '#946844', 3)
+  + `<path d="M80 128Q44 116 44 86Q44 52 80 48Q116 52 116 86Q116 116 80 128Z" fill="#ead8ae"/>`
+  + `<path d="M80 128Q58 116 58 86Q58 54 80 48" stroke="#f6ead0" stroke-width="7" fill="none" opacity=".5"/>`
+  + `<path d="M80 48v80M62 56v64m36-64v64" stroke="#c0a376" stroke-width="2" opacity=".55"/>`
+  + `<ellipse cx="80" cy="88" rx="46" ry="38" fill="url(#obj-glow)"/>`;
+
+symbols.candle = ground(18) + `<ellipse cx="80" cy="148" rx="22" ry="8" fill="#9a6d4e"/><ellipse cx="80" cy="145" rx="22" ry="8" fill="#c08a63"/>`
+  + cyl(144, 13, 14, 44, '#dfa25c', '#f0c184') + `<path d="M80 100v-7" stroke="#53402c" stroke-width="2"/>`
+  + `<path d="M80 93q-7-9 0-17q7 8 0 17Z" fill="#ffe3a4"/><ellipse cx="80" cy="88" rx="26" ry="22" fill="url(#obj-glow)"/>`;
+
+symbols.vase = ground(20) + `<path d="M64 150q-9-30 6-42q-12-20 10-28q22 8 10 28q15 12 6 42Z" fill="#cfd9c4"/>`
+  + `<path d="M64 150q-9-30 6-42q-12-20 10-28" stroke="#e8f0e0" stroke-width="6" fill="none" opacity=".5"/>`
+  + `<ellipse cx="80" cy="80" rx="10" ry="4" fill="#8e9c87"/>`
+  + `<path d="M80 80q-10-26-22-34m22 34q2-30 14-38m-14 38q10-22 22-24" stroke="#9c8a5e" stroke-width="2.6" fill="none" stroke-linecap="round"/>`
+  + [[58, 46, .7, -36], [94, 42, .7, 28], [102, 56, .6, 62]].map(([x, y, s, a]) => leaf(x, y, s, a, '#b8a06a')).join('');
+
+symbols['book-stack'] = ground(26) + [['#6f9ea0', '#4d7a7e', '#3c6165'], ['#d98b63', '#b26847', '#92523a'], ['#cdbd8e', '#a89974', '#8a7c5c']]
+  .map(([t, f, si], i) => obox(-20 + (i % 2 ? 3 : -2), -14, i * 13, 40, 28, 12, t, f, si, 2)).join('')
+  + obox(-16, -11, 39, 34, 23, 10, '#8f8fb0', '#6b6b91', '#555575', 2);
+
+symbols.teapot = ground(28) + `<path d="M50 112q0-32 30-32t30 32q0 26-30 26t-30-26Z" fill="#c96f55"/>`
+  + `<path d="M50 112q0-32 30-32" stroke="#e59277" stroke-width="7" fill="none" opacity=".55"/>`
+  + `<path d="M110 92q18-4 16 14q-2 14-16 12" stroke="#b05f48" stroke-width="7" fill="none" stroke-linecap="round"/>`
+  + `<path d="M50 94q-16-10-22 4" stroke="#b05f48" stroke-width="8" fill="none" stroke-linecap="round"/>`
+  + `<ellipse cx="80" cy="80" rx="22" ry="7" fill="#e08f72"/><ellipse cx="80" cy="76" rx="13" ry="5" fill="#f0ad8e"/>`
+  + `<circle cx="80" cy="70" r="5" fill="#e8c489"/>`;
+
+// Framed pieces hang on a wall, so they are drawn flat and the room skews them
+// into whichever wall plane their slot belongs to.
+const frame = (art, mat = '#efe6cc', wood = '#a9754b', shade = '#7c5436') =>
+  `<rect x="34" y="34" width="92" height="112" rx="4" fill="${shade}"/><rect x="31" y="30" width="92" height="112" rx="4" fill="${wood}"/>`
+  + `<rect x="40" y="39" width="74" height="94" fill="${mat}"/>${art}`;
+symbols['print-botanical'] = frame(`<path d="M77 124V62" stroke="#5c7447" stroke-width="3"/>`
+  + [[62, 74, .8, -52], [94, 68, .8, 44], [66, 96, .7, -36], [90, 92, .7, 32]].map(([x, y, s, a]) => leaf(x, y, s, a, '#6d8f55')).join(''));
+symbols['print-sunset'] = frame(`<rect x="40" y="39" width="74" height="94" fill="#f2cf9d"/><circle cx="77" cy="80" r="18" fill="#e08457"/>`
+  + `<path d="M40 110q20-20 37-6q16-14 37 2v27H40Z" fill="#9d5a46"/><path d="M40 122q22-12 37-2q17-10 37 0v13H40Z" fill="#6f4036"/>`);
+symbols['print-moon'] = frame(`<rect x="40" y="39" width="74" height="94" fill="#2c3f5e"/>`
+  + [[58, 62, 9], [77, 62, 11], [96, 62, 9], [58, 102, 7], [77, 102, 12], [96, 102, 7]]
+      .map(([x, y, r], i) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#e6dcb6" opacity="${i === 1 || i === 4 ? 1 : .5}"/>`).join(''));
+
+// Rugs lie flat on the floor plane, so their symbol is a diamond that the room
+// stretches to the width of whichever slot it lands in.
+const rugArt = (field, border, line) => `<polygon points="150,4 296,60 150,116 4,60" fill="${field}"/>`
+  + `<polygon points="150,4 296,60 150,116 4,60" fill="none" stroke="${border}" stroke-width="7"/>`
+  + `<polygon points="150,18 268,60 150,102 32,60" fill="none" stroke="${line}" stroke-width="3" opacity=".8"/>`
+  + `<polygon points="150,32 240,60 150,88 60,60" fill="none" stroke="${line}" stroke-width="2" opacity=".55"/>`;
+symbols['rug-cream'] = rugArt('#ddcfae', '#bfae8a', '#9f8f6c');
+symbols['rug-moss'] = rugArt('#4d6f52', '#3a5640', '#86a473');
+symbols['rug-clay'] = rugArt('#b5664d', '#8d4b38', '#dd9876');
+
+const objectDefs = `<defs>
+ <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+ <radialGradient id="obj-glow"><stop stop-color="#ffcd85" stop-opacity=".5"/><stop offset="1" stop-color="#ffbe73" stop-opacity="0"/></radialGradient>
+</defs>`;
+writeFileSync(new URL('objects.svg', base), `<svg xmlns="http://www.w3.org/2000/svg" fill="none">${objectDefs}\n`
+  + Object.entries(symbols).map(([id, art]) =>
+      id.startsWith('rug-')
+      ? `<symbol id="${id}" viewBox="0 0 300 120" overflow="visible">${art}</symbol>`
+      // Objects are drawn with their floor line at y=150, but a room slot anchors
+      // the BOTTOM of the symbol box. Shifting them down parks that floor line on
+      // the slot, so nothing hovers above the surface it is standing on.
+      : `<symbol id="${id}" viewBox="0 0 160 180" overflow="visible"><g transform="translate(0 18)">${art}</g></symbol>`).join(NL)
+  + '\n</svg>\n');

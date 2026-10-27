@@ -3,6 +3,7 @@ import { createStorage } from './logic/storage.mjs';
 import { createEngine } from './logic/engine.mjs';
 import { createAudio } from './logic/audio.mjs';
 import { createRoom } from './ui/room.mjs';
+import { coin } from './ui/helpers.mjs';
 import { createPanels } from './ui/panels.mjs';
 
 const storage = createStorage({ onWarning(message) { const warning = document.querySelector('#save-warning'); warning.textContent = message; warning.hidden = false; } });
@@ -16,7 +17,7 @@ function update() {
 }
 engine.subscribe((name, payload) => {
   update();
-  if (payload.reward > 0) { room.reward(`${name === 'FOCUS_COMPLETED' ? 'Un rato bien cuidado.' : name.startsWith('BOOK') ? 'Una historia terminada.' : 'Un pequeño paso.'} +${payload.reward} ✦`); audio.play('reward'); }
+  if (payload.reward > 0) { room.reward(`${name === 'FOCUS_COMPLETED' ? 'Un rato bien cuidado.' : name.startsWith('BOOK') ? 'Una historia terminada.' : 'Un pequeño paso.'} +${payload.reward} ${coin}`); audio.play('reward'); }
   if (name === 'FOCUS_COMPLETED') {
     document.title = 'Tu rato de foco ha terminado · Cozy Room';
     const glow = document.querySelector('.lamp-glow'); glow.classList.remove('celebrate'); requestAnimationFrame(() => glow.classList.add('celebrate'));

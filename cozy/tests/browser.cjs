@@ -70,12 +70,18 @@ const server = http.createServer((request, response) => {
     assert.equal((await stored()).focusHistory.length, 1);
     await page.reload(); assert.equal((await stored()).coins, 30);
     await open('shop');
+    await page.screenshot({ path: path.join(screenshotDir, 'catalog.png'), fullPage: true });
+    // Buying hands off to the room: the catalogue closes and the corners the
+    // object fits in light up, so the choice is made in the world itself.
     await page.locator('[data-action=buy][data-id=monstera]').click();
-    await page.locator('#slot-monstera').selectOption('floor-right');
-    await page.locator('[data-action=equip][data-id=monstera]').click();
+    await page.locator('#placement-note').waitFor({ state: 'visible' });
+    assert.equal(await page.locator('#world-panel').isVisible(), false);
+    assert.equal(await page.locator('.slot-target').count(), 2, 'Only compatible corners offered');
+    await page.locator('.slot-target[data-slot=floor-right]').click();
+    await page.locator('#placement-note').waitFor({ state: 'hidden' });
     assert.equal((await stored()).room.slots['floor-right'], 'monstera');
     assert.equal((await stored()).coins, 15);
-    await page.screenshot({ path: path.join(screenshotDir, 'catalog.png'), fullPage: true });
+    await open('shop');
     await page.locator('[data-filter=Pared]').click();
     await page.locator('[data-action=buy][data-id=print-moon]').click();
     assert.equal((await stored()).coins, 15);
@@ -119,11 +125,18 @@ const server = http.createServer((request, response) => {
     await page.locator('#debug-badge button').click(); await page.locator('#world-panel').waitFor({ state: 'visible' });
     await page.locator('[data-debug=unlock]').click(); await close();
     await open('shop'); await page.locator('[data-filter=Alfombras]').click();
-    await page.locator('[data-action=equip][data-id=rug-cream]').click(); await close();
+    await page.locator('[data-action=place][data-id=rug-cream]').click();
+    await page.locator('.slot-target[data-slot=floor-center]').click();
+    await page.locator('#placement-note').waitFor({ state: 'hidden' });
     assert.equal(await page.locator('#floor-rug .decoration[data-item=rug-cream]').count(), 1);
     assert.equal(await page.locator('#floor-rug > img').count(), 0);
     await page.screenshot({ path: path.join(screenshotDir, 'custom-rug.png'), fullPage: true });
     await page.reload(); assert.equal((await stored()).room.slots['floor-center'], 'rug-cream');
+    await open('shop'); await page.locator('[data-filter=Alfombras]').click();
+    await page.locator('[data-action=place][data-id=rug-moss]').click();
+    await page.locator('#placement-cancel').click();
+    assert.equal(await page.locator('.slot-target').count(), 0);
+    assert.equal((await stored()).room.slots['floor-center'], 'rug-cream', 'Cancelling placement moves nothing');
     await open('focus'); await page.locator('[data-action=start-focus]').click();
     await page.locator('#debug-badge button').click(); await page.locator('#world-panel').waitFor({ state: 'visible' });
     await page.locator('[data-debug=finish]').click(); assert.equal((await stored()).focusHistory.length, 2); await close();

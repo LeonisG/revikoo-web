@@ -7,17 +7,26 @@ export const GAME_CONFIG = Object.freeze({
   featureFlags: { music: false, cat: true },
   storageKey: DEBUG ? 'cozy-room:debug:v1' : 'cozy-room:v1',
 });
+// Slots are the handful of places an object may stand. They are written in the
+// diorama's own world coordinates — x and y run along the floor, z is height —
+// and projected into stage percentages here, exactly as tools/draw-diorama.mjs
+// projects the illustration. Keep the two in step: if the room's geometry moves,
+// this is the single place the slots follow it.
+const at = (x, y, z = 0) => ({ x: +((700 + x - y) / 14).toFixed(2), y: +((480 + (x + y) * .36 - z) / 9).toFixed(2) });
+// `plane` tells the room which surface an object lies in: upright on a floor or
+// a shelf, or flat against one of the two walls, which recede opposite ways.
+const slot = (name, where, size, plane = 'floor') => ({ name, ...where, size, plane });
 export const SLOTS = {
-  'desk-left': { name: 'Escritorio · izquierda', x: 34, y: 53, size: 6 },
-  'desk-right': { name: 'Escritorio · derecha', x: 58.8, y: 53.3, size: 6 },
-  'shelf-top': { name: 'Estante superior', x: 75, y: 24, size: 7 },
-  'shelf-middle': { name: 'Estante central', x: 78.4, y: 50, size: 6 },
-  'floor-left': { name: 'Suelo · izquierda', x: 13.8, y: 79.5, size: 11 },
-  'floor-right': { name: 'Suelo · derecha', x: 70.8, y: 87, size: 13 },
-  'floor-center': { name: 'Centro de la habitación', x: 47.5, y: 89, size: 46 },
-  'wall-left': { name: 'Pared · izquierda', x: 14.1, y: 38, size: 7 },
-  'wall-center': { name: 'Pared · centro', x: 58, y: 33, size: 11 },
-  'wall-right': { name: 'Pared · derecha', x: 85.2, y: 35, size: 7 },
+  'desk-left': slot('Escritorio · izquierda', at(168, 212, 156), 6),
+  'desk-right': slot('Escritorio · derecha', at(352, 96, 156), 6),
+  'shelf-top': slot('Estante superior', at(45, 190, 315), 6),
+  'shelf-middle': slot('Estante central', at(50, 400, 172), 5.5),
+  'floor-left': slot('Suelo · izquierda', at(70, 455), 11),
+  'floor-right': slot('Suelo · derecha', at(468, 232), 11),
+  'floor-center': slot('Centro de la habitación', at(295, 337), 46),
+  'wall-left': slot('Pared · izquierda', at(0, 230, 315), 5, 'wall-left'),
+  'wall-center': slot('Pared · centro', at(60, 0, 250), 8, 'wall-right'),
+  'wall-right': slot('Pared · derecha', at(430, 0, 300), 8, 'wall-right'),
 };
 const item = (id, name, category, price, compatibleSlots, asset = id) => ({ id, name, category, price, asset, compatibleSlots, repeatable: false });
 export const CATALOG = [
