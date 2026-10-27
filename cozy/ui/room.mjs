@@ -1,35 +1,13 @@
 import { roomAssets, objectAsset } from '../assets/manifest.mjs';
 import { CATALOG, GAME_CONFIG, ROOM_SIZES, roomLevel, ASSET_TEST } from '../logic/config.mjs';
 import { GLOW_TINTS } from '../logic/collections.mjs';
-import { paintOrder, cellPolygon, cellAt, useRoomCamera, footprint, CELL, SYMBOL, SCENE, CAMERA } from '../logic/grid.mjs';
+import { paintOrder, cellPolygon, cellAt, useRoomCamera, footprint, SCENE, CAMERA } from '../logic/grid.mjs';
 import { art, escapeHTML, icon } from './helpers.mjs';
+import { contactShadow } from './shadows.mjs';
+import { artDefinition } from '../assets/art-registry.mjs';
 
 const MAX_TILT = 1; // degrees, deliberately barely perceptible
 
-
-/**
- * The shadow an object casts where it meets the surface it stands on. Sized to
- * the object's own footprint and squashed by the camera's tilt, so it lies in
- * the floor plane rather than hovering as a round blob — which is what makes a
- * sprite read as standing in the room instead of pasted over it.
- *
- * Deliberately not a CSS drop-shadow on the sprite: that traces the artwork's
- * silhouette, travels with it, and ignores the room's light direction.
- */
-function contactShadow(item, placement) {
-  if (item.placement === 'wall' || item.flat) return '';
-  const { w, h } = footprint(item, placement.rotation);
-  const span = CELL * (w + h);                      // the footprint's screen width
-  const width = span / SYMBOL.w * 100;
-  const height = span * CAMERA.tilt / SYMBOL.h * 100;
-  // A wardrobe blocks far more light than a mug, so the shadow grows with the
-  // object rather than staying a fixed share of the tile: bigger things pool
-  // more darkness and spread further past their own base.
-  const area = w * h;
-  const spread = placement.on ? .52 : Math.min(1.06, .78 + .05 * (area - 1));
-  const weight = placement.on ? .72 : Math.min(1.25, .9 + .07 * (area - 1));
-  return `<span class="contact" style="--fw:${(width * spread).toFixed(2)};--fh:${(height * spread).toFixed(2)};--shadow-weight:${weight.toFixed(2)}"></span>`;
-}
 
 export function createRoom() {
   const app = document.querySelector('#app'), stage = document.querySelector('#room-stage');
@@ -96,14 +74,18 @@ export function createRoom() {
       // container moves every object by its own distance, with no per-frame work.
       const depth = Math.min(1, Math.max(0, (spot.depth || 0) / (cells * 22)));
       return `<div class="placed ${item.flat ? 'is-flat' : ''} ${item.companion ? 'is-companion' : ''}" data-key="${key}" data-item="${item.id}" data-pose="${placement.pose || 'idle'}"
-        style="left:${spot.x}%;top:${spot.y}%;z-index:${layer + 500};--d:${depth.toFixed(3)};${spot.surface ? `--wall:${spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}"
+        style="left:${spot.x}%;top:${spot.y}%;z-index:${layer + 500};--d:${depth.toFixed(3)};${spot.surface ? `--wall:${spot.surface === 'left' ? '-' : ''}${Math.atan(CAMERA.tilt) * 180 / Math.PI}deg;` : ''}"
         role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${contactShadow(item, placement)}${art(item.id, '', placement.rotation, placement.pose || 'idle', true)}</div>`;
     }).join('');
 
     // Light sources are whatever the player has actually put down.
-    glows.innerHTML = order.filter(o => o.item.glow > 0).map(({ item, spot }) => {
+    glows.innerHTML = order.filter(o => o.item.glow > 0).map(({ item, spot, placement }) => {
       const tint = GLOW_TINTS[item.collection] || GLOW_TINTS['oak-cozy'];
-      return `<div class="object-glow" style="left:${spot.x}%;top:${spot.y}%;--glow:${item.glow};--glow-core:${tint.core};--glow-mid:${tint.mid}"></div>`;
+      const asset = objectAsset(item.id, placement.rotation, placement.pose || 'idle');
+      const emitter = artDefinition(item.id).lightAnchor || [.5, .5];
+      const x = spot.x + (emitter[0] - asset.pivot.x) * asset.width / SCENE.w * 100;
+      const y = spot.y + (emitter[1] - asset.pivot.y) * asset.width / asset.aspect / SCENE.h * 100;
+      return `<div class="object-glow" data-light-item="${item.id}" style="left:${x}%;top:${y}%;--glow:${item.glow};--glow-core:${tint.core};--glow-mid:${tint.mid}"></div>`;
     }).join('');
     app.dataset.lit = order.some(o => o.item.glow >= .8) ? 'bright' : order.some(o => o.item.glow > 0) ? 'dim' : 'none';
     return order;
@@ -123,7 +105,7 @@ export function createRoom() {
       .map(({ item, placement, spot }) => {
         const { w, h } = footprint(item, placement.rotation);
         const tiles = [];
-        for (let x = placement.gx; x < placement.gx + w; x++)
+        for (let x = placement.gx; !placement.on && x < placement.gx + w; x++)
           for (let y = placement.gy; y < placement.gy + h; y++)
             tiles.push(`<polygon points="${cellPolygon(x, y)}" class="fp-tile"/>`);
         const cx = spot.x / 100 * SCENE.w, cy = spot.y / 100 * SCENE.h;

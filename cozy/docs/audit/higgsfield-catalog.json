@@ -1,0 +1,616 @@
+{
+ "date": "2026-10-27",
+ "source": "Higgsfield MCP models_list/models_get and cost-only preflights",
+ "models": [
+  {
+   "id": "tripo_h3_1_image_to_3d",
+   "name": "Tripo H3.1 Image to 3D",
+   "provider_name": "Tripo",
+   "description": "Generate a Tripo H3.1 GLB model from one image",
+   "output_type": "3d",
+   "parameters": [
+    {
+     "name": "face_limit",
+     "required": "optional",
+     "type": "number",
+     "description": "Target number of mesh faces. Leave unset for adaptive geometry. Whole number.",
+     "min": 1000,
+     "max": 2000000,
+     "nullable": true
+    },
+    {
+     "name": "texture",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate textures for the model.",
+     "default": true
+    },
+    {
+     "name": "pbr",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate PBR materials. Enabling PBR also enables textures.",
+     "default": true
+    },
+    {
+     "name": "texture_seed",
+     "required": "optional",
+     "type": "number",
+     "description": "Random seed for texture generation. Whole number.",
+     "nullable": true
+    },
+    {
+     "name": "texture_quality",
+     "required": "optional",
+     "type": "string",
+     "description": "Texture detail level.",
+     "options": [
+      "standard",
+      "detailed"
+     ],
+     "default": "standard"
+    },
+    {
+     "name": "geometry_quality",
+     "required": "optional",
+     "type": "string",
+     "description": "Geometry detail level.",
+     "options": [
+      "standard",
+      "detailed"
+     ],
+     "default": "standard"
+    },
+    {
+     "name": "quad",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate a quad mesh.",
+     "default": false
+    },
+    {
+     "name": "texture_alignment",
+     "required": "optional",
+     "type": "string",
+     "description": "Align textures to the source image or generated geometry.",
+     "options": [
+      "original_image",
+      "geometry"
+     ],
+     "default": "original_image"
+    },
+    {
+     "name": "auto_size",
+     "required": "optional",
+     "type": "bool",
+     "description": "Scale the model to real-world dimensions.",
+     "default": false
+    },
+    {
+     "name": "orientation",
+     "required": "optional",
+     "type": "string",
+     "description": "Keep the default orientation or align it to the source image.",
+     "options": [
+      "default",
+      "align_image"
+     ],
+     "default": "default"
+    }
+   ],
+   "medias": [
+    {
+     "name": "medias",
+     "type": "image",
+     "roles": [
+      "image_references"
+     ]
+    }
+   ],
+   "aspect_ratios": [],
+   "tags": [
+    "3d",
+    "mesh",
+    "glb",
+    "image-to-3d",
+    "textured",
+    "pbr"
+   ]
+  },
+  {
+   "id": "tripo_p2_image_to_3d",
+   "name": "Tripo P2 Image to 3D",
+   "provider_name": "Tripo",
+   "description": "Generate a Tripo P2 3D model from one image; output may be GLB or FBX",
+   "output_type": "3d",
+   "parameters": [
+    {
+     "name": "face_limit",
+     "required": "optional",
+     "type": "number",
+     "description": "Maximum mesh face count; at most 25000 when quad is enabled. Whole number.",
+     "min": 48,
+     "max": 50000,
+     "nullable": true
+    },
+    {
+     "name": "texture",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate textures for the model.",
+     "default": true
+    },
+    {
+     "name": "pbr",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate PBR material maps. Also enables textures.",
+     "default": true
+    },
+    {
+     "name": "seed",
+     "required": "optional",
+     "type": "number",
+     "description": "Random seed for geometry generation. Whole number.",
+     "nullable": true
+    },
+    {
+     "name": "texture_seed",
+     "required": "optional",
+     "type": "number",
+     "description": "Random seed for texture generation. Whole number.",
+     "nullable": true
+    },
+    {
+     "name": "texture_quality",
+     "required": "optional",
+     "type": "string",
+     "description": "Texture detail level.",
+     "options": [
+      "fast",
+      "standard",
+      "detailed",
+      "extreme"
+     ],
+     "default": "standard"
+    },
+    {
+     "name": "texture_version",
+     "required": "optional",
+     "type": "string",
+     "description": "Texture generator version. Fast requires v3.5-20260815.",
+     "options": [
+      "v3.5-20260815",
+      "v3.0-20250812",
+      "v2.5-20250123"
+     ],
+     "nullable": true
+    },
+    {
+     "name": "delight",
+     "required": "optional",
+     "type": "bool",
+     "description": "Remove baked-in lighting before texturing with v3.5.",
+     "default": true
+    },
+    {
+     "name": "auto_size",
+     "required": "optional",
+     "type": "bool",
+     "description": "Scale the model to real-world dimensions in meters.",
+     "default": false
+    },
+    {
+     "name": "export_uv",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate UV coordinates for texturing.",
+     "default": true
+    },
+    {
+     "name": "export_orientation",
+     "required": "optional",
+     "type": "string",
+     "description": "Forward axis of the exported model.",
+     "options": [
+      "+x",
+      "-x",
+      "-y",
+      "+y"
+     ],
+     "nullable": true
+    },
+    {
+     "name": "quad",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate quadrilateral mesh topology.",
+     "default": false
+    }
+   ],
+   "medias": [
+    {
+     "name": "medias",
+     "type": "image",
+     "roles": [
+      "image_references"
+     ]
+    }
+   ],
+   "aspect_ratios": [],
+   "tags": [
+    "3d",
+    "mesh",
+    "image-to-3d",
+    "textured",
+    "pbr"
+   ]
+  },
+  {
+   "id": "meshy_v7_image_to_3d",
+   "name": "Meshy 7 Image to 3D",
+   "provider_name": "Meshy",
+   "description": "Meshy 7 image-to-3D GLB with optional texturing, PBR, rigging, and animation",
+   "output_type": "3d",
+   "parameters": [
+    {
+     "name": "model_type",
+     "required": "optional",
+     "type": "string",
+     "description": "Geometry mode: standard or lowpoly.",
+     "options": [
+      "standard",
+      "lowpoly"
+     ],
+     "default": "standard"
+    },
+    {
+     "name": "topology",
+     "required": "optional",
+     "type": "string",
+     "description": "Output mesh topology.",
+     "options": [
+      "quad",
+      "triangle"
+     ],
+     "default": "triangle"
+    },
+    {
+     "name": "target_polycount",
+     "required": "optional",
+     "type": "number",
+     "description": "Target polygon count. Whole number.",
+     "min": 100,
+     "max": 300000,
+     "default": 30000
+    },
+    {
+     "name": "symmetry_mode",
+     "required": "optional",
+     "type": "string",
+     "description": "Symmetry enforcement during reconstruction.",
+     "options": [
+      "off",
+      "auto",
+      "on"
+     ],
+     "default": "auto"
+    },
+    {
+     "name": "should_remesh",
+     "required": "optional",
+     "type": "bool",
+     "description": "Remesh the generated geometry.",
+     "default": true
+    },
+    {
+     "name": "should_texture",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate textures.",
+     "default": true
+    },
+    {
+     "name": "enable_pbr",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate PBR maps; requires should_texture=true.",
+     "default": false
+    },
+    {
+     "name": "pose_mode",
+     "required": "optional",
+     "type": "string",
+     "description": "Optional canonical pose for the reconstructed model.",
+     "options": [
+      "a-pose",
+      "t-pose"
+     ],
+     "nullable": true
+    },
+    {
+     "name": "texture_prompt",
+     "required": "optional",
+     "type": "string",
+     "description": "Text prompt guiding texture generation. At most 600 characters.",
+     "nullable": true
+    },
+    {
+     "name": "texture_image_url",
+     "required": "optional",
+     "type": "string",
+     "description": "Reference image URL guiding texture generation.",
+     "nullable": true
+    },
+    {
+     "name": "enable_rigging",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate a rig for the mesh.",
+     "default": false
+    },
+    {
+     "name": "rigging_height_meters",
+     "required": "optional",
+     "type": "number",
+     "description": "Real-world height in meters used for rigging.",
+     "default": 1.7
+    },
+    {
+     "name": "enable_animation",
+     "required": "optional",
+     "type": "bool",
+     "description": "Apply an animation; requires enable_rigging=true.",
+     "default": false
+    },
+    {
+     "name": "animation_action_id",
+     "required": "optional",
+     "type": "number",
+     "description": "Animation action id. Whole number.",
+     "min": 0,
+     "max": 696,
+     "default": 92
+    },
+    {
+     "name": "enable_safety_checker",
+     "required": "optional",
+     "type": "bool",
+     "description": "Run the input safety checker.",
+     "default": true
+    },
+    {
+     "name": "ultra_mode",
+     "required": "optional",
+     "type": "bool",
+     "description": "Generate higher-fidelity geometry and finer surface detail.",
+     "default": false
+    },
+    {
+     "name": "folder_id",
+     "required": "optional",
+     "type": "string",
+     "description": "Destination folder id.",
+     "nullable": true
+    }
+   ],
+   "medias": [
+    {
+     "name": "medias",
+     "type": "image",
+     "roles": [
+      "image_references"
+     ]
+    }
+   ],
+   "aspect_ratios": [],
+   "tags": [
+    "3d",
+    "mesh",
+    "glb",
+    "image-to-3d",
+    "low-poly",
+    "textured",
+    "pbr",
+    "rigging",
+    "animation"
+   ]
+  },
+  {
+   "id": "gpt_image_2_5",
+   "name": "GPT Image 2.5",
+   "provider_name": "OpenAI",
+   "description": "GPT Image 2.5 generation and editing with Flare and Sunburst variants",
+   "output_type": "image",
+   "parameters": [
+    {
+     "name": "variant",
+     "required": "optional",
+     "type": "string",
+     "description": "Model variant.",
+     "options": [
+      "flare",
+      "sunburst"
+     ],
+     "default": "flare"
+    },
+    {
+     "name": "quality",
+     "required": "optional",
+     "type": "string",
+     "description": "Rendering quality.",
+     "options": [
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+     ],
+     "default": "low"
+    },
+    {
+     "name": "resolution",
+     "required": "optional",
+     "type": "string",
+     "description": "Output resolution.",
+     "options": [
+      "1k",
+      "2k",
+      "4k"
+     ],
+     "default": "1k"
+    },
+    {
+     "name": "background",
+     "required": "optional",
+     "type": "string",
+     "description": "Background handling. Omit to keep the model default.",
+     "options": [
+      "auto",
+      "opaque",
+      "transparent"
+     ],
+     "nullable": true
+    }
+   ],
+   "medias": [
+    {
+     "name": "medias",
+     "type": "image",
+     "roles": [
+      "image_references"
+     ]
+    }
+   ],
+   "aspect_ratios": [
+    "auto",
+    "1:1",
+    "3:2",
+    "2:3",
+    "4:3",
+    "3:4",
+    "16:9",
+    "9:16",
+    "21:9",
+    "27:16",
+    "16:27",
+    "9:8",
+    "8:9",
+    "4:5",
+    "5:4"
+   ],
+   "tags": [
+    "image-generation",
+    "editing",
+    "reference-images",
+    "4k",
+    "text-rendering"
+   ]
+  }
+ ],
+ "catalog3d": [
+  {
+   "id": "sam_3_3d",
+   "name": "SAM 3 3D Objects"
+  },
+  {
+   "id": "image_to_3d",
+   "name": "Image to 3D"
+  },
+  {
+   "id": "multi_image_to_3d",
+   "name": "Multi-Image to 3D"
+  },
+  {
+   "id": "3d_rigging",
+   "name": "3D Rigging"
+  },
+  {
+   "id": "meshy_image_to_3d",
+   "name": "Image to 3D"
+  },
+  {
+   "id": "meshy_multi_image_to_3d",
+   "name": "Multi-Image to 3D"
+  },
+  {
+   "id": "meshy_rigging",
+   "name": "3D Rigging"
+  },
+  {
+   "id": "sam_3_3d_body",
+   "name": "3D Body"
+  },
+  {
+   "id": "tripo_3d",
+   "name": "Text to 3D"
+  },
+  {
+   "id": "tripo_h3_1_image_to_3d",
+   "name": "Tripo H3.1 Image to 3D"
+  },
+  {
+   "id": "tripo_h3_1_multiview_to_3d",
+   "name": "Tripo H3.1 Multiview to 3D"
+  },
+  {
+   "id": "tripo_p2_image_to_3d",
+   "name": "Tripo P2 Image to 3D"
+  },
+  {
+   "id": "hunyuan3d_v3_image_to_3d",
+   "name": "Hunyuan3D v3 Image to 3D"
+  },
+  {
+   "id": "meshy_v6_text_to_3d",
+   "name": "Meshy 6 Text to 3D"
+  },
+  {
+   "id": "hunyuan3d_v3_1_text_to_3d",
+   "name": "Hunyuan 3D v3.1 Text to 3D"
+  },
+  {
+   "id": "meshy_v5_remesh",
+   "name": "Meshy 5 Remesh"
+  },
+  {
+   "id": "meshy_v5_retexture",
+   "name": "Meshy 5 Retexture"
+  },
+  {
+   "id": "meshy_v7_image_to_3d",
+   "name": "Meshy 7 Image to 3D"
+  }
+ ],
+ "quotes": [
+  {
+   "id": "tripo",
+   "result": {
+    "cost": {
+     "credits": 9,
+     "credits_exact": 9
+    }
+   }
+  },
+  {
+   "id": "meshy",
+   "result": {
+    "cost": {
+     "credits": 38,
+     "credits_exact": 38
+    }
+   }
+  },
+  {
+   "id": "image",
+   "result": {
+    "cost": {
+     "credits": 1.5,
+     "credits_exact": 1.5
+    }
+   }
+  }
+ ],
+ "jobsSubmitted": 1,
+ "jobsSubmittedNote": "Este fichero se escribió antes del envío del piloto. El 27-10-2026 se envió 1 job 3D (tripo_h3_1_image_to_3d, df3e1594-4357-4ef4-a64f-accd526fef70, 9 créditos autorizados). Resultado NO verificado: show_generations type=3d falla en el conector. Ver docs/HIGGSFIELD_PIPELINE.md y assets/candidates/tripo-desk/provenance.json."
+}

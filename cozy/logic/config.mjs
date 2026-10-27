@@ -2,7 +2,8 @@ export const DEBUG = typeof location !== 'undefined' && new URLSearchParams(loca
 // The golden test room: the empty room, the grid, the six reference pieces and
 // nothing else. It is how an asset is judged against the floor it has to stand
 // on, so it keeps its own save and never disturbs a real room.
-export const ASSET_TEST = typeof location !== 'undefined' && new URLSearchParams(location.search).get('asset-test') === 'true';
+export const ART_DEBUG = typeof location !== 'undefined' && new URLSearchParams(location.search).get('art-debug') === 'true';
+export const ASSET_TEST = ART_DEBUG || (typeof location !== 'undefined' && new URLSearchParams(location.search).get('asset-test') === 'true');
 
 export const GAME_CONFIG = Object.freeze({
   version: 2,
@@ -16,7 +17,7 @@ export const GAME_CONFIG = Object.freeze({
   focusDurations: [25, 45, 60, 90],
   animationDurations: { camera: 1000, reward: 3000 },
   featureFlags: { music: false, companions: true, tokens: false },
-  storageKey: ASSET_TEST ? 'cozy-room:assettest:v2' : DEBUG ? 'cozy-room:debug:v2' : 'cozy-room:v2',
+  storageKey: ART_DEBUG ? 'cozy-room:artdebug:v1' : ASSET_TEST ? 'cozy-room:assettest:v2' : DEBUG ? 'cozy-room:debug:v2' : 'cozy-room:v2',
 });
 
 // Room sizes are the first real decision: a bigger floor costs budget that then

@@ -86,18 +86,14 @@ def inspect(sprite_id, sprite):
     issues = []
 
     # AXIS — only decidable for pieces that lie in the floor plane, where the
-    # silhouette edges ARE the floor axes. Judged after the measured correction
-    # from tools/measure-axes.py, since that is what the room actually draws.
-    fix = sprite.get('axisFix')
+    # silhouette edges approximate the floor axes. Production no longer applies
+    # the legacy axisFix: assess authored art, not an imaginary affine correction.
     if 'rug' in sprite_id:
         edges = bottom_edges(alpha.load(), width, height)
         if edges and edges[0] and edges[1]:
             (ml, el), (mr, er) = edges
-            if fix:
-                ml = (fix['shear'] + ml) / fix['widen']
-                mr = (fix['shear'] + mr) / fix['widen']
             left, right = math.degrees(math.atan(abs(ml))), math.degrees(math.atan(abs(mr)))
-            note = ' after correction' if fix else ''
+            note = ' (authored view, no affine)'
             if abs(left - right) > AXIS_TOLERANCE:
                 issues.append(f'AXIS  edges disagree{note}: {left:.1f}° vs {right:.1f}° — not one isometric plane')
             elif abs((left + right) / 2 - CANON_DEG) > AXIS_TOLERANCE:
@@ -109,12 +105,12 @@ def inspect(sprite_id, sprite):
         issues.append(f"GROUND pivot.y {pivot.get('y')} is not a contact point")
     bleed = (faint[3] - solid[3]) / height
     if bleed > .04:
-        issues.append(f'GROUND master carries a baked shadow ({bleed:.0%} below the object)')
+        issues.append(f'GROUND possible baked shadow / faint alpha ({bleed:.0%} below solid bounds); inspect visually')
 
     # SCALE — share of the footprint the art fills.
     ratio = None
     if spec.get('placement') == 'floor' and sprite.get('width'):
-        visible = sprite['width'] * (solid[2] - solid[0]) / width * (fix['widen'] if fix else 1)
+        visible = sprite['width'] * (solid[2] - solid[0]) / width
         ratio = visible / (CELL * (spec['w'] + spec['h']))
         if not SCALE_BAND[0] <= ratio <= SCALE_BAND[1]:
             issues.append(f'SCALE fills {ratio:.0%} of its {spec["w"]}×{spec["h"]} footprint')

@@ -119,6 +119,7 @@ if missing:
     print(f"\n{len(missing)} masters missing: {missing[:4]}")
 
 if args.check:
-    raise SystemExit(f'\n{changed} pivots drifted from the artwork' if changed else '\npivots match the artwork')
+    print(f'\n{changed} pivots drifted from the artwork' if changed else '\npivots match the artwork')
+    raise SystemExit(1 if changed or missing else 0)
 REGISTRY.write_text(head + 'export const SPRITES = ' + json.dumps(sprites, ensure_ascii=False, indent=2) + ';\n', encoding='utf-8')
 print(f'\nrewrote {changed} pivots in {REGISTRY.relative_to(ROOT)}')

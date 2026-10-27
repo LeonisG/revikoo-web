@@ -1,0 +1,23 @@
+{
+  "viewport": [
+    1400,
+    900
+  ],
+  "screenshots": [
+    "small-diagnostic.png",
+    "small-clean.png",
+    "medium-diagnostic.png",
+    "medium-clean.png",
+    "large-diagnostic.png",
+    "large-clean.png"
+  ],
+  "errors": [],
+  "broken": [],
+  "cases": [
+    "small: five golden candidates, stable positions, day, clear, no affine",
+    "medium: five golden candidates, stable positions, day, clear, no affine",
+    "large: five golden candidates, stable positions, day, clear, no affine",
+    "88 catalog objects individually placed without errors",
+    "reload resets QA lighting; normal save unchanged; mobile 360px without overflow"
+  ]
+}

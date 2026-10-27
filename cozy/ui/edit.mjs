@@ -1,8 +1,9 @@
 import { CATALOG, ROOM_SIZES, GAME_CONFIG } from '../logic/config.mjs';
-import { placementError, footprint, cellPolygon, wallAnchor, WALL_SLOTS, paintOrder, occupancy, bindSurface, surfacePosition, toStage, CELL } from '../logic/grid.mjs';
+import { placementError, footprint, cellPolygon, wallAnchor, WALL_SLOTS, paintOrder, occupancy, bindSurface, surfacePosition, toStage, CELL, CAMERA } from '../logic/grid.mjs';
 import { art, escapeHTML } from './helpers.mjs';
 import { availableOrientations, objectAsset } from '../assets/manifest.mjs';
 import { spriteHit } from '../logic/sprite-hit.mjs';
+import { contactShadow } from './shadows.mjs';
 
 // A gesture is speculative: only a valid release/Enter writes to the engine.
 export function createEdit(engine, room, { onChange = () => {}, onError = () => {} } = {}) {
@@ -100,8 +101,8 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
     const preview = { ...state.room.placed, [key]: { item: held.item.id, ...p, pose: held.pose } };
     for (const entry of paintOrder({ placed: preview, cells: cells() }, CATALOG).filter(e => e.key === key || e.placement.parentSurfaceId === key)) {
       const el = document.createElement('div'); el.className = `placement-preview ${klass}`; el.setAttribute('aria-hidden', 'true');
-      el.style.cssText = `left:${entry.spot.x}%;top:${entry.spot.y}%;z-index:${entry.layer + 500};${entry.spot.surface ? `--wall:${entry.spot.surface === 'left' ? '-' : ''}19.8deg;` : ''}`;
-      el.innerHTML = art(entry.item.id, '', entry.placement.rotation, entry.placement.pose || 'idle', true); objects.append(el);
+      el.style.cssText = `left:${entry.spot.x}%;top:${entry.spot.y}%;z-index:${entry.layer + 500};${entry.spot.surface ? `--wall:${entry.spot.surface === 'left' ? '-' : ''}${Math.atan(CAMERA.tilt) * 180 / Math.PI}deg;` : ''}`;
+      el.innerHTML = contactShadow(entry.item, entry.placement) + art(entry.item.id, '', entry.placement.rotation, entry.placement.pose || 'idle', true); objects.append(el);
     }
     say(problem || `${held.item.name} cabe aquí. Suelta para colocarlo.`);
     app.dataset.placement = problem ? 'invalid' : 'valid';
@@ -163,7 +164,15 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
       if (!img) { if (el.contains(event.target)) return el.dataset.key; continue; }
       const bounds = img.getBoundingClientRect(), p = engine.state.room.placed[el.dataset.key];
       const asset = objectAsset(p.item, p.rotation, p.pose || 'idle');
-      if (spriteHit(asset.hitMask, (event.clientX - bounds.left) / bounds.width, (event.clientY - bounds.top) / bounds.height)) return el.dataset.key;
+      const nx = (event.clientX - bounds.left) / bounds.width;
+      // Invert planar wall skew. Bounding-rect normalization alone samples the
+      // wrong alpha row near the upper/lower corners of a hanging picture.
+      const slope = p.wall ? (p.wall === 'left' ? -1 : 1) * CAMERA.tilt : 0;
+      const originalHeight = bounds.height - Math.abs(slope) * bounds.width;
+      const ny = slope
+        ? (event.clientY - bounds.top - Math.abs(slope) * bounds.width / 2 - slope * (nx - .5) * bounds.width) / originalHeight
+        : (event.clientY - bounds.top) / bounds.height;
+      if (spriteHit(asset.hitMask, nx, ny)) return el.dataset.key;
     }
     return null;
   }

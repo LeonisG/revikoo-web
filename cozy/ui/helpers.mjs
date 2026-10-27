@@ -14,23 +14,15 @@ export const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => 
 /** Every sprite shares one logical anchor; art metadata supplies scale and pivot. */
 export function art(id, label = '', rotation = 0, state = 'idle', eager = false) {
   const asset = objectAsset(id, rotation, state);
-    // The catalogue has to show the object that will actually be placed, so the
-    // axis correction travels with the thumbnail too.
-    const thumbFix = asset.axisFix ? `transform:matrix(${asset.axisFix.widen},${asset.axisFix.shear},0,1,0,0);transform-origin:50% ${asset.pivot ? asset.pivot.y * 100 : 82.5}%;` : '';
-    if (!eager) return `<span class="sprite-frame thumbnail"><img class="item-sprite" data-sprite="${id}" src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}" loading="lazy" decoding="async" draggable="false" style="width:100%;height:100%;left:0;top:0;object-fit:contain;${thumbFix}"></span>`;
+    // Show the authored view without affine camera compensation. Historical
+    // axisFix metadata is retained for the audit, never applied to production.
+    if (!eager) return `<span class="sprite-frame thumbnail"><img class="item-sprite" data-sprite="${id}" src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}" loading="lazy" decoding="async" draggable="false" style="width:100%;height:100%;left:0;top:0;object-fit:contain;"></span>`;
     const width = asset.width || SYMBOL.w, height = width / (asset.aspect || 1);
     const pivot = asset.pivot || { x: .5, y: .825 };
     const left = (SYMBOL.anchorX - width * pivot.x) / SYMBOL.w * 100;
     const top = (SYMBOL.anchorY - height * pivot.y) / SYMBOL.h * 100;
-    // Some masters came back at the wrong azimuth: their two floor-plane edges
-    // disagree with the room's floor and with each other. `axisFix` is the
-    // measured affine that sends both to the canonical axes, pinned at the pivot
-    // so the object stays anchored. See tools/measure-axes.py.
-    const fix = asset.axisFix
-      ? `transform:matrix(${asset.axisFix.widen},${asset.axisFix.shear},0,1,0,0);transform-origin:${pivot.x * 100}% ${pivot.y * 100}%;`
-      : '';
     return `<span class="sprite-frame"><img class="item-sprite" data-sprite="${id}" src="${escapeHTML(asset.src)}" alt="${escapeHTML(label)}"
-      loading="${eager ? 'eager' : 'lazy'}" decoding="async" draggable="false" style="width:${width / SYMBOL.w * 100}%;height:${height / SYMBOL.h * 100}%;left:${left}%;top:${top}%;${fix}--sprite-ground:${pivot.y * 100}%"></span>`;
+      loading="${eager ? 'eager' : 'lazy'}" decoding="async" draggable="false" style="width:${width / SYMBOL.w * 100}%;height:${height / SYMBOL.h * 100}%;left:${left}%;top:${top}%;--sprite-ground:${pivot.y * 100}%"></span>`;
 }
 
 export function bookStyle(title) {

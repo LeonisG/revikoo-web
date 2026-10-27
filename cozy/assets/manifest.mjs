@@ -1,5 +1,6 @@
 import { SPRITES } from './sprites.mjs';
 import { ROOM_CAMERAS } from '../logic/room-camera.mjs';
+import { artDefinition } from './art-registry.mjs';
 const root = new URL('./', import.meta.url);
 
 // The room's own layers come in one set per size, so choosing a bigger room
@@ -18,6 +19,8 @@ export const roomAssets = size => ({
 });
 
 export const objectAsset = (id, rotation = 0, state = 'idle') => {
+  const definition = artDefinition(id);
+  if (definition.representation !== 'webp') throw new Error(`Renderer not installed for ${definition.representation}: ${id}`);
   const sprite = SPRITES[id];
   if (!sprite?.src) throw new Error(`Missing production sprite: ${id}`);
   const view = sprite.orientations?.[rotation] || sprite;

@@ -1,4 +1,4 @@
-import { DEBUG, ASSET_TEST, CATALOG, roomLevel } from './logic/config.mjs';
+import { DEBUG, ASSET_TEST, ART_DEBUG, CATALOG, roomLevel } from './logic/config.mjs';
 import { createStorage } from './logic/storage.mjs';
 import { createEngine } from './logic/engine.mjs';
 import { createAudio } from './logic/audio.mjs';
@@ -106,18 +106,21 @@ document.querySelector('#debug-badge').hidden = !DEBUG;
  * and light can be judged the same way every time. Rebuilt on every load, in its
  * own save, so it never drifts and never touches a real room.
  */
-function goldenRoom() {
+function goldenRoom(size = 'medium') {
   document.querySelector('#app').classList.add('asset-test');
-  if (!engine.state.ledger.includes('starter-budget')) engine.startSetup();
+  engine.reset();
+  engine.startSetup();
   engine.debug('rich');
-  engine.debug('clear');
-  if (engine.state.room.size !== 'medium') engine.chooseSize('medium');
-  if (!engine.state.profile.setupCompleted) engine.completeSetup();
-  for (const [id, gx, gy] of [['desk', 2, 0], ['chair', 2, 1], ['bookshelf', 0, 0],
-    ['wardrobe-oak', 0, 3], ['bed-cream', 2, 3], ['floor-lamp', 4, 0]]) {
-    if (!CATALOG[id]) continue;
-    if (!engine.state.inventory[id]) { try { engine.buyItem(id); } catch { continue; } }
-    try { engine.placeItem(id, { gx, gy, rotation: 0 }); } catch { /* skip what will not fit */ }
+  engine.chooseSize(size);
+  engine.completeSetup();
+  engine.preference('lighting', 'day'); engine.preference('weather', 'clear');
+  engine.preference('reduceMotion', true); engine.preference('sound', false); engine.preference('lamp', true);
+  const layout = size === 'small'
+    ? [['desk',1,0],['chair',1,1],['bookshelf',0,2],['wardrobe-oak',2,3],['floor-lamp',3,0]]
+    : [['desk',2,0],['chair',2,1],['bookshelf',0,0],['wardrobe-oak',0,3],['floor-lamp',4,0]];
+  for (const [id, gx, gy] of layout) {
+    engine.debug('add', id);
+    engine.placeItem(id, { gx, gy, rotation: 0 });
   }
   update();
 }
@@ -126,6 +129,8 @@ update();
 if (ASSET_TEST) goldenRoom();
 // A room that has never been built opens straight into building it.
 else if (!engine.state.profile.setupCompleted) setup.start();
+
+if (ART_DEBUG) import('./ui/art-debug.mjs').then(({ createArtDebug }) => createArtDebug(engine, room, update, goldenRoom));
 tick();
 setInterval(tick, 500);
 setInterval(() => room.lighting(), 60000);
