@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "metrics": {
+    "drawCalls": 220,
+    "triangles": 50780,
+    "models": 9,
+    "instances": 2
+  },
+  "errors": [],
+  "bad": [],
+  "normalSaveUnchanged": true
+}

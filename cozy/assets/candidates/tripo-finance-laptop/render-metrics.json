@@ -1,0 +1,83 @@
+{
+  "three": "186",
+  "meshes": 1,
+  "triangles": 10452,
+  "materials": [
+    {
+      "name": "tripo_material_721b8211-ccf0-4102-8b5a-e8a3cc92249b",
+      "metalness": 0,
+      "roughness": 0.9
+    }
+  ],
+  "textures": [
+    {
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "rawSize": [
+    0.9001911282539368,
+    1.0000000000000002,
+    0.7168251276016238
+  ],
+  "scale": 48.87850881772737,
+  "surfaceLevels": [
+    3.1
+  ],
+  "surfaceSlots": null,
+  "id": "finance-laptop",
+  "frameWidth": 160,
+  "framePivot": {
+    "x": 0.5,
+    "y": 0.7
+  },
+  "normalizedSize": [
+    44,
+    48.87850881772738,
+    35.03734332024452
+  ],
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "footprint": [
+    1,
+    1
+  ],
+  "projectedTop": 44.31400804502395,
+  "existingSurfaceHeight": 132,
+  "camera": {
+    "t": 0.44742,
+    "elevationDegrees": 26.578273929356957,
+    "position": [
+      1138.2885647462158,
+      -1138.2885647462158,
+      805.356
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "frustum": [
+      -56.5685424949238,
+      56.5685424949238,
+      79.19595949289331,
+      -33.941125496954285
+    ]
+  },
+  "shadow": {
+    "type": "PCFSoftShadowMap",
+    "mapSize": 1024,
+    "key": [
+      -70,
+      -350,
+      600
+    ],
+    "opacity": 0.25,
+    "separatePass": true
+  },
+  "warning": "Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.",
+  "browserErrors": []
+}

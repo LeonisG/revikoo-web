@@ -110,7 +110,15 @@ const classicItems = [
 
 export const ITEMS = [...classicItems, ...COLLECTION_ITEMS.filter(i => !classicItems.some(old => old.id === i.id)).map(i => item(i.id, i.name, i.category, i.price, i))];
 
-export const CATALOG = Object.freeze(Object.fromEntries(ITEMS.map(i => [i.id, Object.freeze(i)])));
+// Native decorative assets for Studio and the isolated art inspector. They do
+// not enter the shop, starter inventory, collections or financial actions.
+export const EDITOR_ITEMS = [
+  ['finance-laptop','Portátil Cozy Finance'],
+  ['finance-stationery','Papelería financiera'],
+  ['finance-piggy-bank','Hucha de cerámica'],
+  ['finance-desk-calendar','Calendario de sobremesa'],
+].map(([id,name])=>item(id,name,'Decoración',0,{placement:'surface',rotatable:true,editorOnly:true,collection:'finance'}));
+export const CATALOG = Object.freeze(Object.fromEntries([...ITEMS,...EDITOR_ITEMS].map(i => [i.id, Object.freeze(i)])));
 export const STARTER_ITEMS = ITEMS.filter(i => i.starter).map(i => i.id);
 
 /** Access and ownership are independent: an expensive available item is not locked. */

@@ -158,6 +158,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         const item = CATALOG[id];
         if (!item) throw new Error('No se encuentra este objeto.');
         if (item.starter) throw new Error('Esto ya viene con tu habitación.');
+        if (item.editorOnly) throw new Error('Este objeto está disponible en el estudio.');
         if (itemStatus(s, id).access === 'LOCKED') throw new Error('Este objeto aún no está disponible.');
         if (s.coins < item.price) throw new Error('Aún te faltan algunas monedas. Tu habitación puede esperar.');
         s.coins -= item.price; s.stats.spent += item.price; give(s, id);
@@ -170,6 +171,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
         const item = CATALOG[id];
         if (!item) throw new Error('No se encuentra este objeto.');
         if (item.starter) throw new Error('Esto se queda contigo.');
+        if (item.editorOnly) throw new Error('Este objeto no se puede vender.');
         take(s, id);
         const refund = Math.floor(item.price * GAME_CONFIG.resaleRate);
         s.coins += refund; s.stats.sold += 1;
@@ -229,7 +231,7 @@ export function createEngine(storage, { debug = false, now = () => Date.now() } 
     sellPlaced(key) {
       return transact('ITEM_SOLD', s => {
         const current = s.room.placed[key], item = CATALOG[current?.item];
-        if (!item || item.starter) throw new Error('Este objeto no se puede vender.');
+        if (!item || item.starter || item.editorOnly) throw new Error('Este objeto no se puede vender.');
         storeChildren(s, key);
         delete s.room.placed[key];
         const refund = Math.floor(item.price * GAME_CONFIG.resaleRate);

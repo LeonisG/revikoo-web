@@ -7,6 +7,7 @@ root = Path(__file__).resolve().parents[1]
 asset_id = sys.argv[1] if len(sys.argv) > 1 else 'desk'
 assert re.fullmatch('[a-z-]+', asset_id)
 folder = root / f'assets/candidates/tripo-{asset_id}'
+metrics = json.loads((folder/'render-metrics.json').read_text(encoding='utf-8'))
 frames = {}
 for angle in [0, 90, 180, 270]:
     source = folder / f'view-{angle}.png'
@@ -21,8 +22,8 @@ for angle in [0, 90, 180, 270]:
     alpha = image.getchannel('A').resize((32, 32), Image.Resampling.BOX)
     bits = ''.join('1' if n > 40 else '0' for n in alpha.tobytes())
     frames[angle] = {'src': target.relative_to(root / 'assets').as_posix(),
-        'master': source.relative_to(root).as_posix(), 'width': 420, 'aspect': 1,
-        'pivot': {'x': .5, 'y': .825}, 'pixels': [768,768], 'bytes': target.stat().st_size,
+        'master': source.relative_to(root).as_posix(), 'width': metrics.get('frameWidth',420), 'aspect': 1,
+        'pivot': metrics.get('framePivot',{'x': .5, 'y': .825}), 'pixels': [768,768], 'bytes': target.stat().st_size,
         'hitMask': ''.join(format(int(bits[i:i+4],2),'x') for i in range(0,len(bits),4)),
         'candidate': f'tripo-{asset_id}', 'visualStatus': 'DRAFT'}
     frames[angle]['shadowSrc'] = shadow_delivery.relative_to(root/'assets').as_posix()
@@ -34,5 +35,7 @@ geometry = {'id': asset_id, 'top': metrics['projectedTop'], 'footprint': metrics
 if metrics.get('surfaceSlots'):
     assert all(isinstance(s['z'], (int,float)) and s['z'] > 0 for s in metrics['surfaceSlots'])
     geometry['surfaces'] = metrics['surfaceSlots']
+if metrics.get('studioSurfaces'):
+    geometry['studioSurfaces'] = metrics['studioSurfaces']
 (folder/'geometry.mjs').write_text('// Measured from the actual GLB export. No price or ownership data.\nexport const PILOT_GEOMETRY = '+json.dumps(geometry,indent=2)+';\n',encoding='utf-8')
 print(json.dumps({'frames':4,'deliveryBytes':sum(f['bytes'] for f in frames.values())}))

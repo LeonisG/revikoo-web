@@ -44,7 +44,8 @@ const emitters = {
   mushroom: [.5,.35], lantern: [.5,.48], 'future-orb': [.5,.4], laptop: [.5,.4],
 };
 
-export const ART_ASSETS = Object.freeze(Object.fromEntries(Object.entries(SPRITES).map(([id, sprite]) => [id, Object.freeze({
+const sources = {...SPRITES, ...Object.fromEntries(Object.entries(RELEASED).filter(([id])=>!SPRITES[id]).map(([id,a])=>[id,a.frames[0]]))};
+export const ART_ASSETS = Object.freeze(Object.fromEntries(Object.entries(sources).map(([id, sprite]) => [id, Object.freeze({
   id, representation: 'webp', source: sprite.src, master: sprite.master,
   pivot: sprite.pivot, width: sprite.width, aspect: sprite.aspect,
   orientations: Object.freeze([0, ...Object.keys(sprite.orientations || {}).map(Number)]),

@@ -1,0 +1,299 @@
+{
+  "passed": true,
+  "views": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "geometry": {
+    "original": 132,
+    "candidate": 113.73869858923008
+  },
+  "errors": [],
+  "bad": [],
+  "normalSaveUnchanged": true,
+  "productionLoadsNoThreeOrGLB": true,
+  "snapshots": [
+    {
+      "rotation": 0,
+      "storage": {
+        "version": 2,
+        "revision": 46,
+        "profile": {
+          "onboardingCompleted": true,
+          "setupCompleted": true
+        },
+        "coins": 2330,
+        "tasks": [],
+        "books": [],
+        "focusHistory": [],
+        "activeFocus": null,
+        "inventory": {
+          "journal": 1,
+          "timer": 1,
+          "desk": 1,
+          "chair": 1,
+          "bookshelf": 1,
+          "wardrobe-oak": 1,
+          "floor-lamp": 1
+        },
+        "room": {
+          "size": "medium",
+          "placed": {
+            "412ec47b-d81e-4735-876e-c0535b10d87c": {
+              "item": "desk",
+              "gx": 1,
+              "gy": 1,
+              "rotation": 0
+            },
+            "2b39e54d-89b5-4fcf-a9ef-2009c1808159": {
+              "item": "mug",
+              "gx": 1,
+              "gy": 1,
+              "rotation": 0,
+              "parentSurfaceId": "412ec47b-d81e-4735-876e-c0535b10d87c",
+              "surfaceSlot": 0,
+              "on": true
+            }
+          }
+        },
+        "quests": [],
+        "achievements": [
+          "first-shelf",
+          "first-light"
+        ],
+        "ledger": [
+          "starter-budget"
+        ],
+        "stats": {
+          "moves": 1,
+          "sold": 0,
+          "spent": 120
+        },
+        "preferences": {
+          "sound": false,
+          "ambient": 35,
+          "reduceMotion": true,
+          "lighting": "day",
+          "weather": "clear",
+          "lamp": true
+        }
+      },
+      "mugPosition": [
+        "49.057%",
+        "47.608%"
+      ]
+    },
+    {
+      "rotation": 90,
+      "storage": {
+        "version": 2,
+        "revision": 47,
+        "profile": {
+          "onboardingCompleted": true,
+          "setupCompleted": true
+        },
+        "coins": 2330,
+        "tasks": [],
+        "books": [],
+        "focusHistory": [],
+        "activeFocus": null,
+        "inventory": {
+          "journal": 1,
+          "timer": 1,
+          "desk": 1,
+          "chair": 1,
+          "bookshelf": 1,
+          "wardrobe-oak": 1,
+          "floor-lamp": 1
+        },
+        "room": {
+          "size": "medium",
+          "placed": {
+            "412ec47b-d81e-4735-876e-c0535b10d87c": {
+              "item": "desk",
+              "gx": 1,
+              "gy": 1,
+              "rotation": 90
+            },
+            "2b39e54d-89b5-4fcf-a9ef-2009c1808159": {
+              "item": "mug",
+              "gx": 1,
+              "gy": 1,
+              "rotation": 0,
+              "parentSurfaceId": "412ec47b-d81e-4735-876e-c0535b10d87c",
+              "surfaceSlot": 0,
+              "on": true
+            }
+          }
+        },
+        "quests": [],
+        "achievements": [
+          "first-shelf",
+          "first-light"
+        ],
+        "ledger": [
+          "starter-budget"
+        ],
+        "stats": {
+          "moves": 2,
+          "sold": 0,
+          "spent": 120
+        },
+        "preferences": {
+          "sound": false,
+          "ambient": 35,
+          "reduceMotion": true,
+          "lighting": "day",
+          "weather": "clear",
+          "lamp": true
+        }
+      },
+      "mugPosition": [
+        "50.943%",
+        "47.608%"
+      ]
+    },
+    {
+      "rotation": 180,
+      "storage": {
+        "version": 2,
+        "revision": 48,
+        "profile": {
+          "onboardingCompleted": true,
+          "setupCompleted": true
+        },
+        "coins": 2330,
+        "tasks": [],
+        "books": [],
+        "focusHistory": [],
+        "activeFocus": null,
+        "inventory": {
+          "journal": 1,
+          "timer": 1,
+          "desk": 1,
+          "chair": 1,
+          "bookshelf": 1,
+          "wardrobe-oak": 1,
+          "floor-lamp": 1
+        },
+        "room": {
+          "size": "medium",
+          "placed": {
+            "412ec47b-d81e-4735-876e-c0535b10d87c": {
+              "item": "desk",
+              "gx": 1,
+              "gy": 1,
+              "rotation": 180
+            },
+            "2b39e54d-89b5-4fcf-a9ef-2009c1808159": {
+              "item": "mug",
+              "gx": 2,
+              "gy": 1,
+              "rotation": 0,
+              "parentSurfaceId": "412ec47b-d81e-4735-876e-c0535b10d87c",
+              "surfaceSlot": 0,
+              "on": true
+            }
+          }
+        },
+        "quests": [],
+        "achievements": [
+          "first-shelf",
+          "first-light"
+        ],
+        "ledger": [
+          "starter-budget"
+        ],
+        "stats": {
+          "moves": 3,
+          "sold": 0,
+          "spent": 120
+        },
+        "preferences": {
+          "sound": false,
+          "ambient": 35,
+          "reduceMotion": true,
+          "lighting": "day",
+          "weather": "clear",
+          "lamp": true
+        }
+      },
+      "mugPosition": [
+        "57.229%",
+        "53.295%"
+      ]
+    },
+    {
+      "rotation": 270,
+      "storage": {
+        "version": 2,
+        "revision": 49,
+        "profile": {
+          "onboardingCompleted": true,
+          "setupCompleted": true
+        },
+        "coins": 2330,
+        "tasks": [],
+        "books": [],
+        "focusHistory": [],
+        "activeFocus": null,
+        "inventory": {
+          "journal": 1,
+          "timer": 1,
+          "desk": 1,
+          "chair": 1,
+          "bookshelf": 1,
+          "wardrobe-oak": 1,
+          "floor-lamp": 1
+        },
+        "room": {
+          "size": "medium",
+          "placed": {
+            "412ec47b-d81e-4735-876e-c0535b10d87c": {
+              "item": "desk",
+              "gx": 1,
+              "gy": 1,
+              "rotation": 270
+            },
+            "2b39e54d-89b5-4fcf-a9ef-2009c1808159": {
+              "item": "mug",
+              "gx": 1,
+              "gy": 2,
+              "rotation": 0,
+              "parentSurfaceId": "412ec47b-d81e-4735-876e-c0535b10d87c",
+              "surfaceSlot": 0,
+              "on": true
+            }
+          }
+        },
+        "quests": [],
+        "achievements": [
+          "first-shelf",
+          "first-light"
+        ],
+        "ledger": [
+          "starter-budget"
+        ],
+        "stats": {
+          "moves": 4,
+          "sold": 0,
+          "spent": 120
+        },
+        "preferences": {
+          "sound": false,
+          "ambient": 35,
+          "reduceMotion": true,
+          "lighting": "day",
+          "weather": "clear",
+          "lamp": true
+        }
+      },
+      "mugPosition": [
+        "42.771%",
+        "53.295%"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "three": "186",
+  "meshes": 1,
+  "triangles": 10944,
+  "materials": [
+    {
+      "name": "tripo_material_b59e82fa-7dc7-4089-86aa-22dda6286f5b",
+      "metalness": 0,
+      "roughness": 0.9
+    }
+  ],
+  "textures": [
+    {
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "rawSize": [
+    0.7180275321006775,
+    1,
+    0.21558623015880607
+  ],
+  "scale": 55.708170246585254,
+  "surfaceLevels": [
+    8.2
+  ],
+  "surfaceSlots": null,
+  "id": "finance-stationery",
+  "frameWidth": 160,
+  "framePivot": {
+    "x": 0.5,
+    "y": 0.7
+  },
+  "normalizedSize": [
+    40,
+    55.708170246585254,
+    12.009914412506282
+  ],
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "footprint": [
+    1,
+    1
+  ],
+  "projectedTop": 15.189720265929633,
+  "existingSurfaceHeight": 132,
+  "camera": {
+    "t": 0.44742,
+    "elevationDegrees": 26.578273929356957,
+    "position": [
+      1138.2885647462158,
+      -1138.2885647462158,
+      805.356
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "frustum": [
+      -56.5685424949238,
+      56.5685424949238,
+      79.19595949289331,
+      -33.941125496954285
+    ]
+  },
+  "shadow": {
+    "type": "PCFSoftShadowMap",
+    "mapSize": 1024,
+    "key": [
+      -70,
+      -350,
+      600
+    ],
+    "opacity": 0.25,
+    "separatePass": true
+  },
+  "warning": "Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.",
+  "browserErrors": []
+}

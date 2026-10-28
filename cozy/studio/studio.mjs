@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RELEASED } from '../assets/released.mjs';
 import { CATALOG } from '../logic/catalog.mjs';
 import { createRoomKit, disposeKit } from './room-kit.mjs';
-import { KEY, initialLayout, validLayout, fits, corners } from './layout.mjs';
+import { KEY, initialLayout, validLayout, fits, corners, pose, supports } from './layout.mjs';
 
 const $=id=>document.getElementById(id),status=$('status'),host=$('viewport');
 let renderer;
@@ -73,21 +73,43 @@ async function start(){
     for(const p of layout.items){
       let object=instances.get(p.key);
       if(!object&&templates.has(p.id)){object=new THREE.Group();object.add(templates.get(p.id).clone(true));object.userData.instance=p.key;instances.set(p.key,object);scene.add(object);}
-      if(object){object.position.set(p.x,-p.y,0);object.rotation.z=-p.angle*Math.PI/180;}
+      const world=pose(p,layout,RELEASED);
+      if(object&&world){object.position.set(world.x,-world.y,world.z);object.rotation.z=-world.angle*Math.PI/180;}
     }
     $('selection').replaceChildren(new Option('Ninguna',''),...layout.items.map((p,i)=>new Option(`${CATALOG[p.id].name} · ${i+1}`,p.key)));
     $('selection').value=selected||'';details();draw();
   }
   function details(){const p=layout.items.find(p=>p.key===selected);for(const id of ['rotate','quarter','remove'])$(id).disabled=!p;$('undo').disabled=!history.length;
-    selectionLine.visible=!!p;if(p){selectionLine.geometry.dispose();selectionLine.geometry=new THREE.BufferGeometry().setFromPoints(corners(p,RELEASED[p.id].geometry.modelBounds).map(v=>new THREE.Vector3(v.x,-v.y,2)));}
-    $('coordinates').textContent=p?`${CATALOG[p.id].name} · ${p.angle}° · ${Math.round(p.x)} / ${Math.round(p.y)}`:'Selecciona una pieza para colocarla.';
+    const world=p&&pose(p,layout,RELEASED);
+    selectionLine.visible=!!world;if(world){selectionLine.geometry.dispose();selectionLine.geometry=new THREE.BufferGeometry().setFromPoints(corners(world,RELEASED[p.id].geometry.modelBounds).map(v=>new THREE.Vector3(v.x,-v.y,world.z+2)));}
+    const parent=p?.parentSurfaceId&&layout.items.find(o=>o.key===p.parentSurfaceId);
+    $('coordinates').textContent=p?`${CATALOG[p.id].name} · ${world.angle}° · ${parent?'Sobre '+CATALOG[parent.id].name:Math.round(p.x)+' / '+Math.round(p.y)}`:'Selecciona una pieza para colocarla.';
     host.style.cursor=p?'grab':'default';
   }
-  function change(p,next){const candidate={...p,...next};if(!fits(candidate,layout,RELEASED)){announce('Ahí no cabe: deja espacio entre las piezas y las paredes.');return false;}Object.assign(p,candidate);syncObjects();return true;}
-  function rotate(amount){const p=layout.items.find(p=>p.key===selected);if(!p)return;const next={...p,angle:(p.angle+amount+360)%360};if(!fits(next,layout,RELEASED)){announce('No hay espacio para ese giro. Mueve la pieza un poco.');return;}checkpoint();Object.assign(p,next);syncObjects();save();announce(`Giro de ${p.angle}°.`);}
-  function add(id){if(!templates.has(id)||layout.items.length>=30){announce('Este boceto admite hasta 30 piezas.');return;}for(let y=65;y<layout.depth;y+=22)for(let x=65;x<layout.width;x+=22){const p={key:crypto.randomUUID(),id,x,y,angle:0};if(fits(p,layout,RELEASED)){checkpoint();layout.items.push(p);selected=p.key;syncObjects();save();announce('Pieza añadida. Arrástrala o utiliza las flechas.');return;}}announce('No queda un lugar libre para esta pieza.');}
+  function canChange(p,next){return validLayout({...layout,items:layout.items.map(o=>o.key===p.key?{...p,...next}:o)},RELEASED);}
+  function surfaceCandidates(p){return layout.items.filter(o=>!o.parentSurfaceId).flatMap(parent=>supports(parent,RELEASED).map((_,surfaceSlot)=>({...p,parentSurfaceId:parent.key,surfaceSlot}))).filter(o=>canChange(p,o));}
+  function change(p,next){
+    let candidate={...p,...next};
+    if(p.parentSurfaceId&&('x' in next||'y' in next)){
+      candidate=surfaceCandidates(p).sort((a,b)=>{const pa=pose(a,layout,RELEASED),pb=pose(b,layout,RELEASED);return Math.hypot(pa.x-next.x,pa.y-next.y)-Math.hypot(pb.x-next.x,pb.y-next.y);})[0];
+    }
+    if(!candidate||!canChange(p,candidate)){announce('Ahí no cabe: deja espacio entre las piezas y las paredes.');return false;}
+    Object.assign(p,candidate);syncObjects();return true;
+  }
+  function rotate(amount){const p=layout.items.find(p=>p.key===selected);if(!p)return;const next={...p,angle:(p.angle+amount+360)%360};if(!canChange(p,next)){announce('No hay espacio para ese giro. Mueve la pieza un poco.');return;}checkpoint();Object.assign(p,next);syncObjects();save();announce(`Giro de ${p.angle}°.`);}
+  function add(id){
+    if(!templates.has(id)||layout.items.length>=30){announce('Este boceto admite hasta 30 piezas.');return;}
+    const p={key:crypto.randomUUID(),id,x:0,y:0,angle:0},choices=[];
+    if(CATALOG[id].placement==='surface'){
+      const parents=[...layout.items].sort((a,b)=>Number(b.key===selected)-Number(a.key===selected));
+      for(const parent of parents)for(const [surfaceSlot] of supports(parent,RELEASED).entries())choices.push({...p,parentSurfaceId:parent.key,surfaceSlot});
+    }else for(let y=65;y<layout.depth;y+=22)for(let x=65;x<layout.width;x+=22)choices.push({...p,x,y});
+    const candidate=choices.find(v=>validLayout({...layout,items:[...layout.items,v]},RELEASED));
+    if(!candidate){announce('No queda un apoyo libre para esta pieza. Añade o mueve un mueble.');return;}
+    checkpoint();layout.items.push(candidate);selected=candidate.key;syncObjects();save();announce(candidate.parentSurfaceId?'Objeto apoyado. Arrástralo entre apoyos libres; acompaña al mueble al moverlo.':'Pieza añadida. Arrástrala o utiliza las flechas.');
+  }
   $('rotate').onclick=()=>rotate(15);$('quarter').onclick=()=>rotate(90);
-  $('remove').onclick=()=>{if(!selected)return;checkpoint();layout.items=layout.items.filter(p=>p.key!==selected);selected=null;syncObjects();save();};
+  $('remove').onclick=()=>{if(!selected)return;checkpoint();layout.items=layout.items.filter(p=>p.key!==selected&&p.parentSurfaceId!==selected);selected=null;syncObjects();save();};
   $('undo').onclick=()=>{if(!history.length)return;layout=history.pop();if(!layout.items.some(p=>p.key===selected))selected=null;buildRoom();syncObjects();save();announce('Último cambio deshecho.');};
   $('selection').onchange=()=>{selected=$('selection').value||null;details();draw();};
   $('snap').onchange=()=>{layout.snap=$('snap').checked;save();};
@@ -102,8 +124,9 @@ async function start(){
   host.addEventListener('pointerdown',event=>{
     if(event.button!==0||pointer)return;host.focus({preventScroll:true});rayAt(event);scene.updateMatrixWorld(true);
     const hit=ray.intersectObjects([...instances.values()],true)[0];let object=hit?.object;while(object&&!object.userData.instance)object=object.parent;
-    selected=object?.userData.instance||null;const p=layout.items.find(p=>p.key===selected),floor=floorPoint(event);
-    pointer={id:event.pointerId,x:event.clientX,y:event.clientY,azimuth,elevation,before:structuredClone(layout),selected,offset:p&&floor?{x:p.x-floor.x,y:p.y-floor.y}:null,moved:false};
+    selected=object?.userData.instance||null;const p=layout.items.find(p=>p.key===selected),world=p&&pose(p,layout,RELEASED);
+    plane.constant=-(world?.z||0);const floor=floorPoint(event);
+    pointer={id:event.pointerId,x:event.clientX,y:event.clientY,azimuth,elevation,before:structuredClone(layout),selected,offset:world&&floor?{x:world.x-floor.x,y:world.y-floor.y}:null,moved:false};
     host.setPointerCapture(event.pointerId);syncObjects();
   });
   host.addEventListener('pointermove',event=>{
@@ -121,7 +144,12 @@ async function start(){
     if(event.key==='Escape'){event.preventDefault();finish(true);return;}if(pointer)return;
     if(event.key.toLowerCase()==='r'){event.preventDefault();rotate(event.shiftKey?90:15);return;}
     const delta={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[event.key],p=layout.items.find(p=>p.key===selected);
-    if(delta&&p){event.preventDefault();const step=layout.snap?22:event.shiftKey?22:5;const next={...p,x:p.x+delta[0]*step,y:p.y+delta[1]*step};if(fits(next,layout,RELEASED)){checkpoint();Object.assign(p,next);syncObjects();save();}else announce('No hay espacio en esa dirección.');}
+    if(delta&&p){event.preventDefault();
+      if(p.parentSurfaceId){
+        const world=pose(p,layout,RELEASED),choices=surfaceCandidates(p).filter(o=>o.parentSurfaceId!==p.parentSurfaceId||o.surfaceSlot!==p.surfaceSlot).filter(o=>{const q=pose(o,layout,RELEASED);return(q.x-world.x)*delta[0]+(q.y-world.y)*delta[1]>1;}).sort((a,b)=>{const x=pose(a,layout,RELEASED),y=pose(b,layout,RELEASED);return Math.hypot(x.x-world.x,x.y-world.y)-Math.hypot(y.x-world.x,y.y-world.y);});
+        if(choices[0]){checkpoint();Object.assign(p,choices[0]);syncObjects();save();}else announce('No hay otro apoyo libre en esa dirección.');
+      }else{const step=layout.snap?22:event.shiftKey?22:5,next={x:p.x+delta[0]*step,y:p.y+delta[1]*step};if(canChange(p,next)){checkpoint();Object.assign(p,next);syncObjects();save();}else announce('No hay espacio en esa dirección.');}
+    }
   });
   // Read-only diagnostics for acceptance tests; no bypass of placement or budget.
   window.oakStudio={snapshot:()=>structuredClone(layout),metrics:()=>({drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,models:templates.size,instances:instances.size}),project:(x,y,z=0)=>{const v=new THREE.Vector3(x,-y,z).project(camera),r=host.getBoundingClientRect();return{x:r.left+(v.x+1)*r.width/2,y:r.top+(1-v.y)*r.height/2};}};

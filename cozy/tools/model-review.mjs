@@ -12,8 +12,8 @@ renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.N
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.querySelector('#viewport').append(renderer.domElement);
 const scene = new THREE.Scene();
-const t = .44742, elevation = Math.asin(t), frustum = 420 / Math.SQRT2;
-const camera = new THREE.OrthographicCamera(-frustum/2,frustum/2,frustum*.825,-frustum*.175,.1,4000);
+const t = .44742, elevation = Math.asin(t), frameWidth = spec.frameWidth || 420, pivotY = spec.pivotY || .825, frustum = frameWidth / Math.SQRT2;
+const camera = new THREE.OrthographicCamera(-frustum/2,frustum/2,frustum*pivotY,-frustum*(1-pivotY),.1,4000);
 camera.up.set(0,0,1);
 const target = new THREE.Vector3(0,0,0);
 // The grid's second floor axis is opposite real Y: (X,Y,Z)=(x,-y,z).
@@ -47,6 +47,11 @@ const surfaceSlots = id === 'bookshelf' ? [0,1,2].flatMap(level=>[.5,1.5].map(x=
   const levels=[...new Set(probe.intersectObject(model,true).map(hit=>Math.round(hit.point.z*10)/10))].sort((a,b)=>b-a);
   return {x,y,z:levels[level]*Math.SQRT2*Math.cos(elevation)};
 })) : null;
+const studioSurfaces = id === 'bookshelf' ? [-44,44].flatMap(x=>{
+  probe.set(new THREE.Vector3(x,0,size.z+10),new THREE.Vector3(0,0,-1));
+  const levels=probe.intersectObject(model,true).filter(h=>h.face.normal.clone().transformDirection(h.object.matrixWorld).z>.9).map(h=>h.point.z);
+  return levels.slice(0,3).map((z,i)=>({x,y:0,z,clearance:i?levels[i-1]-z-4:null}));
+}) : null;
 let triangles=0, meshes=0; const materials = [], textures = [];
 model.traverse(node => {
   if(!node.isMesh)return; meshes++; triangles+=(node.geometry.index?.count || node.geometry.attributes.position.count)/3;
@@ -59,8 +64,8 @@ model.traverse(node => {
   materials.push({name:original.name,metalness:original.metalness,roughness:original.roughness});
   if(original.map)textures.push({width:original.map.image.width,height:original.map.image.height});
 });
-const metrics = {three:THREE.REVISION,meshes,triangles,materials,textures,rawSize:rawSize.toArray(),scale,surfaceLevels,surfaceSlots,
-  id, normalizedSize:size.toArray(),pivot:[0,0,0],footprint:spec.footprint,projectedTop:size.z*Math.SQRT2*Math.cos(elevation),
+const metrics = {three:THREE.REVISION,meshes,triangles,materials,textures,rawSize:rawSize.toArray(),scale,surfaceLevels,surfaceSlots,studioSurfaces,
+  id, frameWidth, framePivot:{x:.5,y:pivotY}, normalizedSize:size.toArray(),pivot:[0,0,0],footprint:spec.footprint,projectedTop:size.z*Math.SQRT2*Math.cos(elevation),
   existingSurfaceHeight:132,camera:{t,elevationDegrees:elevation*180/Math.PI,position:camera.position.toArray(),target:target.toArray(),frustum:[camera.left,camera.right,camera.top,camera.bottom]},
   shadow:{type:'PCFSoftShadowMap',mapSize:1024,key:key.position.toArray(),opacity:.25,separatePass:true},
   warning:'Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.'};
@@ -69,14 +74,20 @@ function draw({angle=0,material='albedo',view='canonical'}={}) {
   root.rotation.z=-angle*Math.PI/180;
   model.traverse(node=>{if(node.isMesh)node.material=node.userData[material==='lit'?'originalMaterial':material+'Material'];});
   shadowFloor.visible=material==='shadow';
+  camera.top=frustum*pivotY;camera.bottom=-frustum*(1-pivotY);camera.updateProjectionMatrix();
   canonical();
-  if(view==='back') {camera.position.set(-900,900,600);camera.lookAt(0,0,20);}
-  if(view==='underside') {camera.position.set(700,700,-800);camera.lookAt(0,0,50);}
+  if(view!=='canonical'){camera.top=frustum/2;camera.bottom=-frustum/2;camera.updateProjectionMatrix();}
+  if(view==='back') {camera.position.set(-900,900,600);camera.lookAt(0,0,size.z/2);}
+  if(view==='underside') {camera.position.set(700,700,-800);camera.lookAt(0,0,size.z/2);}
   renderer.render(scene,camera); return metrics;
 }
 function controls() {draw({angle:Number(document.querySelector('#angle').value),material:document.querySelector('#material').value,view:document.querySelector('#view').value});}
 for(const id of ['angle','material','view'])document.querySelector('#'+id).addEventListener('change',controls);
 let spin=0;document.querySelector('#spin').addEventListener('click',()=>{spin+=15;draw({angle:spin,material:document.querySelector('#material').value});});
 document.querySelector('#report').textContent=JSON.stringify(metrics,null,2);
-window.cozyModelReview={draw,metrics,canvas:renderer.domElement};
+window.cozyModelReview={draw,metrics,canvas:renderer.domElement,sampleSurface:(x,y)=>{
+  root.rotation.z=0;scene.updateMatrixWorld(true);
+  probe.set(new THREE.Vector3(x,-y,size.z+10),new THREE.Vector3(0,0,-1));
+  return probe.intersectObject(model,true).map(hit=>({z:hit.point.z,normal:hit.face.normal.clone().transformDirection(hit.object.matrixWorld).toArray()}));
+}};
 draw();

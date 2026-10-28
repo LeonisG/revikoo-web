@@ -46,7 +46,7 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
     selected = key; const item = CATALOG[p.item];
     context.innerHTML = `<span>${escapeHTML(item.name)}</span><button data-edit="move">Mover</button>
       ${item.rotatable && availableOrientations(item.id).length > 1 ? '<button data-edit="rotate">Girar</button>' : ''}<button data-edit="store">Guardar</button>
-      ${!item.starter ? '<button data-edit="sell">Vender</button>' : ''}
+      ${!item.starter && !item.editorOnly ? '<button data-edit="sell">Vender</button>' : ''}
       ${item.companion ? `<label>Postura <select data-pet-pose aria-label="Postura del compañero">${[['idle','Descansar'],['sleep','Dormir'],['sit','Sentarse']].map(([value,label])=>`<option value="${value}" ${value === (p.pose || 'idle') ? 'selected' : ''}>${label}</option>`).join('')}</select></label>` : ''}
       <button data-edit="dismiss" aria-label="Cerrar controles">×</button>`;
     context.hidden = false;
@@ -102,7 +102,7 @@ export function createEdit(engine, room, { onChange = () => {}, onError = () => 
     for (const entry of paintOrder({ placed: preview, cells: cells() }, CATALOG).filter(e => e.key === key || e.placement.parentSurfaceId === key)) {
       const el = document.createElement('div'); el.className = `placement-preview ${klass}`; el.setAttribute('aria-hidden', 'true');
       el.style.cssText = `left:${entry.spot.x}%;top:${entry.spot.y}%;z-index:${entry.layer + 500};${entry.spot.surface ? `--wall:${entry.spot.surface === 'left' ? '-' : ''}${Math.atan(CAMERA.tilt) * 180 / Math.PI}deg;` : ''}`;
-      el.innerHTML = contactShadow(entry.item, entry.placement) + art(entry.item.id, '', entry.placement.rotation, entry.placement.pose || 'idle', true); objects.append(el);
+      el.innerHTML = contactShadow(entry.item, entry.placement, preview) + art(entry.item.id, '', entry.placement.rotation, entry.placement.pose || 'idle', true); objects.append(el);
     }
     say(problem || `${held.item.name} cabe aquí. Suelta para colocarlo.`);
     app.dataset.placement = problem ? 'invalid' : 'valid';

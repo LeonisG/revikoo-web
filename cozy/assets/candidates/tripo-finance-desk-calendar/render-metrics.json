@@ -1,0 +1,84 @@
+{
+  "three": "186",
+  "meshes": 1,
+  "triangles": 10573,
+  "materials": [
+    {
+      "name": "tripo_material_4af532ca-8949-45ce-9f81-59edb2d073dc",
+      "metalness": 0,
+      "roughness": 0.9
+    }
+  ],
+  "textures": [
+    {
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "rawSize": [
+    0.8112195730209351,
+    1.0000000000000002,
+    0.9945360422134402
+  ],
+  "scale": 34.51593246909663,
+  "surfaceLevels": [
+    31.5,
+    3.3
+  ],
+  "surfaceSlots": null,
+  "id": "finance-desk-calendar",
+  "frameWidth": 140,
+  "framePivot": {
+    "x": 0.5,
+    "y": 0.7
+  },
+  "normalizedSize": [
+    28,
+    34.51593246909664,
+    34.32733887112174
+  ],
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "footprint": [
+    1,
+    1
+  ],
+  "projectedTop": 43.41601921685128,
+  "existingSurfaceHeight": 132,
+  "camera": {
+    "t": 0.44742,
+    "elevationDegrees": 26.578273929356957,
+    "position": [
+      1138.2885647462158,
+      -1138.2885647462158,
+      805.356
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "frustum": [
+      -49.49747468305832,
+      49.49747468305832,
+      69.29646455628165,
+      -29.698484809834998
+    ]
+  },
+  "shadow": {
+    "type": "PCFSoftShadowMap",
+    "mapSize": 1024,
+    "key": [
+      -70,
+      -350,
+      600
+    ],
+    "opacity": 0.25,
+    "separatePass": true
+  },
+  "warning": "Single generated mesh; independent drawers/doors not provided. DRAFT until geometry and style review.",
+  "browserErrors": []
+}

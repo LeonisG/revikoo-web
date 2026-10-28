@@ -80,7 +80,7 @@ export function createRoom() {
       const depth = Math.min(1, Math.max(0, (spot.depth || 0) / (cells * 22)));
       return `<div class="placed ${item.flat ? 'is-flat' : ''} ${item.companion ? 'is-companion' : ''}" data-key="${key}" data-item="${item.id}" data-pose="${placement.pose || 'idle'}"
         style="left:${spot.x}%;top:${spot.y}%;z-index:${layer + 500};--d:${depth.toFixed(3)};${spot.surface ? `--wall:${spot.surface === 'left' ? '-' : ''}${Math.atan(CAMERA.tilt) * 180 / Math.PI}deg;` : ''}"
-        role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${contactShadow(item, placement)}${art(item.id, '', placement.rotation, placement.pose || 'idle', true)}</div>`;
+        role="button" tabindex="0" aria-label="Editar ${escapeHTML(item.name)}">${contactShadow(item, placement, state.room.placed)}${art(item.id, '', placement.rotation, placement.pose || 'idle', true)}</div>`;
     }).join('');
 
     // Light sources are whatever the player has actually put down.

@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "errors": [],
+  "bad": [],
+  "metrics": {
+    "drawCalls": 239,
+    "triangles": 137684,
+    "models": 9,
+    "instances": 6
+  },
+  "layout": {
+    "version": 1,
+    "width": 440,
+    "depth": 440,
+    "color": "#63715a",
+    "window": 0.62,
+    "light": "day",
+    "snap": false,
+    "items": [
+      {
+        "key": "first-desk",
+        "id": "desk",
+        "x": 215,
+        "y": 170,
+        "angle": 15
+      },
+      {
+        "key": "13d0ed4e-b1dc-41a0-994a-4c58bd13810a",
+        "id": "finance-laptop",
+        "x": 0,
+        "y": 0,
+        "angle": 0,
+        "parentSurfaceId": "first-desk",
+        "surfaceSlot": 0
+      },
+      {
+        "key": "f66f077b-3ba7-4ea8-a8b1-40e3b444de28",
+        "id": "finance-stationery",
+        "x": 0,
+        "y": 0,
+        "angle": 0,
+        "parentSurfaceId": "first-desk",
+        "surfaceSlot": 1
+      },
+      {
+        "key": "473dc900-63ec-4599-9e95-d3e866f6210e",
+        "id": "finance-desk-calendar",
+        "x": 0,
+        "y": 0,
+        "angle": 0,
+        "parentSurfaceId": "first-desk",
+        "surfaceSlot": 2
+      },
+      {
+        "key": "5693e730-e3ac-49f4-a2f1-b6ffa2709a74",
+        "id": "bookshelf",
+        "x": 87,
+        "y": 65,
+        "angle": 0
+      },
+      {
+        "key": "24db3801-2e40-4f74-bdbc-9412a93415cf",
+        "id": "finance-piggy-bank",
+        "x": 0,
+        "y": 0,
+        "angle": 90,
+        "parentSurfaceId": "5693e730-e3ac-49f4-a2f1-b6ffa2709a74",
+        "surfaceSlot": 0
+      }
+    ]
+  },
+  "normalSaveUnchanged": true
+}

@@ -1,6 +1,6 @@
 // Loaded only for ?art-debug=true. Uses a separate save selected in config.mjs.
 import { CATALOG, ROOM_SIZES } from '../logic/config.mjs';
-import { ART_ASSETS, GOLDEN_IDS } from '../assets/art-registry.mjs';
+import { ART_ASSETS, GOLDEN_IDS, artDefinition } from '../assets/art-registry.mjs';
 import { objectAsset, availableOrientations, ART_PILOT } from '../assets/manifest.mjs';
 import { CAMERA, SCENE, CELL, project, cellPolygon, paintOrder, occupancy } from '../logic/grid.mjs';
 import { escapeHTML } from './helpers.mjs';
@@ -18,7 +18,7 @@ export function createArtDebug(engine, room, onChange, resetGolden) {
     <div class="art-toolbar"><label>Habitación <select id="art-size">${Object.values(ROOM_SIZES).map(s => `<option value="${s.id}">${s.cells} × ${s.cells}</option>`).join('')}</select></label>
     <label>Luz <select id="art-light"><option value="day">Día neutro</option><option value="night">Noche</option><option value="sunset">Atardecer</option></select></label></div>
     <label>Objeto <select id="art-item">${Object.values(CATALOG).map(i => `<option value="${i.id}">${escapeHTML(i.name)}</option>`).join('')}</select></label>
-    <div class="art-toolbar"><button type="button" id="art-golden">Golden candidato</button><button type="button" id="art-empty">Room vacía</button><button type="button" id="art-solo">Objeto solo</button></div>
+    <div class="art-toolbar"><button type="button" id="art-golden">Golden candidato</button><button type="button" id="art-empty">Room vacía</button><button type="button" id="art-solo">Objeto solo</button><button type="button" id="art-finance">Escena Finance</button></div>
     ${ART_PILOT ? `<p>Fuente Tripo conservada · 4 vistas reales · escritorio publicado</p><div class="art-toolbar"><button type="button" id="art-pilot-fixture">Escritorio + taza</button><label>Giro real <select id="art-rotation"><option>0</option><option>90</option><option>180</option><option>270</option></select></label></div><p>Superficie calibrada al GLB: 113,7 unidades proyectadas. El juego publicado utiliza esta misma altura. Revisar acabado y contactos.</p><a href="./tools/model-review.html" target="_blank" rel="noopener">Inspeccionar GLB y geometría</a><a href="?art-debug=true">Ver colección publicada</a>` : '<a href="?art-debug=true&pilot=tripo-desk">Abrir piloto Tripo (sin generar)</a>'}
     <fieldset><legend>Capas de revisión</legend>${[['axes','Ejes y grid'],['bounds','Límites de imagen'],['footprints','Footprints y pivots'],['shadows','Contactos'],['lights','Emisores y atmósfera']].map(([key,label]) => `<label><input type="checkbox" data-art-layer="${key}" checked> ${label}</label>`).join('')}</fieldset>
     <output id="art-readout"></output><p class="art-error" id="art-error" role="status"></p>
@@ -36,6 +36,13 @@ export function createArtDebug(engine, room, onChange, resetGolden) {
   byId('light').addEventListener('change', () => guarded(() => { engine.preference('lighting', byId('light').value); onChange(); }));
   byId('golden').addEventListener('click', () => guarded(() => resetGolden(engine.state.room.size)));
   byId('empty').addEventListener('click', () => guarded(() => { engine.debug('clear'); onChange(); }));
+  byId('finance').addEventListener('click', () => guarded(() => {
+    engine.debug('clear');engine.debug('size','large');
+    for(const id of ['desk','bookshelf','side-table','finance-laptop','finance-stationery','finance-piggy-bank','finance-desk-calendar'])engine.debug('add',id);
+    const desk=engine.placeItem('desk',{gx:2,gy:3,rotation:0}),shelf=engine.placeItem('bookshelf',{gx:0,gy:1,rotation:0}),table=engine.placeItem('side-table',{gx:4,gy:2,rotation:0});
+    for(const [id,parent,slot,rotation] of [['finance-laptop',desk,0,0],['finance-stationery',desk,2,90],['finance-piggy-bank',shelf,0,90],['finance-desk-calendar',table,0,0]])engine.placeItem(id,{gx:1,gy:1,parentSurfaceId:parent.key,surfaceSlot:slot,rotation});
+    byId('item').value='finance-laptop';onChange();
+  }));
   byId('solo').addEventListener('click', () => guarded(() => {
     const item = CATALOG[byId('item').value];
     engine.debug('clear'); engine.debug('add', item.id);
@@ -70,7 +77,7 @@ export function createArtDebug(engine, room, onChange, resetGolden) {
     const state = engine.state, cells = ROOM_SIZES[state.room.size].cells;
     byId('size').value = state.room.size; byId('light').value = state.preferences.lighting;
     const order = paintOrder({ placed: state.room.placed, cells }, CATALOG);
-    const selected = byId('item').value, meta = ART_ASSETS[selected], item = CATALOG[selected];
+    const selected = byId('item').value, meta = artDefinition(selected), item = CATALOG[selected];
     const placed = order.find(o => o.item.id === selected);
     const frame = objectAsset(selected,placed?.placement.rotation || 0);
     const matrix = `[[1,-1,0],[${CAMERA.tilt},${CAMERA.tilt},-1]]`;
