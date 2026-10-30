@@ -1,0 +1,135 @@
+{
+  "units": "meters",
+  "authoringUp": "Z",
+  "gltfUp": "Y",
+  "files": {
+    "terrain.glb": {
+      "bytes": 1996108,
+      "sha256": "b4771c52a652fe9b46cb340a8c05aeda79ae1358d86c1414e704e0ae9e9a2a97",
+      "meshes": 8,
+      "materials": 8,
+      "triangles": 39248,
+      "clips": []
+    },
+    "environment-kit.glb": {
+      "bytes": 486140,
+      "sha256": "4dc20e5925276859850961f1a9d1bedd4411263f60e6086d88efe2920eb1ac2e",
+      "meshes": 38,
+      "materials": 16,
+      "triangles": 13459,
+      "clips": []
+    },
+    "bank-island.glb": {
+      "bytes": 3764436,
+      "sha256": "7e37897593a84b9e97bdd60b72e829ffc5d09dca9529b2572b455f74c11e908d",
+      "meshes": 97,
+      "materials": 28,
+      "triangles": 53083,
+      "clips": [
+        {
+          "name": "DOORS_CLOSING",
+          "duration": 0.8,
+          "targets": [
+            "LeftDoor.003",
+            "RightDoor.003"
+          ]
+        },
+        {
+          "name": "DOORS_OPENING",
+          "duration": 0.8,
+          "targets": [
+            "LeftDoor.003",
+            "RightDoor.003"
+          ]
+        },
+        {
+          "name": "DOORS_CLOSED",
+          "duration": 0.8,
+          "targets": [
+            "LeftDoor.003",
+            "RightDoor.003"
+          ]
+        }
+      ]
+    }
+  },
+  "assets": [
+    "BENCH",
+    "BRIDGE_STONE",
+    "BRIDGE_WOOD",
+    "BUSH",
+    "FENCE",
+    "FLOWER_PINK",
+    "FLOWER_WHITE",
+    "FLOWER_YELLOW",
+    "FOUNTAIN",
+    "GRASS",
+    "LAMP",
+    "POT",
+    "ROCK",
+    "SIGN",
+    "TREE_01",
+    "TREE_02",
+    "TREE_03"
+  ],
+  "placements": 275,
+  "plots": [
+    {
+      "id": "town-hall",
+      "position": [
+        -24,
+        -4,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        9
+      ],
+      "rotation": 0,
+      "buildable": true,
+      "entrance": [
+        -24,
+        -8.5,
+        1.85
+      ]
+    },
+    {
+      "id": "studio",
+      "position": [
+        21,
+        -15,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        8
+      ],
+      "rotation": 0,
+      "buildable": true,
+      "entrance": [
+        21,
+        -19,
+        1.85
+      ]
+    },
+    {
+      "id": "library-garden",
+      "position": [
+        20,
+        14,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        8
+      ],
+      "rotation": 0,
+      "buildable": true,
+      "entrance": [
+        20,
+        10,
+        1.85
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "trianglesMaster": 184012,
+  "trianglesGLB": 44171,
+  "meshBatches": 89,
+  "glbBytes": 3497548,
+  "animations": [
+    "DOORS_CLOSED",
+    "DOORS_OPENING",
+    "DOORS_CLOSING"
+  ],
+  "nodes": 121,
+  "materials": 20,
+  "roundtripImportedObjects": 121,
+  "roundtripMeshCount": 89,
+  "animationChecks": [
+    {
+      "clip": "DOORS_CLOSED",
+      "node": "LeftDoor.001",
+      "rotationDeltaDegrees": 0.0,
+      "durationSeconds": 0.7999999783933163
+    },
+    {
+      "clip": "DOORS_CLOSED",
+      "node": "RightDoor.001",
+      "rotationDeltaDegrees": 0.0,
+      "durationSeconds": 0.7999999783933163
+    },
+    {
+      "clip": "DOORS_OPENING",
+      "node": "LeftDoor.001",
+      "rotationDeltaDegrees": 84.99999122018994,
+      "durationSeconds": 0.7999999783933163
+    },
+    {
+      "clip": "DOORS_OPENING",
+      "node": "RightDoor.001",
+      "rotationDeltaDegrees": 84.99999122018994,
+      "durationSeconds": 0.7999999783933163
+    },
+    {
+      "clip": "DOORS_CLOSING",
+      "node": "LeftDoor.001",
+      "rotationDeltaDegrees": 84.99999122018994,
+      "durationSeconds": 0.7999999783933163
+    },
+    {
+      "clip": "DOORS_CLOSING",
+      "node": "RightDoor.001",
+      "rotationDeltaDegrees": 84.99999122018994,
+      "durationSeconds": 0.7999999783933163
+    }
+  ],
+  "missingUVs": []
+}

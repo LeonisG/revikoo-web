@@ -1,0 +1,123 @@
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+20:44:24 | INFO: Starting glTF 2.0 export
+20:44:24 | INFO: Extracting primitive: Nilo_Arm_L__Nilo_Vest_Sage
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Hand_L__Nilo_Porcelain_Ivory
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Pen__Nilo_Brass_Gold
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Pen__Nilo_Vest_Sage
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Arm_R__Nilo_Vest_Sage
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Hand_R__Nilo_Porcelain_Ivory
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Stamp__Nilo_Brass_Gold
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Stamp__Nilo_Leather_Brown
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Body__Nilo_Brass_Gold
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Body__Nilo_Porcelain_Ivory
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Body__Nilo_Shirt_Cream
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Body__Nilo_Vest_Sage
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Blink_L__Nilo_Eye_Dark
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Blink_L__Nilo_Shirt_Cream
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Blink_R__Nilo_Eye_Dark
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Blink_R__Nilo_Shirt_Cream
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Smile__Nilo_Leather_Brown
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Upper__Nilo_Brass_Gold
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Upper__Nilo_Cheek_Rose
+20:44:24 | INFO: Primitives created: 1
+20:44:24 | INFO: Extracting primitive: Nilo_Upper__Nilo_Porcelain_Ivory
+20:44:24 | INFO: Primitives created: 1
+20:44:25 | INFO: Finished glTF 2.0 export in 1.1329376697540283 s
+
+20:44:33 | INFO: Starting glTF 2.0 export
+20:44:33 | INFO: Extracting primitive: ArchedWindow__Office_Daylight
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: ArchedWindow__Office_Ivory
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: ArchedWindow__Office_Walnut_Edge
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: DeskLamp__Office_Brass
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: DeskLamp__Office_Lamp_Glow
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: DeskLamp__Office_Leather_Green
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: DocumentTray__Office_Brass
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: DocumentTray__Office_Leather_Green
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: DocumentTray__Office_Paper
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Ledger__Office_Ink
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Ledger__Office_Paper
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Ledger__Office_Walnut
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: NiloChair__Office_Brass
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: NiloChair__Office_Leather_Green
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: NiloChair__Office_Walnut
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: NiloChair__Office_Walnut_Edge
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Brass
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Ivory
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Lamp_Glow
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Leaf_0
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Leaf_1
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Leaf_2
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Leather_Green
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Limestone
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Paper
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Sage
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Walnut
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Walnut_Edge
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: Office__Office_Walnut_Shadow
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: VaultDoor__Office_Brass
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: VaultDoor__Office_Vault_Metal
+20:44:33 | INFO: Primitives created: 1
+20:44:33 | INFO: Extracting primitive: VaultDoor__Office_Walnut_Shadow
+20:44:33 | INFO: Primitives created: 1
+20:44:34 | INFO: Finished glTF 2.0 export in 0.39845776557922363 s
+00:34.313  render           | Saved: 'C:\Users\chete\Documents\GitHub\revikoo-web\cozy\assets\characters\nilo\previews\front.png'
+00:45.188  render           | Saved: 'C:\Users\chete\Documents\GitHub\revikoo-web\cozy\assets\characters\nilo\previews\side.png'
+00:56.625  render           | Saved: 'C:\Users\chete\Documents\GitHub\revikoo-web\cozy\assets\characters\nilo\previews\back.png'
+01:09.407  render           | Saved: 'C:\Users\chete\Documents\GitHub\revikoo-web\cozy\assets\characters\nilo\previews\three-quarter.png'
+01:21.907  render           | Saved: 'C:\Users\chete\Documents\GitHub\revikoo-web\cozy\assets\characters\nilo\previews\greet.png'
+03:01.860  render           | Saved: 'C:\Users\chete\Documents\GitHub\revikoo-web\cozy\assets\interiors\bank-office\previews\office_empty.png'
+04:48.063  render           | Saved: 'C:\Users\chete\Documents\GitHub\revikoo-web\cozy\assets\interiors\bank-office\previews\office_pov.png'
+
+BANK_VISIT_BUILD_COMPLETE
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit

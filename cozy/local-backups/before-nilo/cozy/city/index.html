@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9e3d6"><title>Isla de los comienzos · Cozy City</title>
+  <meta name="description" content="Explora una pequeña isla de jardines, caminos y agua en movimiento. Un mundo que irá creciendo contigo.">
+  <link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="./city.css">
+  <script type="importmap">{"imports":{"three":"../tools/vendor/three/build/three.module.js","three/addons/":"../tools/vendor/three/examples/jsm/"}}</script>
+  <script type="module" src="./city.mjs"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">cozy<span>city.</span></a><span class="edition">UN PEQUEÑO MUNDO EN CONSTRUCCIÓN</span><a class="back" href="../">Volver a mi habitación ↗</a></header>
+  <main>
+    <div class="intro"><p class="eyebrow">ISLA 001 · UN LUGAR PARA QUEDARSE</p><h1>Los pequeños<br>comienzos.</h1><p>El agua sigue su camino.<br>Tu ciudad empieza a despertar.</p></div>
+    <aside class="world-settings" aria-label="Ambiente y calidad"><label>Luz<select id="lighting"><option value="day">Día</option><option value="sunset">Atardecer</option><option value="night">Noche</option></select></label><label>Detalle<select id="quality"><option value="high">Alto</option><option value="medium" selected>Medio</option><option value="low">Ligero</option></select></label><button id="motion" aria-pressed="true">Pausar ambiente</button></aside>
+    <div id="viewport" tabindex="0" role="region" aria-label="Isla en 3D. Arrastra para girar. Usa la rueda para acercarte. Mayús y arrastre para desplazar. Flechas para girar, más y menos para zoom, Inicio para restablecer."></div>
+    <p id="status" role="status" aria-live="polite">Preparando tu visita…</p>
+    <section id="fallback" hidden><img loading="lazy" src="../assets/buildings/bank/cozy_bank_isometric.png" alt="Banco Cozy de piedra crema con tejado verde y detalles dorados"><p id="error-message"></p><button onclick="location.reload()">Volver a intentar</button></section>
+    <div class="controls">
+      <div class="camera" role="group" aria-label="Controles de cámara"><button id="left" aria-label="Girar a la izquierda">↶</button><button id="reset">Vista inicial</button><button id="right" aria-label="Girar a la derecha">↷</button><span class="divider"></span><button id="out" aria-label="Alejar">−</button><output id="zoom" aria-label="Nivel de zoom">100%</output><button id="in" aria-label="Acercar">+</button></div>
+      <div class="building-controls"><button id="pan" aria-pressed="false">Desplazar</button><button id="focus-bank">Ver el banco ↗</button><button id="doors" class="primary" disabled aria-pressed="false">Abrir las puertas</button></div>
+    </div>
+    <p class="hint">Arrastra para girar · Rueda para acercarte · Mayús + arrastre para desplazar <span>· En móvil, amplía con dos dedos</span></p>
+  </main>
+  <footer><span>COZY CITY <b> / </b> Isla 001</span><span>Un lugar que irá creciendo contigo.</span><a href="../studio/">Visitar Oak Studio ↗</a></footer>
+</body></html>
