@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:8773/cozy/city/",
+  "testedAt": "2026-10-30T20:05:38.201Z",
+  "environment": "Headless Edge, 1440×1000 desktop and 360×800 touch emulation; not physical mobile hardware",
+  "checks": [
+    "Dragging the bank does not enter",
+    "Mesh click, progressive camera, door clip, fade, greeting and idle; repeated click ignored",
+    "Island simulation freezes inside office",
+    "Write and stamp play then blend back to idle",
+    "Return restores complete initial camera and closed doors",
+    "Rotated/panned camera, open doors, night, quality and paused environment survive a visit",
+    "Ten animated visits preserve geometry and texture counts",
+    "Reduced-motion entry and return work without character animation",
+    "Touch bank entry and exit, portrait POV, 360px without overflow",
+    "Failed Nilo load restores city; retry succeeds without page reload"
+  ],
+  "measurements": [],
+  "repeatMemory": [
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    },
+    {
+      "geometries": 219,
+      "textures": 5
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "bad": []
+}

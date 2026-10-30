@@ -1,5 +1,7 @@
 # Cozy City — Isla 001
 
+El Banco permite entrar al despacho 3D de Nilo y volver a la isla: [arquitectura, modelos y validación](COZY_BANK_VISIT.md), [galería y recorrido grabado](qa/bank-office/index.html). Pulsa el edificio o «Entrar al banco»; «Volver a la ciudad» y Escape restauran tu cámara.
+
 La ruta `/cozy/city/` muestra ahora la isla completa. Conserva el banco y sus puertas, incorpora el entorno modular y mantiene los enlaces desde Ajustes y Oak Studio. HTML, CSS y JavaScript sin build; Three.js y GLTFLoader locales. No modifica el progreso ni los datos de Cozy Room.
 
 La versión actual mejora ocho familias del entorno: [autoría y validación V2](COZY_CITY_ASSETS_V2.md), [galería antes/después](qa/island-v2/index.html). La arquitectura y coordenadas iniciales están documentadas en [COZY_CITY_ISLAND.md](COZY_CITY_ISLAND.md). Las carpetas `qa/island` y `qa/city` conservan las revisiones históricas.

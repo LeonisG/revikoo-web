@@ -1,0 +1,43 @@
+{
+  "up": "Z",
+  "niloPosition": [
+    0,
+    1.04,
+    1.01
+  ],
+  "camera": {
+    "desktop": {
+      "position": [
+        0,
+        -3.25,
+        2.4
+      ],
+      "target": [
+        0,
+        1.04,
+        2.12
+      ],
+      "fov": 46
+    },
+    "portrait": {
+      "position": [
+        0,
+        -4.1,
+        2.48
+      ],
+      "target": [
+        0,
+        1.04,
+        2.15
+      ],
+      "fov": 48
+    }
+  },
+  "independentNodes": [
+    "NiloChair",
+    "VaultDoor",
+    "DeskLamp",
+    "Ledger",
+    "DocumentTray"
+  ]
+}

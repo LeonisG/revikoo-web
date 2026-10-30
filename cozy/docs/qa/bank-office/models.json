@@ -1,0 +1,64 @@
+{
+  "assets/characters/nilo/nilo.glb": {
+    "bytes": 404508,
+    "triangles": 19366,
+    "meshes": 22,
+    "materials": [
+      "Nilo_Vest_Sage",
+      "Nilo_Porcelain_Ivory",
+      "Nilo_Brass_Gold",
+      "Nilo_Leather_Brown",
+      "Nilo_Shirt_Cream",
+      "Nilo_Eye_Dark",
+      "Nilo_Cheek_Rose"
+    ],
+    "clips": [
+      {
+        "name": "NILO_IDLE",
+        "duration": 5,
+        "channels": 5
+      },
+      {
+        "name": "NILO_GREET",
+        "duration": 1.5,
+        "channels": 9
+      },
+      {
+        "name": "NILO_STAMP",
+        "duration": 2,
+        "channels": 6
+      },
+      {
+        "name": "NILO_WRITE",
+        "duration": 3,
+        "channels": 6
+      }
+    ],
+    "sha256": "2aaa85b01186755fe0fa50aade31e3ec5dc39d30a1e72b8ce8032fbb892f62fb"
+  },
+  "assets/interiors/bank-office/bank-office.glb": {
+    "bytes": 4088808,
+    "triangles": 84804,
+    "meshes": 32,
+    "materials": [
+      "Office_Daylight",
+      "Office_Ivory",
+      "Office_Walnut_Edge",
+      "Office_Brass",
+      "Office_Lamp_Glow",
+      "Office_Leather_Green",
+      "Office_Paper",
+      "Office_Ink",
+      "Office_Walnut",
+      "Office_Leaf_0",
+      "Office_Leaf_1",
+      "Office_Leaf_2",
+      "Office_Limestone",
+      "Office_Sage",
+      "Office_Walnut_Shadow",
+      "Office_Vault_Metal"
+    ],
+    "clips": [],
+    "sha256": "4ef2f7bec906cf1ac385765eec80dac5d928a499103dd86de8273fb6fcb1b928"
+  }
+}

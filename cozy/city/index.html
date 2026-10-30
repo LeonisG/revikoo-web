@@ -18,9 +18,11 @@
     <section id="fallback" hidden><img loading="lazy" src="../assets/buildings/bank/cozy_bank_isometric.png" alt="Banco Cozy de piedra crema con tejado verde y detalles dorados"><p id="error-message"></p><button onclick="location.reload()">Volver a intentar</button></section>
     <div class="controls">
       <div class="camera" role="group" aria-label="Controles de cámara"><button id="left" aria-label="Girar a la izquierda">↶</button><button id="reset">Vista inicial</button><button id="right" aria-label="Girar a la derecha">↷</button><span class="divider"></span><button id="out" aria-label="Alejar">−</button><output id="zoom" aria-label="Nivel de zoom">100%</output><button id="in" aria-label="Acercar">+</button></div>
-      <div class="building-controls"><button id="pan" aria-pressed="false">Desplazar</button><button id="focus-bank">Ver el banco ↗</button><button id="doors" class="primary" disabled aria-pressed="false">Abrir las puertas</button></div>
+      <div class="building-controls"><button id="pan" aria-pressed="false">Desplazar</button><button id="focus-bank">Ver el banco ↗</button><button id="doors" disabled aria-pressed="false">Abrir las puertas</button><button id="enter-bank" class="primary" disabled>Entrar al banco ↗</button></div>
     </div>
     <p class="hint">Arrastra para girar · Rueda para acercarte · Mayús + arrastre para desplazar <span>· En móvil, amplía con dos dedos</span></p>
+    <section id="office-ui" aria-label="Despacho de Nilo" hidden><div class="office-title"><p class="eyebrow">EL DESPACHO DE NILO</p><h1>Un momento de calma.</h1></div><p id="welcome" role="status" aria-live="polite"></p><div class="office-actions"><button id="office-motion" aria-pressed="true">Pausar ambiente</button><button id="return-city" class="primary">← Volver a la ciudad</button></div></section>
+    <div id="scene-fade" aria-hidden="true" hidden></div>
   </main>
   <footer><span>COZY CITY <b> / </b> Isla 001</span><span>Un lugar que irá creciendo contigo.</span><a href="../studio/">Visitar Oak Studio ↗</a></footer>
 </body></html>

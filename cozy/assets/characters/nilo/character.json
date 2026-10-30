@@ -1,0 +1,17 @@
+{
+  "up": "Z",
+  "origin": "ground between feet",
+  "height": 2.24,
+  "seatOffset": [
+    0,
+    1.04,
+    1.01
+  ],
+  "clips": {
+    "NILO_IDLE": 5,
+    "NILO_GREET": 1.5,
+    "NILO_WRITE": 3,
+    "NILO_STAMP": 2
+  },
+  "rig": "Named transform hierarchy; separate body, upper body, arms, hands and blink controls"
+}
