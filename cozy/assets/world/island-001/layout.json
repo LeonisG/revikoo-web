@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "units": "meters",
+  "up": "Z",
+  "seed": 147,
+  "bank": {
+    "position": [
+      18,
+      2,
+      1.92
+    ],
+    "rotation": 0
+  },
+  "plots": [
+    {
+      "id": "town-hall",
+      "position": [
+        -24,
+        -4,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        9
+      ],
+      "rotation": 0,
+      "buildable": true,
+      "entrance": [
+        -24,
+        -8.5,
+        1.85
+      ]
+    },
+    {
+      "id": "studio",
+      "position": [
+        21,
+        -15,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        8
+      ],
+      "rotation": 0,
+      "buildable": true,
+      "entrance": [
+        21,
+        -19.0,
+        1.85
+      ]
+    },
+    {
+      "id": "library-garden",
+      "position": [
+        20,
+        14,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        8
+      ],
+      "rotation": 0,
+      "buildable": true,
+      "entrance": [
+        20,
+        10.0,
+        1.85
+      ]
+    }
+  ]
+}

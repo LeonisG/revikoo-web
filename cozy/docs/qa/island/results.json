@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:8773/cozy/city/",
+  "testedAt": "2026-10-30T13:09:00.436Z",
+  "environment": "Headless Microsoft Edge, 1440 × 1000 CSS pixels; not a physical phone benchmark",
+  "checks": [
+    "three GLBs and three future plots",
+    "ambient time advances",
+    "all three quality modes measured",
+    "wheel zoom and drag orbit",
+    "keyboard pan and reset",
+    "both doors open to 85 degrees and close",
+    "day/sunset/night transitions",
+    "pause/resume",
+    "reduced motion",
+    "visibility handler pauses and resumes (simulated visibility)",
+    "360px layout without overflow",
+    "actual canvas animation video"
+  ],
+  "measurements": [
+    {
+      "quality": "high",
+      "fps": 60.05805612091689,
+      "frames": 180,
+      "triangles": 435114,
+      "drawCalls": 291,
+      "geometries": 146,
+      "particleLimit": 24
+    },
+    {
+      "quality": "medium",
+      "fps": 40.04004004004004,
+      "frames": 180,
+      "triangles": 433914,
+      "drawCalls": 291,
+      "geometries": 146,
+      "particleLimit": 12
+    },
+    {
+      "quality": "low",
+      "fps": 26.543387378619304,
+      "frames": 120,
+      "triangles": 218225,
+      "drawCalls": 149,
+      "geometries": 146,
+      "particleLimit": 5
+    }
+  ],
+  "errors": [],
+  "bad": [],
+  "warnings": []
+}

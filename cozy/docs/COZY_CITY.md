@@ -1,13 +1,9 @@
-# Cozy City — banco interactivo
+# Cozy City — Isla 001
 
-Ruta independiente `/cozy/city/`, enlazada desde Ajustes de Cozy Room y la cabecera de Oak Studio. HTML/CSS/JavaScript sin build; reutiliza Three.js y GLTFLoader locales. El juego principal no descarga el modelo ni Three.js.
+La ruta `/cozy/city/` muestra ahora la isla completa. Conserva el banco y sus puertas, incorpora el entorno modular y mantiene los enlaces desde Ajustes y Oak Studio. HTML, CSS y JavaScript sin build; Three.js y GLTFLoader locales. No modifica el progreso ni los datos de Cozy Room.
 
-Controles: arrastrar para orbitar, rueda para zoom, botones equivalentes, flechas y +/− con foco en la vista, Inicio para restaurar. En móvil, un dedo orbita y dos amplían. Elevación limitada para evitar pasar bajo el suelo; zoom entre 55% y 350%. Cámara ortográfica con Z vertical y conversión estándar del GLB.
+La arquitectura, autoría Blender, coordenadas, animaciones, mediciones y ampliación están documentadas en [COZY_CITY_ISLAND.md](COZY_CITY_ISLAND.md). Capturas y grabación actuales en [qa/island](qa/island/); `qa/city` conserva la revisión histórica del banco aislado.
 
-El botón de puertas reproduce los clips originales del GLB (apertura/cierre, 0,8 segundos); se bloquea durante la transición y conserva la pose final. Respeta movimiento reducido. Render bajo demanda, salvo durante la animación. DPR máximo 1,75 y mapa de sombras de 2048. Imagen alternativa cuando no hay WebGL o falla la carga. No modifica localStorage ni el progreso.
+Arrastra para orbitar, usa la rueda o pellizco para zoom, Mayús + arrastre o «Desplazar» para mover el encuadre. Flechas, +/− e Inicio funcionan con foco en el visor. «Ver el banco» acerca la cámara; sus puertas se abren con el botón o al pulsar sobre el edificio.
 
-Prueba reproducible: `node cozy/tools/qa-city.cjs`, con PLAYWRIGHT_MODULE si Playwright no está instalado en el proyecto; COZY_URL permite probar localhost o producción. Cubre carga, rueda, arrastre, reset, teclado, poses de puertas, ancho de 360 px y enlace desde Ajustes. Evidencias en `docs/qa/city/`. También pasan las 32 pruebas de `node --test cozy/tests/*.test.mjs`.
-
-El modelo contiene 44.171 triángulos; el renderer cuenta 88.344 al incluir el pase de sombras y el suelo, con 179 llamadas en la vista probada. No se han medido FPS en teléfono físico.
-
-Solo se publican el GLB y el PNG necesarios para la experiencia. El maestro .blend, scripts de autoría, vistas de revisión y copias de seguridad permanecen en la carpeta local del asset.
+Validación: `node cozy/tools/validate-island.cjs`, `node cozy/tools/qa-island.cjs` y `node --test cozy/tests/*.test.mjs`. El script de navegador admite `PLAYWRIGHT_MODULE`, `COZY_URL`, `ISLAND_QA_DIR` y `SKIP_VIDEO`. No añade dependencias al sitio publicado.
