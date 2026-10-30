@@ -11,12 +11,13 @@ export class AmbientAnimationManager{
     this.leafAlpha=new THREE.InstancedBufferAttribute(new Float32Array(24),1);this.leafGeometry.setAttribute('leafAlpha',this.leafAlpha);
     this.leafMaterial.onBeforeCompile=s=>{s.vertexShader=s.vertexShader.replace('#include <common>','#include <common>\nattribute float leafAlpha; varying float vLeafAlpha;').replace('#include <begin_vertex>','#include <begin_vertex>\nvLeafAlpha=leafAlpha;');s.fragmentShader=s.fragmentShader.replace('#include <common>','#include <common>\nvarying float vLeafAlpha;').replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.a *= vLeafAlpha;');};
     this.drops=new THREE.InstancedMesh(new THREE.SphereGeometry(.1,5,4),new THREE.MeshStandardMaterial({color:0xd8f4e1,roughness:.25,transparent:true,opacity:.72}),96);this.drops.frustumCulled=false;scene.add(this.drops);this.dummy=new THREE.Object3D();
+    this.ripples=new THREE.InstancedMesh(new THREE.RingGeometry(.36,.40,24),new THREE.MeshBasicMaterial({color:0xc9eee7,transparent:true,opacity:.38,depthWrite:false,side:THREE.DoubleSide}),8);this.ripples.frustumCulled=false;scene.add(this.ripples);
     this.glows=new THREE.InstancedMesh(new THREE.CircleGeometry(.8,20),new THREE.MeshBasicMaterial({color:0xffbc58,transparent:true,opacity:.12,depthWrite:false} ),world.lamps.length);scene.add(this.glows);world.lamps.forEach((p,i)=>{this.dummy.position.set(p.position[0],p.position[1],p.position[2]+.03);this.dummy.rotation.set(0,0,0);this.dummy.scale.setScalar(1.5);this.dummy.updateMatrix();this.glows.setMatrixAt(i,this.dummy.matrix);});
     this.setQuality('medium');this.setLighting('day',true);
   }
   decorate(material,water,wind){
     if(water){this.waterCount++;material.transparent=true;material.opacity=.9;material.roughness=.28;material.metalness=.12;material.side=THREE.DoubleSide;}if(wind)this.windCount++;
-    const u=this.uniforms;
+    const u=this.uniforms,cascade=material.name.includes('Cascade');
     material.onBeforeCompile=shader=>{
       shader.uniforms.cityTime=u.time;shader.uniforms.cityMotion=u.motion;
       shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nuniform float cityTime; uniform float cityMotion; varying vec3 vCityPosition;');
@@ -39,9 +40,12 @@ export class AmbientAnimationManager{
         float wave=sin(vCityPosition.x*.8+vCityPosition.y*1.7-cityTime*.8+sin(vCityPosition.y*.6))*sin(vCityPosition.y*2.3+cityTime*.5);
         float shimmer=pow(max(0.0,wave),22.0);
         diffuseColor.rgb*=.96+wave*.035;
-        diffuseColor.rgb+=vec3(.06,.10,.09)*shimmer;`);
+        diffuseColor.rgb+=vec3(.06,.10,.09)*shimmer;
+        ${cascade?`float flow=sin(vCityPosition.z*5.0+cityTime*2.4+sin(vCityPosition.x*13.0));
+        float streak=pow(max(0.0,sin(vCityPosition.x*17.0+sin(vCityPosition.z*.8+cityTime*.4))),6.0);
+        diffuseColor.rgb+=vec3(.09,.15,.17)*streak*(.65+.35*flow);`:''}`);
     };
-    material.customProgramCacheKey=()=>`cozy-city-${water}-${wind}`;material.needsUpdate=true;
+    material.customProgramCacheKey=()=>`cozy-city-${water}-${wind}-${cascade}`;material.needsUpdate=true;
   }
   setQuality(quality){this.quality=quality;this.leaves.count=QUALITY[quality].leaves;this.drops.count=QUALITY[quality].foam+24;}
   setMotion(enabled){this.motion=enabled;this.uniforms.motion.value=enabled?1:0;this.leaves.visible=enabled;}
@@ -56,12 +60,13 @@ export class AmbientAnimationManager{
     this.leaves.instanceMatrix.needsUpdate=true;this.leafAlpha.needsUpdate=true;this.activeLeaves=active;
     // Fountain droplets describe small ballistic arcs, with separate cascade foam.
     for(let i=0;i<this.drops.count;i++){
-      if(i<24){const a=i*2.399,p=(t*.6+i/24)%1;d.position.set(1+cos(a)*p*1.65,-4+sin(a)*p*1.65,4.9+1.4*sin(p*Math.PI)-2.3*p);d.scale.set(.7,.7,1.4);}
+      if(i<24){const a=(i%4)*Math.PI/2,p=(t*.72+Math.floor(i/4)/6)%1,r=(.94+.30*p)*1.15;d.position.set(1+cos(a)*r,-4+sin(a)*r,1.92+(1.99-1.36*p*p)*1.15);d.scale.set(.45,.45,1.5);}
       else{const j=i-24,p=(t*.38+j*.137)%1,upper=j%2===0,x=upper?-9.8:-9.88,y=upper?8.5:-28;d.position.set(x+sin(j*8)*1.25,y-p*.6,(upper?5.3:1.84)-p*(upper?3.5:6.7));d.scale.set(.5,.5,3.0);}
       d.rotation.set(0,0,0);d.updateMatrix();this.drops.setMatrixAt(i,d.matrix);
     }this.drops.instanceMatrix.needsUpdate=true;
+    for(let i=0;i<8;i++){const p=(t*.45+i*.21)%1,a=i*Math.PI/2;if(i<4){d.position.set(1+cos(a)*1.24*1.15,-4+sin(a)*1.24*1.15,2.655);d.scale.setScalar(.35+p*.9);}else{const upper=i<6;d.position.set(upper?-9.8:-9.88,upper?7.5:-29.1,upper?1.90:-4.74);d.scale.set(1+p*2,.6+p,1);}d.rotation.set(0,0,0);d.updateMatrix();this.ripples.setMatrixAt(i,d.matrix);}this.ripples.instanceMatrix.needsUpdate=true;
   }
   snapshot(){return {time:this.time,motion:this.motion,quality:this.quality,lighting:this.mode,transition:this.transition,windMaterials:this.windCount,waterMaterials:this.waterCount,activeLeaves:this.activeLeaves,particleLimit:this.leaves.count};}
-  dispose(){for(const o of [this.leaves,this.drops,this.glows]){this.scene.remove(o);o.geometry.dispose();o.material.dispose();}}
+  dispose(){for(const o of [this.leaves,this.drops,this.glows,this.ripples]){this.scene.remove(o);o.geometry.dispose();o.material.dispose();}}
 }
 const sin=Math.sin,cos=Math.cos;

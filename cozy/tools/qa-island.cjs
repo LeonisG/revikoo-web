@@ -11,7 +11,8 @@ const base=process.env.COZY_URL||'http://127.0.0.1:8773/cozy/',out=process.env.I
   await p.waitForTimeout(1000);const initial=await state();assert.equal(initial.plots.length,3);assert.ok(initial.ambient.windMaterials>0&&initial.ambient.waterMaterials>0);
   await p.waitForTimeout(1200);assert.ok((await state()).ambient.time>initial.ambient.time+.5);await shot('day');
   const measurements=[];
-  for(const q of ['high','medium','low']){await p.selectOption('#quality',q);await p.waitForTimeout(4500);const s=await state();measurements.push({quality:q,fps:s.fps,frames:s.frames,triangles:s.triangles,drawCalls:s.calls,geometries:s.geometries,particleLimit:s.ambient.particleLimit});}
+  // Let all modes fill the 180-frame rolling window after shader recompilation.
+  for(const q of ['high','medium','low']){await p.selectOption('#quality',q);await p.waitForTimeout(8000);const s=await state();measurements.push({quality:q,fps:s.fps,frames:s.frames,triangles:s.triangles,drawCalls:s.calls,geometries:s.geometries,particleLimit:s.ambient.particleLimit});}
   await p.selectOption('#quality','medium');
   await p.mouse.move(800,480);await p.mouse.wheel(0,-400);await p.waitForTimeout(120);assert.ok((await state()).zoom>1);
   await p.mouse.down();await p.mouse.move(1040,550,{steps:12});await p.mouse.up();assert.notEqual((await state()).azimuth,initial.azimuth);await shot('another-perspective');await p.click('#reset');

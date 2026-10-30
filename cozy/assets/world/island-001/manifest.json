@@ -4,19 +4,19 @@
   "gltfUp": "Y",
   "files": {
     "terrain.glb": {
-      "bytes": 1996108,
-      "sha256": "b4771c52a652fe9b46cb340a8c05aeda79ae1358d86c1414e704e0ae9e9a2a97",
-      "meshes": 8,
-      "materials": 8,
-      "triangles": 39248,
+      "bytes": 2962760,
+      "sha256": "65113026be42682e4608e80564b4fe929d15ec132048b3773168197bc0842042",
+      "meshes": 16,
+      "materials": 16,
+      "triangles": 59516,
       "clips": []
     },
     "environment-kit.glb": {
-      "bytes": 486140,
-      "sha256": "4dc20e5925276859850961f1a9d1bedd4411263f60e6086d88efe2920eb1ac2e",
-      "meshes": 38,
-      "materials": 16,
-      "triangles": 13459,
+      "bytes": 1406156,
+      "sha256": "8b948794fc3f98a9b46a27a3b4ede489d0aad1a3ffd1efb0115d9f57572326ac",
+      "meshes": 48,
+      "materials": 17,
+      "triangles": 33322,
       "clips": []
     },
     "bank-island.glb": {
@@ -51,6 +51,14 @@
           ]
         }
       ]
+    },
+    "path-kit.glb": {
+      "bytes": 442984,
+      "sha256": "4bc1e428e7eafd076c1064b29e151cf217be26511f82eea6e191765a62d531b5",
+      "meshes": 10,
+      "materials": 5,
+      "triangles": 8266,
+      "clips": []
     }
   },
   "assets": [
@@ -58,11 +66,15 @@
     "BRIDGE_STONE",
     "BRIDGE_WOOD",
     "BUSH",
+    "BUSH_FLOWERING",
+    "BUSH_LAVENDER",
     "FENCE",
     "FLOWER_PINK",
+    "FLOWER_PURPLE",
     "FLOWER_WHITE",
     "FLOWER_YELLOW",
     "FOUNTAIN",
+    "GATE",
     "GRASS",
     "LAMP",
     "POT",
@@ -72,7 +84,7 @@
     "TREE_02",
     "TREE_03"
   ],
-  "placements": 275,
+  "placements": 290,
   "plots": [
     {
       "id": "town-hall",

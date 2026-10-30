@@ -2,7 +2,7 @@
 
 La ruta `/cozy/city/` muestra ahora la isla completa. Conserva el banco y sus puertas, incorpora el entorno modular y mantiene los enlaces desde Ajustes y Oak Studio. HTML, CSS y JavaScript sin build; Three.js y GLTFLoader locales. No modifica el progreso ni los datos de Cozy Room.
 
-La arquitectura, autoría Blender, coordenadas, animaciones, mediciones y ampliación están documentadas en [COZY_CITY_ISLAND.md](COZY_CITY_ISLAND.md). Capturas y grabación actuales en [qa/island](qa/island/); `qa/city` conserva la revisión histórica del banco aislado.
+La versión actual mejora ocho familias del entorno: [autoría y validación V2](COZY_CITY_ASSETS_V2.md), [galería antes/después](qa/island-v2/index.html). La arquitectura y coordenadas iniciales están documentadas en [COZY_CITY_ISLAND.md](COZY_CITY_ISLAND.md). Las carpetas `qa/island` y `qa/city` conservan las revisiones históricas.
 
 Arrastra para orbitar, usa la rueda o pellizco para zoom, Mayús + arrastre o «Desplazar» para mover el encuadre. Flechas, +/− e Inicio funcionan con foco en el visor. «Ver el banco» acerca la cámara; sus puertas se abren con el botón o al pulsar sobre el edificio.
 

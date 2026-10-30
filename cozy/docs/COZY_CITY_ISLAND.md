@@ -1,5 +1,7 @@
 # Isla de los comienzos — autoría e integración
 
+Este documento describe la entrega V1. Para los assets y mediciones actuales, consultar [el pase V2](COZY_CITY_ASSETS_V2.md).
+
 ## Auditoría y alcance
 
 El punto de partida era `/cozy/city/`: visor ortográfico Z-up con controles propios, Three.js 0.186.1 local, GLTFLoader, banco GLB de 44.171 triángulos y tres clips de puertas. La web usa HTML/CSS/JavaScript vanilla, sin compilación ni servidor. Se conserva el motor, la cámara y la navegación existentes. GitHub Pages publica `main`.
