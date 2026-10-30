@@ -142,6 +142,7 @@ export function createPanels(engine, room, audio, edit) {
   }
   function settings(s) {
     return `<p class="panel-intro">Tu rincón, tus pequeñas preferencias.</p>
+      <div class="setting-row"><div><strong>Cozy City · El banco</strong><p class="quiet-note">Explora el primer edificio de la ciudad. Gira la cámara, acércate y abre sus puertas.</p></div><a class="pill-button" href="./city/">Visitar ciudad</a></div>
       <div class="setting-row"><div><strong>Oak Studio · 3D</strong><p class="quiet-note">Prueba la colocación libre y diseña una habitación. Boceto independiente de tu partida.</p></div><a class="pill-button" href="./studio/">Abrir estudio</a></div>
       <div class="setting-row"><label for="sound-setting">Sonido</label><input id="sound-setting" type="checkbox" data-pref="sound" ${s.preferences.sound ? 'checked' : ''}></div>
       <div class="setting-row"><label for="ambient-setting">Volumen del ambiente</label><input id="ambient-setting" type="range" data-pref="ambient" min="0" max="100" value="${s.preferences.ambient}" aria-valuetext="${s.preferences.ambient}%"></div>

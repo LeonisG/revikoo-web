@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9e3d6"><title>El banco · Cozy City</title>
+  <meta name="description" content="Un primer paseo por Cozy City. Explora el banco desde cualquier ángulo.">
+  <link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="./city.css">
+  <script type="importmap">{"imports":{"three":"../tools/vendor/three/build/three.module.js","three/addons/":"../tools/vendor/three/examples/jsm/"}}</script>
+  <script type="module" src="./city.mjs"></script>
+</head>
+<body>
+  <header><a class="brand" href="../">cozy<span>city.</span></a><span class="edition">UN PEQUEÑO MUNDO EN CONSTRUCCIÓN</span><a class="back" href="../">Volver a mi habitación ↗</a></header>
+  <main>
+    <div class="intro"><p class="eyebrow">EL PRIMER RINCÓN DE LA CIUDAD · 001</p><h1>Donde crecen<br>tus planes.</h1><p>El banco de Cozy City.<br>Piedra cálida, tejados verdes y nuevos comienzos.</p></div>
+    <div id="viewport" tabindex="0" role="region" aria-label="Banco en 3D. Arrastra para girar. Usa la rueda para acercarte. Flechas para girar, más y menos para zoom, Inicio para restablecer."></div>
+    <p id="status" role="status" aria-live="polite">Preparando tu visita…</p>
+    <section id="fallback" hidden><img src="../assets/buildings/bank/cozy_bank_isometric.png" alt="Banco Cozy de piedra crema con tejado verde y detalles dorados"><p id="error-message"></p><button onclick="location.reload()">Volver a intentar</button></section>
+    <div class="controls">
+      <div class="camera" role="group" aria-label="Controles de cámara"><button id="left" aria-label="Girar a la izquierda">↶</button><button id="reset">Vista inicial</button><button id="right" aria-label="Girar a la derecha">↷</button><span class="divider"></span><button id="out" aria-label="Alejar">−</button><output id="zoom" aria-label="Nivel de zoom">100%</output><button id="in" aria-label="Acercar">+</button></div>
+      <button id="doors" class="primary" disabled aria-pressed="false">Abrir las puertas <span>↗</span></button>
+    </div>
+    <p class="hint">Arrastra para girar · Rueda para acercarte <span>· En móvil, gira con un dedo y amplía con dos</span></p>
+  </main>
+  <footer><span>COZY CITY <b> / </b> El banco</span><span>Primera versión · Un lugar que irá creciendo contigo.</span><a href="../studio/">Visitar Oak Studio ↗</a></footer>
+</body></html>

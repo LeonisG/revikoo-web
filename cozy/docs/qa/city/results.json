@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "initial": {
+    "loaded": true,
+    "azimuth": -2.15,
+    "elevation": 0.42,
+    "zoom": 1,
+    "opened": false,
+    "playing": false,
+    "clips": [
+      "DOORS_CLOSED",
+      "DOORS_OPENING",
+      "DOORS_CLOSING"
+    ],
+    "triangles": 88344,
+    "calls": 179
+  },
+  "errors": [],
+  "bad": []
+}
