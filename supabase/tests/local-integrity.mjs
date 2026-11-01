@@ -1,0 +1,55 @@
+// PostgreSQL engine tests; these do NOT replace real Supabase Auth/API tests.
+import { readFile, readdir } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
+import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
+const { PGlite } = await import(pathToFileURL(process.env.PGLITE_MODULE));
+const db = new PGlite();
+await db.exec(`create schema auth; create role anon; create role authenticated;
+ create table auth.users(id uuid primary key);
+ create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+ grant usage on schema auth,public to anon,authenticated; grant execute on function auth.uid() to anon,authenticated;`);
+for (const f of (await readdir('supabase/migrations')).filter(f=>f.endsWith('.sql')).sort()) await db.exec(await readFile('supabase/migrations/'+f,'utf8'));
+const a=randomUUID(),b=randomUUID();
+await db.query('insert into auth.users values ($1),($2)',[a,b]);
+async function as(user){await db.exec('reset role');await db.query("select set_config('request.jwt.claim.sub',$1,false)",[user]);await db.exec('set role authenticated');}
+async function mutate(action,payload={},id=randomUUID()){return (await db.query('select public.finance_mutate($1,$2::jsonb,$3) result',[action,JSON.stringify(payload),id])).rows[0].result;}
+async function snapshot(){return (await db.query("select public.finance_snapshot(date_trunc('month',current_date)::date) data")).rows[0].data;}
+await as(a);await mutate('bootstrap');await mutate('bootstrap');let data=await snapshot();assert.equal(data.categories.length,14);
+const expense=data.categories.find(c=>c.category_type==='expense').id,income=data.categories.find(c=>c.category_type==='income').id;
+const principal=(await mutate('account.save',{name:'QA principal',account_type:'checking',initial_balance_cents:'100000'})).id;
+const today=new Date().toISOString().slice(0,10),tx={transaction_type:'expense',amount_cents:'10000',account_id:principal,category_id:expense,occurred_on:today};
+const request=randomUUID(),spend=await mutate('transaction.save',tx,request);
+assert.equal((await snapshot()).accounts[0].balance_cents,'90000');
+assert.deepEqual(await mutate('transaction.save',tx,request),spend);
+await assert.rejects(mutate('transaction.save',{...tx,amount_cents:'1'},request));
+await mutate('transaction.save',{...tx,transaction_type:'income',amount_cents:'20000',category_id:income});
+assert.equal((await snapshot()).accounts[0].balance_cents,'110000');
+const savings=(await mutate('account.save',{name:'QA ahorro',account_type:'savings',initial_balance_cents:'50000'})).id;
+await mutate('transaction.save',{...tx,transaction_type:'transfer',amount_cents:'30000',destination_account_id:savings,category_id:null});
+data=await snapshot();assert.deepEqual(data.accounts.map(a=>a.balance_cents),['80000','80000']);assert.equal(data.income_cents,'20000');assert.equal(data.expense_cents,'10000');
+for(const amount of ['0','-1','1.5','1,01'])await assert.rejects(mutate('transaction.save',{...tx,amount_cents:amount}));
+await assert.rejects(mutate('transaction.save',{...tx,category_id:income}));
+await assert.rejects(mutate('transaction.save',{...tx,account_id:randomUUID()}));
+await assert.rejects(mutate('transaction.save',{...tx,transaction_type:'transfer',category_id:null,destination_account_id:principal}));
+await mutate('transaction.save',{...tx,id:spend.id,amount_cents:'5000'});assert.equal((await snapshot()).accounts[0].balance_cents,'85000');
+await mutate('transaction.delete',{id:spend.id});assert.equal((await snapshot()).accounts[0].balance_cents,'90000');
+await mutate('transaction.save',tx,request);assert.equal((await snapshot()).accounts[0].balance_cents,'90000');
+const rule=(await mutate('rule.save',{name:'QA nómina',transaction_type:'income',amount_cents:'180000',account_id:principal,category_id:income,day_of_month:1,start_date:today.slice(0,7)+'-01'})).id;
+const occurrence={rule_id:rule,period:today.slice(0,7)+'-01',decision:'confirmed',amount_cents:'180000'};
+const confirmed=await mutate('occurrence.decide',occurrence);assert.equal((await mutate('occurrence.decide',occurrence)).already_decided,true);
+await mutate('transaction.delete',{id:confirmed.transaction_id});assert.equal((await mutate('occurrence.decide',occurrence)).already_decided,true);
+await as(b);await mutate('bootstrap');const other=(await mutate('account.save',{name:'QA B',account_type:'cash',initial_balance_cents:'0'})).id;
+const categoryB=(await snapshot()).categories.find(c=>c.category_type==='expense').id;
+await assert.rejects(mutate('transaction.save',{...tx,account_id:principal,category_id:categoryB}));
+await assert.rejects(mutate('transaction.delete',{id:spend.id}));
+assert.equal((await db.query('select * from public.finance_accounts where id=$1',[principal])).rows.length,0);
+await assert.rejects(db.query('update public.finance_accounts set name=$1 where id=$2',['attack',principal]));
+await as(a);await assert.rejects(mutate('transaction.save',{...tx,destination_account_id:other,category_id:null,transaction_type:'transfer'}));
+await assert.rejects(mutate('transaction.save',{...tx,category_id:categoryB}));
+await assert.rejects(mutate('account.save',{id:other,name:'attack',account_type:'cash',initial_balance_cents:'0'}));
+await assert.rejects(mutate('bootstrap',{user_id:b}));
+await db.exec('reset role; set role anon;');await assert.rejects(db.query('select * from public.finance_accounts'));
+await assert.rejects(mutate('bootstrap'));
+console.log('PASS: PostgreSQL migrations, exact balances, transfers, validation, edits/deletes, request tombstones, recurrence dedupe, RLS/privileges and cross-owner integrity. Local Auth identity fixture only.');
+await db.close();

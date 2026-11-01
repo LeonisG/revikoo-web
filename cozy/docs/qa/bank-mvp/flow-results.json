@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "testedAt": "2026-11-01T20:03:17.935Z",
+  "checks": [
+    "Income and salary offer create a real monthly rule; edited confirmation amount posts once",
+    "Internal transfer UI preserves total and excludes transfer from charts",
+    "Month navigation and complete history show stored data",
+    "Rule pause and resume persisted",
+    "Offline logout cannot resurrect a saved session on reload"
+  ],
+  "errors": []
+}

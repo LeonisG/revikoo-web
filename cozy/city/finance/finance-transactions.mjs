@@ -1,0 +1,15 @@
+import {button,field,select,submit,title,escapeHTML,empty} from './finance-ui.mjs';
+import {euros,inputAmount,todayISO} from './finance-calculations.mjs';
+export const transactionKinds=[{id:'expense',name:'Gasto'},{id:'income',name:'Ingreso'},{id:'transfer',name:'Transferencia interna'}];
+export function transactionForm(data,tx={},rule=false) {
+ const kind=tx.transaction_type||'expense',accounts=data.accounts.filter(a=>!a.archived_at),cats=data.categories.filter(c=>c.category_type===kind);
+ const accountId=tx.account_id||accounts.find(a=>a.is_primary)?.id||accounts[0]?.id;
+ return `${title(rule?(tx.id?'Editar habitual':'Nuevo movimiento habitual'):(tx.id?'Corregir movimiento':'Añadir movimiento'))}${rule?'<p>Es una previsión. Solo contará cuando la confirmes.</p>':''}<form data-form="${rule?'rule':'transaction'}" data-id="${tx.id||''}">${select('Tipo de movimiento','transaction_type',transactionKinds,kind)}${rule?field('Nombre de la plantilla','name',tx.name||'','required maxlength="80"'):''}${field('Importe (€)','amount',tx.amount_cents?inputAmount(tx.amount_cents):'','required inputmode="decimal" placeholder="18,50"')}${select(kind==='transfer'?'Cuenta origen':'Cuenta','account_id',accounts,accountId)}<div data-category ${kind==='transfer'?'hidden':''}>${select('Categoría','category_id',cats,tx.category_id)}</div><div data-destination ${kind!=='transfer'?'hidden':''}>${select('Cuenta destino','destination_account_id',accounts,tx.destination_account_id||accounts.find(a=>a.id!==accountId)?.id)}</div>${rule?field('Día del mes','day_of_month',tx.day_of_month||new Date().getDate(),'type="number" min="1" max="31" required')+field('Desde','start_date',tx.start_date||todayISO(),'type="date" min="1900-01-01" max="2100-12-31" required')+'<p class="bank-muted">Si el mes no tiene ese día, se usará su último día.</p>':field('Fecha','occurred_on',tx.occurred_on||todayISO(),'type="date" min="1900-01-01" max="2100-12-31" required')+field('Concepto (opcional)','description',tx.description||'','maxlength="240"')}${submit(tx.id?'Guardar corrección':rule?'Crear plantilla':'Guardar movimiento')}</form>`;
+}
+export function movementList(items,data) {
+ if(!items.length)return empty('Todavía no hay movimientos. Cada pequeño comienzo cuenta.');
+ return `<ul class="bank-movements">${items.map(t=>{
+  const category=data.categories.find(c=>c.id===t.category_id),account=data.accounts.find(a=>a.id===t.account_id);
+  return `<li><div><strong>${escapeHTML(t.description||category?.name||'Transferencia interna')}</strong><small>${escapeHTML(t.occurred_on.split('-').reverse().join('/'))} · ${escapeHTML(account?.name||'Cuenta')}</small></div><b class="bank-${t.transaction_type}">${t.transaction_type==='expense'?'−':t.transaction_type==='income'?'+':'↔'}${euros(t.amount_cents)}</b><div class="bank-row">${button('Editar','transaction.edit',`data-id="${t.id}" aria-label="Editar ${escapeHTML(t.description||'movimiento')}"`)}${button('Eliminar','transaction.delete',`data-id="${t.id}" aria-label="Eliminar ${escapeHTML(t.description||'movimiento')}"`)}</div></li>`;
+ }).join('')}</ul>`;
+}

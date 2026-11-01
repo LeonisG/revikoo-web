@@ -1,0 +1,6 @@
+import {button,field,submit,title} from './finance-ui.mjs';
+export function authView(view) {
+ if(view==='welcome')return `${title('Tu dinero, con calma.')}<p>¡Hola! Para guardar tus finanzas, vamos a crear tu cuenta.</p><div class="bank-stack">${button('Registrarse','register','class="bank-primary"')}${button('Iniciar sesión','login')}</div><p class="bank-muted">Organiza tus cuentas, ingresos y gastos en un lugar tranquilo. No se conecta con tu banco ni mueve dinero real.</p>`;
+ const recovery=view==='recover',update=view==='password',register=view==='register';
+ return `${title(update?'Nueva contraseña':recovery?'Recuperar acceso':register?'Crea tu cuenta':'Bienvenido de nuevo')}<form data-form="${view}">${update?'':field('Correo electrónico','email','','type="email" autocomplete="email" required maxlength="254"')}${recovery?'':field('Contraseña','password','','type="password" autocomplete="'+(register||update?'new-password':'current-password')+'" required minlength="8" maxlength="128"')}${register||update?'<p class="bank-muted">Utiliza al menos 8 caracteres y una contraseña única.</p>':''}${submit(update?'Guardar contraseña':recovery?'Enviar enlace':register?'Registrarme':'Iniciar sesión')}</form>${view==='login'?button('He olvidado mi contraseña','recover'):''}${button('Volver', 'welcome')}`;
+}

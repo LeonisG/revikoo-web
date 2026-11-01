@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "testedAt": "2026-11-01T20:05:44.768Z",
+  "checks": [
+    "Real single-use Auth recovery callback opens the office and password form",
+    "SDK removes credentials from URL",
+    "Password API update changes the credential; old password fails and new password logs in"
+  ],
+  "limitation": "Uses an Admin API generated recovery link; SMTP email delivery is verified separately."
+}

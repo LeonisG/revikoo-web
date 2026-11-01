@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "testedAt": "2026-11-01T19:50:31.819Z",
+  "url": "http://127.0.0.1:8773/cozy/city/",
+  "checks": [
+    "Real Auth login and first-account onboarding inside office",
+    "Expense persisted, balance 900 EUR, WRITE during request and STAMP only after backend response",
+    "Office return/re-entry and full page reload retain real account data",
+    "Invalid decimals do not submit; committed request with lost response retries without duplication or false STAMP",
+    "UI edit/delete confirmations and balance recalculation",
+    "Logout immediately removes financial data",
+    "Switching user shows only the new identity and persistent recurrence decisions",
+    "360 px responsive panel and usable form",
+    "Nilo can be uncovered and city return remains available; no uncaught browser errors"
+  ],
+  "errors": [],
+  "fixture": "Real temporary Supabase users; screenshot finances are QA data."
+}

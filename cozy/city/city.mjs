@@ -3,6 +3,7 @@ import { loadWorld } from './world.mjs';
 import { AmbientAnimationManager, QUALITY } from './ambient.mjs';
 import { BankTransition } from './bank-transition.mjs';
 import { loadBankOffice } from './bank-office.mjs';
+import { createFinanceApp } from './finance/finance-app.mjs';
 const $=id=>document.getElementById(id),host=$('viewport'),status=$('status');
 let renderer;
 function fail(message){status.textContent='';$('fallback').hidden=false;$('error-message').textContent=message;$('doors').disabled=true;}
@@ -18,6 +19,7 @@ async function start(){
  let azimuth=-1.98,elevation=.67,zoom=1,scheduled=0,mixer,playing=false,lastTime=0,opened=false,loaded=false,ambient,world,disposed=false;
  let quality=innerWidth<700?'low':'medium',userMotion=true,needsFrame=true,panMode=false,frameTimes=[],nextFrameAt=0;
  let transition,office,officePromise,doorResolve,previousFocus;
+ const finance=createFinanceApp({root:$('bank-finance'),nilo:phase=>{office?.controller.operation(phase);draw();},onAuthReturn:()=>{if(transition)transition.enter();else on(window,'cozy-ready',()=>transition.enter());}});
  const reduced=matchMedia('(prefers-reduced-motion: reduce)'),target=new THREE.Vector3(0,0,2),pointers=new Map();let pinchDistance=0,startPointer=null,dragged=false;
  function wantsMotion(){return transition?.busy||(transition?.officeActive?office?.controller.enabled:ambient&&(ambient.motion||ambient.transition<1||playing));}
  function draw(){needsFrame=true;if(!scheduled&&!document.hidden&&!disposed)scheduled=requestAnimationFrame(frame);}
@@ -56,19 +58,20 @@ async function start(){
  function toggleDoors(){if(!loaded||playing||!cityControlsEnabled())return;doorState(!opened);}
  $('doors').disabled=!(clips.has('DOORS_OPENING')&&clips.has('DOORS_CLOSING'));on($('doors'),'click',toggleDoors);status.textContent='';draw();
  async function prepareOffice(){if(office)return office;if(!officePromise)officePromise=loadBankOffice().then(async value=>{try{if(disposed)throw new Error('disposed');value.setQuality(quality);value.setMotion(userMotion&&!reduced.matches);value.resize(host.clientWidth,host.clientHeight);await renderer.compileAsync(value.scene,value.camera);if(disposed)throw new Error('disposed');office=value;return value;}catch(error){value.dispose();throw error;}}).catch(error=>{officePromise=null;throw error;});return officePromise;}
- function lockUI(locked){document.querySelector('.controls').inert=locked;document.querySelector('.world-settings').inert=locked;$('return-city').disabled=locked;$('office-motion').disabled=locked;document.querySelector('main').setAttribute('aria-busy',String(locked));if(locked){pointers.clear();previousFocus=document.activeElement;host.focus({preventScroll:true});}}
+ function lockUI(locked){document.querySelector('.controls').inert=locked;document.querySelector('.world-settings').inert=locked;$('bank-finance').inert=locked;$('return-city').disabled=locked;$('office-motion').disabled=locked;document.querySelector('main').setAttribute('aria-busy',String(locked));if(locked){pointers.clear();previousFocus=document.activeElement;host.focus({preventScroll:true});}}
  function sceneUI(isOffice){document.body.dataset.scene=isOffice?'office':'city';$('office-ui').hidden=!isOffice;for(const selector of ['.intro','.world-settings','.controls','.hint'])document.querySelector(selector).hidden=isOffice;host.setAttribute('aria-label',isOffice?'Despacho del Banco. Nilo te recibe sentado frente a ti. Usa Volver a la ciudad o Escape para salir.':'Isla en 3D. Arrastra para girar. Usa la rueda para acercarte.');document.documentElement.dataset.light=isOffice?'office':ambient.mode;frameTimes=[];lastTime=0;aim();}
  transition=new BankTransition({reduced:()=>reduced.matches,canEnter:()=>loaded&&!playing,
   capture:()=>({target:target.toArray(),zoom,azimuth,elevation,opened}),approach:()=>({target:[18,2,5.8],zoom:innerWidth<700?5.3:4.1,azimuth:-2.15,elevation:.42}),
   camera:s=>{target.fromArray(s.target);zoom=s.zoom;azimuth=s.azimuth;elevation=s.elevation;aim();},
   restore:s=>{target.fromArray(s.target);zoom=s.zoom;azimuth=s.azimuth;elevation=s.elevation;doorState(s.opened,true);aim();},
-  openDoors:()=>doorState(true),prepareOffice,showOffice:()=>{sceneUI(true);office.controller.active=true;},showCity:()=>{if(office)office.controller.active=false;sceneUI(false);},
+  openDoors:()=>doorState(true),prepareOffice,showOffice:()=>{sceneUI(true);office.controller.active=true;},showCity:()=>{finance.leave();if(office)office.controller.active=false;sceneUI(false);},
   fade:value=>{$('scene-fade').style.opacity=value;$('scene-fade').hidden=value===0;},lock:lockUI,message:text=>{status.textContent=text;},requestFrame:draw,
-  stateChanged:s=>{document.body.dataset.bankState=s;},welcome:()=>{office.controller.greet();$('welcome').textContent='¡Bienvenido al Banco de Cozy!';$('return-city').focus({preventScroll:true});draw();},
+  stateChanged:s=>{document.body.dataset.bankState=s;},welcome:()=>{office.controller.greet();finance.enter();$('return-city').focus({preventScroll:true});draw();},
   focusCity:()=>{const el=previousFocus?.isConnected&&!previousFocus.closest('[hidden]')?previousFocus:$('enter-bank');el.focus({preventScroll:true});$('doors').disabled=false;}
  });
+ window.dispatchEvent(new Event('cozy-ready'));
  $('enter-bank').disabled=false;on($('enter-bank'),'click',()=>transition.enter());on($('return-city'),'click',()=>transition.leave());on($('office-motion'),'click',()=>{userMotion=!userMotion;updateMotion();});
  on(document,'keydown',e=>{if(e.key==='Escape'&&transition.state==='OFFICE_IDLE'){e.preventDefault();transition.leave();}});
- function dispose(){disposed=true;transition.dispose();doorResolve?.();cancelAnimationFrame(scheduled);resize.disconnect();events.abort();mixer.stopAllAction();mixer.uncacheRoot(world.bank.scene);ambient.dispose();world.dispose();office?.dispose();key.shadow.map?.dispose();renderer.dispose();}on(window,'pagehide',e=>{if(!e.persisted)dispose();});
+ function dispose(){disposed=true;finance.dispose();transition.dispose();doorResolve?.();cancelAnimationFrame(scheduled);resize.disconnect();events.abort();mixer.stopAllAction();mixer.uncacheRoot(world.bank.scene);ambient.dispose();world.dispose();office?.dispose();key.shadow.map?.dispose();renderer.dispose();}on(window,'pagehide',e=>{if(!e.persisted)dispose();});
  window.cozyCity={snapshot:()=>({loaded,azimuth,elevation,zoom,target:target.toArray(),opened,playing,bankState:transition.state,officeActive:transition.officeActive,nilo:office?.controller.snapshot(),clips:[...clips.keys()],triangles:renderer.info.render.triangles,calls:renderer.info.render.calls,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,ambient:ambient.snapshot(),plots:world.layout.plots,frames:frameTimes.length,fps:frameTimes.length?1000/(frameTimes.reduce((a,b)=>a+b,0)/frameTimes.length):0}),doorPose:()=>{const result=[];world.bank.scene.traverse(o=>{if(/^(LeftDoor|RightDoor)/.test(o.name)&&!o.isMesh)result.push({name:o.name,quaternion:o.quaternion.toArray()});});return result;},focusBank,reset,enterBank:()=>transition.enter(),leaveBank:()=>transition.leave()};
 }

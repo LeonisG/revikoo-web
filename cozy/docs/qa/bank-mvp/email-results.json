@@ -1,0 +1,11 @@
+{
+  "testedAt": "2026-11-01T20:15:28.388977+00:00",
+  "smtpAccepted": true,
+  "signupEmailReceivedByOwner": true,
+  "signupConfirmedInDatabase": true,
+  "passwordLoginAfterConfirmation": true,
+  "recoveryEmailAccepted": true,
+  "recoveryCompletion": "Owner confirmed completion; previous test password rejected by real Auth API",
+  "secretsStoredInRepository": false,
+  "verifiedAt": "2026-11-01T20:17:13.691850+00:00"
+}

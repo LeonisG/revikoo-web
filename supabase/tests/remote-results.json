@@ -1,0 +1,20 @@
+{
+  "tested_at": "2026-11-01T19:44:59.712Z",
+  "project_ref": "xnpavjonigaocypgrpoh",
+  "checks": [
+    "Two real Auth password logins",
+    "Idempotent per-user category onboarding",
+    "1000 EUR minus 100 EUR = 900 EUR",
+    "900 EUR plus 200 EUR = 1100 EUR",
+    "Atomic transfer: 800/800 EUR, total 1600 EUR; monthly income/expense unchanged",
+    "Bidirectional API isolation: SELECT, direct UPDATE/DELETE, RPC edit/delete, foreign categories/accounts and supplied user_id",
+    "Invalid amounts, category kind, nonexistent account and self-transfer rejected by PostgreSQL",
+    "Concurrent retry returns one receipt; changed payload rejected",
+    "Correction/deletion recalculate balances; replay cannot recreate deleted movement",
+    "Concurrent monthly confirmation posts exactly once",
+    "Postponement and skip persisted without changing balances",
+    "Persistent snapshot survives logout and a new Auth login",
+    "Anonymous data denied and invalid session rejected"
+  ],
+  "auth_fixture": "Two temporary users created by Auth Admin API with confirmed test emails; no email delivery claim."
+}
