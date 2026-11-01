@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {dashboardView,trendChart} from '../city/finance/finance-dashboard.mjs';
+import {movementList} from '../city/finance/finance-transactions.mjs';
+const data={accounts:[{id:'a',name:'<img src=x onerror=alert(1)>',account_type:'checking',balance_cents:'999999999999999999'}],categories:[{id:'c',name:'<script>bad()</script>'}],recent:[],income_cents:'100000',expense_cents:'50000',expenses_by_category:[{category_id:'c',amount_cents:'50000'}]};
+test('glass presentation escapes untrusted labels and keeps exact large balances',()=>{const html=dashboardView(data,'2026-11-01',[]);assert.ok(!html.includes('<img src=x'));assert.ok(!html.includes('<script>'));assert.ok(html.includes('&lt;img'));assert.ok(html.includes('9.999.999.999.999.999,99'));});
+test('zero-income months are labelled as zero and do not fabricate a positive bar',()=>{const html=trendChart([{month:'2026-11-01',income_cents:'0',expense_cents:'325'}]);assert.ok(html.includes('--bar-height:0%'));assert.ok(html.includes('Ingresos: 0,00'));assert.ok(html.includes('3,25'));});
+test('history gives internal transfers a destination, explicit type and safe concept',()=>{const html=movementList([{id:'t',account_id:'a',destination_account_id:'b',transaction_type:'transfer',amount_cents:'15000',occurred_on:'2026-11-01',description:'<svg onload=bad()>'}],{...data,accounts:[...data.accounts,{id:'b',name:'Ahorro'}]});assert.ok(html.includes('Transferencia interna'));assert.ok(html.includes('→ Ahorro'));assert.ok(html.includes('↔150,00'));assert.ok(!html.includes('<svg onload'));});

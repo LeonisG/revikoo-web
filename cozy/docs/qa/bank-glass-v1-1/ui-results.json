@@ -1,0 +1,88 @@
+{
+  "desktop": {
+    "canvasCount": 1,
+    "documentScrollLocked": true,
+    "horizontalOverflow": false,
+    "kpis": [
+      "23.648,86 €",
+      "2.014,25 €",
+      "1.310,43 €",
+      "703,82 €"
+    ],
+    "overlay": {
+      "bottom": 900,
+      "height": 900,
+      "left": 0,
+      "right": 1440,
+      "top": 0,
+      "width": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  "mobile": {
+    "canvasCount": 1,
+    "contentOverflow": false,
+    "horizontalOverflow": false,
+    "logoutVisible": true,
+    "overlay": {
+      "bottom": 800,
+      "height": 800,
+      "left": 0,
+      "right": 360,
+      "top": 0,
+      "width": 360,
+      "x": 0,
+      "y": 0
+    },
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  "returnToNilo": {
+    "canvasCount": 1,
+    "focus": "Abrir mis finanzas",
+    "mode": "office",
+    "scene": "office",
+    "scrollRestored": true
+  },
+  "logout": {
+    "financialRows": 0,
+    "kpis": 0,
+    "mode": "office"
+  },
+  "authMobile": {
+    "cardWidth": 332,
+    "horizontalOverflow": false,
+    "overlay": {
+      "bottom": 800,
+      "height": 800,
+      "left": 0,
+      "right": 360,
+      "top": 0,
+      "width": 360,
+      "x": 0,
+      "y": 0
+    },
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  "checks": [
+    "Real user login opens fullscreen dashboard",
+    "Backend create expense 3.25 EUR and edit to 3.50 EUR persisted after reload",
+    "October figures match PostgreSQL",
+    "History paginates from 50 to 100 distinct rows",
+    "Escape cancels custom confirmation without leaving dashboard",
+    "Escape from finance returns to office and restores opener focus",
+    "City to office to finance to office to city without page navigation",
+    "Logout removes visible financial data",
+    "Login, register and recovery views use the viewport overlay"
+  ]
+}
