@@ -6,6 +6,8 @@ Fecha de verificación: 1 de noviembre de 2026. Ruta: <https://revikoo.com/cozy/
 
 Backend aplicado y conectado. Operaciones financieras y aislamiento probados contra las APIs reales de Supabase con dos identidades temporales. Integración del despacho comprobada en Edge, escritorio y emulación móvil de 360 px.
 
+Publicado en GitHub Pages con el commit `0aa0032`. La comprobación sobre el dominio de producción confirmó carga sin errores, login real, consulta persistente en el despacho, logout y regreso a la ciudad. [Resultado de producción](qa/bank-mvp/production-results.json).
+
 SMTP de Gmail operativo tras introducir una contraseña de aplicación válida. Registro real enviado, recibido y confirmado por el propietario; confirmación e inicio de sesión verificados después en Supabase. Recuperación recibida y completada por el propietario; la contraseña anterior del usuario QA fue rechazada después del cambio. La confirmación de correo permanece obligatoria.
 
 ## Proyecto
@@ -64,7 +66,7 @@ Las claves foráneas compuestas incluyen al propietario. El tipo de categoría s
 - En el navegador, los UUID de petición se reutilizan ante errores ambiguos mediante una huella SHA-256, sessionStorage y un respaldo en memoria. Los importes y conceptos no se guardan en ese almacenamiento de reintentos.
 - Contenido del usuario escapado antes de insertarse en HTML. No se publica ninguna clave service-role, credencial PostgreSQL, contraseña ni token administrativo.
 
-El asesor de seguridad emite un aviso para la RPC SECURITY DEFINER ejecutable por autenticados. Es la API de escritura prevista y se ha revisado y probado, no una exposición involuntaria. [Explicación del aviso](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable). Los avisos iniciales de índices sin uso corresponden a tablas recién creadas; se mantienen para referencias y consultas futuras. No se desactivó RLS ni se retiraron protecciones para pasar pruebas.
+La revisión final del asesor de seguridad emite un aviso para la RPC SECURITY DEFINER ejecutable por autenticados. Es la API de escritura prevista y se ha revisado y probado, no una exposición involuntaria. [Explicación del aviso](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable). La revisión final de rendimiento no devuelve avisos. No se desactivó RLS ni se retiraron protecciones para pasar pruebas.
 
 ## Auth y correo
 
@@ -74,7 +76,9 @@ El callback real de recuperación se probó con un enlace de un solo uso generad
 
 Los primeros intentos fueron rechazados por Gmail con 535; se resolvió al generar y guardar una contraseña de aplicación válida. Después, el envío de registro llegó al buzón del propietario, este confirmó el enlace y la API verificó `email_confirmed_at` e inicio de sesión válido. La recuperación también llegó al buzón y se completó en el formulario; se verificó el rechazo de la contraseña anterior. El aviso de Supabase sobre proveedor de correo personal trata de entrega y límites; es distinto del fallo de autenticación ya resuelto. [SMTP de Supabase](https://supabase.com/docs/guides/auth/auth-smtp), [contraseñas de aplicación de Google](https://support.google.com/accounts/answer/185833?hl=es).
 
-No se desactivó la confirmación ni se inventó SMTP alternativo. No hay bloqueos de permisos pendientes. La contraseña SMTP permanece exclusivamente en la configuración cifrada de Supabase.
+No se desactivó la confirmación ni se inventó SMTP alternativo. No hay bloqueos de permisos pendientes. La contraseña SMTP se guardó en Supabase y no se incorporó al código ni al repositorio.
+
+El mínimo de contraseña está configurado en ocho caracteres tanto en la interfaz como en Auth; la API rechazó una contraseña de siete con `weak_password`. La comprobación de contraseñas filtradas permanece desactivada: Supabase la ofrece en planes Pro y superiores y no se autorizó contratar recursos de pago. [Disponibilidad de esta protección](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
 
 ## Recurrencias y Nilo
 
@@ -101,6 +105,8 @@ Nilo saluda al entrar, escribe mientras espera una escritura y sella solo tras u
 - Capturas y resultados en [galería QA](qa/bank-mvp/index.html). Sus importes pertenecen únicamente a identidades de prueba; no son datos precargados del producto.
 
 Los módulos de pruebas reciben por variables de entorno rutas a dependencias y a un archivo de credenciales QA **fuera del repositorio**. No incluyen usuarios utilizables ni contraseñas públicas.
+
+Al terminar se eliminaron mediante Auth Admin exclusivamente las tres identidades temporales de esta ejecución, incluida la del correo de prueba. Se verificaron cero filas restantes para esos propietarios en Auth y en las seis tablas financieras. La función temporal `cozy-bank-qa-fixture` se sustituyó por una respuesta constante 404, sin código ni capacidades administrativas; se verificó el 404 incluso presentando la antigua autorización de QA. Las capturas conservan los resultados históricos de la prueba, no cuentas activas.
 
 ## Límites
 

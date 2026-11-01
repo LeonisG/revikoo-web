@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "url": "https://revikoo.com/cozy/city/",
+  "commit": "0aa0032",
+  "testedAt": "2026-11-01T20:21:01.550Z",
+  "checks": [
+    "GitHub Pages deployment success",
+    "Production resources served without errors",
+    "Real Auth login from production origin",
+    "Persistent finance snapshot in office",
+    "Logout removes data and city return works"
+  ],
+  "errors": [],
+  "bad": []
+}
