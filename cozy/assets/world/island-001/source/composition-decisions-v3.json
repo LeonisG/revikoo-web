@@ -1,0 +1,1498 @@
+[
+  {
+    "id": "garden-bench",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "walk-lamp-01",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "walk-lamp-04",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "walk-lamp-06",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "walk-lamp-07",
+    "action": "removed",
+    "reasons": [
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "tree_01-001",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "COLLISION:walk-lamp-10"
+    ]
+  },
+  {
+    "id": "tree_03-001",
+    "action": "removed",
+    "reasons": [
+      "OPEN_MEADOW",
+      "COLLISION:meadow-bench",
+      "BENCH_ACCESS:meadow-bench"
+    ]
+  },
+  {
+    "id": "tree_01-002",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "PATH_CLEARANCE",
+      "OPEN_MEADOW",
+      "BENCH_ACCESS:meadow-bench"
+    ]
+  },
+  {
+    "id": "tree_02-002",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "tree_03-002",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "tree_01-003",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "tree_02-003",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "tree_02-004",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "tree_03-004",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "FUTURE_BUILDING_PLOTS:library-garden"
+    ]
+  },
+  {
+    "id": "tree_01-006",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "tree_02-006",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "tree_03-006",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "tree_01-008",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "tree_02-008",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "tree_03-008",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "tree_01-009",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "tree_02-009",
+    "action": "removed",
+    "reasons": [
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "tree_03-009",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "COLLISION:walk-lamp-09"
+    ]
+  },
+  {
+    "id": "tree_01-010",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "OPEN_MEADOW",
+      "COLLISION:meadow-bench",
+      "BENCH_ACCESS:meadow-bench",
+      "COLLISION:walk-lamp-09"
+    ]
+  },
+  {
+    "id": "rock-001",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-002",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-003",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-004",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "COLLISION:tree_01-005"
+    ]
+  },
+  {
+    "id": "rock-005",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "COLLISION:tree_01-005"
+    ]
+  },
+  {
+    "id": "rock-006",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "FUTURE_BUILDING_PLOTS:library-garden"
+    ]
+  },
+  {
+    "id": "rock-007",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-008",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-009",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-010",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-011",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-012",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-013",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-014",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "OPEN_MEADOW"
+    ]
+  },
+  {
+    "id": "rock-015",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-016",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-017",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-018",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-019",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-020",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-021",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-022",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-023",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "rock-024",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-025",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "COLLISION:tree_03-007"
+    ]
+  },
+  {
+    "id": "rock-026",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-027",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-028",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-029",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-030",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-031",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "rock-032",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "rock-033",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "rock-034",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-035",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-036",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "rock-037",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-039",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-040",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-038"
+    ]
+  },
+  {
+    "id": "rock-041",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-043",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-044",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-042"
+    ]
+  },
+  {
+    "id": "rock-045",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-047",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-048",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-046"
+    ]
+  },
+  {
+    "id": "rock-049",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-051",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-052",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-050"
+    ]
+  },
+  {
+    "id": "rock-054",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-055",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-053"
+    ]
+  },
+  {
+    "id": "rock-056",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-058",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-059",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-057"
+    ]
+  },
+  {
+    "id": "rock-060",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-062",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-063",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-061"
+    ]
+  },
+  {
+    "id": "rock-064",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-066",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-067",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-065"
+    ]
+  },
+  {
+    "id": "rock-068",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-070",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-071",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "COLLISION:rock-069"
+    ]
+  },
+  {
+    "id": "rock-072",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-074",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-075",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-073"
+    ]
+  },
+  {
+    "id": "rock-077",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-078",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-076"
+    ]
+  },
+  {
+    "id": "rock-079",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-081",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-082",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-080"
+    ]
+  },
+  {
+    "id": "rock-083",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-085",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-086",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-084"
+    ]
+  },
+  {
+    "id": "rock-087",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-089",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-090",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-088"
+    ]
+  },
+  {
+    "id": "rock-091",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-092",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "rock-093",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-094",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "rock-095",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-096",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "rock-097",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-098",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "rock-099",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "rock-100",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "bush-005",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:tree_03-007"
+    ]
+  },
+  {
+    "id": "bush-006",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "bush-008",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-04",
+      "COLLISION:walk-lamp-02"
+    ]
+  },
+  {
+    "id": "bush-009",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:town-hall"
+    ]
+  },
+  {
+    "id": "bush-010",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "bush_flowering-002",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:tree_01-004"
+    ]
+  },
+  {
+    "id": "bush_flowering-006",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "bush_flowering-007",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-02"
+    ]
+  },
+  {
+    "id": "bush_flowering-008",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "bush_flowering-009",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "COLLISION:rock-069"
+    ]
+  },
+  {
+    "id": "bush_flowering-010",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:library-garden"
+    ]
+  },
+  {
+    "id": "bush_flowering-011",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "bush_flowering-012",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "bush_flowering-013",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN",
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "bush_flowering-014",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "bush_lavender-004",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "bush_lavender-005",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:tree_01-007"
+    ]
+  },
+  {
+    "id": "bush_lavender-007",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-03"
+    ]
+  },
+  {
+    "id": "bush_lavender-008",
+    "action": "removed",
+    "reasons": [
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "bush_lavender-009",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "bush_lavender-010",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:tree_01-005"
+    ]
+  },
+  {
+    "id": "pot-001",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-01",
+      "BENCH_ACCESS:plaza-bench-01"
+    ]
+  },
+  {
+    "id": "pot-002",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-02",
+      "BENCH_ACCESS:plaza-bench-02"
+    ]
+  },
+  {
+    "id": "pot-003",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-04",
+      "BENCH_ACCESS:plaza-bench-04"
+    ]
+  },
+  {
+    "id": "pot-004",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-03",
+      "BENCH_ACCESS:plaza-bench-03"
+    ]
+  },
+  {
+    "id": "pot-005",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "pot-006",
+    "action": "removed",
+    "reasons": [
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "flower_white-001",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "flower_white-002",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-042"
+    ]
+  },
+  {
+    "id": "flower_white-003",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-057"
+    ]
+  },
+  {
+    "id": "flower_white-004",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "flower_white-005",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-065",
+      "COLLISION:rock-069"
+    ]
+  },
+  {
+    "id": "flower_white-006",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "flower_white-007",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "flower_white-008",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-084"
+    ]
+  },
+  {
+    "id": "flower_white-009",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "flower_white-010",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_white-012",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:walk-lamp-03"
+    ]
+  },
+  {
+    "id": "flower_white-016",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-03"
+    ]
+  },
+  {
+    "id": "flower_white-017",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-04"
+    ]
+  },
+  {
+    "id": "flower_white-019",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_white-020",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_white-025",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-065",
+      "COLLISION:rock-069"
+    ]
+  },
+  {
+    "id": "flower_white-027",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_white-028",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_white-029",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "flower_white-030",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "flower_white-031",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_white-032",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_white-033",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:tree_01-005"
+    ]
+  },
+  {
+    "id": "flower_pink-009",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "flower_pink-010",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "flower_pink-011",
+    "action": "removed",
+    "reasons": [
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "flower_pink-012",
+    "action": "removed",
+    "reasons": [
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "flower_pink-013",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:town-hall"
+    ]
+  },
+  {
+    "id": "flower_pink-014",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:town-hall"
+    ]
+  },
+  {
+    "id": "flower_pink-015",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_pink-016",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "COLLISION:rock-069"
+    ]
+  },
+  {
+    "id": "flower_pink-017",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "flower_pink-018",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:studio"
+    ]
+  },
+  {
+    "id": "flower_pink-021",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:library-garden"
+    ]
+  },
+  {
+    "id": "flower_pink-022",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:library-garden"
+    ]
+  },
+  {
+    "id": "flower_pink-024",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:tree_01-005"
+    ]
+  },
+  {
+    "id": "flower_purple-001",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "flower_purple-002",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-02"
+    ]
+  },
+  {
+    "id": "flower_purple-003",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:plaza-bench-03",
+      "BENCH_ACCESS:plaza-bench-03"
+    ]
+  },
+  {
+    "id": "flower_purple-004",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "flower_purple-005",
+    "action": "removed",
+    "reasons": [
+      "BANK_ARCHITECTURE"
+    ]
+  },
+  {
+    "id": "flower_purple-006",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_purple-007",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_purple-009",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_purple-010",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_purple-011",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "COLLISION:walk-lamp-05"
+    ]
+  },
+  {
+    "id": "flower_purple-012",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE",
+      "FUTURE_BUILDING_PLOTS:town-hall"
+    ]
+  },
+  {
+    "id": "flower_purple-013",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_purple-014",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_purple-015",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "flower_yellow-001",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:walk-lamp-02"
+    ]
+  },
+  {
+    "id": "flower_yellow-003",
+    "action": "removed",
+    "reasons": [
+      "FUTURE_BUILDING_PLOTS:library-garden"
+    ]
+  },
+  {
+    "id": "grass-001",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "grass-002",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-038",
+      "COLLISION:rock-042"
+    ]
+  },
+  {
+    "id": "grass-003",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "grass-004",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-050"
+    ]
+  },
+  {
+    "id": "grass-005",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-061"
+    ]
+  },
+  {
+    "id": "grass-006",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "grass-007",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER",
+      "COLLISION:rock-073"
+    ]
+  },
+  {
+    "id": "grass-008",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:rock-076"
+    ]
+  },
+  {
+    "id": "grass-009",
+    "action": "removed",
+    "reasons": [
+      "RIVER_BUFFER"
+    ]
+  },
+  {
+    "id": "grass-010",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:walk-lamp-02",
+      "COLLISION:rock-088"
+    ]
+  },
+  {
+    "id": "garden-fence-01",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "garden-fence-02",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "garden-fence-03",
+    "action": "removed",
+    "reasons": [
+      "OUTSIDE_TERRAIN"
+    ]
+  },
+  {
+    "id": "garden-fence-05",
+    "action": "removed",
+    "reasons": [
+      "COLLISION:bush-002"
+    ]
+  },
+  {
+    "id": "wayfinding-01",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  },
+  {
+    "id": "wayfinding-02",
+    "action": "removed",
+    "reasons": [
+      "PATH_CLEARANCE"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "immutable": {
+    "bank-island.glb": "7e37897593a84b9e97bdd60b72e829ffc5d09dca9529b2572b455f74c11e908d",
+    "environment-kit.glb": "8b948794fc3f98a9b46a27a3b4ede489d0aad1a3ffd1efb0115d9f57572326ac",
+    "path-kit.glb": "4bc1e428e7eafd076c1064b29e151cf217be26511f82eea6e191765a62d531b5"
+  },
+  "outputs": {
+    "terrain.glb": "d5362e3e032e5e17d27482d37540555abf030f901f0abda405fd0e33aff94bf8",
+    "placements.json": "7a402d2adce0885674df19077302eb3a53bfbdc50fe86d55bfd4045ed250f844",
+    "layout.json": "06b58d89111b298abd820b5bf82a29484798ac813809a5bde40d6f314662b88d",
+    "manifest.json": "a341c53585fe2c00f17ecd1e4245a1187d38f9194abf182ef8e456512358c5f0"
+  },
+  "instances": 225,
+  "issues": 0
+}

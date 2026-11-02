@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-02",
+  "browser": "Codex in-app browser",
+  "wheelZoom": {"before": "100%", "after": "135%"},
+  "keyboardRotationExercised": true,
+  "doorOpeningAndClosing": true,
+  "officeTransition": true,
+  "existingSessionDashboard": {"mode": "finance", "fullscreen": true, "canvasCount": 1},
+  "returnedToOfficeAndCity": true,
+  "financialWrites": false,
+  "mobile": {"viewport": [360, 800], "scrollWidth": 360, "canvasCount": 1, "ready": true, "quality": "low"},
+  "consoleErrorsOrWarnings": [],
+  "physicalPhoneTested": false
+}

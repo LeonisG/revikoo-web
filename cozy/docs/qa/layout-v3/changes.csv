@@ -1,0 +1,421 @@
+﻿ID,Asset,Posicion anterior,Incidencias anteriores,Correccion,Posicion final,Validacion final
+bench-001,BENCH,"[-3, -10, 1.9]",WRONG_FACING,Retirado de la escena V3,,No instanciado
+bench-002,BENCH,"[6, -8, 1.9]","WRONG_FACING, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED, BENCH_ACCESS_BLOCKED, BENCH_ACCESS_BLOCKED, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+bench-003,BENCH,"[5, 2, 1.9]","WRONG_FACING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bench-004,BENCH,"[-5, 0, 1.9]","WRONG_FACING, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+bench-005,BENCH,"[-22, 9, 1.9]","BURIED, WRONG_FACING, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+bridge-stone,BRIDGE_STONE,,,Composicion nueva,"[-12.363974994365744, -5.9293221569214625, 1.6099999999999999]",
+bridge-wood,BRIDGE_WOOD,,,Composicion nueva,"[-11.773970993441393, 8.932574701254424, 1.6099999999999999]",
+bridge_stone-001,BRIDGE_STONE,"[-13.940307175146884, -6, 1.88]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bridge_wood-001,BRIDGE_WOOD,"[-10.059692824853116, 6, 1.88]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+bush-001,BUSH,"[39.436141646642604, 0.0, 1.8]",,Conservado y recalculado sobre soporte real,"[39.436141646642604, 0.0, 1.835101]",
+bush-002,BUSH,"[17.790514176678705, 20.51610656171748, 1.8]",,Conservado y recalculado sobre soporte real,"[17.790514176678705, 20.51610656171748, 1.828866]",
+bush-003,BUSH,"[-18.493485823321297, 21.326776847531455, 1.8]","BURIED, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-18.493485823321297, 21.326776847531455, 1.995571]",
+bush-004,BUSH,"[-33.131858353357394, 2.701484414646724e-15, 1.8]",,Conservado y recalculado sobre soporte real,"[-33.131858353357394, 2.701484414646724e-15, 1.835955]",
+bush-005,BUSH,"[-18.49348582332131, -21.32677684753144, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush-006,BUSH,"[17.79051417667867, -20.516106561717486, 1.8]","BURIED, PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush-007,BUSH,"[-7, -10, 1.8]",,Conservado y recalculado sobre soporte real,"[-7, -10, 1.840801]",
+bush-008,BUSH,"[-6, 2, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush-009,BUSH,"[-30, -8, 1.8]","BURIED, FUTURE_BUILDING_PLOTS:town-hall, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush-010,BUSH,"[26, -10, 1.8]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+bush_flowering-001,BUSH_FLOWERING,"[35.102291565190534, 8.506426544185425, 1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[35.102291565190534, 8.506426544185425, 1.84134]",
+bush_flowering-002,BUSH_FLOWERING,"[5.631033270916368, 21.26253987061575, 1.8]",,Retirado de la escena V3,,No instanciado
+bush_flowering-003,BUSH_FLOWERING,"[-29.35660887917309, 16.400807664674513, 1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[-29.35660887917309, 16.400807664674513, 1.877745]",
+bush_flowering-004,BUSH_FLOWERING,"[-33.08932254000126, -8.018618700737582, 1.8]",,Conservado y recalculado sobre soporte real,"[-33.08932254000126, -8.018618700737582, 1.831944]",
+bush_flowering-005,BUSH_FLOWERING,"[-6.970267686017435, -26.319431523922088, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-6.970267686017435, -26.319431523922088, 1.831125]",
+bush_flowering-006,BUSH_FLOWERING,"[26.233704269084896, -14.65611848494033, 1.8]",FUTURE_BUILDING_PLOTS:studio,Retirado de la escena V3,,No instanciado
+bush_flowering-007,BUSH_FLOWERING,"[8, -9, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+bush_flowering-008,BUSH_FLOWERING,"[12, -4, 1.8]","BURIED, PATH_CLEARANCE, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_flowering-009,BUSH_FLOWERING,"[-18, -9, 1.8]","FUTURE_BUILDING_PLOTS:town-hall, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_flowering-010,BUSH_FLOWERING,"[14, 10, 1.8]","BURIED, PATH_CLEARANCE, FUTURE_BUILDING_PLOTS:library-garden",Retirado de la escena V3,,No instanciado
+bush_flowering-011,BUSH_FLOWERING,"[-12.600191767898675, 9.4, 5.18]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+bush_flowering-012,BUSH_FLOWERING,"[-7.0001917678986745, 9.4, 5.18]","FLOATING, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_flowering-013,BUSH_FLOWERING,"[-12.692879693361302, -27.2, 1.55]","OUTSIDE_TERRAIN, BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_flowering-014,BUSH_FLOWERING,"[-7.092879693361302, -27.2, 1.55]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_lavender-001,BUSH_LAVENDER,"[28.627102378510237, 15.993250516069736, 1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[28.627102378510237, 15.993250516069736, 1.799999]",
+bush_lavender-002,BUSH_LAVENDER,"[-6.427728380541868, 24.270826399595922, 1.8]",,Conservado y recalculado sobre soporte real,"[-6.427728380541868, 24.270826399595922, 1.800001]",
+bush_lavender-003,BUSH_LAVENDER,"[-36.02525995490217, 8.730091793934333, 1.8]",,Conservado y recalculado sobre soporte real,"[-36.02525995490217, 8.730091793934333, 1.799999]",
+bush_lavender-004,BUSH_LAVENDER,"[-26.963210769747775, -15.063675633545087, 1.8]",,Retirado de la escena V3,,No instanciado
+bush_lavender-005,BUSH_LAVENDER,"[6.173572576391919, -23.31114499494192, 1.8]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+bush_lavender-006,BUSH_LAVENDER,"[32.166354150289635, -7.794953450988678, 1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[32.166354150289635, -7.794953450988678, 1.799997]",
+bush_lavender-007,BUSH_LAVENDER,"[7, 1, 1.8]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_lavender-008,BUSH_LAVENDER,"[24, -4, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_lavender-009,BUSH_LAVENDER,"[15, -20, 1.8]","BURIED, PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+bush_lavender-010,BUSH_LAVENDER,"[27, 14, 1.8]",,Retirado de la escena V3,,No instanciado
+central-fountain,FOUNTAIN,,,Composicion nueva,"[1, -4, 1.895002]",
+fence-001,FENCE,"[-21, 1, 1.85]","FUTURE_BUILDING_PLOTS:town-hall, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+fence-002,FENCE,"[-27, 1, 1.85]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+fence-003,FENCE,"[18, -10, 1.85]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+fence-004,FENCE,"[24, -10, 1.85]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+fence-005,FENCE,"[18, 19, 1.85]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+fence-006,FENCE,"[21, 19, 1.85]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+fence-007,FENCE,"[24, 19, 1.85]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+fence-008,FENCE,"[-22, 21, 5.25]","OUTSIDE_TERRAIN, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+fence-009,FENCE,"[-19, 23, 5.25]","OUTSIDE_TERRAIN, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+fence-010,FENCE,"[-13, 24, 5.25]",,Retirado de la escena V3,,No instanciado
+flower_pink-001,FLOWER_PINK,"[-7.0, -8.8, 1.82]",,Conservado y recalculado sobre soporte real,"[-7.0, -8.8, 1.731001]",
+flower_pink-002,FLOWER_PINK,"[-5.9682317769961015, -9.269978422561294, 1.82]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[-5.9682317769961015, -9.269978422561294, 1.730999]",
+flower_pink-003,FLOWER_PINK,"[8.0, -7.8, 1.82]",,Conservado y recalculado sobre soporte real,"[8.0, -7.8, 1.850998]",
+flower_pink-004,FLOWER_PINK,"[9.031768223003898, -8.269978422561294, 1.82]",,Conservado y recalculado sobre soporte real,"[9.031768223003898, -8.269978422561294, 1.730999]",
+flower_pink-005,FLOWER_PINK,"[7.0, 2.2, 1.82]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[7.0, 2.2, 1.840998]",
+flower_pink-006,FLOWER_PINK,"[8.031768223003898, 1.7300215774387062, 1.82]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[8.031768223003898, 1.7300215774387062, 1.730997]",
+flower_pink-007,FLOWER_PINK,"[-6.0, 3.2, 1.82]",,Conservado y recalculado sobre soporte real,"[-6.0, 3.2, 1.730999]",
+flower_pink-008,FLOWER_PINK,"[-4.9682317769961015, 2.7300215774387064, 1.82]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[-4.9682317769961015, 2.7300215774387064, 1.730999]",
+flower_pink-009,FLOWER_PINK,"[12.0, -2.8, 1.82]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+flower_pink-010,FLOWER_PINK,"[13.031768223003898, -3.2699784225612936, 1.82]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+flower_pink-011,FLOWER_PINK,"[24.0, -2.8, 1.82]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+flower_pink-012,FLOWER_PINK,"[25.031768223003898, -3.2699784225612936, 1.82]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+flower_pink-013,FLOWER_PINK,"[-30.0, -6.8, 1.82]",FUTURE_BUILDING_PLOTS:town-hall,Retirado de la escena V3,,No instanciado
+flower_pink-014,FLOWER_PINK,"[-28.968231776996102, -7.269978422561294, 1.82]",FUTURE_BUILDING_PLOTS:town-hall,Retirado de la escena V3,,No instanciado
+flower_pink-015,FLOWER_PINK,"[-18.0, -7.8, 1.82]","PATH_CLEARANCE, FUTURE_BUILDING_PLOTS:town-hall, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_pink-016,FLOWER_PINK,"[-16.968231776996102, -8.269978422561294, 1.82]","FLOATING, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_pink-017,FLOWER_PINK,"[15.0, -18.8, 1.82]","PATH_CLEARANCE, FUTURE_BUILDING_PLOTS:studio",Retirado de la escena V3,,No instanciado
+flower_pink-018,FLOWER_PINK,"[16.031768223003898, -19.269978422561294, 1.82]","PATH_CLEARANCE, FUTURE_BUILDING_PLOTS:studio, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_pink-019,FLOWER_PINK,"[26.0, -8.8, 1.82]",,Conservado y recalculado sobre soporte real,"[26.0, -8.8, 1.730999]",
+flower_pink-020,FLOWER_PINK,"[27.031768223003898, -9.269978422561294, 1.82]",,Conservado y recalculado sobre soporte real,"[27.031768223003898, -9.269978422561294, 1.730999]",
+flower_pink-021,FLOWER_PINK,"[14.0, 11.2, 1.82]",FUTURE_BUILDING_PLOTS:library-garden,Retirado de la escena V3,,No instanciado
+flower_pink-022,FLOWER_PINK,"[15.031768223003898, 10.730021577438706, 1.82]","PATH_CLEARANCE, FUTURE_BUILDING_PLOTS:library-garden",Retirado de la escena V3,,No instanciado
+flower_pink-023,FLOWER_PINK,"[27.0, 15.2, 1.82]",,Conservado y recalculado sobre soporte real,"[27.0, 15.2, 1.730999]",
+flower_pink-024,FLOWER_PINK,"[28.031768223003898, 14.730021577438706, 1.82]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+flower_purple-001,FLOWER_PURPLE,"[-8.295013991486593, -9.895001219872665, 1.82]",,Retirado de la escena V3,,No instanciado
+flower_purple-002,FLOWER_PURPLE,"[6.704986008513407, -8.895001219872665, 1.82]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+flower_purple-003,FLOWER_PURPLE,"[5.704986008513407, 1.1049987801273358, 1.82]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_purple-004,FLOWER_PURPLE,"[10.704986008513407, -3.8950012198726642, 1.82]","BURIED, PATH_CLEARANCE",Retirado de la escena V3,,No instanciado
+flower_purple-005,FLOWER_PURPLE,"[22.70498600851341, -3.8950012198726642, 1.82]",,Retirado de la escena V3,,No instanciado
+flower_purple-006,FLOWER_PURPLE,"[-19.29501399148659, -8.895001219872665, 1.82]",FUTURE_BUILDING_PLOTS:town-hall,Retirado de la escena V3,,No instanciado
+flower_purple-007,FLOWER_PURPLE,"[13.704986008513407, -19.895001219872665, 1.82]","PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_purple-008,FLOWER_PURPLE,"[24.70498600851341, -9.895001219872665, 1.82]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[24.70498600851341, -9.895001219872665, 1.730999]",
+flower_purple-009,FLOWER_PURPLE,"[12.704986008513407, 10.104998780127335, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_purple-010,FLOWER_PURPLE,"[9, -6, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_purple-011,FLOWER_PURPLE,"[12, -7, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_purple-012,FLOWER_PURPLE,"[-20, -7, 1.82]","PATH_CLEARANCE, FUTURE_BUILDING_PLOTS:town-hall",Retirado de la escena V3,,No instanciado
+flower_purple-013,FLOWER_PURPLE,"[8, -16, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_purple-014,FLOWER_PURPLE,"[14, -20, 1.82]","PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_purple-015,FLOWER_PURPLE,"[-2, 10, 1.82]","PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_purple-016,FLOWER_PURPLE,"[-20, 4, 1.82]",PATH_CLEARANCE,Conservado y recalculado sobre soporte real,"[-20, 4, 1.742386]",
+flower_white-001,FLOWER_WHITE,"[-13.87001933002416, -20.45, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-002,FLOWER_WHITE,"[-7.87001933002416, -20.45, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-003,FLOWER_WHITE,"[-15.81314892928793, -15.350000000000001, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-004,FLOWER_WHITE,"[-9.81314892928793, -15.350000000000001, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-005,FLOWER_WHITE,"[-17.117810491616517, -10.25, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-006,FLOWER_WHITE,"[-11.117810491616517, -10.25, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-007,FLOWER_WHITE,"[-15.019799732701083, -0.05000000000000071, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-008,FLOWER_WHITE,"[-9.019799732701083, -0.05000000000000071, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-009,FLOWER_WHITE,"[-12.871810257787223, 10.149999999999999, 1.8]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-010,FLOWER_WHITE,"[-6.871810257787223, 10.149999999999999, 1.8]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+flower_white-011,FLOWER_WHITE,"[-6.121897865283504, -10.884872458649495, 1.82]",,Conservado y recalculado sobre soporte real,"[-6.121897865283504, -10.884872458649495, 1.730999]",
+flower_white-012,FLOWER_WHITE,"[-7.226624815589873, -11.181625426952952, 1.82]",,Retirado de la escena V3,,No instanciado
+flower_white-013,FLOWER_WHITE,"[8.878102134716496, -9.884872458649495, 1.82]",,Conservado y recalculado sobre soporte real,"[8.878102134716496, -9.884872458649495, 1.730999]",
+flower_white-014,FLOWER_WHITE,"[7.773375184410127, -10.181625426952952, 1.82]",BENCH_ACCESS_BLOCKED,Conservado y recalculado sobre soporte real,"[7.773375184410127, -10.181625426952952, 1.731001]",
+flower_white-015,FLOWER_WHITE,"[7.878102134716496, 0.11512754135050551, 1.82]",,Conservado y recalculado sobre soporte real,"[7.878102134716496, 0.11512754135050551, 1.826]",
+flower_white-016,FLOWER_WHITE,"[6.773375184410127, -0.18162542695295225, 1.82]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+flower_white-017,FLOWER_WHITE,"[-5.121897865283504, 1.1151275413505055, 1.82]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-018,FLOWER_WHITE,"[-6.226624815589873, 0.8183745730470477, 1.82]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[-6.226624815589873, 0.8183745730470477, 1.841002]",
+flower_white-019,FLOWER_WHITE,"[12.878102134716496, -4.884872458649495, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_white-020,FLOWER_WHITE,"[11.773375184410126, -5.1816254269529525, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_white-021,FLOWER_WHITE,"[24.878102134716496, -4.884872458649495, 1.82]",,Conservado y recalculado sobre soporte real,"[24.878102134716496, -4.884872458649495, 1.730999]",
+flower_white-022,FLOWER_WHITE,"[23.773375184410128, -5.1816254269529525, 1.82]",,Conservado y recalculado sobre soporte real,"[23.773375184410128, -5.1816254269529525, 1.730999]",
+flower_white-023,FLOWER_WHITE,"[-29.121897865283504, -8.884872458649495, 1.82]","FUTURE_BUILDING_PLOTS:town-hall, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-29.121897865283504, -8.884872458649495, 1.730999]",
+flower_white-024,FLOWER_WHITE,"[-30.226624815589872, -9.181625426952952, 1.82]",,Conservado y recalculado sobre soporte real,"[-30.226624815589872, -9.181625426952952, 1.730999]",
+flower_white-025,FLOWER_WHITE,"[-17.121897865283504, -9.884872458649495, 1.82]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-026,FLOWER_WHITE,"[-18.226624815589872, -10.181625426952952, 1.82]",,Conservado y recalculado sobre soporte real,"[-18.226624815589872, -10.181625426952952, 1.730999]",
+flower_white-027,FLOWER_WHITE,"[15.878102134716496, -20.884872458649493, 1.82]","PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-028,FLOWER_WHITE,"[14.773375184410126, -21.18162542695295, 1.82]","PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-029,FLOWER_WHITE,"[26.878102134716496, -10.884872458649495, 1.82]","FUTURE_BUILDING_PLOTS:studio, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+flower_white-030,FLOWER_WHITE,"[25.773375184410128, -11.181625426952952, 1.82]",FUTURE_BUILDING_PLOTS:studio,Retirado de la escena V3,,No instanciado
+flower_white-031,FLOWER_WHITE,"[14.878102134716496, 9.115127541350505, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_white-032,FLOWER_WHITE,"[13.773375184410126, 8.818374573047048, 1.82]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+flower_white-033,FLOWER_WHITE,"[27.878102134716496, 13.115127541350505, 1.82]",,Retirado de la escena V3,,No instanciado
+flower_white-034,FLOWER_WHITE,"[26.773375184410128, 12.818374573047048, 1.82]",,Conservado y recalculado sobre soporte real,"[26.773375184410128, 12.818374573047048, 1.730999]",
+flower_yellow-001,FLOWER_YELLOW,"[-7.295013991486593, 2.1049987801273358, 1.82]",,Retirado de la escena V3,,No instanciado
+flower_yellow-002,FLOWER_YELLOW,"[-31.29501399148659, -7.895001219872665, 1.82]",,Conservado y recalculado sobre soporte real,"[-31.29501399148659, -7.895001219872665, 1.730997]",
+flower_yellow-003,FLOWER_YELLOW,"[25.70498600851341, 14.104998780127335, 1.82]",FUTURE_BUILDING_PLOTS:library-garden,Retirado de la escena V3,,No instanciado
+fountain-001,FOUNTAIN,"[1, -4, 1.92]",,Retirado de la escena V3,,No instanciado
+garden-bed-01-01,BUSH,,,Composicion nueva,"[-30.6, 5.3, 1.827199]",
+garden-bed-01-02,BUSH_FLOWERING,,,Composicion nueva,"[-29.2, 5.6, 1.828899]",
+garden-bed-01-04,FLOWER_WHITE,,,Composicion nueva,"[-31.1, 4.35, 1.749001]",
+garden-bed-01-05,FLOWER_PINK,,,Composicion nueva,"[-28.7, 4.65, 1.751999]",
+garden-bed-01-08,GRASS,,,Composicion nueva,"[-31.5, 5.7, 1.686424]",
+garden-bed-02-03,BUSH_LAVENDER,,,Composicion nueva,"[-22.7, 19.35, 2.013569]",
+garden-bed-02-04,FLOWER_WHITE,,,Composicion nueva,"[-24.1, 19.35, 1.929352]",
+garden-bed-02-05,FLOWER_PINK,,,Composicion nueva,"[-21.7, 19.65, 1.972002]",
+garden-bed-02-06,FLOWER_PURPLE,,,Composicion nueva,"[-23.3, 18.5, 1.980133]",
+garden-bed-02-07,FLOWER_YELLOW,,,Composicion nueva,"[-22.2, 18.5, 2.006168]",
+garden-bed-03-01,BUSH,,,Composicion nueva,"[-5.6, 18.3, 1.827199]",
+garden-bed-03-02,BUSH_FLOWERING,,,Composicion nueva,"[-4.2, 18.6, 1.828897]",
+garden-bed-03-03,BUSH_LAVENDER,,,Composicion nueva,"[-4.7, 17.35, 1.800001]",
+garden-bed-03-04,FLOWER_WHITE,,,Composicion nueva,"[-6.1, 17.35, 1.748999]",
+garden-bed-03-05,FLOWER_PINK,,,Composicion nueva,"[-3.7, 17.65, 1.752001]",
+garden-bed-03-06,FLOWER_PURPLE,,,Composicion nueva,"[-5.3, 16.5, 1.755001]",
+garden-bed-03-07,FLOWER_YELLOW,,,Composicion nueva,"[-4.2, 16.5, 1.757999]",
+garden-bed-03-08,GRASS,,,Composicion nueva,"[-6.5, 18.7, 1.686422]",
+garden-bed-04-01,BUSH,,,Composicion nueva,"[5.4, 18.3, 1.827199]",
+garden-bed-04-04,FLOWER_WHITE,,,Composicion nueva,"[4.9, 17.35, 1.749001]",
+garden-bed-04-06,FLOWER_PURPLE,,,Composicion nueva,"[5.7, 16.5, 1.754999]",
+garden-bed-04-07,FLOWER_YELLOW,,,Composicion nueva,"[6.8, 16.5, 1.757999]",
+garden-bed-04-08,GRASS,,,Composicion nueva,"[4.5, 18.7, 1.686426]",
+garden-bed-05-01,BUSH,,,Composicion nueva,"[28.4, 9.3, 1.827199]",
+garden-bed-05-02,BUSH_FLOWERING,,,Composicion nueva,"[29.8, 9.6, 1.828897]",
+garden-bed-05-03,BUSH_LAVENDER,,,Composicion nueva,"[29.3, 8.35, 1.799999]",
+garden-bed-05-04,FLOWER_WHITE,,,Composicion nueva,"[27.9, 8.35, 1.748999]",
+garden-bed-05-05,FLOWER_PINK,,,Composicion nueva,"[30.3, 8.65, 1.752001]",
+garden-bed-05-06,FLOWER_PURPLE,,,Composicion nueva,"[28.7, 7.5, 1.754999]",
+garden-bed-05-07,FLOWER_YELLOW,,,Composicion nueva,"[29.8, 7.5, 1.758001]",
+garden-bed-05-08,GRASS,,,Composicion nueva,"[27.5, 9.7, 1.686424]",
+garden-bed-06-01,BUSH,,,Composicion nueva,"[30.4, 0.3, 1.827199]",
+garden-bed-06-02,BUSH_FLOWERING,,,Composicion nueva,"[31.8, 0.6, 1.828899]",
+garden-bed-06-03,BUSH_LAVENDER,,,Composicion nueva,"[31.3, -0.65, 1.799999]",
+garden-bed-06-04,FLOWER_WHITE,,,Composicion nueva,"[29.9, -0.65, 1.748999]",
+garden-bed-06-05,FLOWER_PINK,,,Composicion nueva,"[32.3, -0.35, 1.751999]",
+garden-bed-06-06,FLOWER_PURPLE,,,Composicion nueva,"[30.7, -1.5, 1.755001]",
+garden-bed-06-07,FLOWER_YELLOW,,,Composicion nueva,"[31.8, -1.5, 1.757999]",
+garden-bed-06-08,GRASS,,,Composicion nueva,"[29.5, 0.7, 1.686424]",
+garden-bed-07-01,BUSH,,,Composicion nueva,"[26.4, -7.7, 1.827199]",
+garden-bed-07-02,BUSH_FLOWERING,,,Composicion nueva,"[27.8, -7.4, 1.828897]",
+garden-bed-07-03,BUSH_LAVENDER,,,Composicion nueva,"[27.3, -8.65, 1.799997]",
+garden-bed-07-04,FLOWER_WHITE,,,Composicion nueva,"[25.9, -8.65, 1.748999]",
+garden-bed-07-05,FLOWER_PINK,,,Composicion nueva,"[28.3, -8.35, 1.751999]",
+garden-bed-07-06,FLOWER_PURPLE,,,Composicion nueva,"[26.7, -9.5, 1.754999]",
+garden-bed-07-07,FLOWER_YELLOW,,,Composicion nueva,"[27.8, -9.5, 1.757999]",
+garden-bed-07-08,GRASS,,,Composicion nueva,"[25.5, -7.3, 1.686424]",
+garden-bed-08-01,BUSH,,,Composicion nueva,"[10.4, -21.7, 1.827199]",
+garden-bed-08-02,BUSH_FLOWERING,,,Composicion nueva,"[11.8, -21.4, 1.828899]",
+garden-bed-08-03,BUSH_LAVENDER,,,Composicion nueva,"[11.3, -22.65, 1.799999]",
+garden-bed-08-04,FLOWER_WHITE,,,Composicion nueva,"[9.9, -22.65, 1.748999]",
+garden-bed-08-05,FLOWER_PINK,,,Composicion nueva,"[12.3, -22.35, 1.751999]",
+garden-bed-08-08,GRASS,,,Composicion nueva,"[9.5, -21.3, 1.686424]",
+garden-bed-09-01,BUSH,,,Composicion nueva,"[-0.6, -17.7, 1.827201]",
+garden-bed-09-02,BUSH_FLOWERING,,,Composicion nueva,"[0.8, -17.4, 1.828897]",
+garden-bed-09-03,BUSH_LAVENDER,,,Composicion nueva,"[0.3, -18.65, 1.799999]",
+garden-bed-09-04,FLOWER_WHITE,,,Composicion nueva,"[-1.1, -18.65, 1.748999]",
+garden-bed-09-05,FLOWER_PINK,,,Composicion nueva,"[1.3, -18.35, 1.751999]",
+garden-bed-09-06,FLOWER_PURPLE,,,Composicion nueva,"[-0.3, -19.5, 1.754999]",
+garden-bed-09-07,FLOWER_YELLOW,,,Composicion nueva,"[0.8, -19.5, 1.757999]",
+garden-bed-09-08,GRASS,,,Composicion nueva,"[-1.5, -17.3, 1.686426]",
+garden-bed-10-01,BUSH,,,Composicion nueva,"[-7.6, -16.7, 1.827199]",
+garden-bed-10-02,BUSH_FLOWERING,,,Composicion nueva,"[-6.2, -16.4, 1.828899]",
+garden-bed-10-03,BUSH_LAVENDER,,,Composicion nueva,"[-6.7, -17.65, 1.800001]",
+garden-bed-10-04,FLOWER_WHITE,,,Composicion nueva,"[-8.1, -17.65, 1.749001]",
+garden-bed-10-05,FLOWER_PINK,,,Composicion nueva,"[-5.7, -17.35, 1.752001]",
+garden-bed-10-06,FLOWER_PURPLE,,,Composicion nueva,"[-7.3, -18.5, 1.754999]",
+garden-bed-10-07,FLOWER_YELLOW,,,Composicion nueva,"[-6.2, -18.5, 1.757999]",
+garden-bed-10-08,GRASS,,,Composicion nueva,"[-8.5, -16.3, 1.686424]",
+garden-bed-11-01,BUSH,,,Composicion nueva,"[-20.6, -12.7, 1.827199]",
+garden-bed-11-02,BUSH_FLOWERING,,,Composicion nueva,"[-19.2, -12.4, 1.828899]",
+garden-bed-11-03,BUSH_LAVENDER,,,Composicion nueva,"[-19.7, -13.65, 1.799997]",
+garden-bed-11-04,FLOWER_WHITE,,,Composicion nueva,"[-21.1, -13.65, 1.748999]",
+garden-bed-11-05,FLOWER_PINK,,,Composicion nueva,"[-18.7, -13.35, 1.751999]",
+garden-bed-11-06,FLOWER_PURPLE,,,Composicion nueva,"[-20.3, -14.5, 1.755001]",
+garden-bed-11-07,FLOWER_YELLOW,,,Composicion nueva,"[-19.2, -14.5, 1.757999]",
+garden-bed-11-08,GRASS,,,Composicion nueva,"[-21.5, -12.3, 1.686424]",
+garden-bed-12-01,BUSH,,,Composicion nueva,"[-31.6, -7.7, 1.827197]",
+garden-bed-12-03,BUSH_LAVENDER,,,Composicion nueva,"[-30.7, -8.65, 1.799999]",
+garden-bed-12-04,FLOWER_WHITE,,,Composicion nueva,"[-32.1, -8.65, 1.748999]",
+garden-bed-12-05,FLOWER_PINK,,,Composicion nueva,"[-29.7, -8.35, 1.751997]",
+garden-bed-12-06,FLOWER_PURPLE,,,Composicion nueva,"[-31.3, -9.5, 1.754997]",
+garden-bed-12-07,FLOWER_YELLOW,,,Composicion nueva,"[-30.2, -9.5, 1.757997]",
+garden-bed-12-08,GRASS,,,Composicion nueva,"[-32.5, -7.3, 1.686424]",
+garden-bed-13-01,BUSH,,,Composicion nueva,"[-32.6, -1.7, 1.827199]",
+garden-bed-13-03,BUSH_LAVENDER,,,Composicion nueva,"[-31.7, -2.65, 1.799999]",
+garden-bed-13-04,FLOWER_WHITE,,,Composicion nueva,"[-33.1, -2.65, 1.748997]",
+garden-bed-13-06,FLOWER_PURPLE,,,Composicion nueva,"[-32.3, -3.5, 1.754999]",
+garden-bed-13-07,FLOWER_YELLOW,,,Composicion nueva,"[-31.2, -3.5, 1.757999]",
+garden-bed-13-08,GRASS,,,Composicion nueva,"[-33.5, -1.3, 1.686424]",
+garden-bed-14-01,BUSH,,,Composicion nueva,"[-30.6, 11.3, 1.832786]",
+garden-bed-14-03,BUSH_LAVENDER,,,Composicion nueva,"[-29.7, 10.35, 1.812477]",
+garden-bed-14-04,FLOWER_WHITE,,,Composicion nueva,"[-31.1, 10.35, 1.749261]",
+garden-bed-14-05,FLOWER_PINK,,,Composicion nueva,"[-28.7, 10.65, 1.789929]",
+garden-bed-14-06,FLOWER_PURPLE,,,Composicion nueva,"[-30.3, 9.5, 1.756073]",
+garden-bed-14-07,FLOWER_YELLOW,,,Composicion nueva,"[-29.2, 9.5, 1.771295]",
+garden-bed-14-08,GRASS,,,Composicion nueva,"[-31.5, 11.7, 1.686563]",
+garden-bed-15-03,BUSH_LAVENDER,,,Composicion nueva,"[-5.7, 6.35, 1.799999]",
+garden-bed-15-04,FLOWER_WHITE,,,Composicion nueva,"[-7.1, 6.35, 1.748999]",
+garden-bed-15-05,FLOWER_PINK,,,Composicion nueva,"[-4.7, 6.65, 1.751999]",
+garden-bed-15-06,FLOWER_PURPLE,,,Composicion nueva,"[-6.3, 5.5, 1.754999]",
+garden-bed-15-07,FLOWER_YELLOW,,,Composicion nueva,"[-5.2, 5.5, 1.757999]",
+garden-bed-16-01,BUSH,,,Composicion nueva,"[9.4, 15.3, 1.827199]",
+garden-bed-16-02,BUSH_FLOWERING,,,Composicion nueva,"[10.8, 15.6, 1.828899]",
+garden-bed-16-03,BUSH_LAVENDER,,,Composicion nueva,"[10.3, 14.35, 1.800001]",
+garden-bed-16-04,FLOWER_WHITE,,,Composicion nueva,"[8.9, 14.35, 1.748999]",
+garden-bed-16-05,FLOWER_PINK,,,Composicion nueva,"[11.3, 14.65, 1.751997]",
+garden-bed-16-06,FLOWER_PURPLE,,,Composicion nueva,"[9.7, 13.5, 1.754999]",
+garden-bed-16-07,FLOWER_YELLOW,,,Composicion nueva,"[10.8, 13.5, 1.757999]",
+garden-bed-16-08,GRASS,,,Composicion nueva,"[8.5, 15.7, 1.686424]",
+garden-fence-04,FENCE,,,Composicion nueva,"[15, 20, 1.799999]",
+garden-fence-06,FENCE,,,Composicion nueva,"[21.4, 20, 1.799997]",
+gate-001,GATE,"[-24, 1, 1.85]","PATH_CLEARANCE, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+gate-002,GATE,"[21, -10, 1.85]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-001,GRASS,"[-13.150659312189571, -23.0, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-002,GRASS,"[-7.150659312189571, -23.0, 1.8]","FLOATING, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-003,GRASS,"[-14.82329439196604, -17.9, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-004,GRASS,"[-8.82329439196604, -17.9, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-005,GRASS,"[-16.634675129042552, -12.8, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-006,GRASS,"[-10.634675129042552, -12.8, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-007,GRASS,"[-15.992424937282166, -2.6000000000000014, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-008,GRASS,"[-9.992424937282166, -2.6000000000000014, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-009,GRASS,"[-14.043075824955293, 2.5, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grass-010,GRASS,"[-8.043075824955293, 2.5, 1.8]","FLOATING, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+grove-tree-05,TREE_02,,,Composicion nueva,"[-20, 20, 2.094498]",
+grove-tree-06,TREE_01,,,Composicion nueva,"[-5, 20, 1.929421]",
+lamp-001,LAMP,"[-5, -9, 1.9]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+lamp-002,LAMP,"[7, -9, 1.9]","BENCH_ACCESS:bench-002, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+lamp-003,LAMP,"[-5, 2, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+lamp-004,LAMP,"[7, 2, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+lamp-005,LAMP,"[12, -4, 1.9]","BURIED, PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+lamp-006,LAMP,"[24, -4, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+lamp-007,LAMP,"[-18, -6, 1.9]","PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+lamp-008,LAMP,"[-29, -9, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+lamp-009,LAMP,"[12, -17, 1.9]","BURIED, PATH_CLEARANCE",Retirado de la escena V3,,No instanciado
+lamp-010,LAMP,"[27, -17, 1.9]",OUTSIDE_TERRAIN,Retirado de la escena V3,,No instanciado
+lamp-011,LAMP,"[13, 13, 1.9]",,Retirado de la escena V3,,No instanciado
+lamp-012,LAMP,"[26, 10, 1.9]",,Retirado de la escena V3,,No instanciado
+lamp-013,LAMP,"[-5, 15, 1.9]","BURIED, PATH_CLEARANCE",Retirado de la escena V3,,No instanciado
+lamp-014,LAMP,"[-21, 16, 5.25]",,Retirado de la escena V3,,No instanciado
+meadow-bench,BENCH,,,Composicion nueva,"[-27, 11, 1.89654]",
+plaza-bench-01,BENCH,,,Composicion nueva,"[-3.2, -9.4, 1.92]",
+plaza-bench-02,BENCH,,,Composicion nueva,"[5.8, -8.8, 1.92]",
+plaza-bench-03,BENCH,,,Composicion nueva,"[5.8, 1, 1.92]",
+plaza-bench-04,BENCH,,,Composicion nueva,"[-4, 1, 1.92]",
+pot-001,POT,"[-4, -8, 1.9]",,Retirado de la escena V3,,No instanciado
+pot-002,POT,"[6, -8, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+pot-003,POT,"[-4, 0, 1.9]","BENCH_ACCESS:bench-004, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+pot-004,POT,"[6, 0, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+pot-005,POT,"[13, -3, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+pot-006,POT,"[24, -3, 1.9]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-001,ROCK,"[41.95334217727937, 0.0, -1.8]",,Conservado y recalculado sobre soporte real,"[41.95334217727937, 0.0, -1.8207494625361837]",
+rock-002,ROCK,"[40.922087734601156, 4.804214302730534, -1.8]",,Conservado y recalculado sobre soporte real,"[40.922087734601156, 4.804214302730534, -2.3918468555315844]",
+rock-003,ROCK,"[37.34286336722398, 9.049389940622794, -1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[37.34286336722398, 9.049389940622794, -2.211578498175481]",
+rock-004,ROCK,"[33.78772385114206, 12.988055247191017, -1.8]",,Conservado y recalculado sobre soporte real,"[33.78772385114206, 12.988055247191017, -1.8771684439698721]",
+rock-005,ROCK,"[30.4543642324577, 17.01409629369121, -1.8]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[30.4543642324577, 17.01409629369121, -2.2765091450251225]",
+rock-006,ROCK,"[25.62814267919276, 20.335245583231497, -1.8]",,Conservado y recalculado sobre soporte real,"[25.62814267919276, 20.335245583231497, -1.8]",
+rock-007,ROCK,"[18.926078911360324, 21.82564527842285, -1.8]",,Conservado y recalculado sobre soporte real,"[18.926078911360324, 21.82564527842285, -1.8]",
+rock-008,ROCK,"[12.013180501860768, 21.97545890240055, -1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[12.013180501860768, 21.97545890240055, -2.094228164137865]",
+rock-009,ROCK,"[5.990460926506775, 22.619723266612503, -1.8]",,Conservado y recalculado sobre soporte real,"[5.990460926506775, 22.619723266612503, -1.8]",
+rock-010,ROCK,"[2.246064132599111e-15, 24.422331126141263, -1.8]",,Conservado y recalculado sobre soporte real,"[2.246064132599111e-15, 24.422331126141263, -1.8]",
+rock-011,ROCK,"[-6.838008915470073, 25.820028084676515, -1.8]",,Conservado y recalculado sobre soporte real,"[-6.838008915470073, 25.820028084676515, -1.9800970932225606]",
+rock-012,ROCK,"[-13.734441653678806, 25.12412579342224, -1.8]",,Retirado de la escena V3,,No instanciado
+rock-013,ROCK,"[-19.67392108863968, 22.688060476097295, -1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[-19.67392108863968, 22.688060476097295, -2.761534583261832]",
+rock-014,ROCK,"[-25.228563171720303, 20.01818993404954, -1.8]",,Conservado y recalculado sobre soporte real,"[-25.228563171720303, 20.01818993404954, -2.6250105370323444]",
+rock-015,ROCK,"[-31.230434977843714, 17.44766772837714, -1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[-31.230434977843714, 17.44766772837714, -2.1036089808655336]",
+rock-016,ROCK,"[-36.393223851142054, 13.98961362666773, -1.8]",,Conservado y recalculado sobre soporte real,"[-36.393223851142054, 13.98961362666773, -1.8]",
+rock-017,ROCK,"[-38.32474463287465, 9.287331695674823, -1.8]",,Conservado y recalculado sobre soporte real,"[-38.32474463287465, 9.287331695674823, -1.8]",
+rock-018,ROCK,"[-36.99490609025557, 4.343166900957012, -1.8]",,Conservado y recalculado sobre soporte real,"[-36.99490609025557, 4.343166900957012, -3.1244955796373386]",
+rock-019,ROCK,"[-35.246657822720636, 2.8739195900497066e-15, -1.8]",,Conservado y recalculado sobre soporte real,"[-35.246657822720636, 2.8739195900497066e-15, -1.8]",
+rock-020,ROCK,"[-35.1050707979413, -4.121302029349677, -1.8]",,Conservado y recalculado sobre soporte real,"[-35.1050707979413, -4.121302029349677, -1.8]",
+rock-021,ROCK,"[-35.20140695744816, -8.530445426316577, -1.8]",,Conservado y recalculado sobre soporte real,"[-35.20140695744816, -8.530445426316577, -1.8701534705497251]",
+rock-022,ROCK,"[-33.06943732101661, -12.711944752808986, -1.8]",,Conservado y recalculado sobre soporte real,"[-33.06943732101661, -12.711944752808986, -1.8]",
+rock-023,ROCK,"[-28.684266776327423, -16.025186844196902, -1.8]",,Conservado y recalculado sobre soporte real,"[-28.684266776327423, -16.025186844196902, -1.8]",
+rock-024,ROCK,"[-23.995060788608082, -19.03943879308397, -1.8]",,Conservado y recalculado sobre soporte real,"[-23.995060788608082, -19.03943879308397, -1.8]",
+rock-025,ROCK,"[-19.673921088639695, -22.68806047609728, -1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-19.673921088639695, -22.68806047609728, -2.5351969692319285]",
+rock-026,ROCK,"[-14.390774562880855, -26.32474180599514, -1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-14.390774562880855, -26.32474180599514, -2.3379065326860777]",
+rock-027,ROCK,"[-7.41517838938025, -27.999395238214987, -1.8]","OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-028,ROCK,"[-7.443217536329019e-15, -26.97766887385874, -1.8]",,Conservado y recalculado sobre soporte real,"[-7.443217536329019e-15, -26.97766887385874, -1.8]",
+rock-029,ROCK,"[6.5676304004169355, -24.79909042015098, -1.8]",OBJECT_COLLISION,Conservado y recalculado sobre soporte real,"[6.5676304004169355, -24.79909042015098, -3.0409288010281488]",
+rock-030,ROCK,"[12.669513411062823, -23.176074914973455, -1.8]",,Conservado y recalculado sobre soporte real,"[12.669513411062823, -23.176074914973455, -1.8]",
+rock-031,ROCK,"[18.92607891136029, -21.825645278422858, -1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[18.92607891136029, -21.825645278422858, -2.788834169966961]",
+rock-032,ROCK,"[24.39464029608053, -19.35649444226593, -1.8]",,Conservado y recalculado sobre soporte real,"[24.39464029608053, -19.35649444226593, -1.8]",
+rock-033,ROCK,"[27.90819603094138, -15.591615409510991, -1.8]",,Conservado y recalculado sobre soporte real,"[27.90819603094138, -15.591615409510991, -1.8]",
+rock-034,ROCK,"[30.463937321016612, -11.710386373332273, -1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[30.463937321016612, -11.710386373332273, -3.1440912637228013]",
+rock-035,ROCK,"[34.219525691797486, -8.292503671264551, -1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[34.219525691797486, -8.292503671264551, -2.4387538172573784]",
+rock-036,ROCK,"[39.0322524422869, -4.582349431123206, -1.8]",,Conservado y recalculado sobre soporte real,"[39.0322524422869, -4.582349431123206, -1.8374345489823884]",
+rock-037,ROCK,"[-12.552971544808193, -23.0, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-038,ROCK,"[-7.74834707957095, -23.0, 1.25]","BURIED, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-7.74834707957095, -23.0, 1.891384]",
+rock-039,ROCK,"[-12.784720583422043, -22.15, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-040,ROCK,"[-7.923017174443365, -22.15, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-041,ROCK,"[-13.044630513304224, -21.3, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-042,ROCK,"[-8.146444720629294, -21.3, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-8.146444720629294, -21.3, 1.984113]",
+rock-043,ROCK,"[-13.284399927961047, -20.45, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-044,ROCK,"[-8.455638732087273, -20.45, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-045,ROCK,"[-13.481010591294115, -19.6, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-046,ROCK,"[-8.860791808994474, -19.6, 1.25]","BURIED, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-8.860791808994474, -19.6, 1.894461]",
+rock-047,ROCK,"[-13.652338258687747, -18.75, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-048,ROCK,"[-9.329968966743357, -18.75, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-049,ROCK,"[-13.848121793353151, -17.9, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-050,ROCK,"[-9.79846699057893, -17.9, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-9.79846699057893, -17.9, 1.518034]",
+rock-051,ROCK,"[-14.120898232786455, -17.05, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-052,ROCK,"[-10.19822898683028, -17.05, 1.25]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-053,ROCK,"[-14.493531022617166, -16.2, 1.25]","BURIED, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-14.493531022617166, -16.2, 1.105771]",
+rock-054,ROCK,"[-10.490678745212229, -16.2, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-055,ROCK,"[-14.942222535645243, -15.350000000000001, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-056,ROCK,"[-10.684075322930617, -15.350000000000001, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-057,ROCK,"[-15.405031399157831, -14.5, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-15.405031399157831, -14.5, 1.91681]",
+rock-058,ROCK,"[-10.825358750733603, -14.5, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-059,ROCK,"[-15.811123588274254, -13.65, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-060,ROCK,"[-10.97124942147711, -13.65, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-061,ROCK,"[-16.11399494339556, -12.8, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-16.11399494339556, -12.8, 1.939531]",
+rock-062,ROCK,"[-11.155355314689546, -12.8, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-063,ROCK,"[-16.30977643666941, -11.950000000000001, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-064,ROCK,"[-11.370168028340075, -11.950000000000001, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-065,ROCK,"[-16.430697814093108, -11.1, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-16.430697814093108, -11.1, 1.968855]",
+rock-066,ROCK,"[-11.573864951845422, -11.1, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-067,ROCK,"[-16.518505310956435, -10.25, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-068,ROCK,"[-11.7171156722766, -10.25, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-069,ROCK,"[-16.59437613114832, -9.4, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-16.59437613114832, -9.4, 1.903464]",
+rock-070,ROCK,"[-11.77334468700445, -9.4, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-071,ROCK,"[-16.643699808595212, -8.55, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-072,ROCK,"[-11.75407616471487, -8.55, 1.25]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-073,ROCK,"[-15.240364622606297, -3.4499999999999993, 1.25]","BURIED, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-15.240364622606297, -3.4499999999999993, 1.564649]",
+rock-074,ROCK,"[-11.319769870093069, -3.4499999999999993, 1.25]",BURIED,Retirado de la escena V3,,No instanciado
+rock-075,ROCK,"[-14.997765019726188, -2.6000000000000014, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-076,ROCK,"[-10.987084854838145, -2.6000000000000014, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-10.987084854838145, -2.6000000000000014, 1.314367]",
+rock-077,ROCK,"[-14.816212700263986, -1.75, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-078,ROCK,"[-10.546979773137465, -1.75, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-079,ROCK,"[-14.646705985717842, -0.9000000000000021, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-080,ROCK,"[-10.062980315687065, -0.9000000000000021, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-10.062980315687065, -0.9000000000000021, 1.859163]",
+rock-081,ROCK,"[-14.434610467187557, -0.05000000000000071, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-082,ROCK,"[-9.604988998214608, -0.05000000000000071, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-083,ROCK,"[-14.151730599155757, 0.8000000000000007, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-084,ROCK,"[-9.216856853261445, 0.8000000000000007, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-9.216856853261445, 0.8000000000000007, 1.948901]",
+rock-085,ROCK,"[-13.811921463536311, 1.6499999999999986, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-086,ROCK,"[-8.900405901190304, 1.6499999999999986, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-087,ROCK,"[-13.4617188706976, 2.5, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-088,ROCK,"[-8.624432779212986, 2.5, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-8.624432779212986, 2.5, 1.913537]",
+rock-089,ROCK,"[-13.152288135781584, 3.349999999999998, 1.25]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-090,ROCK,"[-8.352401747417678, 3.349999999999998, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-091,ROCK,"[-11.952965214192572, 8.45, 1.25]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-092,ROCK,"[-7.652488941780524, 8.45, 1.25]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-093,ROCK,"[-11.826472506843881, 9.299999999999997, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-094,ROCK,"[-7.796938898474352, 9.299999999999997, 1.25]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-095,ROCK,"[-11.832030315770336, 10.149999999999999, 1.25]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-096,ROCK,"[-7.91159019980411, 10.149999999999999, 1.25]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-097,ROCK,"[-11.950191767898675, 8.8, 4.4799999999999995]","BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-098,ROCK,"[-7.650191767898674, 8.8, 4.4799999999999995]","FLOATING, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-099,ROCK,"[-12.042879693361302, -27.8, 0.8500000000000001]","OUTSIDE_TERRAIN, UNSUPPORTED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+rock-100,ROCK,"[-7.742879693361301, -27.8, 0.8500000000000001]","OUTSIDE_TERRAIN, BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+sign-001,SIGN,"[8, -13, 1.9]",PATH_CLEARANCE,Retirado de la escena V3,,No instanciado
+tree_01-001,TREE_01,"[-32, -13, 1.8]","OUTSIDE_TERRAIN, BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_01-002,TREE_01,"[-25, 17, 5.25]","OUTSIDE_TERRAIN, BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_01-003,TREE_01,"[-10, 22, 5.25]",BURIED,Retirado de la escena V3,,No instanciado
+tree_01-004,TREE_01,"[7, 18, 1.8]",BURIED,Conservado y recalculado sobre soporte real,"[7, 18, 1.923264]",
+tree_01-005,TREE_01,"[30, 12, 1.8]","BURIED, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[30, 12, 1.945119]",
+tree_01-006,TREE_01,"[31, -13, 1.8]","OUTSIDE_TERRAIN, UNSUPPORTED, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_01-007,TREE_01,"[5, -20, 1.8]",BURIED,Conservado y recalculado sobre soporte real,"[5, -20, 1.92408]",
+tree_01-008,TREE_01,"[-27, -17, 1.8]","OUTSIDE_TERRAIN, BURIED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_01-009,TREE_01,"[9, 9, 1.8]","BURIED, PATH_CLEARANCE",Retirado de la escena V3,,No instanciado
+tree_01-010,TREE_01,"[-23, 10, 1.8]","BURIED, OBJECT_COLLISION, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+tree_02-001,TREE_02,"[-30, 4, 1.8]",BURIED,Conservado y recalculado sobre soporte real,"[-30, 4, 1.924112]",
+tree_02-002,TREE_02,"[-21, 22, 5.25]","OUTSIDE_TERRAIN, BURIED, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_02-003,TREE_02,"[-5, 23, 1.8]",BURIED,Retirado de la escena V3,,No instanciado
+tree_02-004,TREE_02,"[12, 23, 1.8]","OUTSIDE_TERRAIN, UNSUPPORTED, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_02-005,TREE_02,"[34, 3, 1.8]",,Conservado y recalculado sobre soporte real,"[34, 3, 1.886269]",
+tree_02-006,TREE_02,"[26, -21, 1.8]","OUTSIDE_TERRAIN, UNSUPPORTED, FUTURE_BUILDING_PLOTS:studio",Retirado de la escena V3,,No instanciado
+tree_02-007,TREE_02,"[-3, -19, 1.8]",,Conservado y recalculado sobre soporte real,"[-3, -19, 1.881975]",
+tree_02-008,TREE_02,"[-4, 6, 1.8]","BURIED, PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_02-009,TREE_02,"[28, 2, 1.8]",,Retirado de la escena V3,,No instanciado
+tree_03-001,TREE_03,"[-29, 13, 1.8]",OBJECT_COLLISION,Retirado de la escena V3,,No instanciado
+tree_03-002,TREE_03,"[-17, 23, 5.25]","OUTSIDE_TERRAIN, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_03-003,TREE_03,"[2, 21, 1.8]",,Conservado y recalculado sobre soporte real,"[2, 21, 1.79078]",
+tree_03-004,TREE_03,"[25, 19, 1.8]","OUTSIDE_TERRAIN, FUTURE_BUILDING_PLOTS:library-garden, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_03-005,TREE_03,"[30, -5, 1.8]",,Conservado y recalculado sobre soporte real,"[30, -5, 1.789691]",
+tree_03-006,TREE_03,"[14, -22, 1.8]","OUTSIDE_TERRAIN, PATH_CLEARANCE, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_03-007,TREE_03,"[-19, -19, 1.8]","OBJECT_COLLISION, OBJECT_COLLISION",Conservado y recalculado sobre soporte real,"[-19, -19, 1.788823]",
+tree_03-008,TREE_03,"[-3, 12, 1.8]","PATH_CLEARANCE, OBJECT_COLLISION",Retirado de la escena V3,,No instanciado
+tree_03-009,TREE_03,"[-19, 8, 5.25]","PATH_CLEARANCE, OBJECT_COLLISION, BENCH_ACCESS_BLOCKED",Retirado de la escena V3,,No instanciado
+walk-lamp-02,LAMP,,,Composicion nueva,"[-7, 2, 1.799997]",
+walk-lamp-03,LAMP,,,Composicion nueva,"[-7, -12, 1.799999]",
+walk-lamp-05,LAMP,,,Composicion nueva,"[11, -7, 1.799999]",
+walk-lamp-08,LAMP,,,Composicion nueva,"[-21, -10, 1.799999]",
+walk-lamp-09,LAMP,,,Composicion nueva,"[-21, 8, 1.912796]",
+walk-lamp-10,LAMP,,,Composicion nueva,"[-28, -12, 1.799999]",
+walk-lamp-11,LAMP,,,Composicion nueva,"[0, 12, 1.799999]",
+wayfinding-03,SIGN,,,Composicion nueva,"[17, -21, 1.799999]",

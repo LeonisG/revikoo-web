@@ -1,0 +1,14 @@
+{
+  "viewport": [
+    1280,
+    900
+  ],
+  "calls": 308,
+  "triangles": 503646,
+  "geometries": 154,
+  "textures": 3,
+  "fps": 45.04,
+  "frames": 180,
+  "scene": "CITY_IDLE",
+  "quality": "medium"
+}

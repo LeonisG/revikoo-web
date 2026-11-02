@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { loadWorld } from './world.mjs';
-import { AmbientAnimationManager, QUALITY } from './ambient.mjs';
+import { loadWorld } from './world.mjs?v=layout-v3-3';
+import { AmbientAnimationManager, QUALITY } from './ambient.mjs?v=layout-v3-3';
 import { BankTransition } from './bank-transition.mjs';
 import { loadBankOffice } from './bank-office.mjs';
 import { createFinanceApp } from './finance/finance-app.mjs';
@@ -30,7 +30,7 @@ async function start(){
  function rotate(dx,dy=0){if(!cityControlsEnabled())return;azimuth+=dx;elevation=THREE.MathUtils.clamp(elevation+dy,.22,1.25);aim();}
  function pan(dx,dy){if(!cityControlsEnabled())return;const f=90/host.clientHeight/zoom;target.x=THREE.MathUtils.clamp(target.x+(-Math.sin(azimuth)*dx+Math.cos(azimuth)*dy)*f,-25,25);target.y=THREE.MathUtils.clamp(target.y+(Math.cos(azimuth)*dx+Math.sin(azimuth)*dy)*f,-18,18);aim();}
  function reset(){if(!cityControlsEnabled())return;azimuth=-1.98;elevation=.67;zoom=1;target.set(0,0,2);aim();}
- function focusBank(){if(!cityControlsEnabled())return;target.set(18,2,5.8);zoom=innerWidth<700?5.3:4.1;azimuth=-2.15;elevation=.42;aim();}
+ function focusBank(){if(!cityControlsEnabled())return;if(!world)return;target.fromArray(world.layout.bank.position).add(new THREE.Vector3(0,0,3.88));zoom=innerWidth<700?5.3:4.1;azimuth=-2.15;elevation=.42;aim();}
  function setQuality(value){quality=value;const q=QUALITY[value];renderer.setPixelRatio(Math.min(devicePixelRatio,q.dpr));renderer.shadowMap.enabled=!!q.shadow;key.castShadow=!!q.shadow;if(q.shadow){key.shadow.mapSize.set(q.shadow,q.shadow);key.shadow.map?.setSize(q.shadow,q.shadow);}renderer.shadowMap.needsUpdate=true;scene.traverse(o=>{if(o.material){for(const m of Array.isArray(o.material)?o.material:[o.material])m.needsUpdate=true;}});if(ambient)ambient.setQuality(value);office?.setQuality(value);$('quality').value=value;frameTimes=[];aim();}
  const resize=new ResizeObserver(aim);resize.observe(host);setQuality(quality);
  on(host,'wheel',e=>{e.preventDefault();const delta=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?host.clientHeight:1);zoomBy(Math.exp(-THREE.MathUtils.clamp(delta,-200,200)*.0015));},{passive:false});on(host,'contextmenu',e=>e.preventDefault());
@@ -61,7 +61,7 @@ async function start(){
  function lockUI(locked){document.querySelector('.controls').inert=locked;document.querySelector('.world-settings').inert=locked;$('bank-finance').inert=locked;$('return-city').disabled=locked;$('office-motion').disabled=locked;document.querySelector('main').setAttribute('aria-busy',String(locked));if(locked){pointers.clear();previousFocus=document.activeElement;host.focus({preventScroll:true});}}
  function sceneUI(isOffice){document.body.dataset.scene=isOffice?'office':'city';$('office-ui').hidden=!isOffice;for(const selector of ['.intro','.world-settings','.controls','.hint'])document.querySelector(selector).hidden=isOffice;host.setAttribute('aria-label',isOffice?'Despacho del Banco. Nilo te recibe sentado frente a ti. Usa Volver a la ciudad o Escape para salir.':'Isla en 3D. Arrastra para girar. Usa la rueda para acercarte.');document.documentElement.dataset.light=isOffice?'office':ambient.mode;frameTimes=[];lastTime=0;aim();}
  transition=new BankTransition({reduced:()=>reduced.matches,canEnter:()=>loaded&&!playing,
-  capture:()=>({target:target.toArray(),zoom,azimuth,elevation,opened}),approach:()=>({target:[18,2,5.8],zoom:innerWidth<700?5.3:4.1,azimuth:-2.15,elevation:.42}),
+  capture:()=>({target:target.toArray(),zoom,azimuth,elevation,opened}),approach:()=>({target:world.layout.bank.position.map((v,i)=>v+(i===2?3.88:0)),zoom:innerWidth<700?5.3:4.1,azimuth:-2.15,elevation:.42}),
   camera:s=>{target.fromArray(s.target);zoom=s.zoom;azimuth=s.azimuth;elevation=s.elevation;aim();},
   restore:s=>{target.fromArray(s.target);zoom=s.zoom;azimuth=s.azimuth;elevation=s.elevation;doorState(s.opened,true);aim();},
   openDoors:()=>doorState(true),prepareOffice,showOffice:()=>{sceneUI(true);office.controller.active=true;},showCity:()=>{finance.leave();if(office)office.controller.active=false;sceneUI(false);},
@@ -74,4 +74,8 @@ async function start(){
  on(document,'keydown',e=>{if(!e.defaultPrevented&&e.key==='Escape'&&transition.state==='OFFICE_IDLE'){e.preventDefault();transition.leave();}});
  function dispose(){disposed=true;finance.dispose();transition.dispose();doorResolve?.();cancelAnimationFrame(scheduled);resize.disconnect();events.abort();mixer.stopAllAction();mixer.uncacheRoot(world.bank.scene);ambient.dispose();world.dispose();office?.dispose();key.shadow.map?.dispose();renderer.dispose();}on(window,'pagehide',e=>{if(!e.persisted)dispose();});
  window.cozyCity={snapshot:()=>({finance:finance.snapshot(),loaded,azimuth,elevation,zoom,target:target.toArray(),opened,playing,bankState:transition.state,officeActive:transition.officeActive,nilo:office?.controller.snapshot(),clips:[...clips.keys()],triangles:renderer.info.render.triangles,calls:renderer.info.render.calls,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,ambient:ambient.snapshot(),plots:world.layout.plots,frames:frameTimes.length,fps:frameTimes.length?1000/(frameTimes.reduce((a,b)=>a+b,0)/frameTimes.length):0}),doorPose:()=>{const result=[];world.bank.scene.traverse(o=>{if(/^(LeftDoor|RightDoor)/.test(o.name)&&!o.isMesh)result.push({name:o.name,quaternion:o.quaternion.toArray()});});return result;},focusBank,reset,enterBank:()=>transition.enter(),leaveBank:()=>transition.leave()};
+ if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).has('layoutQA')){
+   const {installLayoutReview}=await import('./layout-review.mjs');
+   installLayoutReview({world,scene,snapshot:window.cozyCity.snapshot,view:v=>{target.fromArray(v.target);zoom=v.zoom;azimuth=v.azimuth;elevation=v.elevation;frameTimes=[];aim();},draw});
+ }
 }

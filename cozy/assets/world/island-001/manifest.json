@@ -4,11 +4,11 @@
   "gltfUp": "Y",
   "files": {
     "terrain.glb": {
-      "bytes": 2962760,
-      "sha256": "65113026be42682e4608e80564b4fe929d15ec132048b3773168197bc0842042",
-      "meshes": 16,
-      "materials": 16,
-      "triangles": 59516,
+      "bytes": 1110188,
+      "sha256": "d5362e3e032e5e17d27482d37540555abf030f901f0abda405fd0e33aff94bf8",
+      "meshes": 11,
+      "materials": 11,
+      "triangles": 29008,
       "clips": []
     },
     "environment-kit.glb": {
@@ -84,26 +84,26 @@
     "TREE_02",
     "TREE_03"
   ],
-  "placements": 290,
+  "placements": 225,
   "plots": [
     {
       "id": "town-hall",
       "position": [
-        -24,
-        -4,
+        -25,
+        -3,
         1.85
       ],
       "dimensions": [
-        11,
-        9
+        10,
+        8
       ],
-      "rotation": 0,
-      "buildable": true,
       "entrance": [
-        -24,
-        -8.5,
-        1.85
-      ]
+        -25,
+        -7,
+        1.92
+      ],
+      "buildable": true,
+      "rotation": 0
     },
     {
       "id": "studio",
@@ -116,13 +116,13 @@
         11,
         8
       ],
-      "rotation": 0,
-      "buildable": true,
       "entrance": [
         21,
         -19,
-        1.85
-      ]
+        1.92
+      ],
+      "buildable": true,
+      "rotation": 0
     },
     {
       "id": "library-garden",
@@ -135,13 +135,13 @@
         11,
         8
       ],
-      "rotation": 0,
-      "buildable": true,
       "entrance": [
         20,
         10,
-        1.85
-      ]
+        1.92
+      ],
+      "buildable": true,
+      "rotation": 0
     }
   ]
 }

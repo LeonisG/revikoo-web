@@ -5,6 +5,8 @@ const states={day:{sky:0xe9e4d3,hemi:2.3,key:3.2,fill:1.3,sun:0xffe8b8,lamp:.08,
 export class AmbientAnimationManager{
   constructor(scene,world,lights){
     this.scene=scene;this.world=world;this.lights=lights;this.time=0;this.motion=true;this.quality='medium';this.mode='day';this.uniforms={time:{value:0},motion:{value:1}};this.luminous=[];this.waterCount=0;this.windCount=0;this.transition=1;this.current={...states.day,sky:new THREE.Color(states.day.sky),sun:new THREE.Color(states.day.sun)};
+    this.fountain=world.layout.anchors.FOUNTAIN_CENTER;
+    this.waterfalls=Object.entries(world.layout.anchors).filter(([id])=>id.startsWith('WATERFALL_')).map(([,anchor])=>anchor);
     for(const material of world.materials){const name=material.name;const water=name.includes('Water'),wind=/City_Leaf|City_Petal/.test(name);if(water||wind)this.decorate(material,water,wind);if(/Glow|Emission|Window_Glass/.test(name))this.luminous.push({material,window:name.includes('Window')});}
     this.leafGeometry=new THREE.SphereGeometry(.16,5,3);this.leafGeometry.scale(1,.45,.12);this.leafMaterial=new THREE.MeshStandardMaterial({color:0x8a9d43,roughness:.9,transparent:true,depthWrite:false,side:THREE.DoubleSide});
     this.leaves=new THREE.InstancedMesh(this.leafGeometry,this.leafMaterial,24);this.leaves.instanceMatrix.setUsage(THREE.DynamicDrawUsage);this.leaves.frustumCulled=false;scene.add(this.leaves);
@@ -60,11 +62,11 @@ export class AmbientAnimationManager{
     this.leaves.instanceMatrix.needsUpdate=true;this.leafAlpha.needsUpdate=true;this.activeLeaves=active;
     // Fountain droplets describe small ballistic arcs, with separate cascade foam.
     for(let i=0;i<this.drops.count;i++){
-      if(i<24){const a=(i%4)*Math.PI/2,p=(t*.72+Math.floor(i/4)/6)%1,r=(.94+.30*p)*1.15;d.position.set(1+cos(a)*r,-4+sin(a)*r,1.92+(1.99-1.36*p*p)*1.15);d.scale.set(.45,.45,1.5);}
-      else{const j=i-24,p=(t*.38+j*.137)%1,upper=j%2===0,x=upper?-9.8:-9.88,y=upper?8.5:-28;d.position.set(x+sin(j*8)*1.25,y-p*.6,(upper?5.3:1.84)-p*(upper?3.5:6.7));d.scale.set(.5,.5,3.0);}
+      if(i<24){const a=(i%4)*Math.PI/2,p=(t*.72+Math.floor(i/4)/6)%1,f=this.fountain,r=(.94+.30*p)*f.scale;d.position.set(f.position[0]+cos(a)*r,f.position[1]+sin(a)*r,f.position[2]+(1.99-1.36*p*p)*f.scale);d.scale.set(.45,.45,1.5);}
+      else{const j=i-24,p=(t*.38+j*.137)%1,f=this.waterfalls[j%this.waterfalls.length],lip=f.lip[2+(j*7)%(f.lip.length-4)];d.position.set(lip[0]+f.direction[0]*(.02+p*.55),lip[1]+f.direction[1]*(.02+p*.55),lip[2]+p*(f.bottom[2]-lip[2]));d.scale.set(.5,.5,3.0);}
       d.rotation.set(0,0,0);d.updateMatrix();this.drops.setMatrixAt(i,d.matrix);
     }this.drops.instanceMatrix.needsUpdate=true;
-    for(let i=0;i<8;i++){const p=(t*.45+i*.21)%1,a=i*Math.PI/2;if(i<4){d.position.set(1+cos(a)*1.24*1.15,-4+sin(a)*1.24*1.15,2.655);d.scale.setScalar(.35+p*.9);}else{const upper=i<6;d.position.set(upper?-9.8:-9.88,upper?7.5:-29.1,upper?1.90:-4.74);d.scale.set(1+p*2,.6+p,1);}d.rotation.set(0,0,0);d.updateMatrix();this.ripples.setMatrixAt(i,d.matrix);}this.ripples.instanceMatrix.needsUpdate=true;
+    for(let i=0;i<8;i++){const p=(t*.45+i*.21)%1,a=i*Math.PI/2;if(i<4){const f=this.fountain;d.position.set(f.position[0]+cos(a)*1.24*f.scale,f.position[1]+sin(a)*1.24*f.scale,f.position[2]+.61*f.scale+.015);d.scale.setScalar(.35+p*.9);}else{const f=this.waterfalls[(i-4)%this.waterfalls.length];d.position.set(f.bottom[0]+f.direction[0]*.65,f.bottom[1]+f.direction[1]*.65,f.bottom[2]+.025);d.scale.set(1+p*2,.6+p,1);}d.rotation.set(0,0,0);d.updateMatrix();this.ripples.setMatrixAt(i,d.matrix);}this.ripples.instanceMatrix.needsUpdate=true;
   }
   snapshot(){return {time:this.time,motion:this.motion,quality:this.quality,lighting:this.mode,transition:this.transition,windMaterials:this.windCount,waterMaterials:this.waterCount,activeLeaves:this.activeLeaves,particleLimit:this.leaves.count};}
   dispose(){for(const o of [this.leaves,this.drops,this.glows,this.ripples]){this.scene.remove(o);o.geometry.dispose();o.material.dispose();}}

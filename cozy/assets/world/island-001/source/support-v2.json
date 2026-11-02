@@ -1,0 +1,1452 @@
+[
+  {
+    "id": "tree_01-001",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.622550076753981
+  },
+  {
+    "id": "tree_02-001",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.650887207386603
+  },
+  {
+    "id": "tree_03-001",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.783426625824272
+  },
+  {
+    "id": "tree_01-002",
+    "supportHeight": 5.250001907348633,
+    "contactHeight": 5.063075302680711
+  },
+  {
+    "id": "tree_02-002",
+    "supportHeight": 5.249999046325684,
+    "contactHeight": 5.106072608905266
+  },
+  {
+    "id": "tree_03-002",
+    "supportHeight": 5.25,
+    "contactHeight": 5.230586083358858
+  },
+  {
+    "id": "tree_01-003",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 5.0827019860642615
+  },
+  {
+    "id": "tree_02-003",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.67882585586435
+  },
+  {
+    "id": "tree_03-003",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.7842191320083531
+  },
+  {
+    "id": "tree_01-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.651735458136141
+  },
+  {
+    "id": "tree_02-004",
+    "supportHeight": null,
+    "contactHeight": 1.697884562679477
+  },
+  {
+    "id": "tree_03-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.7810418293876655
+  },
+  {
+    "id": "tree_01-005",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.6298798296680004
+  },
+  {
+    "id": "tree_02-005",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.688728580799314
+  },
+  {
+    "id": "tree_03-005",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.7853084286014511
+  },
+  {
+    "id": "tree_01-006",
+    "supportHeight": null,
+    "contactHeight": 1.611652276895992
+  },
+  {
+    "id": "tree_02-006",
+    "supportHeight": null,
+    "contactHeight": 1.6620196697515612
+  },
+  {
+    "id": "tree_03-006",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.7849654050925656
+  },
+  {
+    "id": "tree_01-007",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.6509193421246782
+  },
+  {
+    "id": "tree_02-007",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.6930220828811304
+  },
+  {
+    "id": "tree_03-007",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.7861763930670358
+  },
+  {
+    "id": "tree_01-008",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.6081173464567373
+  },
+  {
+    "id": "tree_02-008",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.6827051472015362
+  },
+  {
+    "id": "tree_03-008",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.785067020897759
+  },
+  {
+    "id": "tree_01-009",
+    "supportHeight": 1.8449974060058594,
+    "contactHeight": 1.6587982724940287
+  },
+  {
+    "id": "tree_02-009",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.6827153406972792
+  },
+  {
+    "id": "tree_03-009",
+    "supportHeight": 5.249999046325684,
+    "contactHeight": 5.2310415129792425
+  },
+  {
+    "id": "tree_01-010",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 1.6205616554601299
+  },
+  {
+    "id": "rock-001",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.5289450016164245
+  },
+  {
+    "id": "bush-001",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.7648980066122981
+  },
+  {
+    "id": "rock-002",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.6543078435762713
+  },
+  {
+    "id": "rock-003",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.614736740869843
+  },
+  {
+    "id": "bush_flowering-001",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.7586592698097183
+  },
+  {
+    "id": "rock-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.541329656037468
+  },
+  {
+    "id": "rock-005",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.62898980964445
+  },
+  {
+    "id": "bush_lavender-001",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "rock-006",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": -2.4693074625560136
+  },
+  {
+    "id": "rock-007",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.391767908299964
+  },
+  {
+    "id": "bush-002",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.7711331939103745
+  },
+  {
+    "id": "rock-008",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.5889769115301715
+  },
+  {
+    "id": "rock-009",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.40310581265572
+  },
+  {
+    "id": "bush_flowering-002",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.7689835312720947
+  },
+  {
+    "id": "rock-010",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.515778639811812
+  },
+  {
+    "id": "rock-011",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.563923749702871
+  },
+  {
+    "id": "bush_lavender-002",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "rock-012",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": -2.5926536332534367
+  },
+  {
+    "id": "rock-013",
+    "supportHeight": 5.25,
+    "contactHeight": -2.7354588079378175
+  },
+  {
+    "id": "bush-003",
+    "supportHeight": 5.25,
+    "contactHeight": 1.7638388297399639
+  },
+  {
+    "id": "rock-014",
+    "supportHeight": 5.25,
+    "contactHeight": -2.7054901149598685
+  },
+  {
+    "id": "rock-015",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.5910361151954464
+  },
+  {
+    "id": "bush_flowering-003",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.7681415348455412
+  },
+  {
+    "id": "rock-016",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.3775228442016374
+  },
+  {
+    "id": "rock-017",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.478420188577242
+  },
+  {
+    "id": "bush_lavender-003",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "rock-018",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.815133172738459
+  },
+  {
+    "id": "rock-019",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.4201781311740347
+  },
+  {
+    "id": "bush-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.764044531215331
+  },
+  {
+    "id": "rock-020",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.5007610077688156
+  },
+  {
+    "id": "rock-021",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": -2.5397897838282644
+  },
+  {
+    "id": "bush_flowering-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.7680552151726847
+  },
+  {
+    "id": "rock-022",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.4510216194829932
+  },
+  {
+    "id": "rock-023",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.521049046120567
+  },
+  {
+    "id": "bush_lavender-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "rock-024",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": -2.450926348445437
+  },
+  {
+    "id": "rock-025",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": -2.685774941603957
+  },
+  {
+    "id": "bush-005",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.759100520820579
+  },
+  {
+    "id": "rock-026",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": -2.6424672849411195
+  },
+  {
+    "id": "rock-027",
+    "supportHeight": 1.6344947814941406,
+    "contactHeight": -2.6929602814216396
+  },
+  {
+    "id": "bush_flowering-005",
+    "supportHeight": 1.6726913452148438,
+    "contactHeight": 1.768874505439769
+  },
+  {
+    "id": "rock-028",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.366665750537674
+  },
+  {
+    "id": "rock-029",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": -2.7967892457859476
+  },
+  {
+    "id": "bush_lavender-005",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "rock-030",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.3775767365954135
+  },
+  {
+    "id": "rock-031",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.7414514001220227
+  },
+  {
+    "id": "bush-006",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.758901994322459
+  },
+  {
+    "id": "rock-032",
+    "supportHeight": 1.8700008392333984,
+    "contactHeight": -2.453135355581609
+  },
+  {
+    "id": "rock-033",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.4439713253744797
+  },
+  {
+    "id": "bush_flowering-006",
+    "supportHeight": 1.8700008392333984,
+    "contactHeight": 1.7538987365096794
+  },
+  {
+    "id": "rock-034",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": -2.8194346643530785
+  },
+  {
+    "id": "rock-035",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.664604493677937
+  },
+  {
+    "id": "bush_lavender-006",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "rock-036",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": -2.5326075815561984
+  },
+  {
+    "id": "rock-037",
+    "supportHeight": 1.6619548797607422,
+    "contactHeight": 1.0862979467490352
+  },
+  {
+    "id": "grass-001",
+    "supportHeight": 1.7060012817382812,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-038",
+    "supportHeight": 1.6401138305664062,
+    "contactHeight": 1.1081936137062296
+  },
+  {
+    "id": "grass-002",
+    "supportHeight": 1.7479896545410156,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-039",
+    "supportHeight": 1.6342639923095703,
+    "contactHeight": 1.0256498710885495
+  },
+  {
+    "id": "rock-040",
+    "supportHeight": 1.6510009765625,
+    "contactHeight": 1.0004946380223456
+  },
+  {
+    "id": "rock-041",
+    "supportHeight": 1.6995468139648438,
+    "contactHeight": 1.0431365034892746
+  },
+  {
+    "id": "rock-042",
+    "supportHeight": 1.7042388916015625,
+    "contactHeight": 0.9643062839262655
+  },
+  {
+    "id": "rock-043",
+    "supportHeight": 1.6410369873046875,
+    "contactHeight": 1.0723956337621372
+  },
+  {
+    "id": "flower_white-001",
+    "supportHeight": 1.7266044616699219,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-044",
+    "supportHeight": 1.6374969482421875,
+    "contactHeight": 1.1054075265310388
+  },
+  {
+    "id": "flower_white-002",
+    "supportHeight": 1.7576580047607422,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-045",
+    "supportHeight": 1.6980228424072266,
+    "contactHeight": 1.003787841162066
+  },
+  {
+    "id": "rock-046",
+    "supportHeight": 1.6832313537597656,
+    "contactHeight": 1.1020153162032567
+  },
+  {
+    "id": "rock-047",
+    "supportHeight": 1.6416816711425781,
+    "contactHeight": 1.0261490043652166
+  },
+  {
+    "id": "rock-048",
+    "supportHeight": 1.625436782836914,
+    "contactHeight": 0.9641030973901327
+  },
+  {
+    "id": "rock-049",
+    "supportHeight": 1.6843605041503906,
+    "contactHeight": 1.0663644085416044
+  },
+  {
+    "id": "grass-003",
+    "supportHeight": 1.7945880889892578,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-050",
+    "supportHeight": 1.6581134796142578,
+    "contactHeight": 1.0828143131763455
+  },
+  {
+    "id": "grass-004",
+    "supportHeight": 1.740030288696289,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-051",
+    "supportHeight": 1.6259403228759766,
+    "contactHeight": 1.047404793525313
+  },
+  {
+    "id": "rock-052",
+    "supportHeight": 1.6370429992675781,
+    "contactHeight": 1.0939813003104333
+  },
+  {
+    "id": "rock-053",
+    "supportHeight": 1.6740474700927734,
+    "contactHeight": 1.087222125344922
+  },
+  {
+    "id": "rock-054",
+    "supportHeight": 1.6507377624511719,
+    "contactHeight": 1.0095361127549611
+  },
+  {
+    "id": "rock-055",
+    "supportHeight": 1.68145751953125,
+    "contactHeight": 1.04597468856581
+  },
+  {
+    "id": "flower_white-003",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-056",
+    "supportHeight": 1.6662578582763672,
+    "contactHeight": 1.0392959564472093
+  },
+  {
+    "id": "flower_white-004",
+    "supportHeight": 1.7806529998779297,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-057",
+    "supportHeight": 1.6424427032470703,
+    "contactHeight": 1.0687423510327245
+  },
+  {
+    "id": "rock-058",
+    "supportHeight": 1.6601142883300781,
+    "contactHeight": 1.0337776583314984
+  },
+  {
+    "id": "rock-059",
+    "supportHeight": 1.6874370574951172,
+    "contactHeight": 1.084372315722618
+  },
+  {
+    "id": "rock-060",
+    "supportHeight": 1.7000350952148438,
+    "contactHeight": 1.0436573977638735
+  },
+  {
+    "id": "rock-061",
+    "supportHeight": 1.6752910614013672,
+    "contactHeight": 1.0334844590999983
+  },
+  {
+    "id": "grass-005",
+    "supportHeight": 1.7584819793701172,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-062",
+    "supportHeight": 1.6602191925048828,
+    "contactHeight": 1.09385680847878
+  },
+  {
+    "id": "grass-006",
+    "supportHeight": 1.73388671875,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-063",
+    "supportHeight": 1.6871299743652344,
+    "contactHeight": 0.9603960892950698
+  },
+  {
+    "id": "rock-064",
+    "supportHeight": 1.6955375671386719,
+    "contactHeight": 1.05615780999198
+  },
+  {
+    "id": "rock-065",
+    "supportHeight": 1.6714458465576172,
+    "contactHeight": 0.9879829181107828
+  },
+  {
+    "id": "rock-066",
+    "supportHeight": 1.6688003540039062,
+    "contactHeight": 1.0678932979075788
+  },
+  {
+    "id": "rock-067",
+    "supportHeight": 1.6956710815429688,
+    "contactHeight": 0.9848351033915105
+  },
+  {
+    "id": "flower_white-005",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-068",
+    "supportHeight": 1.6998443603515625,
+    "contactHeight": 1.1009222527749667
+  },
+  {
+    "id": "flower_white-006",
+    "supportHeight": 1.7902202606201172,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-069",
+    "supportHeight": 1.6740856170654297,
+    "contactHeight": 1.0894512938842198
+  },
+  {
+    "id": "rock-070",
+    "supportHeight": 1.6762771606445312,
+    "contactHeight": 0.9749978268531405
+  },
+  {
+    "id": "rock-071",
+    "supportHeight": 1.648183822631836,
+    "contactHeight": 1.0164767171549414
+  },
+  {
+    "id": "rock-072",
+    "supportHeight": 1.697488784790039,
+    "contactHeight": 1.0504577561291466
+  },
+  {
+    "id": "rock-073",
+    "supportHeight": 1.6805305480957031,
+    "contactHeight": 1.08844106659503
+  },
+  {
+    "id": "rock-074",
+    "supportHeight": 1.680816650390625,
+    "contactHeight": 1.0986287513073967
+  },
+  {
+    "id": "rock-075",
+    "supportHeight": 1.6828384399414062,
+    "contactHeight": 1.0528396011099361
+  },
+  {
+    "id": "grass-007",
+    "supportHeight": 1.7862167358398438,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-076",
+    "supportHeight": 1.6476459503173828,
+    "contactHeight": 1.051876184947308
+  },
+  {
+    "id": "grass-008",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-077",
+    "supportHeight": 1.6879119873046875,
+    "contactHeight": 1.0239490329334855
+  },
+  {
+    "id": "rock-078",
+    "supportHeight": 1.6886672973632812,
+    "contactHeight": 0.9663099482228406
+  },
+  {
+    "id": "rock-079",
+    "supportHeight": 1.678924560546875,
+    "contactHeight": 1.0887000313856945
+  },
+  {
+    "id": "rock-080",
+    "supportHeight": 1.6883792877197266,
+    "contactHeight": 1.1137582994837452
+  },
+  {
+    "id": "rock-081",
+    "supportHeight": 1.661275863647461,
+    "contactHeight": 0.9875389613877417
+  },
+  {
+    "id": "flower_white-007",
+    "supportHeight": 1.7560253143310547,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-082",
+    "supportHeight": 1.661966323852539,
+    "contactHeight": 1.0274681423965109
+  },
+  {
+    "id": "flower_white-008",
+    "supportHeight": 1.7755851745605469,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-083",
+    "supportHeight": 1.7025775909423828,
+    "contactHeight": 1.0626188347752756
+  },
+  {
+    "id": "rock-084",
+    "supportHeight": 1.702657699584961,
+    "contactHeight": 1.01894549319983
+  },
+  {
+    "id": "rock-085",
+    "supportHeight": 1.6438865661621094,
+    "contactHeight": 0.9792513740960539
+  },
+  {
+    "id": "rock-086",
+    "supportHeight": 1.6498374938964844,
+    "contactHeight": 0.9671763950599532
+  },
+  {
+    "id": "rock-087",
+    "supportHeight": 1.698282241821289,
+    "contactHeight": 1.0085364017220724
+  },
+  {
+    "id": "grass-009",
+    "supportHeight": 1.7440452575683594,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-088",
+    "supportHeight": 1.6965408325195312,
+    "contactHeight": 1.0738202410840003
+  },
+  {
+    "id": "grass-010",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.934224995970726
+  },
+  {
+    "id": "rock-089",
+    "supportHeight": 1.6525840759277344,
+    "contactHeight": 1.0632219555852964
+  },
+  {
+    "id": "rock-090",
+    "supportHeight": 1.6674060821533203,
+    "contactHeight": 0.9904429428453252
+  },
+  {
+    "id": "rock-091",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 1.057556567065856
+  },
+  {
+    "id": "rock-092",
+    "supportHeight": 1.689229965209961,
+    "contactHeight": 1.0141484213104033
+  },
+  {
+    "id": "rock-093",
+    "supportHeight": 5.249999046325684,
+    "contactHeight": 1.0174706653979695
+  },
+  {
+    "id": "rock-094",
+    "supportHeight": 1.6833553314208984,
+    "contactHeight": 1.0664734830362919
+  },
+  {
+    "id": "rock-095",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 0.9645608021028016
+  },
+  {
+    "id": "flower_white-009",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "rock-096",
+    "supportHeight": 1.6701927185058594,
+    "contactHeight": 1.10366031815136
+  },
+  {
+    "id": "flower_white-010",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.8779999982565643
+  },
+  {
+    "id": "bush-007",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-001",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-011",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-001",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-002",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-012",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_flowering-007",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-003",
+    "supportHeight": 1.9100017547607422,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-013",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-002",
+    "supportHeight": 1.9599990844726562,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-014",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_lavender-007",
+    "supportHeight": 1.9599990844726562,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "flower_pink-005",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-015",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-003",
+    "supportHeight": 1.9599990844726562,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-006",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-016",
+    "supportHeight": 1.9599971771240234,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush-008",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-007",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-017",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_yellow-001",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-008",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-018",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_flowering-008",
+    "supportHeight": 2.0785369873046875,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-009",
+    "supportHeight": 1.9150009155273438,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-019",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-004",
+    "supportHeight": 2.1325454711914062,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-010",
+    "supportHeight": 1.9150028228759766,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-020",
+    "supportHeight": 1.8449993133544922,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_lavender-008",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "flower_pink-011",
+    "supportHeight": 1.9150009155273438,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-021",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-005",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-012",
+    "supportHeight": 1.914999008178711,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-022",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush-009",
+    "supportHeight": 1.8899993896484375,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-013",
+    "supportHeight": 1.8899993896484375,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-023",
+    "supportHeight": 1.8700008392333984,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_yellow-002",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-014",
+    "supportHeight": 1.8700027465820312,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-024",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_flowering-009",
+    "supportHeight": 1.7921886444091797,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-015",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-025",
+    "supportHeight": 1.747955322265625,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-006",
+    "supportHeight": 1.8700027465820312,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-016",
+    "supportHeight": 1.7098407745361328,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-026",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_lavender-009",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "flower_pink-017",
+    "supportHeight": 1.8899974822998047,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-027",
+    "supportHeight": 1.9799976348876953,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-007",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-018",
+    "supportHeight": 1.980001449584961,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-028",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush-010",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-019",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-029",
+    "supportHeight": 1.8699989318847656,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-008",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-020",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-030",
+    "supportHeight": 1.8700008392333984,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_flowering-010",
+    "supportHeight": 2.1399993896484375,
+    "contactHeight": 1.7591999888420105
+  },
+  {
+    "id": "flower_pink-021",
+    "supportHeight": 1.8899993896484375,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-031",
+    "supportHeight": 1.9512786865234375,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_purple-009",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-022",
+    "supportHeight": 1.8700008392333984,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-032",
+    "supportHeight": 1.9695053100585938,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bush_lavender-010",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.8
+  },
+  {
+    "id": "flower_pink-023",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-033",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_yellow-003",
+    "supportHeight": 1.8700027465820312,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_pink-024",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "flower_white-034",
+    "supportHeight": 1.8000030517578125,
+    "contactHeight": 1.88899999845773
+  },
+  {
+    "id": "bench-001",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "bench-002",
+    "supportHeight": 1.960000991821289,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "bench-003",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "bench-004",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "bench-005",
+    "supportHeight": 5.249999046325684,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-001",
+    "supportHeight": 1.9599990844726562,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-002",
+    "supportHeight": 1.9599990844726562,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-003",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-004",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-005",
+    "supportHeight": 2.0785369873046875,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-006",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-007",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-008",
+    "supportHeight": 1.8899993896484375,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-009",
+    "supportHeight": 2.1399993896484375,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-010",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-011",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-012",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-013",
+    "supportHeight": 4.280000686645508,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "lamp-014",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 5.25
+  },
+  {
+    "id": "gate-001",
+    "supportHeight": 1.9672832489013672,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-001",
+    "supportHeight": 1.8899993896484375,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-002",
+    "supportHeight": 1.8899993896484375,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-003",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "gate-002",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-004",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-005",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-006",
+    "supportHeight": 1.7999992370605469,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-007",
+    "supportHeight": 1.799997329711914,
+    "contactHeight": 1.85
+  },
+  {
+    "id": "fence-008",
+    "supportHeight": 5.249999046325684,
+    "contactHeight": 5.25
+  },
+  {
+    "id": "fence-009",
+    "supportHeight": 5.25,
+    "contactHeight": 5.25
+  },
+  {
+    "id": "fence-010",
+    "supportHeight": 5.249998092651367,
+    "contactHeight": 5.25
+  },
+  {
+    "id": "pot-001",
+    "supportHeight": 1.9599990844726562,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "pot-002",
+    "supportHeight": 1.960000991821289,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "pot-003",
+    "supportHeight": 1.9599990844726562,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "pot-004",
+    "supportHeight": 1.9599971771240234,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "pot-005",
+    "supportHeight": 1.9150009155273438,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "pot-006",
+    "supportHeight": 1.9150009155273438,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "fountain-001",
+    "supportHeight": 1.9099998474121094,
+    "contactHeight": 1.92
+  },
+  {
+    "id": "bridge_stone-001",
+    "supportHeight": 1.1980667114257812,
+    "contactHeight": 1.9700000035762786
+  },
+  {
+    "id": "bridge_wood-001",
+    "supportHeight": 1.2108440399169922,
+    "contactHeight": 1.9565000030398367
+  },
+  {
+    "id": "sign-001",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.9
+  },
+  {
+    "id": "rock-097",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 4.142500008940696
+  },
+  {
+    "id": "bush_flowering-011",
+    "supportHeight": 5.250000953674316,
+    "contactHeight": 5.156199993491173
+  },
+  {
+    "id": "rock-098",
+    "supportHeight": 1.7048969268798828,
+    "contactHeight": 4.142500008940696
+  },
+  {
+    "id": "bush_flowering-012",
+    "supportHeight": 1.7989177703857422,
+    "contactHeight": 5.156199993491173
+  },
+  {
+    "id": "rock-099",
+    "supportHeight": null,
+    "contactHeight": 0.5125000089406968
+  },
+  {
+    "id": "bush_flowering-013",
+    "supportHeight": 1.7477741241455078,
+    "contactHeight": 1.5261999934911727
+  },
+  {
+    "id": "rock-100",
+    "supportHeight": 1.5851764678955078,
+    "contactHeight": 0.5125000089406968
+  },
+  {
+    "id": "bush_flowering-014",
+    "supportHeight": 1.6608009338378906,
+    "contactHeight": 1.5261999934911727
+  },
+  {
+    "id": "flower_purple-010",
+    "supportHeight": 1.9100017547607422,
+    "contactHeight": 1.885999998524785
+  },
+  {
+    "id": "flower_purple-011",
+    "supportHeight": 1.9231700897216797,
+    "contactHeight": 1.885999998524785
+  },
+  {
+    "id": "flower_purple-012",
+    "supportHeight": 1.8700027465820312,
+    "contactHeight": 1.885999998524785
+  },
+  {
+    "id": "flower_purple-013",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.885999998524785
+  },
+  {
+    "id": "flower_purple-014",
+    "supportHeight": 1.9799995422363281,
+    "contactHeight": 1.885999998524785
+  },
+  {
+    "id": "flower_purple-015",
+    "supportHeight": 1.8000011444091797,
+    "contactHeight": 1.885999998524785
+  },
+  {
+    "id": "flower_purple-016",
+    "supportHeight": 1.9799976348876953,
+    "contactHeight": 1.885999998524785
+  }
+]

@@ -1,0 +1,4 @@
+/cozy/local-backups/
+/cozy/assets/world/island-001/source/geometry-v3.json
+/cozy/assets/world/island-001/source/*.blend1
+__pycache__/

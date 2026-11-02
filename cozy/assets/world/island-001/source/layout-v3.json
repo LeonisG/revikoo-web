@@ -1,0 +1,562 @@
+{
+  "version": 3,
+  "units": "meters",
+  "up": "Z",
+  "seed": 147,
+  "bank": {
+    "position": [
+      18,
+      2,
+      1.92
+    ],
+    "rotation": 0,
+    "terrace": [
+      10.75,
+      -3.5,
+      25.25,
+      7.5
+    ],
+    "clearance": [
+      15,
+      -6.8,
+      21,
+      -2.8
+    ]
+  },
+  "terrain": {
+    "radius": [
+      39,
+      26
+    ],
+    "harmonics": [
+      0.065,
+      3,
+      0.7,
+      0.045,
+      7
+    ],
+    "base": 1.8,
+    "meadow": {
+      "center": [
+        -20,
+        15
+      ],
+      "height": 0.32,
+      "radius": 12
+    },
+    "lagoon": -4.85
+  },
+  "plaza": {
+    "center": [
+      1,
+      -4
+    ],
+    "radius": 8.6,
+    "elevation": 1.92,
+    "fountainScale": 1.15,
+    "walkway": [
+      2.7,
+      4.4
+    ]
+  },
+  "river": {
+    "knots": [
+      [
+        -13,
+        30
+      ],
+      [
+        -14,
+        21
+      ],
+      [
+        -11.8,
+        14
+      ],
+      [
+        -12,
+        6
+      ],
+      [
+        -13,
+        -3
+      ],
+      [
+        -11,
+        -11
+      ],
+      [
+        -12.5,
+        -19
+      ],
+      [
+        -10,
+        -30
+      ]
+    ],
+    "halfWidth": 1.65,
+    "widthVariation": 0.22,
+    "sourceHeight": 1.56,
+    "exitHeight": 1.32,
+    "bankWidth": 1.3,
+    "depth": 0.65
+  },
+  "plots": [
+    {
+      "id": "town-hall",
+      "position": [
+        -25,
+        -3,
+        1.85
+      ],
+      "dimensions": [
+        10,
+        8
+      ],
+      "entrance": [
+        -25,
+        -7,
+        1.92
+      ],
+      "buildable": true,
+      "rotation": 0
+    },
+    {
+      "id": "studio",
+      "position": [
+        21,
+        -15,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        8
+      ],
+      "entrance": [
+        21,
+        -19,
+        1.92
+      ],
+      "buildable": true,
+      "rotation": 0
+    },
+    {
+      "id": "library-garden",
+      "position": [
+        20,
+        14,
+        1.85
+      ],
+      "dimensions": [
+        11,
+        8
+      ],
+      "entrance": [
+        20,
+        10,
+        1.92
+      ],
+      "buildable": true,
+      "rotation": 0
+    }
+  ],
+  "bridges": [
+    {
+      "id": "bridge-stone",
+      "asset": "BRIDGE_STONE",
+      "nearY": -6,
+      "scale": 1
+    },
+    {
+      "id": "bridge-wood",
+      "asset": "BRIDGE_WOOD",
+      "nearY": 9,
+      "scale": 1
+    }
+  ],
+  "nodes": {
+    "plaza-east": [
+      7.2,
+      -4
+    ],
+    "plaza-west": [
+      -5.5,
+      -6
+    ],
+    "plaza-north": [
+      3,
+      2.2
+    ],
+    "plaza-south": [
+      4,
+      -10
+    ],
+    "bank": [
+      18,
+      -3.5
+    ],
+    "north-junction": [
+      5,
+      8
+    ],
+    "meadow": [
+      -23,
+      14
+    ],
+    "garden": [
+      -26,
+      -14
+    ],
+    "town-hall": [
+      -25,
+      -7
+    ],
+    "studio": [
+      21,
+      -19
+    ],
+    "library-garden": [
+      20,
+      10
+    ]
+  },
+  "edges": [
+    {
+      "id": "bank-promenade",
+      "from": "plaza-east",
+      "to": "bank",
+      "via": [
+        [
+          12,
+          -4.8
+        ],
+        [
+          16,
+          -4.8
+        ]
+      ],
+      "width": 3.4
+    },
+    {
+      "id": "west-crossing",
+      "from": "plaza-west",
+      "to": "bridge-stone-east",
+      "via": [
+        [
+          -7,
+          -6
+        ]
+      ],
+      "width": 2.6
+    },
+    {
+      "id": "town-approach",
+      "from": "bridge-stone-west",
+      "to": "town-hall",
+      "via": [
+        [
+          -20,
+          -7
+        ]
+      ],
+      "width": 2.6
+    },
+    {
+      "id": "garden-walk",
+      "from": "town-hall",
+      "to": "garden",
+      "via": [
+        [
+          -24,
+          -11
+        ]
+      ],
+      "width": 2.2
+    },
+    {
+      "id": "north-walk",
+      "from": "plaza-north",
+      "to": "north-junction",
+      "via": [
+        [
+          3.8,
+          5
+        ]
+      ],
+      "width": 2.8
+    },
+    {
+      "id": "library-approach",
+      "from": "north-junction",
+      "to": "library-garden",
+      "via": [
+        [
+          11,
+          10
+        ]
+      ],
+      "width": 2.8
+    },
+    {
+      "id": "upper-crossing",
+      "from": "north-junction",
+      "to": "bridge-wood-east",
+      "via": [
+        [
+          -1,
+          9
+        ]
+      ],
+      "width": 2.6
+    },
+    {
+      "id": "meadow-walk",
+      "from": "bridge-wood-west",
+      "to": "meadow",
+      "via": [
+        [
+          -20,
+          11
+        ]
+      ],
+      "width": 2.6
+    },
+    {
+      "id": "studio-approach",
+      "from": "plaza-south",
+      "to": "studio",
+      "via": [
+        [
+          8,
+          -15
+        ],
+        [
+          14,
+          -19
+        ]
+      ],
+      "width": 2.8
+    }
+  ],
+  "zones": [
+    {
+      "id": "CENTRAL_PLAZA",
+      "bounds": [
+        -7.6,
+        -12.6,
+        9.6,
+        4.6
+      ],
+      "use": "Fountain, seating and circulation",
+      "allowed": [
+        "FOUNTAIN",
+        "BENCH",
+        "LAMP"
+      ],
+      "forbidden": [
+        "TREE_*",
+        "FENCE",
+        "BUSH*"
+      ],
+      "accesses": [
+        "plaza-east",
+        "plaza-west",
+        "plaza-north",
+        "plaza-south"
+      ],
+      "reserves": [
+        "FOUNTAIN_WALKWAY",
+        "BENCH_ACCESS"
+      ],
+      "constraints": [
+        "Keep the 1.7 m fountain circulation ring clear"
+      ]
+    },
+    {
+      "id": "BANK_DISTRICT",
+      "bounds": [
+        10.75,
+        -6.8,
+        26,
+        8
+      ],
+      "use": "Bank approach and preserved architecture",
+      "allowed": [
+        "LAMP",
+        "POT"
+      ],
+      "forbidden": [
+        "TREE_*",
+        "FENCE"
+      ],
+      "accesses": [
+        "bank"
+      ],
+      "reserves": [
+        "BANK_ENTRANCE_CLEARANCE"
+      ],
+      "constraints": [
+        "Bank transform and GLB immutable"
+      ]
+    },
+    {
+      "id": "RIVERSIDE",
+      "bounds": [
+        -18,
+        -29,
+        -7,
+        28
+      ],
+      "use": "Continuous watercourse and planted banks",
+      "allowed": [
+        "BRIDGE_*",
+        "ROCK",
+        "GRASS",
+        "FLOWER_*",
+        "BUSH*"
+      ],
+      "forbidden": [
+        "FENCE",
+        "GATE"
+      ],
+      "accesses": [
+        "bridge-stone-east",
+        "bridge-wood-east"
+      ],
+      "reserves": [
+        "RIVER_BUFFER"
+      ],
+      "constraints": [
+        "Only bridge spans may cross water"
+      ]
+    },
+    {
+      "id": "GARDENS",
+      "bounds": [
+        -36,
+        -22,
+        35,
+        23
+      ],
+      "use": "Peripheral planting and restful views",
+      "allowed": [
+        "TREE_*",
+        "BUSH*",
+        "FLOWER_*",
+        "GRASS",
+        "ROCK",
+        "BENCH",
+        "LAMP",
+        "POT",
+        "SIGN",
+        "FENCE",
+        "GATE"
+      ],
+      "forbidden": [],
+      "accesses": [
+        "garden"
+      ],
+      "reserves": [
+        "PATH_CLEARANCE"
+      ],
+      "constraints": [
+        "Full oriented canopy clearance near routes and buildings"
+      ]
+    },
+    {
+      "id": "OPEN_MEADOW",
+      "bounds": [
+        -29,
+        8,
+        -17,
+        19
+      ],
+      "use": "Open gently undulating former highland",
+      "allowed": [
+        "BENCH",
+        "LAMP",
+        "FLOWER_*"
+      ],
+      "forbidden": [
+        "TREE_*",
+        "FENCE",
+        "GATE"
+      ],
+      "accesses": [
+        "meadow"
+      ],
+      "reserves": [
+        "OPEN_MEADOW"
+      ],
+      "constraints": [
+        "Keep central meadow free for future use"
+      ],
+      "reserveBounds": [
+        -27,
+        13,
+        -19,
+        18
+      ]
+    },
+    {
+      "id": "FUTURE_PLOTS",
+      "bounds": [
+        -31,
+        -19,
+        27,
+        18
+      ],
+      "use": "Three buildable plots (exact polygons in plots)",
+      "allowed": [],
+      "forbidden": [
+        "*"
+      ],
+      "accesses": [
+        "town-hall",
+        "studio",
+        "library-garden"
+      ],
+      "reserves": [
+        "FUTURE_BUILDING_PLOTS"
+      ],
+      "constraints": [
+        "No permanent decor inside plot footprint"
+      ]
+    },
+    {
+      "id": "PATH_NETWORK",
+      "bounds": [
+        -28,
+        -21,
+        23,
+        16
+      ],
+      "use": "Connected walkable graph including bridges",
+      "allowed": [
+        "BRIDGE_*"
+      ],
+      "forbidden": [
+        "TREE_*",
+        "BUSH*",
+        "FENCE",
+        "GATE",
+        "BENCH",
+        "LAMP"
+      ],
+      "accesses": [
+        "bank",
+        "town-hall",
+        "studio",
+        "library-garden",
+        "meadow",
+        "garden"
+      ],
+      "reserves": [
+        "PATH_CLEARANCE"
+      ],
+      "constraints": [
+        "Boolean union of paving, no stacked crossing surfaces"
+      ]
+    }
+  ]
+}

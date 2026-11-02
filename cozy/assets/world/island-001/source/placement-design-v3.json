@@ -1,0 +1,2481 @@
+[
+  {
+    "id": "central-fountain",
+    "asset": "FOUNTAIN",
+    "xy": [
+      1,
+      -4
+    ],
+    "scale": 1.15,
+    "placementRole": "focal-point",
+    "zone": "CENTRAL_PLAZA"
+  },
+  {
+    "id": "plaza-bench-01",
+    "asset": "BENCH",
+    "xy": [
+      -3.2,
+      -9.4
+    ],
+    "facingTarget": "central-fountain",
+    "placementRole": "seating",
+    "zone": "CENTRAL_PLAZA"
+  },
+  {
+    "id": "plaza-bench-02",
+    "asset": "BENCH",
+    "xy": [
+      5.8,
+      -8.8
+    ],
+    "facingTarget": "central-fountain",
+    "placementRole": "seating",
+    "zone": "CENTRAL_PLAZA"
+  },
+  {
+    "id": "plaza-bench-03",
+    "asset": "BENCH",
+    "xy": [
+      5.8,
+      1
+    ],
+    "facingTarget": "central-fountain",
+    "placementRole": "seating",
+    "zone": "CENTRAL_PLAZA"
+  },
+  {
+    "id": "plaza-bench-04",
+    "asset": "BENCH",
+    "xy": [
+      -4,
+      1
+    ],
+    "facingTarget": "central-fountain",
+    "placementRole": "seating",
+    "zone": "CENTRAL_PLAZA"
+  },
+  {
+    "id": "meadow-bench",
+    "asset": "BENCH",
+    "xy": [
+      -27,
+      11
+    ],
+    "facingTarget": "meadow",
+    "placementRole": "seating",
+    "zone": "GARDENS"
+  },
+  {
+    "id": "walk-lamp-02",
+    "asset": "LAMP",
+    "xy": [
+      -7,
+      2
+    ],
+    "scale": 0.9,
+    "placementRole": "path-light"
+  },
+  {
+    "id": "walk-lamp-03",
+    "asset": "LAMP",
+    "xy": [
+      -7,
+      -12
+    ],
+    "scale": 0.9,
+    "placementRole": "path-light"
+  },
+  {
+    "id": "walk-lamp-05",
+    "asset": "LAMP",
+    "xy": [
+      11,
+      -7
+    ],
+    "scale": 0.9,
+    "placementRole": "path-light"
+  },
+  {
+    "id": "walk-lamp-08",
+    "asset": "LAMP",
+    "xy": [
+      -21,
+      -10
+    ],
+    "scale": 0.9,
+    "placementRole": "path-light"
+  },
+  {
+    "id": "walk-lamp-09",
+    "asset": "LAMP",
+    "xy": [
+      -21,
+      8
+    ],
+    "scale": 0.9,
+    "placementRole": "path-light"
+  },
+  {
+    "id": "walk-lamp-10",
+    "asset": "LAMP",
+    "xy": [
+      -28,
+      -12
+    ],
+    "scale": 0.9,
+    "placementRole": "path-light"
+  },
+  {
+    "id": "walk-lamp-11",
+    "asset": "LAMP",
+    "xy": [
+      0,
+      12
+    ],
+    "scale": 0.9,
+    "placementRole": "path-light"
+  },
+  {
+    "id": "tree_02-001",
+    "asset": "TREE_02",
+    "angle": 2.760042274103754,
+    "scale": 1.1768362117230815,
+    "xy": [
+      -30,
+      4
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_03-003",
+    "asset": "TREE_03",
+    "angle": 3.9908638474342886,
+    "scale": 0.9220522396634888,
+    "xy": [
+      2,
+      21
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_01-004",
+    "asset": "TREE_01",
+    "angle": 1.4888849638780346,
+    "scale": 0.8641046305054978,
+    "xy": [
+      7,
+      18
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_01-005",
+    "asset": "TREE_01",
+    "angle": 1.887477750216155,
+    "scale": 0.9914820163896378,
+    "xy": [
+      30,
+      12
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_02-005",
+    "asset": "TREE_02",
+    "angle": 4.729798572403341,
+    "scale": 0.8781824359275076,
+    "xy": [
+      34,
+      3
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_03-005",
+    "asset": "TREE_03",
+    "angle": 5.200155805656193,
+    "scale": 0.8584062878783589,
+    "xy": [
+      30,
+      -5
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_01-007",
+    "asset": "TREE_01",
+    "angle": 0.5462960328645194,
+    "scale": 0.8688610585473577,
+    "xy": [
+      5,
+      -20
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_02-007",
+    "asset": "TREE_02",
+    "angle": 3.7533699768519875,
+    "scale": 0.844297021829669,
+    "xy": [
+      -3,
+      -19
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "tree_03-007",
+    "asset": "TREE_03",
+    "angle": 3.594628292309202,
+    "scale": 0.8076924374194273,
+    "xy": [
+      -19,
+      -19
+    ],
+    "placementRole": "canopy-framing"
+  },
+  {
+    "id": "rock-038",
+    "asset": "ROCK",
+    "angle": 0.3431510047428657,
+    "scale": 0.3151253112230153,
+    "xy": [
+      -7.74834707957095,
+      -23.0
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-042",
+    "asset": "ROCK",
+    "angle": 4.439099976892831,
+    "scale": 0.6348749414267412,
+    "xy": [
+      -8.146444720629294,
+      -21.3
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-046",
+    "asset": "ROCK",
+    "angle": 0.11589849427189519,
+    "scale": 0.3288548615933309,
+    "xy": [
+      -8.860791808994474,
+      -19.6
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-050",
+    "asset": "ROCK",
+    "angle": 3.344996125668253,
+    "scale": 0.37152375833902873,
+    "xy": [
+      -9.79846699057893,
+      -17.9
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-053",
+    "asset": "ROCK",
+    "angle": 0.19767878777817488,
+    "scale": 0.3617286199271538,
+    "xy": [
+      -14.493531022617166,
+      -16.2
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-057",
+    "asset": "ROCK",
+    "angle": 2.297931354650439,
+    "scale": 0.40279478615325215,
+    "xy": [
+      -15.405031399157831,
+      -14.5
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-061",
+    "asset": "ROCK",
+    "angle": 2.129351416762737,
+    "scale": 0.48114565919045527,
+    "xy": [
+      -16.11399494339556,
+      -12.8
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-065",
+    "asset": "ROCK",
+    "angle": 3.15714002657002,
+    "scale": 0.5822601974006659,
+    "xy": [
+      -16.430697814093108,
+      -11.1
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-069",
+    "asset": "ROCK",
+    "angle": 1.1729757219078647,
+    "scale": 0.3567749119308192,
+    "xy": [
+      -16.59437613114832,
+      -9.4
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-073",
+    "asset": "ROCK",
+    "angle": 4.102239242487835,
+    "scale": 0.35901986152182286,
+    "xy": [
+      -15.240364622606297,
+      -3.4499999999999993
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-076",
+    "asset": "ROCK",
+    "angle": 2.411982082311326,
+    "scale": 0.4402751562248466,
+    "xy": [
+      -10.987084854838145,
+      -2.6000000000000014
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-080",
+    "asset": "ROCK",
+    "angle": 2.087387965289238,
+    "scale": 0.3027593425009497,
+    "xy": [
+      -10.062980315687065,
+      -0.9000000000000021
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-084",
+    "asset": "ROCK",
+    "angle": 5.206532747325496,
+    "scale": 0.5134544731578315,
+    "xy": [
+      -9.216856853261445,
+      0.8000000000000007
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "rock-088",
+    "asset": "ROCK",
+    "angle": 4.784553563685555,
+    "scale": 0.39151058574037656,
+    "xy": [
+      -8.624432779212986,
+      2.5
+    ],
+    "placementRole": "river-edge"
+  },
+  {
+    "id": "bush-001",
+    "asset": "BUSH",
+    "angle": 4.531541428800811,
+    "scale": 1.0324112878825513,
+    "xy": [
+      39.436141646642604,
+      0.0
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush-002",
+    "asset": "BUSH",
+    "angle": 0.5957880133987995,
+    "scale": 0.8490234763273439,
+    "xy": [
+      17.790514176678705,
+      20.51610656171748
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush-003",
+    "asset": "BUSH",
+    "angle": 4.917567790175214,
+    "scale": 1.063563540314032,
+    "xy": [
+      -18.493485823321297,
+      21.326776847531455
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush-004",
+    "asset": "BUSH",
+    "angle": 1.5718673631706117,
+    "scale": 1.0575134985754506,
+    "xy": [
+      -33.131858353357394,
+      2.701484414646724e-15
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush-007",
+    "asset": "BUSH",
+    "angle": 0,
+    "scale": 1.2,
+    "xy": [
+      -7,
+      -10
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_flowering-001",
+    "asset": "BUSH_FLOWERING",
+    "angle": 1.943323133017551,
+    "scale": 1.2159034966004791,
+    "xy": [
+      35.102291565190534,
+      8.506426544185425
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_flowering-003",
+    "asset": "BUSH_FLOWERING",
+    "angle": 2.826733670991486,
+    "scale": 0.9370134247589369,
+    "xy": [
+      -29.35660887917309,
+      16.400807664674513
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_flowering-004",
+    "asset": "BUSH_FLOWERING",
+    "angle": 1.4462743457334588,
+    "scale": 0.939552237972165,
+    "xy": [
+      -33.08932254000126,
+      -8.018618700737582
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_flowering-005",
+    "asset": "BUSH_FLOWERING",
+    "angle": 2.2849024946846765,
+    "scale": 0.9154554720008509,
+    "xy": [
+      -6.970267686017435,
+      -26.319431523922088
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_lavender-001",
+    "asset": "BUSH_LAVENDER",
+    "angle": 2.188957992535174,
+    "scale": 0.9463295829741427,
+    "xy": [
+      28.627102378510237,
+      15.993250516069736
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_lavender-002",
+    "asset": "BUSH_LAVENDER",
+    "angle": 0.7536003387618354,
+    "scale": 0.8825516533866737,
+    "xy": [
+      -6.427728380541868,
+      24.270826399595922
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_lavender-003",
+    "asset": "BUSH_LAVENDER",
+    "angle": 3.1095275987110407,
+    "scale": 1.388303220490813,
+    "xy": [
+      -36.02525995490217,
+      8.730091793934333
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "bush_lavender-006",
+    "asset": "BUSH_LAVENDER",
+    "angle": 1.6163509614863951,
+    "scale": 1.0165802344481514,
+    "xy": [
+      32.166354150289635,
+      -7.794953450988678
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-011",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -6.121897865283504,
+      -10.884872458649495
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-013",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      8.878102134716496,
+      -9.884872458649495
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-014",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      7.773375184410127,
+      -10.181625426952952
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-015",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      7.878102134716496,
+      0.11512754135050551
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-018",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -6.226624815589873,
+      0.8183745730470477
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-021",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      24.878102134716496,
+      -4.884872458649495
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-022",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      23.773375184410128,
+      -5.1816254269529525
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-023",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -29.121897865283504,
+      -8.884872458649495
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-024",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -30.226624815589872,
+      -9.181625426952952
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-026",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -18.226624815589872,
+      -10.181625426952952
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_white-034",
+    "asset": "FLOWER_WHITE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      26.773375184410128,
+      12.818374573047048
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-001",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -7.0,
+      -8.8
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-002",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -5.9682317769961015,
+      -9.269978422561294
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-003",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      8.0,
+      -7.8
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-004",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      9.031768223003898,
+      -8.269978422561294
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-005",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      7.0,
+      2.2
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-006",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      8.031768223003898,
+      1.7300215774387062
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-007",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -6.0,
+      3.2
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-008",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -4.9682317769961015,
+      2.7300215774387064
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-019",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      26.0,
+      -8.8
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-020",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      27.031768223003898,
+      -9.269978422561294
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_pink-023",
+    "asset": "FLOWER_PINK",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      27.0,
+      15.2
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_purple-008",
+    "asset": "FLOWER_PURPLE",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      24.70498600851341,
+      -9.895001219872665
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_purple-016",
+    "asset": "FLOWER_PURPLE",
+    "angle": 0,
+    "scale": 1.1,
+    "xy": [
+      -20,
+      4
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "flower_yellow-002",
+    "asset": "FLOWER_YELLOW",
+    "angle": 0,
+    "scale": 1.15,
+    "xy": [
+      -31.29501399148659,
+      -7.895001219872665
+    ],
+    "placementRole": "garden-border"
+  },
+  {
+    "id": "garden-fence-04",
+    "asset": "FENCE",
+    "xy": [
+      15,
+      20
+    ],
+    "scale": 0.85,
+    "angle": 0,
+    "placementRole": "garden-boundary"
+  },
+  {
+    "id": "garden-fence-06",
+    "asset": "FENCE",
+    "xy": [
+      21.4,
+      20
+    ],
+    "scale": 0.85,
+    "angle": 0,
+    "placementRole": "garden-boundary"
+  },
+  {
+    "id": "wayfinding-03",
+    "asset": "SIGN",
+    "xy": [
+      17,
+      -21
+    ],
+    "angle": 0,
+    "placementRole": "wayfinding"
+  },
+  {
+    "id": "garden-bed-01-01",
+    "asset": "BUSH",
+    "xy": [
+      -30.6,
+      5.3
+    ],
+    "scale": 0.8,
+    "angle": 0.0,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-01-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      -29.2,
+      5.6
+    ],
+    "scale": 0.85,
+    "angle": 0.0,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-01-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -31.1,
+      4.35
+    ],
+    "scale": 0.85,
+    "angle": 0.0,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-01-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -28.7,
+      4.65
+    ],
+    "scale": 0.8,
+    "angle": 0.0,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-01-08",
+    "asset": "GRASS",
+    "xy": [
+      -31.5,
+      5.7
+    ],
+    "scale": 1.1,
+    "angle": 0.0,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-02-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -22.7,
+      19.35
+    ],
+    "scale": 0.7,
+    "angle": 0.43,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-02-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -24.1,
+      19.35
+    ],
+    "scale": 0.85,
+    "angle": 0.43,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-02-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -21.7,
+      19.65
+    ],
+    "scale": 0.8,
+    "angle": 0.43,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-02-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -23.3,
+      18.5
+    ],
+    "scale": 0.75,
+    "angle": 0.43,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-02-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -22.2,
+      18.5
+    ],
+    "scale": 0.7,
+    "angle": 0.43,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-01",
+    "asset": "BUSH",
+    "xy": [
+      -5.6,
+      18.3
+    ],
+    "scale": 0.8,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      -4.2,
+      18.6
+    ],
+    "scale": 0.85,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -4.7,
+      17.35
+    ],
+    "scale": 0.7,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -6.1,
+      17.35
+    ],
+    "scale": 0.85,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -3.7,
+      17.65
+    ],
+    "scale": 0.8,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -5.3,
+      16.5
+    ],
+    "scale": 0.75,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -4.2,
+      16.5
+    ],
+    "scale": 0.7,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-03-08",
+    "asset": "GRASS",
+    "xy": [
+      -6.5,
+      18.7
+    ],
+    "scale": 1.1,
+    "angle": 0.86,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-04-01",
+    "asset": "BUSH",
+    "xy": [
+      5.4,
+      18.3
+    ],
+    "scale": 0.8,
+    "angle": 1.29,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-04-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      4.9,
+      17.35
+    ],
+    "scale": 0.85,
+    "angle": 1.29,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-04-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      5.7,
+      16.5
+    ],
+    "scale": 0.75,
+    "angle": 1.29,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-04-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      6.8,
+      16.5
+    ],
+    "scale": 0.7,
+    "angle": 1.29,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-04-08",
+    "asset": "GRASS",
+    "xy": [
+      4.5,
+      18.7
+    ],
+    "scale": 1.1,
+    "angle": 1.29,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-01",
+    "asset": "BUSH",
+    "xy": [
+      28.4,
+      9.3
+    ],
+    "scale": 0.8,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      29.8,
+      9.6
+    ],
+    "scale": 0.85,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      29.3,
+      8.35
+    ],
+    "scale": 0.7,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      27.9,
+      8.35
+    ],
+    "scale": 0.85,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      30.3,
+      8.65
+    ],
+    "scale": 0.8,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      28.7,
+      7.5
+    ],
+    "scale": 0.75,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      29.8,
+      7.5
+    ],
+    "scale": 0.7,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-05-08",
+    "asset": "GRASS",
+    "xy": [
+      27.5,
+      9.7
+    ],
+    "scale": 1.1,
+    "angle": 1.72,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-01",
+    "asset": "BUSH",
+    "xy": [
+      30.4,
+      0.3
+    ],
+    "scale": 0.8,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      31.8,
+      0.6
+    ],
+    "scale": 0.85,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      31.3,
+      -0.65
+    ],
+    "scale": 0.7,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      29.9,
+      -0.65
+    ],
+    "scale": 0.85,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      32.3,
+      -0.35
+    ],
+    "scale": 0.8,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      30.7,
+      -1.5
+    ],
+    "scale": 0.75,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      31.8,
+      -1.5
+    ],
+    "scale": 0.7,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-06-08",
+    "asset": "GRASS",
+    "xy": [
+      29.5,
+      0.7
+    ],
+    "scale": 1.1,
+    "angle": 2.15,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-01",
+    "asset": "BUSH",
+    "xy": [
+      26.4,
+      -7.7
+    ],
+    "scale": 0.8,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      27.8,
+      -7.4
+    ],
+    "scale": 0.85,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      27.3,
+      -8.65
+    ],
+    "scale": 0.7,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      25.9,
+      -8.65
+    ],
+    "scale": 0.85,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      28.3,
+      -8.35
+    ],
+    "scale": 0.8,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      26.7,
+      -9.5
+    ],
+    "scale": 0.75,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      27.8,
+      -9.5
+    ],
+    "scale": 0.7,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-07-08",
+    "asset": "GRASS",
+    "xy": [
+      25.5,
+      -7.3
+    ],
+    "scale": 1.1,
+    "angle": 2.58,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-08-01",
+    "asset": "BUSH",
+    "xy": [
+      10.4,
+      -21.7
+    ],
+    "scale": 0.8,
+    "angle": 3.01,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-08-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      11.8,
+      -21.4
+    ],
+    "scale": 0.85,
+    "angle": 3.01,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-08-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      11.3,
+      -22.65
+    ],
+    "scale": 0.7,
+    "angle": 3.01,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-08-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      9.9,
+      -22.65
+    ],
+    "scale": 0.85,
+    "angle": 3.01,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-08-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      12.3,
+      -22.35
+    ],
+    "scale": 0.8,
+    "angle": 3.01,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-08-08",
+    "asset": "GRASS",
+    "xy": [
+      9.5,
+      -21.3
+    ],
+    "scale": 1.1,
+    "angle": 3.01,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-01",
+    "asset": "BUSH",
+    "xy": [
+      -0.6,
+      -17.7
+    ],
+    "scale": 0.8,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      0.8,
+      -17.4
+    ],
+    "scale": 0.85,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      0.3,
+      -18.65
+    ],
+    "scale": 0.7,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -1.1,
+      -18.65
+    ],
+    "scale": 0.85,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      1.3,
+      -18.35
+    ],
+    "scale": 0.8,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -0.3,
+      -19.5
+    ],
+    "scale": 0.75,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      0.8,
+      -19.5
+    ],
+    "scale": 0.7,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-09-08",
+    "asset": "GRASS",
+    "xy": [
+      -1.5,
+      -17.3
+    ],
+    "scale": 1.1,
+    "angle": 3.44,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-01",
+    "asset": "BUSH",
+    "xy": [
+      -7.6,
+      -16.7
+    ],
+    "scale": 0.8,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      -6.2,
+      -16.4
+    ],
+    "scale": 0.85,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -6.7,
+      -17.65
+    ],
+    "scale": 0.7,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -8.1,
+      -17.65
+    ],
+    "scale": 0.85,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -5.7,
+      -17.35
+    ],
+    "scale": 0.8,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -7.3,
+      -18.5
+    ],
+    "scale": 0.75,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -6.2,
+      -18.5
+    ],
+    "scale": 0.7,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-10-08",
+    "asset": "GRASS",
+    "xy": [
+      -8.5,
+      -16.3
+    ],
+    "scale": 1.1,
+    "angle": 3.87,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-01",
+    "asset": "BUSH",
+    "xy": [
+      -20.6,
+      -12.7
+    ],
+    "scale": 0.8,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      -19.2,
+      -12.4
+    ],
+    "scale": 0.85,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -19.7,
+      -13.65
+    ],
+    "scale": 0.7,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -21.1,
+      -13.65
+    ],
+    "scale": 0.85,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -18.7,
+      -13.35
+    ],
+    "scale": 0.8,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -20.3,
+      -14.5
+    ],
+    "scale": 0.75,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -19.2,
+      -14.5
+    ],
+    "scale": 0.7,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-11-08",
+    "asset": "GRASS",
+    "xy": [
+      -21.5,
+      -12.3
+    ],
+    "scale": 1.1,
+    "angle": 4.3,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-12-01",
+    "asset": "BUSH",
+    "xy": [
+      -31.6,
+      -7.7
+    ],
+    "scale": 0.8,
+    "angle": 4.7299999999999995,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-12-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -30.7,
+      -8.65
+    ],
+    "scale": 0.7,
+    "angle": 4.7299999999999995,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-12-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -32.1,
+      -8.65
+    ],
+    "scale": 0.85,
+    "angle": 4.7299999999999995,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-12-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -29.7,
+      -8.35
+    ],
+    "scale": 0.8,
+    "angle": 4.7299999999999995,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-12-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -31.3,
+      -9.5
+    ],
+    "scale": 0.75,
+    "angle": 4.7299999999999995,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-12-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -30.2,
+      -9.5
+    ],
+    "scale": 0.7,
+    "angle": 4.7299999999999995,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-12-08",
+    "asset": "GRASS",
+    "xy": [
+      -32.5,
+      -7.3
+    ],
+    "scale": 1.1,
+    "angle": 4.7299999999999995,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-13-01",
+    "asset": "BUSH",
+    "xy": [
+      -32.6,
+      -1.7
+    ],
+    "scale": 0.8,
+    "angle": 5.16,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-13-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -31.7,
+      -2.65
+    ],
+    "scale": 0.7,
+    "angle": 5.16,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-13-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -33.1,
+      -2.65
+    ],
+    "scale": 0.85,
+    "angle": 5.16,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-13-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -32.3,
+      -3.5
+    ],
+    "scale": 0.75,
+    "angle": 5.16,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-13-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -31.2,
+      -3.5
+    ],
+    "scale": 0.7,
+    "angle": 5.16,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-13-08",
+    "asset": "GRASS",
+    "xy": [
+      -33.5,
+      -1.3
+    ],
+    "scale": 1.1,
+    "angle": 5.16,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-14-01",
+    "asset": "BUSH",
+    "xy": [
+      -30.6,
+      11.3
+    ],
+    "scale": 0.8,
+    "angle": 5.59,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-14-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -29.7,
+      10.35
+    ],
+    "scale": 0.7,
+    "angle": 5.59,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-14-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -31.1,
+      10.35
+    ],
+    "scale": 0.85,
+    "angle": 5.59,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-14-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -28.7,
+      10.65
+    ],
+    "scale": 0.8,
+    "angle": 5.59,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-14-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -30.3,
+      9.5
+    ],
+    "scale": 0.75,
+    "angle": 5.59,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-14-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -29.2,
+      9.5
+    ],
+    "scale": 0.7,
+    "angle": 5.59,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-14-08",
+    "asset": "GRASS",
+    "xy": [
+      -31.5,
+      11.7
+    ],
+    "scale": 1.1,
+    "angle": 5.59,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-15-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      -5.7,
+      6.35
+    ],
+    "scale": 0.7,
+    "angle": 6.02,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-15-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      -7.1,
+      6.35
+    ],
+    "scale": 0.85,
+    "angle": 6.02,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-15-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      -4.7,
+      6.65
+    ],
+    "scale": 0.8,
+    "angle": 6.02,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-15-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      -6.3,
+      5.5
+    ],
+    "scale": 0.75,
+    "angle": 6.02,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-15-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      -5.2,
+      5.5
+    ],
+    "scale": 0.7,
+    "angle": 6.02,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-01",
+    "asset": "BUSH",
+    "xy": [
+      9.4,
+      15.3
+    ],
+    "scale": 0.8,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-02",
+    "asset": "BUSH_FLOWERING",
+    "xy": [
+      10.8,
+      15.6
+    ],
+    "scale": 0.85,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-03",
+    "asset": "BUSH_LAVENDER",
+    "xy": [
+      10.3,
+      14.35
+    ],
+    "scale": 0.7,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-04",
+    "asset": "FLOWER_WHITE",
+    "xy": [
+      8.9,
+      14.35
+    ],
+    "scale": 0.85,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-05",
+    "asset": "FLOWER_PINK",
+    "xy": [
+      11.3,
+      14.65
+    ],
+    "scale": 0.8,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-06",
+    "asset": "FLOWER_PURPLE",
+    "xy": [
+      9.7,
+      13.5
+    ],
+    "scale": 0.75,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-07",
+    "asset": "FLOWER_YELLOW",
+    "xy": [
+      10.8,
+      13.5
+    ],
+    "scale": 0.7,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "garden-bed-16-08",
+    "asset": "GRASS",
+    "xy": [
+      8.5,
+      15.7
+    ],
+    "scale": 1.1,
+    "angle": 6.45,
+    "placementRole": "composed-border"
+  },
+  {
+    "id": "grove-tree-05",
+    "asset": "TREE_02",
+    "xy": [
+      -20,
+      20
+    ],
+    "scale": 0.8,
+    "angle": 2.0,
+    "placementRole": "peripheral-grove"
+  },
+  {
+    "id": "grove-tree-06",
+    "asset": "TREE_01",
+    "xy": [
+      -5,
+      20
+    ],
+    "scale": 0.9,
+    "angle": 2.5,
+    "placementRole": "peripheral-grove"
+  },
+  {
+    "id": "rock-001",
+    "asset": "ROCK",
+    "scale": 1.6198778242819403,
+    "angle": 2.8878115284757957,
+    "xy": [
+      41.95334217727937,
+      0.0
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-002",
+    "asset": "ROCK",
+    "scale": 1.8984619249060015,
+    "angle": 4.949445913043238,
+    "xy": [
+      40.922087734601156,
+      4.804214302730534
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-003",
+    "asset": "ROCK",
+    "scale": 1.8105261387844367,
+    "angle": 0.5183741778562133,
+    "xy": [
+      37.34286336722398,
+      9.049389940622794
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-004",
+    "asset": "ROCK",
+    "scale": 1.6473992792799956,
+    "angle": 1.304135219844587,
+    "xy": [
+      33.78772385114206,
+      12.988055247191017
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-005",
+    "asset": "ROCK",
+    "scale": 1.8421996257892908,
+    "angle": 4.5972463074248315,
+    "xy": [
+      30.4543642324577,
+      17.01409629369121
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-006",
+    "asset": "ROCK",
+    "scale": 1.4873499561924597,
+    "angle": 1.8636760902592586,
+    "xy": [
+      25.62814267919276,
+      20.335245583231497
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-007",
+    "asset": "ROCK",
+    "scale": 1.315039831058801,
+    "angle": 4.403365317113644,
+    "xy": [
+      18.926078911360324,
+      21.82564527842285
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-008",
+    "asset": "ROCK",
+    "scale": 1.7532820720687166,
+    "angle": 1.8732120465633588,
+    "xy": [
+      12.013180501860768,
+      21.97545890240055
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-009",
+    "asset": "ROCK",
+    "scale": 1.3402351747390409,
+    "angle": 1.5666880784254198,
+    "xy": [
+      5.990460926506775,
+      22.619723266612503
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-010",
+    "asset": "ROCK",
+    "scale": 1.5906192417188243,
+    "angle": 0.37271989955063567,
+    "xy": [
+      2.246064132599111e-15,
+      24.422331126141263
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-011",
+    "asset": "ROCK",
+    "scale": 1.6976083776443103,
+    "angle": 2.946917061960062,
+    "xy": [
+      -6.838008915470073,
+      25.820028084676515
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-013",
+    "asset": "ROCK",
+    "scale": 2.078797406042252,
+    "angle": 1.950177475784997,
+    "xy": [
+      -19.67392108863968,
+      22.688060476097295
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-014",
+    "asset": "ROCK",
+    "scale": 2.012200308771479,
+    "angle": 4.314930494737987,
+    "xy": [
+      -25.228563171720303,
+      20.01818993404954
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-015",
+    "asset": "ROCK",
+    "scale": 1.7578580803349946,
+    "angle": 1.679604368226941,
+    "xy": [
+      -31.230434977843714,
+      17.44766772837714
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-016",
+    "asset": "ROCK",
+    "scale": 1.2833841322239294,
+    "angle": 0.07738318388960964,
+    "xy": [
+      -36.393223851142054,
+      13.98961362666773
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-017",
+    "asset": "ROCK",
+    "scale": 1.507600458998311,
+    "angle": 5.367758754174676,
+    "xy": [
+      -38.32474463287465,
+      9.287331695674823
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-018",
+    "asset": "ROCK",
+    "scale": 2.2558515547340114,
+    "angle": 3.158694231552123,
+    "xy": [
+      -36.99490609025557,
+      4.343166900957012
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-019",
+    "asset": "ROCK",
+    "scale": 1.3781736613403224,
+    "angle": 0.4382207295774296,
+    "xy": [
+      -35.246657822720636,
+      2.8739195900497066e-15
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-020",
+    "asset": "ROCK",
+    "scale": 1.5572467251836508,
+    "angle": 0.29533303332279665,
+    "xy": [
+      -35.1050707979413,
+      -4.121302029349677
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-021",
+    "asset": "ROCK",
+    "scale": 1.64397734094667,
+    "angle": 2.689770368138767,
+    "xy": [
+      -35.20140695744816,
+      -8.530445426316577
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-022",
+    "asset": "ROCK",
+    "scale": 1.4467147482870597,
+    "angle": 0.5456932149089537,
+    "xy": [
+      -33.06943732101661,
+      -12.711944752808986
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-023",
+    "asset": "ROCK",
+    "scale": 1.6023312560485425,
+    "angle": 3.39200179427165,
+    "xy": [
+      -28.684266776327423,
+      -16.025186844196902
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-024",
+    "asset": "ROCK",
+    "scale": 1.4465030348646595,
+    "angle": 3.554191138812881,
+    "xy": [
+      -23.995060788608082,
+      -19.03943879308397
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-025",
+    "asset": "ROCK",
+    "scale": 1.9683888112644006,
+    "angle": 0.5228488179052331,
+    "xy": [
+      -19.673921088639695,
+      -22.68806047609728
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-026",
+    "asset": "ROCK",
+    "scale": 1.872149571686403,
+    "angle": 2.975887915295362,
+    "xy": [
+      -14.390774562880855,
+      -26.32474180599514
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-028",
+    "asset": "ROCK",
+    "scale": 1.2592572567759786,
+    "angle": 1.4062475473102858,
+    "xy": [
+      -7.443217536329019e-15,
+      -26.97766887385874
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-029",
+    "asset": "ROCK",
+    "scale": 2.2150872715374343,
+    "angle": 3.6112075506739294,
+    "xy": [
+      6.5676304004169355,
+      -24.79909042015098
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-030",
+    "asset": "ROCK",
+    "scale": 1.2835038931021607,
+    "angle": 4.2653391566958785,
+    "xy": [
+      12.669513411062823,
+      -23.176074914973455
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-031",
+    "asset": "ROCK",
+    "scale": 2.092114277915485,
+    "angle": 4.962569843417251,
+    "xy": [
+      18.92607891136029,
+      -21.825645278422858
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-032",
+    "asset": "ROCK",
+    "scale": 1.45141193974175,
+    "angle": 3.4954500974878506,
+    "xy": [
+      24.39464029608053,
+      -19.35649444226593
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-033",
+    "asset": "ROCK",
+    "scale": 1.4310474276308764,
+    "angle": 6.0837464126846825,
+    "xy": [
+      27.90819603094138,
+      -15.591615409510991
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-034",
+    "asset": "ROCK",
+    "scale": 2.2654104252419454,
+    "angle": 5.854730993782703,
+    "xy": [
+      30.463937321016612,
+      -11.710386373332273
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-035",
+    "asset": "ROCK",
+    "scale": 1.9213433701825218,
+    "angle": 0.7458491820255211,
+    "xy": [
+      34.219525691797486,
+      -8.292503671264551
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  },
+  {
+    "id": "rock-036",
+    "asset": "ROCK",
+    "scale": 1.628016891030382,
+    "angle": 1.7705561724120953,
+    "xy": [
+      39.0322524422869,
+      -4.582349431123206
+    ],
+    "cliffElevation": -1.8,
+    "placementRole": "coastal-outcrop"
+  }
+]
